@@ -175,7 +175,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -185,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -238,8 +238,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/08/text/" itemprop="url">
-                  Unbenannt
+                <a class="post-title-link" href="/2016/10/08/Swift泛型初探/" itemprop="url">
+                  Swift泛型初探
                 </a>
               
             
@@ -251,7 +251,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-08T22:33:34+08:00" content="2016-10-08">
               2016-10-08
             </time>
@@ -282,9 +282,171 @@
       
         
           
-            <hr>
-<p>title:测试博客是否能用</p>
-<p>###特殊文章,测试博客是否能正常使用</p>
+            <p>其实真的觉得即使自己能独立完成项目,还有是太多太多学习的地方可以不断提高,毕竟如果重复写一些代码是没有意义的.虽然说我已经使用了swift写了一个项目并且已经在AppStore里面发布,但是对于swift的认识还是很浅薄的.最近在重新看swift programming language一书,重新看了一遍里面的内容–其实对于泛型,我最初的理解是来源于Java,在项目中我真的比较少用到泛型.</p>
+<p>####泛型需求的产生<br>下面是书里面的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  func swapTwoInt(inout a:Int,inout b:Int)&#123;</div><div class="line">        let tempA = a;</div><div class="line">        a = b;</div><div class="line">        b = tempA</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要是我有这个交换两个内容的要求,但是这紧紧单纯是对Int但种类型的配置,如果我还需要有String和Double的话,我必须要拷贝代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">func swapTwoString(inout a:String,inout b:String)&#123;</div><div class="line">          let tempA = a;</div><div class="line">          a = b;</div><div class="line">          b = tempA</div><div class="line">&#125;</div><div class="line"></div><div class="line">      func swapTwoDouble(inout a:Double,inout b:Double)&#123;</div><div class="line">          let tempA = a;</div><div class="line">          a = b;</div><div class="line">          b = tempA</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+<p>于是我们产生了泛型,它可以定义一种统一的类型<t>,这个时候你可以在参数里面写入这个参数,它代表了前后一致的类型,如String,Int,Double…</t></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func swapTwoValues&lt;T&gt;(inout a: T, inout _ b: T)&#123;</div><div class="line">       let tempA = a;</div><div class="line">       a = b;</div><div class="line">       b = tempA</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+<p>在我写泛型的时候,遇到的第一个问题是返回值怎么处理?<br>唔哼,这个问题让我们继续把泛型的其他定义看下去的时候再继续思考吧.</p>
+<p>####命名类型参数<br>那么,泛型的书写方法就是用一对箭括号把类型名称合并起来:如 <strong><em><t></t></em></strong>,当然,你也可以一两个其他字母表示,<strong><em><u,t></u,t></em></strong></p>
+<p>####泛型类型<br> 其中,书中里面举了一个泛型类型的例子是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">struct IntStack &#123;</div><div class="line">    var items = [Int]();</div><div class="line">    /*</div><div class="line">     mutating关键字:由于swift功能强大,不仅可以让class遵守,也可以让enum和struct遵守</div><div class="line">     mutating关键字在定义协议的方法的时候可以在前面加上,让其三种类型在遵守协议的时候对有关键字的方法有不同的&quot;提示&quot;:</div><div class="line">    class: 在class中实现带有mutating方法的接口时，不用mutating进行修饰。因为对于class来说，类的成员变量和方法都是透明的，所以不必使用 mutating 来进行修饰</div><div class="line">     enum:</div><div class="line">     struct:如果将struct中的mutating去掉，则会报错不能改变结构体的成员。</div><div class="line">    */</div><div class="line">    //将一个数值入栈</div><div class="line">    mutating func push(item:Int)</div><div class="line">    &#123;</div><div class="line">        items.append(item)</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    //和内存中的栈一样,先进后出,所以只要移除最后一个元素即可</div><div class="line">    mutating func pop() -&gt; Int&#123;</div><div class="line">        </div><div class="line">        return items.removeLast()</div><div class="line">      &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是只针对Int一种类型避免也显得太弱了吧,所以我们可以用泛型对其进行改良:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">struct Stack&lt;T&gt; &#123;</div><div class="line">      var items = [T]()</div><div class="line">      mutating func push(item: T) &#123;</div><div class="line">        items.append(item)</div><div class="line">      &#125;</div><div class="line">      mutating func pop() -&gt; T &#123;</div><div class="line">        return items.removeLast()</div><div class="line">      &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用的时候可以将该类型延伸为相应的类型,如string:</p>
+<pre><code>var stringsInStack = Stack&lt;String&gt;()
+stringsInStack.push(&quot;1&quot;);//1
+stringsInStack.push(&quot;2&quot;);//1,2
+stringsInStack.push(&quot;3&quot;);//1,2,3
+stringsInStack.push(&quot;4&quot;);//1,2,3,4
+stringsInStack.pop()//1,2,3
+</code></pre><p>现在,有点明白了Array和Dictionary为什么可以指定类型了吧,其实无形中我们已经用了很多泛型的内容,只是我们缺少了总结和理解:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">     //定义了一个内容必须为字符串的数组</div><div class="line">  var arr :[String] = []</div><div class="line">     arr[0] = &quot;name&quot;;</div><div class="line">     arr[1] = &quot;age&quot;;</div><div class="line">     arr[3] = &quot;height&quot;;</div><div class="line"></div><div class="line">//定义了一个key为String,value为AnyObject的字典  </div><div class="line">   var parma : [String:AnyObject] = [:]</div><div class="line">      parma[&quot;name&quot;] = &quot;shiron&quot;</div><div class="line">      parma[&quot;age&quot;] = 22</div><div class="line">      parma[&quot;height&quot;] = 1.70</div></pre></td></tr></table></figure>
+<p>这里可以延伸出后面的一个话题:类型约束.</p>
+<p>####类型约束<br>输入Dictionary点进去可以看到该类的属性和方法:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public struct Dictionary&lt;Key : Hashable, Value&gt; : CollectionType, DictionaryLiteralConvertible&#123;</div><div class="line">各种dict的属性和方法......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们发现在dict对泛型进行定义的时候,key有一个特殊的限制:</p>
+<p><strong><strong><key: hashable,value=""></key:></strong></strong><br>此时,我们可以看到key被强制遵守了一个hashable的协议(注意:Swift 标准库中定义的一个特定协议,所有的 Swift 基本类型(如 String , Int , Double 和 Bool )默认都是可哈希。)</p>
+<p>当你对泛型的有较高的输入要求时,可以限制某种类或者协议来进行类型约束,定义方法就是在泛型字母后面添加 T:SomeProtocol或者U:someClass</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func someFunction&lt;T:someClass,U:someProtocol&gt;(someT:T,someU:U)&#123;</div><div class="line">    //函数主体</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>####扩展一个泛型类型<br>当然我们泛型的好用之处不仅这么一点点.</p>
+<p>书中还对Stack的类型作出了一个扩展:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">extension Stack &#123;</div><div class="line">    var topItem: T? &#123;</div><div class="line">        return items.isEmpty ? nil : items[items.count - 1]</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> topItem 属性会返回一个 T 类型的可选值。当栈为空的时候, topItem 将会返回 nil ;当栈不为空的时候, topItem 会返回 items 数组中的最后一个元素,然而你注意到了吗?我们在扩展里面并没有使用泛型类型的定义,它是从结构体中直接带过来了,对它进行解包则可以自己使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> if let topItem = stackOfStrings.topItem &#123; </div><div class="line">    print(&quot; \(topItem)&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/08/ObjectMapper/" itemprop="url">
+                  ObjectMapper的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-08T17:22:11+08:00" content="2016-10-08">
+              2016-10-08
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="关于ObjectMapper"><a href="#关于ObjectMapper" class="headerlink" title="关于ObjectMapper"></a>关于ObjectMapper</h3><p>关于这个第三方库,我也是最近才接触到,在转到swift的项目当中,其实很长时间都在寻找一个适合库来做网络请求回来的JSON解析,但一直都没有找到较好的,所以之前的项目一直都是手动字典转模型,最近发现了一个轻巧又实用的库–而且再多层嵌套,也可以用几句代码完成转换,简直可以媲美OC中字典转模型的第三方框架.</p>
+<p>Github的地址为:<a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="external">https://github.com/Hearst-DD/ObjectMapper</a></p>
+<p>本文主要是翻译github的内容,大家如果英文阅读能力较好的可以自己翻看英文文档</p>
+<h3 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h3><p>如果一个类或者结构体的接口实现了<strong><em>Mappable</em></strong>接口的时,便可以支持映射,然后还需要实现协议中的两个接口:</p>
+<pre><code>init?(_ map: Map)mutating 
+func mapping(map: Map)
+</code></pre><p>ObjectMapper实用了一个操作符 “&lt;-“来定义成员变量的映射和JSON的转换.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">//这里要定义好需要转换的内容相对于的字段和类型,以后日后方便赋值转换</div><div class="line"> </div><div class="line">  </div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line">    var weight: Double!</div><div class="line">    var array: [AnyObject]?</div><div class="line">    var dictionary: [String : AnyObject] = [:]</div><div class="line">    var bestFriend: User?                       // Nested User object</div><div class="line">    var friends: [User]?                        // Array of Users</div><div class="line">    var birthday: NSDate?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">  //根据字典中的内容用&quot;&lt;-&quot;操作符号来映射相应的内容,将其转换到定义好的成员变量中</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">        weight      &lt;- map[&quot;weight&quot;]</div><div class="line">        array       &lt;- map[&quot;arr&quot;]</div><div class="line">        dictionary  &lt;- map[&quot;dict&quot;]</div><div class="line">        bestFriend  &lt;- map[&quot;best_friend&quot;]</div><div class="line">        friends     &lt;- map[&quot;friends&quot;]</div><div class="line">        birthday    &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"> //结构体的话也是执行相应的操作</div><div class="line">struct Temperature: Mappable &#123;</div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line">    </div><div class="line">    init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    mutating func mapping(map: Map) &#123;</div><div class="line">        celsius     &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit  &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>唔,一旦你的类接口定义了Mappable,那么你这个类就可以调用简答的方法进行字典转模型的转换啦.</p>
+<p>转换一个JSON成相应的类模型:</p>
+<pre><code>let user = User(JSONSting:jsonString)
+</code></pre><p>转换一个模型成相应的字符串:</p>
+<pre><code>let jsonString = user.toJSONString(prettyPrint:true)
+</code></pre><p>除了这种转换方式,Mapper.swfit类还提供了扩展的方法也可以进行同样的转换:</p>
+<pre><code> // 字典转模型
+let user = Mapper&lt;User&gt;().map(JSONString: JSONString)
+//字典转模型
+let JSONString = Mapper().toJSONString(user, prettyPrint: true)
+</code></pre><p>ObjectMapper支持以下的数据类型</p>
+<ul>
+<li>Int</li>
+<li>Bool</li>
+<li>Double</li>
+<li>Float</li>
+<li>String</li>
+<li>RawRepresentable(Enums)</li>
+<li>Array<anyobject></anyobject></li>
+<li>Dictionary<string, anyobject=""></string,></li>
+<li>Object<t: mappable=""></t:></li>
+<li>Array<t: mappable=""></t:></li>
+<li>Array<array<t: mappable="">&gt;</array<t:></li>
+<li>Set<t: mappable=""></t:></li>
+<li>Dictionary<string, t:="" mappable=""></string,></li>
+<li>Dictionary<string, array<t:="" mappable="">&gt;</string,></li>
+<li>Optionals of all the above</li>
+</ul>
+<p>###Mappable Protocol<br><strong><em>mutating func mapping(map: Map)</em></strong><br>这个函数里面定义了映射所需要指向的字符串,当解析JSON的过程中,创建好实例对象以后会去执行这个函数,当生成JSON的过程中,这个函数是唯一一个可以被叫做对象.</p>
+<p>###init?(_ map: Map)</p>
+<p>//翻译未完成,待续…其实ObjectMapper的使用非常简单,只要字符串和相对应的Object一一对应即可…</p>
 
           
         
@@ -334,8 +496,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/08/hello-world/" itemprop="url">
-                  Hello World
+                <a class="post-title-link" href="/2016/10/07/ReactiveCocoa在swift情况下使用宏/" itemprop="url">
+                  ReactiveCocoa在swift情况下使用宏
                 </a>
               
             
@@ -347,9 +509,9 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T17:22:11+08:00" content="2016-10-08">
-              2016-10-08
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-07T10:19:17+08:00" content="2016-10-07">
+              2016-10-07
             </time>
           </span>
 
@@ -378,15 +540,156 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+            <p>####在swift的环境下,配置RAC和RACObserve宏需要另外添加文件,如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import ReactiveCocoa</div><div class="line">public struct RAC  &#123;</div><div class="line">        var target : NSObject!</div><div class="line">        var keyPath : String!</div><div class="line">    var nilValue : AnyObject!</div><div class="line"></div><div class="line">    init(_ target: NSObject!, _ keyPath: String, nilValue: AnyObject? = nil) &#123;</div><div class="line">        self.target = target</div><div class="line">        self.keyPath = keyPath</div><div class="line">        self.nilValue = nilValue</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    func assignSignal(signal : RACSignal) &#123;</div><div class="line">        signal.setKeyPath(self.keyPath, onObject: self.target, nilValue: self.nilValue)</div><div class="line">      &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">public func RACObserve(target: NSObject!, keyPath: NSString) -&gt; RACSignal  &#123;</div><div class="line">       return target.rac_valuesForKeyPath(keyPath as String, observer: target)</div><div class="line">&#125;</div><div class="line"></div><div class="line">public func &lt;= (rac:RAC, signal:RACSignal)&#123;</div><div class="line">       rac.assignSignal(signal)</div><div class="line">&#125; </div><div class="line"></div><div class="line">public func &gt;=( signal:RACSignal, rac:RAC)&#123;</div><div class="line">     rac.assignSignal(signal)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在学习swift导入RAC的过程中,由于宏在OC项目中非常好用,但是宏在swift中不好使,需要额外导入文件才能正常使用.<br>下面举了一个textFiled输入文字时,改变下面的那个label内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">  import UIKit</div><div class="line">  import SnapKit</div><div class="line">  import ReactiveCocoa</div><div class="line">  //import ReactiveCocoa.RACEXTScope</div><div class="line"></div><div class="line">  func == (Str1:String,Str:String) -&gt;Bool&#123;      </div><div class="line">      return true</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line">    </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        view.addSubview(textFiled)</div><div class="line">        view.addSubview(label)</div><div class="line">        </div><div class="line">        textFiled.snp_makeConstraints &#123; (make) in</div><div class="line">            make.center.equalTo(self.view)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        label.snp_makeConstraints &#123; (make) in</div><div class="line">            make.top.equalTo(textFiled).offset(20)</div><div class="line">            make.centerX.equalTo(textFiled)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        let str1 = &quot;1&quot;</div><div class="line">        let str2 = &quot;2&quot;</div><div class="line">        let bool = str1==str2</div><div class="line">        print(bool)</div><div class="line">        RAC(label,&quot;text&quot;) &lt;= textFiled.rac_textSignal()</div><div class="line"> </div><div class="line">  </div><div class="line"></div><div class="line">    RACObserve(label, keyPath: &quot;center&quot;) .subscribeNext &#123; (x) in</div><div class="line">            print(&quot;移动的距离为:\(x)&quot; </div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override func touchesBegan(touches: Set&lt;UITouch&gt;, withEvent event: UIEvent?) &#123;</div><div class="line">  //点击屏幕label向下移动</div><div class="line">        label.snp_remakeConstraints &#123; (make) in</div><div class="line">            make.top.equalTo(textFiled).offset( number * 20)</div><div class="line">            make.centerX.equalTo(textFiled)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        number += 1</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private lazy var textFiled : UITextField=&#123;</div><div class="line">        let textFiled = UITextField()</div><div class="line">        textFiled.placeholder = &quot;请输入文字&quot;</div><div class="line">        return textFiled</div><div class="line">    &#125;()</div><div class="line"></div><div class="line">    private lazy var label : UILabel=&#123;</div><div class="line">        let label = UILabel()</div><div class="line">        label.text = &quot;我是占位文字,textFiled改变时我也会改变&quot;</div><div class="line">        label.font = UIFont.systemFontOfSize(16)</div><div class="line">        </div><div class="line">        return label</div><div class="line">      &#125;()</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>其中textFiled绑定label的核心代码就是:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 只要文本框文字改变，就会修改label的文字</div><div class="line">RAC(label,&quot;text&quot;) &lt;= textFiled.rac_textSignal()</div></pre></td></tr></table></figure>
+<p>一句话就可以实现绑定textFiled变化时,label也跟着变化</p>
+<ul>
+<li>其中点击屏幕label往下移动的核心代码是:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">        RACObserve(label, keyPath:&quot;center&quot;) .subscribeNext &#123; (x) in</div><div class="line">            print(&quot;移动的距离为:\(x)&quot; </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>RACObserve宏代码会让其返回一个Signal,我们使用订阅的时候,即可像KVO一样绑定信息,监控对象某个属性的变化.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/11/layoutIfNeeded-和-layoutSubviews/" itemprop="url">
+                  setNeedsUpdateConstraints 和 updateConstraintsIfNeeded
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-11T17:47:47+08:00" content="2015-08-11">
+              2015-08-11
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded</p>
+<p>之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么时机调用了</p>
+<p>####查了一下文档,先对layoutIfNeeded进行一个解释吧!</p>
+<ul>
+<li>1、init初始化不会触发layoutSubviews   但是是用initWithFrame 进行初始化时，当rect的值不为CGRectZero时,也会触发</li>
+<li>2、addSubview会触发layoutSubviews</li>
+<li>3、设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</li>
+<li>4、滚动一个UIScrollView会触发layoutSubviews</li>
+<li>5、旋转Screen会触发父UIView上的layoutSubviews事件</li>
+<li>6、改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件</li>
+</ul>
+<p>####在官方文档上,对于setNeedsUpdateConstraints的解释是:</p>
+<pre><code>当你的自定义视图的属性发生变化将会影响约束,此时可以调用这个方法表明,约束需要更新在将来的某个时候。然后系统会调用updateConstraints()作为其正常布局的一部分通过。用这个作为优化工具批量约束变化。更新限制一次性前需要确保您不必重新计算约束当多个更改视图之间的布局。
+</code></pre><p>####对于updateConstraintsIfNeeded这个方法,则是:</p>
+<pre><code>每当一个新布局通过触发视图,系统调用这个方法来确保任何约束为视图和它的子视图更新的信息从当前视图层次及其约束。由系统自动调用此方法,但可能是手动调用如果你需要检查最新的约束。子类不应重写此方法。
+</code></pre><p>####关于UIView的Layer，IOS提供了三个方法：</p>
+<ol>
+<li><p><code>layoutSubviews</code></p>
+<p>在iOS5.1和之前的版本，此方法的缺省实现不会做任何事情(实现为空)，iOS5.1之后(iOS6开始)的版本，此方法的缺省实现是使用你设置在此view上面的constraints(Autolayout)去决定subviews的position和size。 UIView的子类如果需要对其subviews进行更精确的布局，则可以重写此方法。只有在autoresizing和constraint-based behaviors of subviews不能提供我们想要的布局结果的时候，我们才应该重写此方法。可以在此方法中直接设置subviews的frame。 我们不应该直接调用此方法，而应当用下面两个方法。</p>
+</li>
+<li><p><code>setNeedsLayout</code></p>
+<p>此方法会将view当前的layout设置为无效的，并在下一个upadte cycle里去触发layout更新。</p>
+</li>
+<li><p><code>layoutIfNeeded</code></p>
+<p>使用此方法强制立即进行layout,从当前view开始，此方法会遍历整个view层次(包括superviews)请求layout。因此，调用此方法会强制整个view层次布局。</p>
+</li>
+</ol>
+<p>####基于约束的AutoLayer的方法：</p>
+<ol>
+<li><p><code>setNeedsUpdateConstraints</code></p>
+<p>当一个自定义view的某个属性发生改变，并且可能影响到constraint时，需要调用此方法去标记constraints需要在未来的某个点更新，系统然后调用updateConstraints.</p>
+</li>
+<li><p><code>needsUpdateConstraints</code></p>
+<p>constraint-based layout system使用此返回值去决定是否需要调用updateConstraints作为正常布局过程的一部分。</p>
+</li>
+<li><p><code>updateConstraintsIfNeeded</code></p>
+<p>立即触发约束更新，自动更新布局。</p>
+</li>
+<li><p><code>updateConstraints</code></p>
+<p>自定义view应该重写此方法在其中建立constraints. 注意：要在实现在最后调用[super updateConstraints]</p>
+<p>下面一张经典的图是来自stackoverflow,图已经比较明白的显示了整个流程,不再作过多的解释.</p>
+</li>
+</ol>
+<p><img src="http://i.stack.imgur.com/i9YuN.png" alt="layout image"></p>
 
           
         
@@ -456,13 +759,20 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -511,7 +821,7 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

@@ -86,19 +86,21 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="###关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded
+之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/10/08/hello-world/index.html">
+<meta property="og:title" content="setNeedsUpdateConstraints 和 updateConstraintsIfNeeded">
+<meta property="og:url" content="http://yoursite.com/2015/08/11/layoutIfNeeded-和-layoutSubviews/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-10-08T09:22:11.000Z">
+<meta property="og:description" content="###关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded
+之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方">
+<meta property="og:image" content="http://i.stack.imgur.com/i9YuN.png">
+<meta property="og:updated_time" content="2016-10-10T13:54:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="setNeedsUpdateConstraints 和 updateConstraintsIfNeeded">
+<meta name="twitter:description" content="###关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded
+之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方">
+<meta name="twitter:image" content="http://i.stack.imgur.com/i9YuN.png">
 
 
 
@@ -119,10 +121,10 @@ Quick">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/08/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/08/11/layoutIfNeeded-和-layoutSubviews/"/>
 
 
-  <title> Hello World | Hexo </title>
+  <title> setNeedsUpdateConstraints 和 updateConstraintsIfNeeded | Hexo </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="">
@@ -180,7 +182,7 @@ Quick">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -190,7 +192,7 @@ Quick">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -242,7 +244,7 @@ Quick">
             
             
               
-                Hello World
+                setNeedsUpdateConstraints 和 updateConstraintsIfNeeded
               
             
           </h1>
@@ -253,9 +255,9 @@ Quick">
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T17:22:11+08:00" content="2016-10-08">
-              2016-10-08
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-11T17:47:47+08:00" content="2015-08-11">
+              2015-08-11
             </time>
           </span>
 
@@ -282,15 +284,50 @@ Quick">
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>###关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded</p>
+<p>之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么时机调用了</p>
+<p>####查了一下文档,先对layoutIfNeeded进行一个解释吧!</p>
+<ul>
+<li>1、init初始化不会触发layoutSubviews   但是是用initWithFrame 进行初始化时，当rect的值不为CGRectZero时,也会触发</li>
+<li>2、addSubview会触发layoutSubviews</li>
+<li>3、设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</li>
+<li>4、滚动一个UIScrollView会触发layoutSubviews</li>
+<li>5、旋转Screen会触发父UIView上的layoutSubviews事件</li>
+<li>6、改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件</li>
+</ul>
+<p>####在官方文档上,对于setNeedsUpdateConstraints的解释是:</p>
+<pre><code>当你的自定义视图的属性发生变化将会影响约束,此时可以调用这个方法表明,约束需要更新在将来的某个时候。然后系统会调用updateConstraints()作为其正常布局的一部分通过。用这个作为优化工具批量约束变化。更新限制一次性前需要确保您不必重新计算约束当多个更改视图之间的布局。
+</code></pre><p>####对于updateConstraintsIfNeeded这个方法,则是:</p>
+<pre><code>每当一个新布局通过触发视图,系统调用这个方法来确保任何约束为视图和它的子视图更新的信息从当前视图层次及其约束。由系统自动调用此方法,但可能是手动调用如果你需要检查最新的约束。子类不应重写此方法。
+</code></pre><p>####关于UIView的Layer，IOS提供了三个方法：</p>
+<ol>
+<li><p><code>layoutSubviews</code></p>
+<p>在iOS5.1和之前的版本，此方法的缺省实现不会做任何事情(实现为空)，iOS5.1之后(iOS6开始)的版本，此方法的缺省实现是使用你设置在此view上面的constraints(Autolayout)去决定subviews的position和size。 UIView的子类如果需要对其subviews进行更精确的布局，则可以重写此方法。只有在autoresizing和constraint-based behaviors of subviews不能提供我们想要的布局结果的时候，我们才应该重写此方法。可以在此方法中直接设置subviews的frame。 我们不应该直接调用此方法，而应当用下面两个方法。</p>
+</li>
+<li><p><code>setNeedsLayout</code></p>
+<p>此方法会将view当前的layout设置为无效的，并在下一个upadte cycle里去触发layout更新。</p>
+</li>
+<li><p><code>layoutIfNeeded</code></p>
+<p>使用此方法强制立即进行layout,从当前view开始，此方法会遍历整个view层次(包括superviews)请求layout。因此，调用此方法会强制整个view层次布局。</p>
+</li>
+</ol>
+<p>####基于约束的AutoLayer的方法：</p>
+<ol>
+<li><p><code>setNeedsUpdateConstraints</code></p>
+<p>当一个自定义view的某个属性发生改变，并且可能影响到constraint时，需要调用此方法去标记constraints需要在未来的某个点更新，系统然后调用updateConstraints.</p>
+</li>
+<li><p><code>needsUpdateConstraints</code></p>
+<p>constraint-based layout system使用此返回值去决定是否需要调用updateConstraints作为正常布局过程的一部分。</p>
+</li>
+<li><p><code>updateConstraintsIfNeeded</code></p>
+<p>立即触发约束更新，自动更新布局。</p>
+</li>
+<li><p><code>updateConstraints</code></p>
+<p>自定义view应该重写此方法在其中建立constraints. 注意：要在实现在最后调用[super updateConstraints]</p>
+<p>下面一张经典的图是来自stackoverflow,图已经比较明白的显示了整个流程,不再作过多的解释.</p>
+</li>
+</ol>
+<p><img src="http://i.stack.imgur.com/i9YuN.png" alt="layout image"></p>
 
       
     </div>
@@ -320,8 +357,8 @@ Quick">
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/08/text/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/07/ReactiveCocoa在swift情况下使用宏/" rel="prev" title="ReactiveCocoa在swift情况下使用宏">
+                ReactiveCocoa在swift情况下使用宏 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -371,10 +408,10 @@ Quick">
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -390,13 +427,20 @@ Quick">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -429,7 +473,7 @@ Quick">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
         </section>
@@ -456,7 +500,7 @@ Quick">
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
