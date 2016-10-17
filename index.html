@@ -175,7 +175,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -185,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -238,6 +238,900 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/14/UIView动画和CoreAnimation学习/" itemprop="url">
+                  UIView动画和CoreAnimation学习
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-14T11:34:51+08:00" content="2016-10-14">
+              2016-10-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处<a href="http://liuyanwei.jumppo.com/index.html" target="_blank" rel="external">阅读原文</a>)</strong></p>
+<h5 id="以前在工作中一直都忽视了对动画方面的研究-现在看了一遍刘彦玮大神的博客-偶像啊啊-gt-lt-里面有关于对动画的一些博客-自己重新对动画的知识进行有体系的学习和研究-自己记录下来希望以后能够更好的使用-学习资料来源于iOS动画和特效专题"><a href="#以前在工作中一直都忽视了对动画方面的研究-现在看了一遍刘彦玮大神的博客-偶像啊啊-gt-lt-里面有关于对动画的一些博客-自己重新对动画的知识进行有体系的学习和研究-自己记录下来希望以后能够更好的使用-学习资料来源于iOS动画和特效专题" class="headerlink" title="以前在工作中一直都忽视了对动画方面的研究,现在看了一遍刘彦玮大神的博客(偶像啊啊!&gt;&lt;),里面有关于对动画的一些博客,自己重新对动画的知识进行有体系的学习和研究,自己记录下来希望以后能够更好的使用,学习资料来源于iOS动画和特效专题"></a>以前在工作中一直都忽视了对动画方面的研究,现在看了一遍<a href="http://liuyanwei.jumppo.com/index.html" target="_blank" rel="external">刘彦玮</a>大神的博客(偶像啊啊!&gt;&lt;),里面有关于对动画的一些博客,自己重新对动画的知识进行有体系的学习和研究,自己记录下来希望以后能够更好的使用,学习资料来源于<a href="http://liuyanwei.jumppo.com/2015/10/29/iOS-animation-0.html" target="_blank" rel="external">iOS动画和特效专题</a></h5><h3 id="一-从最简单的动画开始"><a href="#一-从最简单的动画开始" class="headerlink" title="一.从最简单的动画开始"></a>一.从最简单的动画开始</h3><p>在我们刚刚进入iOS的学习过程中,最先接触的,肯定是下面这个方式来做简答的动画吧!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//初始设定</div><div class="line">	animateView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)</div><div class="line">	        animateView.backgroundColor = UIColor.redColor()</div><div class="line">	        </div><div class="line">	 view.addSubview(animateView)</div><div class="line"></div><div class="line">//最简答的动画是这样设置的:</div><div class="line">        </div><div class="line">      UIView.animateWithDuration(1.0, animations: &#123;</div><div class="line">          //动画效果</div><div class="line">          //颜色可以变</div><div class="line">          self.animateView.backgroundColor = UIColor.yellowColor()</div><div class="line">          //大小/位置可变</div><div class="line">          self.animateView.frame = CGRect(x: 200 , y: 200, width: 200, height: 200)</div><div class="line">          //透明度改变</div><div class="line">          self.animateView.alpha = 0.5</div><div class="line">          </div><div class="line">      &#125;) &#123; (isCompletion) in</div><div class="line">          print(&quot;动画结束&quot;)</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>animateWithDurationl里面有四个重载的方法,使用该方法可以实现了很多简单的功能,其中一个还有有阻尼系数和回弹系数,可以设置弹簧效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">//此方法含有阻尼系数和回弹系数</div><div class="line">        UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.CurveEaseIn, animations: &#123;</div><div class="line">            //大小/位置可变</div><div class="line">            self.animateView.frame = CGRect(x: 200 , y: 200, width: 200, height: 200)</div><div class="line">            &#125;) &#123; (isCompletion) in</div><div class="line">                print(&quot;动画结束&quot;)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h3 id="二-Core-Animation的类图"><a href="#二-Core-Animation的类图" class="headerlink" title="二.Core Animation的类图"></a>二.Core Animation的类图</h3><p><img src="http://liuyanwei.jumppo.com/assets/uploads/animationAndEffect05.png" alt="类图"></p>
+<ul>
+<li><p>CAAnimation：核心动画的基础类，不能直接使用，负责动画运行时间、速度的控制，本身实现了CAMediaTiming协议。</p>
+</li>
+<li><p>CAPropertyAnimation：属性动画的基类（通过属性进行动画设置，注意是可动画属性），不能直接使用。</p>
+</li>
+<li><p>CAAnimationGroup：动画组，动画组是一种组合模式设计，可以通过动画组来进行所有动画行为的统一控制，组中所有动画效果可以并发执行。</p>
+</li>
+<li><p>CATransition：转场动画，主要通过滤镜进行动画效果设置。</p>
+</li>
+<li><p>CABasicAnimation：基础动画，通过属性修改进行动画参数控制，只有初始状态和结束状态。</p>
+</li>
+<li><p>CAKeyframeAnimation：关键帧动画，同样是通过属性进行动画参数控制，但是同基础动画不同的是它可以有多个状态控制。</p>
+</li>
+</ul>
+<h3 id="基本动画CABasicAnimation"><a href="#基本动画CABasicAnimation" class="headerlink" title="基本动画CABasicAnimation"></a>基本动画CABasicAnimation</h3><p>然后按照老师的写法,再自己敲了一遍,在touchesBegan方法里面进行了尝试.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">       let baseAnimation = CABasicAnimation(keyPath: &quot;position&quot;)</div><div class="line">        //fromValue设置起点位置,不设置的时候为当前位置</div><div class="line">//        let point  = CGPoint(x: 100, y: 100)</div><div class="line">//        baseAnimation.toValue = NSValue(CGPoint: point)</div><div class="line">        baseAnimation.byValue = NSValue(CGPoint: CGPoint(x: 100, y: 100))</div><div class="line">        </div><div class="line">        //其他动画属性</div><div class="line">        baseAnimation.duration = 0.2</div><div class="line">        baseAnimation.repeatCount = 1</div><div class="line">        </div><div class="line">        //加速运动</div><div class="line">//        baseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)</div><div class="line">        //自定义加速的曲线参数</div><div class="line">        baseAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.1, 0, 0.9, 0.7)</div><div class="line">        </div><div class="line">        </div><div class="line">        //这两个属性若不设置，动画执行后回复位</div><div class="line">        baseAnimation.removedOnCompletion = false</div><div class="line">        baseAnimation.fillMode = kCAFillModeForwards</div><div class="line">        </div><div class="line">        //可以在动画中缓存一些</div><div class="line">        //baseAnimation.setValue(NSValue(CGPoint: point), forKey: &quot;startPoint&quot;)</div><div class="line">        //开始动画</div><div class="line">        animateView.layer.addAnimation(baseAnimation, forKey: &quot;TextAnimateView&quot;)</div></pre></td></tr></table></figure>
+<p><img src="http://liuyanwei.jumppo.com/assets/uploads/animationAndEffect01.gif" alt=""><br>老师后来提醒了说其实动画只是layer层改变了,实际上,view上的frame还是没有改变,当你再次点击屏幕的时候,view又会回到原来的地方,重新开始这个动画.解决办法是重新设置view.frame :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//        ----------------</div><div class="line">//        此处设置的代理是为了可以让view.frame同时跟着view.layer一起改变</div><div class="line">        baseAnimation.delegate = self</div><div class="line">        </div><div class="line">        baseAnimation.setValue(NSValue(CGPoint: endPoint), forKey: &quot;endPoint&quot;)</div><div class="line">        baseAnimation.setValue(self.animateView, forKey: &quot;sender&quot;)</div><div class="line">        </div><div class="line">//        ----------------</div><div class="line">//代理方法里面可以获取到view和终点的位置</div><div class="line">override func animationDidStop(anim: CAAnimation, finished flag: Bool) &#123;</div><div class="line">        let endPoint = anim.valueForKey(&quot;endPoint&quot;)?.CGPointValue()</div><div class="line">        let theView = anim.valueForKey(&quot;sender&quot;) as! UIView</div><div class="line">        theView.layer.position = endPoint!</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>keyPath用于区分BasicAnimation动画类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">   可选的KeyPath</div><div class="line">   transform.scale = 比例轉換 </div><div class="line">   transform.scale.x</div><div class="line">   transform.scale.y</div><div class="line">   &#123;</div><div class="line">    //CABasicAnimation(keyPath: &quot;transform.scale&quot;)</div><div class="line">    //CABasicAnimation(keyPath: &quot;transform.scale.x&quot;)</div><div class="line">    //CABasicAnimation(keyPath: &quot;transform.scale.y&quot;)</div><div class="line">    //初始大小</div><div class="line">    transformAnimation.fromValue = NSNumber(float: 1.0)</div><div class="line">    //最终大小</div><div class="line">    transformAnimation.toValue = NSNumber(double: 2.0)</div><div class="line">//  以上缩放是以view的中心点为中心缩放的，如果需要自定义缩放点，可以设置卯点：</div><div class="line">//        //中心点</div><div class="line">        animateView.layer.anchorPoint = CGPointMake(0.5, 0.5)</div><div class="line">//        //左上角</div><div class="line">        animateView.layer.anchorPoint = CGPointMake(0, 0)</div><div class="line">//        //右下角</div><div class="line">        animateView.layer.anchorPoint = CGPointMake(1.0, 1.0)</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   transform.rotation = 旋轉</div><div class="line">   transform.rotation.x</div><div class="line">   transform.rotation.y</div><div class="line">   transform.rotation.z</div><div class="line">   </div><div class="line">   &#123;</div><div class="line">    	 CABasicAnimation(keyPath: &quot;transform.rotation&quot;)</div><div class="line">    	 CABasicAnimation(keyPath: &quot;transform.rotation.x&quot;)</div><div class="line">    	 CABasicAnimation(keyPath: &quot;transform.rotation.y&quot;)</div><div class="line">    	 CABasicAnimation(keyPath: &quot;transform.rotation.z&quot;)</div><div class="line">    	 //初始角度</div><div class="line">        transformAnimation.fromValue = NSNumber(float: 0)</div><div class="line">        //旋转后角度</div><div class="line">        transformAnimation.toValue = NSNumber(float: 130)</div><div class="line">        </div><div class="line">        </div><div class="line">   &#125;</div><div class="line">   transform.translation</div><div class="line">   transform.translation.x</div><div class="line">   transform.translation.y</div><div class="line">   transform.translation.z</div><div class="line"></div><div class="line">   opacity = 透明度</div><div class="line">   margin</div><div class="line">   zPosition</div><div class="line">   backgroundColor 背景颜色</div><div class="line">   cornerRadius 圆角</div><div class="line">   borderWidth</div><div class="line">   bounds</div><div class="line">   contents</div><div class="line">   contentsRect</div><div class="line">   cornerRadius</div><div class="line">   frame</div><div class="line">   hidden</div><div class="line">   mask</div><div class="line">   masksToBounds</div><div class="line">   opacity</div><div class="line">   position</div><div class="line">   shadowColor</div><div class="line">   shadowOffset</div><div class="line">   shadowOpacity</div><div class="line">   shadowRadius</div><div class="line"></div><div class="line">   */</div></pre></td></tr></table></figure>
+<h3 id="CABasicAnimation-组合动画"><a href="#CABasicAnimation-组合动画" class="headerlink" title="CABasicAnimation 组合动画"></a>CABasicAnimation 组合动画</h3><p>所有的动画都是由简单的简单的动画组合成的,所以对基础动画的学习是很重要的的,如果需要复杂的动画,当然是要发挥你的想象力啦~<br>自己按老师的代码敲了一遍,熟悉熟悉~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">//组合动画</div><div class="line">      func groupAnimation(theView:UIView)&#123;</div><div class="line"></div><div class="line">      //向右平移100</div><div class="line">      let mAnimation = CABasicAnimation(keyPath: &quot;position&quot;)</div><div class="line">      //baseAnimation.fromValue 初始位置，如果不设就是当前位置</div><div class="line">      let endPoint = CGPoint(x: theView.layer.position.x+100, y: theView.layer.position.y)</div><div class="line">      mAnimation.toValue = NSValue(CGPoint:endPoint)//绝对位置</div><div class="line"></div><div class="line">      //baseAnimation.byValue = NSValue(CGPoint:CGPoint(x: 100, y: 0))//相对位置</div><div class="line"></div><div class="line">      //x轴旋转动画</div><div class="line">      let xAnimation = CABasicAnimation(keyPath: &quot;transform.rotation.x&quot;)</div><div class="line">      (xAnimation as CABasicAnimation).byValue =  NSNumber(double:M_PI*500)</div><div class="line">      xAnimation.duration = 1.5</div><div class="line"></div><div class="line">      //y轴旋转动画</div><div class="line">      let yAnimation = CABasicAnimation(keyPath: &quot;transform.rotation.y&quot;)</div><div class="line">      (yAnimation as CABasicAnimation).byValue =  NSNumber(double:M_PI*200)</div><div class="line"></div><div class="line">      //缩放动画</div><div class="line">      let sAnimation = CABasicAnimation(keyPath: &quot;transform.scale&quot;)</div><div class="line">      // 动画选项设定</div><div class="line">      sAnimation.autoreverses = true // 动画结束时执行逆动画</div><div class="line">      // 缩放倍数</div><div class="line">      sAnimation.fromValue = NSNumber(double:0.1) // 开始时的倍率</div><div class="line">      sAnimation.toValue = NSNumber(double:1.5) // 结束时的倍率</div><div class="line"></div><div class="line">      //动画组</div><div class="line">      let groupAnimation = CAAnimationGroup()</div><div class="line"></div><div class="line">      // 动画选项设定，动画组统一设置或者单独设置</div><div class="line">      groupAnimation.duration = 3.0;</div><div class="line">      groupAnimation.repeatCount = 1;</div><div class="line">      groupAnimation.animations = [xAnimation,yAnimation,sAnimation,mAnimation]</div><div class="line">      //这两个属性若不设置，动画执行后回复位</div><div class="line">      groupAnimation.removedOnCompletion = false</div><div class="line">      groupAnimation.fillMode = kCAFillModeForwards</div><div class="line">      groupAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)//加速运动</div><div class="line">      groupAnimation.delegate = self</div><div class="line">      //可以在动画中缓存一些</div><div class="line">      groupAnimation.setValue(NSValue(CGPoint: endPoint), forKey: &quot;endPoint&quot;)</div><div class="line">      groupAnimation.setValue(theView, forKey: &quot;sender&quot;)</div><div class="line">      //执行动画</div><div class="line">      theView.layer.addAnimation(groupAnimation, forKey: &quot;theViewMoveRotation90&quot;)</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><img src="http://liuyanwei.jumppo.com/assets/uploads/animationAndEffect02.gif" alt=""></p>
+<h3 id="关键帧动画-CAKeyframeAnimation"><a href="#关键帧动画-CAKeyframeAnimation" class="headerlink" title="关键帧动画 CAKeyframeAnimation"></a>关键帧动画 CAKeyframeAnimation</h3><blockquote>
+<p>关键帧动画就是在动画控制过程中开发者指定主要的动画状态，至于各个状态间动画如何进行则由系统自动运算补充（每两个关键帧之间系统形成的动画称为“补间动画”），这种动画的好处就是开发者不用逐个控制每个动画帧，而只要关心几个关键帧的状态即可。</p>
+</blockquote>
+<p>那么,Keyframe顾名思义就是关键点的frame，你可以通过设定CALayer的始点、中间关键点、终点的frame，时间，动画会沿你设定的轨迹进行移动:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">private func KeyframeAnimation(theView:UIView)&#123;</div><div class="line">        </div><div class="line">        //关键帧动画</div><div class="line">        let keyframeAnimation = CAKeyframeAnimation(keyPath: &quot;position&quot;)</div><div class="line">        //弧线位置移动</div><div class="line">        </div><div class="line">        </div><div class="line">        //弧线位置移动</div><div class="line">        let path = CGPathCreateMutable()</div><div class="line">        CGPathMoveToPoint(path, nil, 50, 50)</div><div class="line">        //曲线描述</div><div class="line">        CGPathAddCurveToPoint(path, nil, 50, 50, 700, 300, 30, 500)</div><div class="line">        keyframeAnimation.path = path</div><div class="line">        </div><div class="line">        keyframeAnimation.duration = 1.0 ;</div><div class="line">        keyframeAnimation.beginTime =  CACurrentMediaTime() + 2;</div><div class="line">        theView.layer.addAnimation(keyframeAnimation, forKey: &quot;1111&quot;)</div><div class="line">        </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><img src="http://liuyanwei.jumppo.com/assets/uploads/animationAndEffect03.gif" alt=""><br>(插图失败,为了让自己看到效果,继续借图)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line">     先附带上让一些迷糊的属性解释吧,要不然大家好像有点看不懂!</div><div class="line">     （1）values属性</div><div class="line"></div><div class="line">     values属性指明整个动画过程中的关键帧点，例如上例中的A-E就是通过values指定的。需要注意的是，起点必须作为values的第一个值。</div><div class="line"></div><div class="line">     （2）path属性</div><div class="line"></div><div class="line">     作用与values属性一样，同样是用于指定整个动画所经过的路径的。需要注意的是，values与path是互斥的，当values与path同时指定时，path会覆盖values，即values属性将被忽略。例如上述pathAnimation例子</div><div class="line"></div><div class="line">     （3）keyTimes属性</div><div class="line"></div><div class="line">     该属性是一个数组，用以指定每个子路径(AB,BC,CD)的时间。如果你没有显式地对keyTimes进行设置，则系统会默认每条子路径的时间为：ti=duration/(5-1)，即每条子路径的duration相等，都为duration的1\4。当然，我们也可以传个数组让物体快慢结合。例如，你可以传入&#123;0.0, 0.1,0.6,0.7,1.0&#125;，其中首尾必须分别是0和1，因此tAB=0.1-0, tCB=0.6-0.1, tDC=0.7-0.6, tED=1-0.7.....</div><div class="line"></div><div class="line">     （4）timeFunctions属性</div><div class="line"></div><div class="line">     用过UIKit层动画的同学应该对这个属性不陌生，这个属性用以指定时间函数，类似于运动的加速度，有以下几种类型。上例子的AB段就是用了淡入淡出效果。记住，这是一个数组，你有几个子路径就应该传入几个元素</div><div class="line"></div><div class="line">     1 kCAMediaTimingFunctionLinear//线性</div><div class="line">     2 kCAMediaTimingFunctionEaseIn//淡入</div><div class="line">     3 kCAMediaTimingFunctionEaseOut//淡出</div><div class="line">     4 kCAMediaTimingFunctionEaseInEaseOut//淡入淡出</div><div class="line">     5 kCAMediaTimingFunctionDefault//默认</div><div class="line"></div><div class="line">     （5）calculationMode属性</div><div class="line"></div><div class="line">     该属性决定了物体在每个子路径下是跳着走还是匀速走，跟timeFunctions属性有点类似</div><div class="line"></div><div class="line">     1 const kCAAnimationLinear//线性，默认</div><div class="line">     2 const kCAAnimationDiscrete//离散，无中间过程，但keyTimes设置的时间依旧生效，物体跳跃地出现在各个关键帧上</div><div class="line">     3 const kCAAnimationPaced//平均，keyTimes跟timeFunctions失效</div><div class="line">     4 const kCAAnimationCubic//平均，同上</div><div class="line">     5 const kCAAnimationCubicPaced//平均，同上</div><div class="line"></div><div class="line">     */</div></pre></td></tr></table></figure>
+<h3 id="转场效果"><a href="#转场效果" class="headerlink" title="转场效果"></a>转场效果</h3><p>转场动画的使用一般分为以下几个步骤：</p>
+<ul>
+<li>创建转场动画</li>
+<li>设置转场类型、子类型（可选）及其他属性</li>
+<li>设置转场后的新视图并添加动画到图层</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line">  //步骤1：添加view底图，添加view的左右滑动手势</div><div class="line">    let bg = UIImageView(image: UIImage(named: &quot;x0&quot;))</div><div class="line">    func addBgImageView()&#123;</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        bg.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height)</div><div class="line">        view.addSubview(bg)</div><div class="line">        </div><div class="line">        let rightSwipe = UISwipeGestureRecognizer(target: self, action:#selector(ViewController.rightSwipe(_:)))</div><div class="line">        rightSwipe.direction = .Right</div><div class="line">        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.leftSwipe(_:)))</div><div class="line">        leftSwipe.direction = .Left</div><div class="line">        </div><div class="line">        view.addGestureRecognizer(rightSwipe)</div><div class="line">        view.addGestureRecognizer(leftSwipe)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">//    步骤2：随机获取图片和随机获取转场效果的函数</div><div class="line">    var images:[UIImage]?</div><div class="line">    func fetchImage()-&gt;UIImage&#123;</div><div class="line">        if images == nil &#123;</div><div class="line">            images = [];</div><div class="line">            </div><div class="line">            for index in 0...5 &#123;</div><div class="line">                let image = UIImage(named: &quot;x&quot; + String(index))</div><div class="line">                images!.append(image!)</div><div class="line">                </div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        return images![Int(arc4random()%5)]</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func swipeTransition(subtype:String) -&gt; CATransition &#123;</div><div class="line">        let transfer = CATransition()</div><div class="line">        </div><div class="line">        /*</div><div class="line">         kCATransitionFade：淡入淡出，默认效果</div><div class="line">         kCATransitionMoveIn：新视图移动到就是图上方</div><div class="line">         kCATransitionPush:新视图推开旧视图</div><div class="line">         kCATransitionReveal：移走旧视图然后显示新视图</div><div class="line">         </div><div class="line">         //苹果未公开的私有转场效果</div><div class="line">         cube:立方体</div><div class="line">         suckEffect:吸走的效果</div><div class="line">         oglFlip:前后翻转效果</div><div class="line">         rippleEffect:波纹效果</div><div class="line">         pageCurl:翻页起来</div><div class="line">         pageUnCurl:翻页下来</div><div class="line">         cameraIrisHollowOpen:镜头开</div><div class="line">         cameraIrisHollowClose:镜头关</div><div class="line">         */</div><div class="line">        </div><div class="line">        let types = [kCATransitionFade,kCATransitionMoveIn,kCATransitionPush,kCATransitionReveal,&quot;cube&quot;,&quot;suckEffect&quot;,&quot;oglFlip&quot;,&quot;rippleEffect&quot;,&quot;pageCurl&quot;,&quot;pageUnCurl&quot;,&quot;cameraIrisHollowOpen&quot;,&quot;cameraIrisHollowClose&quot;]</div><div class="line">        </div><div class="line">        let type = types[Int(arc4random()%11)]</div><div class="line">        </div><div class="line">        transfer.type = type</div><div class="line">        </div><div class="line">        NSLog(&quot;%@&quot;, type)</div><div class="line">        </div><div class="line">        transfer.subtype = subtype</div><div class="line">        transfer.duration = 1</div><div class="line">        return transfer</div><div class="line">    &#125;</div><div class="line">//    步骤3：左右滑动方法，实现场景切换</div><div class="line">    </div><div class="line">    func rightSwipe(rightSwipe:UIGestureRecognizer)&#123;</div><div class="line">        </div><div class="line">        bg.image = fetchImage()</div><div class="line">        bg.layer.addAnimation(swipeTransition(kCATransitionFromRight), forKey: &quot;kCATransitionFromRight&quot;)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func leftSwipe(leftSwipe:UIGestureRecognizer)&#123;</div><div class="line">        </div><div class="line">        bg.image = fetchImage()</div><div class="line">        bg.layer.addAnimation(swipeTransition(kCATransitionFromLeft), forKey: &quot;kCATransitionFromleft&quot;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><img src="http://liuyanwei.jumppo.com/assets/uploads/animationAndEffect04.gif" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/13/Java中abstract不能共存的关键字/" itemprop="url">
+                  Java中abstract不能共存的关键字
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-13T23:34:54+08:00" content="2016-10-13">
+              2016-10-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##abstract修饰不能和哪些关键字共存?</p>
+<ul>
+<li><strong>static不能和abstract组合,由于abstract没有方法体,所以用类去调用会失败.</strong></li>
+<li><strong>final 不能和abstract组合,由于final不允许重写方法,abstract需要直接重写方法</strong></li>
+<li><strong>private 不能和abstract组合,abstract是为了让子类看到并且重写,而private是不让外界使用和了解</strong></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/11/iOS中模拟发送http请求以及解析xml/" itemprop="url">
+                  iOS中模拟发送http请求以及解析xml
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-11T13:32:33+08:00" content="2016-10-11">
+              2016-10-11
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="AFNetWorking请求"><a href="#AFNetWorking请求" class="headerlink" title="AFNetWorking请求"></a>AFNetWorking请求</h3><p>这个不难,导入AFN框架,生成一个单例类,特别要注意的是,如果作为模拟请求http请求的话,返回的并不是json数据.</p>
+<h4 id="1-单例代码如下"><a href="#1-单例代码如下" class="headerlink" title="1.单例代码如下"></a>1.单例代码如下</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">import UIKit</div><div class="line"></div><div class="line">class NetworkTools: AFHTTPSessionManager &#123;</div><div class="line"></div><div class="line">		//设置单例</div><div class="line">    static let tools: NetworkTools = &#123;</div><div class="line">        </div><div class="line">        </div><div class="line">        let tool = NetworkTools()</div><div class="line">        </div><div class="line">        //设置类型</div><div class="line">        tool.responseSerializer.acceptableContentTypes =  NSSet(objects: &quot;application/json&quot;, &quot;text/html&quot;,&quot;text/json&quot;, &quot;text/javascript&quot;, &quot;text/plain&quot;,&quot;image/png&quot;) as? Set&lt;String&gt;</div><div class="line"></div><div class="line">        tool.responseSerializer = AFHTTPResponseSerializer()</div><div class="line">        </div><div class="line">        return tool</div><div class="line">    &#125;()</div><div class="line">    </div><div class="line">    //获取单例</div><div class="line">    class func shareNetworkTools() -&gt;NetworkTools&#123;</div><div class="line">        return tools</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-发送请求"><a href="#2-发送请求" class="headerlink" title="2.发送请求"></a>2.发送请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var param = [String:String]()</div><div class="line">      </div><div class="line"></div><div class="line">      NetworkTools.shareNetworkTools().post(&quot;https://www.baidu.com&quot;, parameters: param, progress: nil, success:&#123;(URLSessionDataTask, data)in</div><div class="line">          </div><div class="line">          let jsonStr = String.init(data: data as! Data, encoding: .utf8)!</div><div class="line">          </div><div class="line">          print(jsonStr)</div><div class="line">          </div><div class="line">      &#125;, failure:&#123;(URLSessionDataTask, error) in</div><div class="line">          </div><div class="line">          print(error)</div><div class="line">      &#125;);</div></pre></td></tr></table></figure>
+<p>好了,在这里我们已经可以获得含有dom字节的字符串吧,保佑解析不要出错吧,这里就不作网络请求了,直接加载本地数据(为了方便查看,这里直接解析html吧):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;div&gt;</div><div class="line">    &lt;p&gt;测试节点&lt;/p&gt;</div><div class="line">    &lt;h1&gt;nnnnnn&lt;/h1&gt;</div><div class="line">    &lt;table&gt;</div><div class="line">      &lt;ul&gt;</div><div class="line">        &lt;li&gt;abc1&lt;/li&gt;</div><div class="line">        &lt;li&gt;abc2&lt;/li&gt;</div><div class="line">        &lt;li&gt;abc3&lt;/li&gt;</div><div class="line">        &lt;li&gt;abc4&lt;/li&gt;</div><div class="line">        &lt;li&gt;abc5&lt;/li&gt;</div><div class="line">      &lt;/ul&gt;</div><div class="line">    &lt;/table&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h3 id="GDataXMLNode解析XML"><a href="#GDataXMLNode解析XML" class="headerlink" title="GDataXMLNode解析XML"></a>GDataXMLNode解析XML</h3><h4 id="一-使用GDataXMLNode解析-必须导入文件和框架"><a href="#一-使用GDataXMLNode解析-必须导入文件和框架" class="headerlink" title="一.使用GDataXMLNode解析,必须导入文件和框架"></a>一.使用GDataXMLNode解析,必须导入文件和框架</h4><p>(OS_导入libxml2.2框架后,找不到<libxml tree.h="">的解决办法)</libxml></p>
+<ol>
+<li>从网上下载GDataXMLNode.h和GDataXMLNode.m,只有两个文件,下载完成后直接拉入项目中即可.(<strong>此时编译会报错误:找不到libxml tree.h</strong>)</li>
+<li>下载完成后需要配置项目中的动态库,选中项目,像工程中添加”libxml2.tbd” (借一下图,感谢<a href="http://my.csdn.net/pilqc2009" target="_blank" rel="external">pilqc2009</a>)<br><img src="http://img.blog.csdn.net/20140822203855390?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcHJlX2VtaW5lbnQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="1"></li>
+</ol>
+<p><img src="../../images/1.png" alt=""></p>
+<ol>
+<li><p>切换到切换到Buiild Settings的tab里，通过搜索,找到“Linking”选项框，在里面的”Other Linker Flags”的debug 和 release 里面点击“+”，添加 “-lxml2”<br><img src="http://img.blog.csdn.net/20140822204223171?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcHJlX2VtaW5lbnQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</li>
+<li><p>跟步骤2一样，依然在Buiild Settings的tab里，通过搜索，找到 Framework Search ,添加“/usr/lib/libxml2.tbd”；</p>
+</li>
+<li><img src="http://img.blog.csdn.net/20140822204710075?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcHJlX2VtaW5lbnQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+<li>跟步骤3一样，依然在Buiild Settings的tab里，通过搜索，在“Header Search Paths” 和 “User Header Search Paths” 里填入$(SDKROOT)/usr/include/libxml2。<br><img src="http://img.blog.csdn.net/20140822205006387?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcHJlX2VtaW5lbnQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+<li>然后clean项目，就OK，可以使用了。</li>
+</ol>
+<p>二.导入框架以后,就可以愉快的使用GDataXMLNode来解析文件了,如上面的html结构的文档,使用如下方法进行解析:</p>
+<pre><code>override func viewDidLoad() {
+
+    super.viewDidLoad()
+    //加载web预览
+    let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
+    self.view.addSubview(webView)
+
+
+    let path = Bundle.main.bundlePath
+    //获得基础路径
+    let baseURL = NSURL.fileURL(withPath: path)
+    //获取文件
+    let htmlPath = Bundle.main.path(forResource: &quot;index&quot;, ofType: &quot;html&quot;)!
+    //抛出错误
+    do{
+        //将html文件转换为文本
+        let htmlCont = try NSString(contentsOfFile: htmlPath, encoding: String.Encoding.utf8.rawValue)
+
+        //将内容显示
+        webView.loadHTMLString(htmlCont as String, baseURL: baseURL)
+
+        print(htmlCont)
+
+
+        do {
+            //解析该文本    
+            let doc = try GDataXMLDocument.init(xmlString: htmlCont as String!, options: 0)
+            //获取节点
+            let root = doc.rootElement();
+
+            print(root!)
+        } catch  {
+            print(&quot;解析错误&quot;)
+        }
+
+    }
+    catch{
+        print(&quot;URl有误,获取失败失败&quot;)
+    }        
+    view.backgroundColor = UIColor.red
+}
+</code></pre><p>打印的结果如下解析完成,喜欢怎么取都可以啦:(或得跟节点)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GDataXMLElement 0x7ff9e3f478b0: &#123;type:1 name:html xml:&quot;&lt;html&gt;&lt;body&gt;&lt;div&gt;&lt;p&gt;测试节点&lt;/p&gt;&lt;h1&gt;nnnnnn&lt;/h1&gt;&lt;table&gt;&lt;ul&gt;&lt;li&gt;abc1&lt;/li&gt;&lt;li&gt;abc2&lt;/li&gt;&lt;li&gt;abc3&lt;/li&gt;&lt;li&gt;abc4&lt;/li&gt;&lt;li&gt;abc5&lt;/li&gt;&lt;/ul&gt;&lt;/table&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/10/Mou的使用/" itemprop="url">
+                  Mou的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-10T23:40:53+08:00" content="2016-10-10">
+              2016-10-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mou"><a href="#Mou" class="headerlink" title="Mou"></a>Mou</h1><p><img src="http://25.io/mou/Mou_128.png" alt="Mou icon"></p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><strong>Mou</strong>, the missing Markdown editor for <em>web developers</em>.</p>
+<h3 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h3><h4 id="Strong-and-Emphasize"><a href="#Strong-and-Emphasize" class="headerlink" title="Strong and Emphasize"></a>Strong and Emphasize</h4><p><strong>strong</strong> or <strong>strong</strong> ( Cmd + B )</p>
+<p><em>emphasize</em> or <em>emphasize</em> ( Cmd + I )</p>
+<p><strong>Sometimes I want a lot of text to be bold.<br>Like, seriously, a <em>LOT</em> of text</strong></p>
+<h4 id="Blockquotes"><a href="#Blockquotes" class="headerlink" title="Blockquotes"></a>Blockquotes</h4><blockquote>
+<p>Right angle brackets &gt; are used for block quotes.</p>
+</blockquote>
+<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;</a> link.</p>
+<p>Simple inline link <a href="http://chenluois.com" target="_blank" rel="external">http://chenluois.com</a>, another inline link <a href="http://25.io/smaller/" target="_blank" rel="external">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension" target="_blank" rel="external">Resize</a>.</p>
+<p>A <a href="http://25.io/mou/" title="Markdown editor on Mac OS X" target="_blank" rel="external">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
+<p>Titles ( or called tool tips ) in the links are optional.</p>
+<h4 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h4><p>An inline image <img src="http://25.io/smaller/favicon.ico" alt="Smaller icon" title="Title here">, title is optional.</p>
+<p>A <img src="http://resizesafari.com/favicon.ico" alt="Resize icon" title="Title"> reference style image.</p>
+<h4 id="Inline-code-and-Block-code"><a href="#Inline-code-and-Block-code" class="headerlink" title="Inline code and Block code"></a>Inline code and Block code</h4><p>Inline code are surround by <code>backtick</code> key. To create a block code:</p>
+<pre><code>Indent each line by at least 1 tab, or 4 spaces.
+var Mou = exactlyTheAppIwant; 
+</code></pre><h4 id="Ordered-Lists"><a href="#Ordered-Lists" class="headerlink" title="Ordered Lists"></a>Ordered Lists</h4><p>Ordered lists are created using “1.” + Space:</p>
+<ol>
+<li>Ordered list item</li>
+<li>Ordered list item</li>
+<li>Ordered list item</li>
+</ol>
+<h4 id="Unordered-Lists"><a href="#Unordered-Lists" class="headerlink" title="Unordered Lists"></a>Unordered Lists</h4><p>Unordered list are created using “*” + Space:</p>
+<ul>
+<li>Unordered list item</li>
+<li>Unordered list item</li>
+<li>Unordered list item </li>
+</ul>
+<p>Or using “-“ + Space:</p>
+<ul>
+<li>Unordered list item</li>
+<li>Unordered list item</li>
+<li>Unordered list item</li>
+</ul>
+<h4 id="Hard-Linebreak"><a href="#Hard-Linebreak" class="headerlink" title="Hard Linebreak"></a>Hard Linebreak</h4><p>End a line with two or more spaces will create a hard linebreak, called <code>&lt;br /&gt;</code> in HTML. ( Control + Return )<br>Above line ended with 2 spaces.</p>
+<h4 id="Horizontal-Rules"><a href="#Horizontal-Rules" class="headerlink" title="Horizontal Rules"></a>Horizontal Rules</h4><p>Three or more asterisks or dashes:</p>
+<hr>
+<hr>
+<hr>
+<h4 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h4><p>Setext-style:</p>
+<h1 id="This-is-H1"><a href="#This-is-H1" class="headerlink" title="This is H1"></a>This is H1</h1><h2 id="This-is-H2"><a href="#This-is-H2" class="headerlink" title="This is H2"></a>This is H2</h2><p>atx-style:</p>
+<h1 id="This-is-H1-1"><a href="#This-is-H1-1" class="headerlink" title="This is H1"></a>This is H1</h1><h2 id="This-is-H2-1"><a href="#This-is-H2-1" class="headerlink" title="This is H2"></a>This is H2</h2><h3 id="This-is-H3"><a href="#This-is-H3" class="headerlink" title="This is H3"></a>This is H3</h3><h4 id="This-is-H4"><a href="#This-is-H4" class="headerlink" title="This is H4"></a>This is H4</h4><h5 id="This-is-H5"><a href="#This-is-H5" class="headerlink" title="This is H5"></a>This is H5</h5><h6 id="This-is-H6"><a href="#This-is-H6" class="headerlink" title="This is H6"></a>This is H6</h6><h3 id="Extra-Syntax"><a href="#Extra-Syntax" class="headerlink" title="Extra Syntax"></a>Extra Syntax</h3><h4 id="Footnotes"><a href="#Footnotes" class="headerlink" title="Footnotes"></a>Footnotes</h4><p>Footnotes work mostly like reference-style links. A footnote is made of two things: a marker in the text that will become a superscript number; a footnote definition that will be placed in a list of footnotes at the end of the document. A footnote looks like this:</p>
+<p>That’s some text with a footnote.[^1]</p>
+<p>[^1]: And that’s the footnote.</p>
+<h4 id="Strikethrough"><a href="#Strikethrough" class="headerlink" title="Strikethrough"></a>Strikethrough</h4><p>Wrap with 2 tilde characters:</p>
+<p><del>Strikethrough</del></p>
+<h4 id="Fenced-Code-Blocks"><a href="#Fenced-Code-Blocks" class="headerlink" title="Fenced Code Blocks"></a>Fenced Code Blocks</h4><p>Start with a line containing 3 or more backticks, and ends with the first line with the same number of backticks:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Fenced code blocks are like Stardard Markdown’s regular code</div><div class="line">blocks, except that they’re not indented and instead rely on</div><div class="line">a start and end fence lines to delimit the code block.</div></pre></td></tr></table></figure>
+<h4 id="Tables"><a href="#Tables" class="headerlink" title="Tables"></a>Tables</h4><p>A simple table looks like this:</p>
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+<th>Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+<p>If you wish, you can add a leading and tailing pipe to each line of the table:</p>
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+<th>Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+<p>Specify alignment for each column by adding colons to separator lines:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">First Header</th>
+<th style="text-align:center">Second Header</th>
+<th style="text-align:right">Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Left</td>
+<td style="text-align:center">Center</td>
+<td style="text-align:right">Right</td>
+</tr>
+<tr>
+<td style="text-align:left">Left</td>
+<td style="text-align:center">Center</td>
+<td style="text-align:right">Right</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Shortcuts"><a href="#Shortcuts" class="headerlink" title="Shortcuts"></a>Shortcuts</h3><h4 id="View"><a href="#View" class="headerlink" title="View"></a>View</h4><ul>
+<li>Toggle live preview: Shift + Cmd + I</li>
+<li>Toggle Words Counter: Shift + Cmd + W</li>
+<li>Toggle Transparent: Shift + Cmd + T</li>
+<li>Toggle Floating: Shift + Cmd + F</li>
+<li>Left/Right = 1/1: Cmd + 0</li>
+<li>Left/Right = 3/1: Cmd + +</li>
+<li>Left/Right = 1/3: Cmd + -</li>
+<li>Toggle Writing orientation: Cmd + L</li>
+<li>Toggle fullscreen: Control + Cmd + F</li>
+</ul>
+<h4 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h4><ul>
+<li>Copy HTML: Option + Cmd + C</li>
+<li>加粗字体: 选择文字后 , Cmd + B </li>
+<li>斜体,强调 : 选择文字后 , Cmd + I </li>
+<li>行内嵌套代码 : 选择文字后 , Cmd + K</li>
+<li>删除线，加删除线 : 选择文字后 , Cmd + U</li>
+<li>链接到某网址: 选择文字后, Control + Shift + L</li>
+<li>Image: Select text, Control + Shift + I</li>
+<li>Select Word: Control + Option + W</li>
+<li>Select Line: Shift + Cmd + L</li>
+<li>Select All: Cmd + A</li>
+<li>Deselect All: Cmd + D</li>
+<li>全部转换为大写: Select text, Control + U</li>
+<li>全部转换为小写: Select text, Control + Shift + U</li>
+<li>首字母大写: Select text, Control + Option + U</li>
+<li>Convert to List: Select lines, Control + L</li>
+<li>Convert to Blockquote: Select lines, Control + Q</li>
+<li>Convert to H1: Cmd + 1</li>
+<li>Convert to H2: Cmd + 2</li>
+<li>Convert to H3: Cmd + 3</li>
+<li>Convert to H4: Cmd + 4</li>
+<li>Convert to H5: Cmd + 5</li>
+<li>Convert to H6: Cmd + 6</li>
+<li>Convert Spaces to Tabs: Control + [</li>
+<li>Convert Tabs to Spaces: Control + ]</li>
+<li>Insert Current Date: Control + Shift + 1</li>
+<li>Insert Current Time: Control + Shift + 2</li>
+<li>Insert entity &lt;: Control + Shift + ,</li>
+<li>Insert entity &gt;: Control + Shift + .</li>
+<li>Insert entity &amp;: Control + Shift + 7</li>
+<li>Insert entity Space: Control + Shift + Space</li>
+<li>Insert Scriptogr.am Header: Control + Shift + G</li>
+<li>Shift Line Left: Select lines, Cmd + [</li>
+<li>Shift Line Right: Select lines, Cmd + ]</li>
+<li>New Line: Cmd + Return</li>
+<li>Comment: Cmd + /</li>
+<li>Hard Linebreak: Control + Return</li>
+</ul>
+<h4 id="Edit"><a href="#Edit" class="headerlink" title="Edit"></a>Edit</h4><ul>
+<li>Auto complete current word: Esc</li>
+<li>Find: Cmd + F</li>
+<li>Close find bar: Esc</li>
+</ul>
+<h4 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h4><ul>
+<li>Post on Scriptogr.am: Control + Shift + S</li>
+<li>Post on Tumblr: Control + Shift + T</li>
+</ul>
+<h4 id="Export"><a href="#Export" class="headerlink" title="Export"></a>Export</h4><ul>
+<li>Export HTML: Option + Cmd + E</li>
+<li>Export PDF:  Option + Cmd + P</li>
+</ul>
+<h3 id="And-more"><a href="#And-more" class="headerlink" title="And more?"></a>And more?</h3><p>Don’t forget to check Preferences, lots of useful options are there.</p>
+<p>Follow <a href="https://twitter.com/mou" target="_blank" rel="external">@Mou</a> on Twitter for the latest news.</p>
+<p>For feedback, use the menu <code>Help</code> - <code>Send Feedback</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/10/iOS-架构模式-–-简述-MVC-MVP-MVVM-和-VIPER-转/" itemprop="url">
+                  iOS 架构模式 – 简述 MVC, MVP, MVVM 和 VIPER (转)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-10T23:23:20+08:00" content="2016-10-10">
+              2016-10-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在使用 iOS 的 MVC 时候感觉怪怪的？想要尝试下 MVVM？之前听说过 VIPER，但是又纠结是不是值得去学？</p>
+<p>继续阅读，你就会知道上面问题的答案 – 如果读完了还是不知道的话，欢迎留言评论。</p>
+<p>iOS 上面的架构模式你可能之前就了解过一些，接下来我们会帮你把它们进行一下梳理。我们先简要回顾一下目前比较主流的架构模式，分析比较一些他们的原理，并用一些小栗子来进行练习。如果你对其中的某一种比较感兴趣的话，我们也在文章里面给出了对应的链接。</p>
+<p>对于设计模式的学习是一件容易上瘾的事情，所以先提醒你一下：在你读完这篇文章之后，可能会比读之前有更多的疑问，比如：</p>
+<ul>
+<li><p>(MVC）谁来负责网络请求：是 Model 还是 Controller？</p>
+</li>
+<li><p>(MVVM）我该怎么去把一个 Model 传递给一个新创建的 View 的 ViewModel？</p>
+</li>
+<li><p>(VIPER）谁来负责创建 VIPER 模块：是 Router 还是 Presenter？</p>
+</li>
+</ul>
+<h3 id="1-为何要在意架构的选择呢？"><a href="#1-为何要在意架构的选择呢？" class="headerlink" title="1. 为何要在意架构的选择呢？"></a>1. 为何要在意架构的选择呢？</h3><p>   因为如果你不在意的话，难保一天，你就需要去调试一个巨大无比又有着各种问题的类，然后你会发现在这个类里面，你完全就找不到也修复不了任何 bug。一般来说，把这么大的一个类作为整体放在脑子里记着是一件非常困难的事情，你总是难免会忘掉一些比较重要的细节。如果你发现在你的应用里面已经开始出现这种状况了，那你很可能遇到过下面这类问题：</p>
+<ul>
+<li>这个类是一个 UIViewController 的子类。</li>
+<li>你的数据直接保存在了 UIViewController 里面。</li>
+<li>你的 UIViews 好像什么都没做。</li>
+<li>你的 Model 只是一个纯粹的数据结构</li>
+<li>你的单元测试什么都没有覆盖到</li>
+</ul>
+<p>其实即便你遵循了 Apple 的设计规范，实现了 <a href="https://developer.apple.com/library/content/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html" target="_blank" rel="external">Apple 的 MVC 框架</a>，也还是一样会遇到上面这些问题；所以也没什么好失落的。<a href="https://developer.apple.com/library/content/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html" target="_blank" rel="external">Apple 的 MVC 框架</a> 有它自身的缺陷，不过这个我们后面再说。</p>
+<p>让我们先来定义一下好的框架应该具有的特征：</p>
+<ol>
+<li>用严格定义的角色，平衡的将职责 划分 给不同的实体。</li>
+<li>可测性 通常取决于上面说的第一点（不用太担心，如果架构何时的话，做到这点并不难）。</li>
+<li>易用 并且维护成本低。</li>
+</ol>
+<h5 id="1-1为什么要划分？"><a href="#1-1为什么要划分？" class="headerlink" title="1.1为什么要划分？"></a>1.1为什么要划分？</h5><p>   当我们试图去理解事物的工作原理的时候，划分可以减轻我们的脑部压力。如果你觉得开发的越多，大脑就越能适应去处理复杂的工作，确实是这样。但是大脑的这种能力不是线性提高的，而且很快就会达到一个瓶颈。所以要处理复杂的事情，最好的办法还是在遵循 单一责任原则 的条件下，将它的职责划分到多个实体中去。</p>
+<h5 id="1-2-为什么要可测性？"><a href="#1-2-为什么要可测性？" class="headerlink" title="1.2 为什么要可测性？"></a>1.2 为什么要可测性？</h5><p>   对于那些对单元测试心存感激的人来说，应该不会有这方面的疑问：单元测试帮助他们测试出了新功能里面的错误，或者是帮他们找出了重构的一个复杂类里面的 bug。这意味着这些单元测试帮助这些开发者们在程序运行之前就发现了问题，这些问题如果被忽视的话很可能会提交到用户的设备上去；而修复这些问题，又至少需要一周左右的时间（AppStore 审核）。</p>
+<h5 id="1-3-为什么要易用"><a href="#1-3-为什么要易用" class="headerlink" title="1.3 为什么要易用"></a>1.3 为什么要易用</h5><p>   这块没什么好说的，直说一点：最好的代码是那些从未被写出来的代码。代码写的越少，问题就越少；所以开发者想少写点代码并不一定就是因为他懒。还有，当你想用一个比较 聪明 的方法的时候，全完不要忽略了它的维护成本。</p>
+<h3 id="2-MV-X-的基本要素"><a href="#2-MV-X-的基本要素" class="headerlink" title="2.MV(X) 的基本要素"></a>2.MV(X) 的基本要素</h3><p>现在我们面对架构设计模式的时候有了很多选择：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">* MCV</div><div class="line">* MVP</div><div class="line">* MVVM</div><div class="line">* VIPER</div></pre></td></tr></table></figure>
+<p>首先前三种模式都是把所有的实体归类到了下面三种分类中的一种：</p>
+<ul>
+<li><strong>Models（模型)</strong> — 数据层，或者负责处理数据的 <a href="https://en.wikipedia.org/wiki/Data_access_layer" target="_blank" rel="external">数据接口层</a>。比如 Person 和 PersonDataProvider 类</li>
+<li><strong>Views（视图）</strong> – 展示层(GUI)。对于 iOS 来说所有以 UI 开头的类基本都属于这层。</li>
+<li><strong>Controller/Presenter/ViewModel（控制器/展示器/视图模型）</strong> – 它是 Model 和 View 之间的胶水或者说是中间人。一般来说，当用户对 View 有操作时它负责去修改相应 Model；当 Model 的值发生变化时它负责去更新对应 View。</li>
+</ul>
+<p>将实体进行分类之后我们可以：</p>
+<ul>
+<li>更好的理解</li>
+<li>重用（主要是 View 和 Model）</li>
+<li>对它们独立的进行测试</li>
+</ul>
+<h4 id="3-让我从-MV-X-系列开始讲起，最后讲-VIPER。"><a href="#3-让我从-MV-X-系列开始讲起，最后讲-VIPER。" class="headerlink" title="3. 让我从 MV(X) 系列开始讲起，最后讲 VIPER。"></a>3. 让我从 MV(X) 系列开始讲起，最后讲 VIPER。</h4><p>在开始讨论 Apple 的 MVC 之前，我们先来看下 传统的 MVC。</p>
+<p>在这种架构下，View 是无状态的，在 Model 变化的时候它只是简单的被 Controller 重绘；就像网页一样，点击了一个新的链接，整个网页就重新加载。尽管这种架构可以在 iOS 应用里面实现，但是由于 MVC 的三种实体被紧密耦合着，每一种实体都和其他两种有着联系，所以即便是实现了也没有什么意义。这种紧耦合还戏剧性的减少了它们被重用的可能，这恐怕不是你想要在自己的应用里面看到的。<strong>综上，传统 MVC 的例子我觉得也没有必要去写了。</strong></p>
+<h4 id="4-Apple-的-MVC"><a href="#4-Apple-的-MVC" class="headerlink" title="4.Apple 的 MVC"></a>4.Apple 的 MVC</h4><p><strong>4.1 理想</strong></p>
+<p>View 和 Model 之间是相互独立的，它们只通过 Controller 来相互联系。有点恼人的是 Controller 是重用性最差的，因为我们一般不会把冗杂的业务逻辑放在 Model 里面，那就只能放在 Controller 里了。</p>
+<p>理论上看这么做貌似挺简单的，但是你有没有觉得有点不对劲？你甚至听过有人把 MVC 叫做重控制器模式。另外 关于 <a href="https://www.objc.io/issues/1-view-controllers/lighter-view-controllers/" target="_blank" rel="external">ViewController 瘦身</a> 已经成为 iOS 开发者们热议的话题了。为什么 Apple 要沿用只是做了一点点改进的传统 MVC 架构呢？</p>
+<p><strong>4.2.现实</strong></p>
+<p>Cocoa MVC 鼓励你去写重控制器是因为 View 的整个生命周期都需要它去管理，Controller 和 View 很难做到相互独立。虽然你可以把控制器里的一些业务逻辑和数据转换的工作交给 Model，但是你再想把负担往 View 里面分摊的时候就没办法了；因为 View 的主要职责就只是讲用户的操作行为交给 Controller 去处理而已。于是 ViewController 最终就变成了所有东西的代理和数据源，甚至还负责网络请求的发起和取消，还有…剩下的你来讲。</p>
+<p>像下面这种代码你应该不陌生吧：</p>
+<pre><code>var userCell = tableView.dequeueReusableCellWithIdentifier(&quot;identifier&quot;) vas UserCell
+userCell.configureWithUser(user)
+</code></pre><p>   Cell 作为一个 View 直接用 Model 来完成了自身的配置，MVC 的原则被打破了，这种情况一直存在，而且还没人觉得有什么问题。如果你是严格遵循 MVC 的话，你应该是在 ViewController 里面去配置 Cell，而不是直接将 Model 丢给 Cell，当然这样会让你的 ViewController 更重。</p>
+<p>   <strong>Cocoa MVC 被戏称为重控制器模式还是有原因的。</strong> </p>
+<p>问题直到开始<a href="http://nshipster.com/unit-testing/" target="_blank" rel="external"> 单元测试</a>（希望你的项目里面已经有了）之后才开始显现出来。Controller 测试起来很困难，因为它和 View 耦合的太厉害，要测试它的话就需要频繁的去 mock View 和 View 的生命周期；而且按照这种架构去写控制器代码的话，业务逻辑的代码也会因为视图布局代码的原因而变得很散乱。  </p>
+<p>综上所述，Cocoa MVC 貌似并不是一个很好的选择。但是我们还是评估一下他在各方面的表现（在文章开头有讲）：</p>
+<ul>
+<li><strong>划分</strong> – View 和 Model 确实是实现了分离，但是 View 和 Controller 耦合的太厉害</li>
+<li><strong>可测性</strong> – 因为划分的不够清楚，所以能测的基本就只有 Model 而已</li>
+<li><strong>易用</strong> – 相较于其他模式，它的代码量最少。而且基本上每个人都很熟悉它，即便是没太多经验的开发者也能维护。</li>
+</ul>
+<p>在这种情况下你可以选择 Cocoa MVC：你并不想在架构上花费太多的时间，而且你觉得对于你的小项目来说，花费更高的维护成本只是浪费而已。</p>
+<p><strong>如果你最看重的是开发速度，那么 Cocoa MVC 就是你最好的选择。</strong></p>
+<h4 id="5-MVP-–-保证了职责划分的（promises-delivered）-Cocoa-MVC"><a href="#5-MVP-–-保证了职责划分的（promises-delivered）-Cocoa-MVC" class="headerlink" title="5.MVP – 保证了职责划分的（promises delivered） Cocoa MVC"></a>5.MVP – 保证了职责划分的（promises delivered） Cocoa MVC</h4><p>看起来确实很像 Apple 的 MVC 对吧？确实蛮像，它的名字是 MVP（被动变化的 View）。稍等…这个意思是说 Apple 的 MVC 实际上是 MVP 吗？不是的，回想一下，在 MVC 里面 View 和 Controller 是耦合紧密的，但是对于 MVP 里面的 Presenter 来讲，它完全不关注 ViewController 的生命周期，而且 View 也能被简单 mock 出来，所以在 Presenter 里面基本没什么布局相关的代码，它的职责只是通过数据和状态更新 View。</p>
+<p><strong>如果我跟你讲 UIViewController 在这里的角色其实是 View 你感觉如何。</strong></p>
+<p>在 MVP 架构里面，UIViewController 的那些子类其实是属于 View 的，而不是 Presenter。这种区别提供了极好的可测性，但是这是用开发速度的代价换来的，因为你必须要手动的去创建数据和绑定事件，像下面这段代码中做的一样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">import UIKit</div><div class="line"> </div><div class="line">struct Person &#123; // Model</div><div class="line">    let firstName: String</div><div class="line">    let lastName: String</div><div class="line">&#125;</div><div class="line"> </div><div class="line">protocol GreetingView: class &#123;</div><div class="line">    func setGreeting(greeting: String)</div><div class="line">&#125;</div><div class="line"> </div><div class="line">protocol GreetingViewPresenter &#123;</div><div class="line">    init(view: GreetingView, person: Person)</div><div class="line">    func showGreeting()</div><div class="line">&#125;</div><div class="line"> </div><div class="line">class GreetingPresenter : GreetingViewPresenter &#123;</div><div class="line">    unowned let view: GreetingView</div><div class="line">    let person: Person</div><div class="line">    required init(view: GreetingView, person: Person) &#123;</div><div class="line">        self.view = view</div><div class="line">        self.person = person</div><div class="line">    &#125;</div><div class="line">    func showGreeting() &#123;</div><div class="line">        let greeting = &quot;Hello&quot; + &quot; &quot; + self.person.firstName + &quot; &quot; + self.person.lastName</div><div class="line">        self.view.setGreeting(greeting)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">class GreetingViewController : UIViewController, GreetingView &#123;</div><div class="line">    var presenter: GreetingViewPresenter!</div><div class="line">    let showGreetingButton = UIButton()</div><div class="line">    let greetingLabel = UILabel()</div><div class="line"> </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        self.showGreetingButton.addTarget(self, action: &quot;didTapButton:&quot;, forControlEvents: .TouchUpInside)</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    func didTapButton(button: UIButton) &#123;</div><div class="line">        self.presenter.showGreeting()</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    func setGreeting(greeting: String) &#123;</div><div class="line">        self.greetingLabel.text = greeting</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // layout code goes here</div><div class="line">&#125;</div><div class="line">// Assembling of MVP</div><div class="line">let model = Person(firstName: &quot;David&quot;, lastName: &quot;Blaine&quot;)</div><div class="line">let view = GreetingViewController()</div><div class="line">let presenter = GreetingPresenter(view: view, person: model)</div><div class="line">view.presenter = presenter</div></pre></td></tr></table></figure>
+<p><strong>5.1.关于组装方面的重要说明</strong></p>
+<p>MVP 架构拥有三个真正独立的分层，所以在组装的时候会有一些问题，而 MVP 也成了第一个披露了这种问题的架构。因为我们不想让 View 知道 Model 的信息，所以在当前的 ViewController（角色其实是 View）里面去进行组装肯定是不正确的，我们应该在另外的地方完成组装。比如，我们可以创建一个应用层（app-wide）的 Router 服务，让它来负责组装和 View-to-View 的转场。这个问题不仅在 MVP 中存在，在接下来要介绍的模式里面也都有这个问题。</p>
+<p>让我们来看一下 MVP 在各方面的表现：</p>
+<ul>
+<li><strong>划分</strong> – 我们把大部分的职责都分配到了 Presenter 和 Model 里面，而 View 基本上不需要做什么（在上面的例子里面，Model 也什么都没做）。</li>
+<li><strong>可测性</strong> – 简直棒，我们可以通过 View 来测试大部分的业务逻辑。</li>
+<li><strong>易用</strong> – 就我们上面那个简单的例子来讲，代码量差不多是 MVC 架构的两倍，但是 MVP 的思路还是蛮清晰的。<br><strong>MVP 架构在 iOS 中意味着极好的可测性和巨大的代码量。</strong></li>
+</ul>
+<h4 id="6-MVP-–-添加了数据绑定的另一个版本"><a href="#6-MVP-–-添加了数据绑定的另一个版本" class="headerlink" title="6.MVP – 添加了数据绑定的另一个版本"></a>6.MVP – 添加了数据绑定的另一个版本</h4><p>还存在着另一种的 MVP – Supervising Controller MVP。这个版本的 MVP 包括了 View 和 Model 的直接绑定，与此同时 Presenter（Supervising Controller）仍然继续处理 View 上的用户操作，控制 View 的显示变化。</p>
+<p>但是我们之前讲过，模糊的职责划分是不好的事情，比如 View 和 Model 的紧耦合。这个道理在 Cocoa 桌面应用开发上面也是一样的。</p>
+<p>就像传统 MVC 架构一样，我找不到有什么理由需要为这个有瑕疵的架构写一个例子</p>
+<h4 id="7-MVVM-–-是-MV-X-系列架构里面最新兴的，也是最出色的"><a href="#7-MVVM-–-是-MV-X-系列架构里面最新兴的，也是最出色的" class="headerlink" title="7.MVVM – 是 MV(X) 系列架构里面最新兴的，也是最出色的"></a>7.MVVM – 是 MV(X) 系列架构里面最新兴的，也是最出色的</h4><p>MVVM 架构是 MV(X) 里面最新的一个，让我们希望它在出现的时候已经考虑到了 MV(X) 模式之前所遇到的问题吧。</p>
+<p>理论上来说，Model – View – ViewModel 看起来非常棒。View 和 Model 我们已经都熟悉了，中间人的角色我们也熟悉了，但是在这里中间人的角色变成了 ViewModel。</p>
+<p>它跟 MVP 很像：</p>
+<ul>
+<li>MVVM 架构把 ViewController 看做 View。</li>
+<li>View 和 Model 之间没有紧耦合</li>
+</ul>
+<p>另外，它还像 Supervising 版的 MVP 那样做了数据绑定，不过这次不是绑定 View 和 Model，而是绑定 View 和 ViewModel。</p>
+<p>那么，iOS 里面的 ViewModel 到底是个什么东西呢？本质上来讲，他是独立于 UIKit 的， View 和 View 的状态的一个呈现（representation）。ViewModel 能主动调用对 Model 做更改，也能在 Model 更新的时候对自身进行调整，然后通过 View 和 ViewModel 之间的绑定，对 View 也进行对应的更新。</p>
+<p><strong>7.1.绑定</strong></p>
+<p>我在 MVP 的部分简单的提过这个内容，在这里让我们再延伸讨论一下。绑定这个概念源于 OS X 平台的开发，但是在 iOS 平台上面，我们并没有对应的开发工具。当然，我们也有 KVO 和 通知，但是用这些方式去做绑定不太方便。</p>
+<p>那么，如果我们不想自己去写他们的话，下面提供了两个选择：</p>
+<ul>
+<li>选一个基于 KVO 的绑定库，比如 RZDataBinding 或者 SwiftBond。</li>
+<li>使用全量级的 函数式响应编程 框架,比如 ReactiveCocoa、RxSwift 或者 PromiseKit。</li>
+</ul>
+<p>实际上，现在提到「MVVM」你应该就会想到 ReactiveCocoa，反过来也是一样。虽然我们可以通过简单的绑定来实现 MVVM 模式，但是 ReactiveCocoa（或者同类型的框架）会让你更大限度的去理解 MVVM。</p>
+<p>响应式编程框架也有一点不好的地方，能力越大责任越大嘛。用响应式编程用得不好的话，很容易会把事情搞得一团糟。或者这么说，如果有什么地方出错了，你需要花费更多的时间去调试。</p>
+<p>在接下来的这个小例子中，用响应式框架（FRF）或者 KVO 都显得有点大刀小用，所以我们用另一种方式：直接的调用 ViewModel 的 showGreeting 方法去更新自己（的 greeting 属性），（在 greeting 属性的 didSet 回调里面）用 greetingDidChange 闭包函数去更新 View 的显示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">import UIKit</div><div class="line"> </div><div class="line">struct Person &#123; // Model</div><div class="line">    let firstName: String</div><div class="line">    let lastName: String</div><div class="line">&#125;</div><div class="line"> </div><div class="line">protocol GreetingViewModelProtocol: class &#123;</div><div class="line">    var greeting: String? &#123; get &#125;</div><div class="line">    var greetingDidChange: ((GreetingViewModelProtocol) -&gt; ())? &#123; get set &#125; // function to call when greeting did change</div><div class="line">    init(person: Person)</div><div class="line">    func showGreeting()</div><div class="line">&#125;</div><div class="line"> </div><div class="line">class GreetingViewModel : GreetingViewModelProtocol &#123;</div><div class="line">    let person: Person</div><div class="line">    var greeting: String? &#123;</div><div class="line">        didSet &#123;</div><div class="line">            self.greetingDidChange?(self)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    var greetingDidChange: ((GreetingViewModelProtocol) -&gt; ())?</div><div class="line">    required init(person: Person) &#123;</div><div class="line">        self.person = person</div><div class="line">    &#125;</div><div class="line">    func showGreeting() &#123;</div><div class="line">        self.greeting = &quot;Hello&quot; + &quot; &quot; + self.person.firstName + &quot; &quot; + self.person.lastName</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">class GreetingViewController : UIViewController &#123;</div><div class="line">    var viewModel: GreetingViewModelProtocol! &#123;</div><div class="line">        didSet &#123;</div><div class="line">            self.viewModel.greetingDidChange = &#123; [unowned self] viewModel in</div><div class="line">                self.greetingLabel.text = viewModel.greeting</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    let showGreetingButton = UIButton()</div><div class="line">    let greetingLabel = UILabel()</div><div class="line"> </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        self.showGreetingButton.addTarget(self.viewModel, action: &quot;showGreeting&quot;, forControlEvents: .TouchUpInside)</div><div class="line">    &#125;</div><div class="line">    // layout code goes here</div><div class="line">&#125;</div><div class="line">// Assembling of MVVM</div><div class="line">let model = Person(firstName: &quot;David&quot;, lastName: &quot;Blaine&quot;)</div><div class="line">let viewModel = GreetingViewModel(person: model)</div><div class="line">let view = GreetingViewController()</div><div class="line">view.viewModel = viewModel</div></pre></td></tr></table></figure>
+<p>然后，我们再回过头来对它各方面的表现做一个评价：</p>
+<ul>
+<li><strong>划分</strong> – 这在我们的小栗子里面表现的不是很清楚，但是 MVVM 框架里面的 View 比 MVP 里面负责的事情要更多一些。因为前者是通过 ViewModel 的数据绑定来更新自身状态的，而后者只是把所有的事件统统交给 Presenter 去处理就完了，自己本身并不负责更新。</li>
+<li><strong>可测性</strong> – 因为 ViewModel 对 View 是一无所知的，这样我们对它的测试就变得很简单。View 应该也是能够被测试的，但是可能因为它对 UIKit 的依赖，你会直接略过它。</li>
+<li><strong>易用</strong> – 在我们的例子里面，它的代码量基本跟 MVP 持平，但是在实际的应用当中 MVVM 会更简洁一些。因为在 MVP 下你必须要把 View 的所有事件都交给 Presenter 去处理，而且需要手动的去更新 View 的状态；而在 MVVM 下，你只需要用绑定就可以解决。</li>
+</ul>
+<p><strong>MVVM 真的很有魅力，因为它不仅结合了上述几种框架的优点，还不需要你为视图的更新去写额外的代码（因为在 View 上已经做了数据绑定），另外它在可测性上的表现也依然很棒。</strong></p>
+<h4 id="8-VIPER-–-把搭建乐高积木的经验应用到-iOS-应用的设计上"><a href="#8-VIPER-–-把搭建乐高积木的经验应用到-iOS-应用的设计上" class="headerlink" title="8.VIPER – 把搭建乐高积木的经验应用到 iOS 应用的设计上"></a>8.VIPER – 把搭建乐高积木的经验应用到 iOS 应用的设计上</h4><p>VIPER 是我们最后一个要介绍的框架，这个框架比较有趣的是它不属于任何一种 MV(X) 框架。</p>
+<p>到目前为止，你可能觉得我们把职责划分成三层，这个颗粒度已经很不错了吧。现在 VIPER 从另一个角度对职责进行了划分，这次划分了 五层。</p>
+<ul>
+<li><strong>Interactor（交互器）</strong> – 包括数据（Entities）或者网络相关的业务逻辑。比如创建新的 entities 或者从服务器上获取数据；要实现这些功能，你可能会用到一些服务和管理（Services and Managers）：这些可能会被误以为成是外部依赖东西，但是它们就是 VIPER 的 Interactor 模块。</li>
+<li><strong>Presenter（展示器）</strong> – 包括 UI（but UIKit independent）相关的业务逻辑，可以调用 Interactor 中的方法。</li>
+<li><strong>Entities（实体）</strong> – 纯粹的数据对象。不包括数据访问层，因为这是 Interactor 的职责。</li>
+<li><strong>Router（路由）</strong> – 负责 VIPER 模块之间的转场</li>
+</ul>
+<p>实际上 VIPER 模块可以只是一个页面（screen），也可以是你应用里整个的用户使用流程（the whole user story）- 比如说「验证」这个功能，它可以只是一个页面，也可以是连续相关的一组页面。你的每个「乐高积木」想要有多大，都是你自己来决定的。</p>
+<p>如果我们把 VIPER 和 MV(X) 系列做一个对比的话，我们会发现它们在职责划分上面有下面的一些区别：</p>
+<ul>
+<li>Model（数据交互）的逻辑被转移到了 Interactor 里面，Entities 只是一个什么都不用做的数据结构体。</li>
+<li>Controller/Presenter/ViewModel 的职责里面，只有 UI 的展示功能被转移到了 Presenter 里面。Presenter 不具备直接更改数据的能力。</li>
+<li>VIPER 是第一个把导航的职责单独划分出来的架构模式，负责导航的就是 Router 层。</li>
+</ul>
+<p><strong>如何正确的使用导航（doing routing）对于 iOS 应用开发来说是一个挑战，MV(X) 系列的架构完全就没有意识到（所以也不用处理）这个问题。
+</strong></p>
+<p>下面的这个列子并没有涉及到导航和 VIPER 模块间的转场，同样上面 MV(X) 系列架构里面也都没有涉及。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">import UIKit</div><div class="line"> </div><div class="line">struct Person &#123; // Entity (usually more complex e.g. NSManagedObject)</div><div class="line">    let firstName: String</div><div class="line">    let lastName: String</div><div class="line">&#125;</div><div class="line"> </div><div class="line">struct GreetingData &#123; // Transport data structure (not Entity)</div><div class="line">    let greeting: String</div><div class="line">    let subject: String</div><div class="line">&#125;</div><div class="line"> </div><div class="line">protocol GreetingProvider &#123;</div><div class="line">    func provideGreetingData()</div><div class="line">&#125;</div><div class="line"> </div><div class="line">protocol GreetingOutput: class &#123;</div><div class="line">    func receiveGreetingData(greetingData: GreetingData)</div><div class="line">&#125;</div><div class="line"> </div><div class="line">class GreetingInteractor : GreetingProvider &#123;</div><div class="line">    weak var output: GreetingOutput!</div><div class="line"> </div><div class="line">    func provideGreetingData() &#123;</div><div class="line">        let person = Person(firstName: &quot;David&quot;, lastName: &quot;Blaine&quot;) // usually comes from data access layer</div><div class="line">        let subject = person.firstName + &quot; &quot; + person.lastName</div><div class="line">        let greeting = GreetingData(greeting: &quot;Hello&quot;, subject: subject)</div><div class="line">        self.output.receiveGreetingData(greeting)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">protocol GreetingViewEventHandler &#123;</div><div class="line">    func didTapShowGreetingButton()</div><div class="line">&#125;</div><div class="line"> </div><div class="line">protocol GreetingView: class &#123;</div><div class="line">    func setGreeting(greeting: String)</div><div class="line">&#125;</div><div class="line"> </div><div class="line">class GreetingPresenter : GreetingOutput, GreetingViewEventHandler &#123;</div><div class="line">    weak var view: GreetingView!</div><div class="line">    var greetingProvider: GreetingProvider!</div><div class="line"> </div><div class="line">    func didTapShowGreetingButton() &#123;</div><div class="line">        self.greetingProvider.provideGreetingData()</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    func receiveGreetingData(greetingData: GreetingData) &#123;</div><div class="line">        let greeting = greetingData.greeting + &quot; &quot; + greetingData.subject</div><div class="line">        self.view.setGreeting(greeting)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">class GreetingViewController : UIViewController, GreetingView &#123;</div><div class="line">    var eventHandler: GreetingViewEventHandler!</div><div class="line">    let showGreetingButton = UIButton()</div><div class="line">    let greetingLabel = UILabel()</div><div class="line"> </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        self.showGreetingButton.addTarget(self, action: &quot;didTapButton:&quot;, forControlEvents: .TouchUpInside)</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    func didTapButton(button: UIButton) &#123;</div><div class="line">        self.eventHandler.didTapShowGreetingButton()</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    func setGreeting(greeting: String) &#123;</div><div class="line">        self.greetingLabel.text = greeting</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    // layout code goes here</div><div class="line">&#125;</div><div class="line">// Assembling of VIPER module, without Router</div><div class="line">let view = GreetingViewController()</div><div class="line">let presenter = GreetingPresenter()</div><div class="line">let interactor = GreetingInteractor()</div><div class="line">view.eventHandler = presenter</div><div class="line">presenter.view = view</div><div class="line">presenter.greetingProvider = interactor</div><div class="line">interactor.output = presenter</div></pre></td></tr></table></figure>
+<p>我们再来评价下它在各方面的表现：</p>
+<ul>
+<li><strong>划分</strong> – 毫无疑问的，VIPER 在职责划分方面是做的最好的。</li>
+<li><strong>可测性</strong> – 理所当然的，职责划分的越好，测试起来就越容易</li>
+<li><strong>易用</strong> – 最后，你可能已经猜到了，上面两点好处都是用维护性的代价换来的。一个小小的任务，可能就需要你为各种类写大量的接口。</li>
+</ul>
+<h3 id="8-1-那么，我们到底应该给「乐高」一个怎样的评价呢？"><a href="#8-1-那么，我们到底应该给「乐高」一个怎样的评价呢？" class="headerlink" title="8.1.那么，我们到底应该给「乐高」一个怎样的评价呢？"></a>8.1.那么，我们到底应该给「乐高」一个怎样的评价呢？</h3><p>果你在使用 VIPER 框架的时候有一种在用乐高积木搭建帝国大厦的感觉，那么你可能 正在犯错误；可能对于你负责的应用来说，还没有到使用 VIPER 的时候，你应该把一些事情考虑的再简单一些。总是有一些人忽视这个问题，继续扛着大炮去打小鸟。我觉得可能是因为他们相信，虽然目前来看维护成本高的不合常理，但是至少在将来他们的应用可以从 VIPER 架构上得到回报吧。如果你也跟他们的观点一样的话，那我建议你尝试一下 Generamba – 一个可以生成 VIPER 框架的工具。虽然对于我个人来讲，这感觉就像给大炮装上了一个自动瞄准系统，然后去做一件只用弹弓就能解决的事情。</p>
+<h4 id="9-结论"><a href="#9-结论" class="headerlink" title="9.结论"></a>9.结论</h4><p>我们简单了解了几种架构模式，对于那些让你困惑的问题，我希望你已经找到了答案。但是毫无疑问，你应该已经意识到了，在选择架构模式这件问题上面，不存在什么 银色子弹，你需要做的就是具体情况具体分析，权衡利弊而已。</p>
+<p>因此在同一个应用里面，即便有几种混合的架构模式也是很正常的一件事情。比如：开始的时候，你用的是 MVC 架构，后来你意识到有一个特殊的页面用 MVC 做的的话维护起来会相当的麻烦；这个时候你可以只针对这一个页面用 MVVM 模式去开发，对于之前那些用 MVC 就能正常工作的页面，你完全没有必要去重构它们，因为两种架构是完全可以和睦共存的。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/08/Swift泛型初探/" itemprop="url">
                   Swift泛型初探
                 </a>
@@ -251,7 +1145,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-10-08T22:33:34+08:00" content="2016-10-08">
               2016-10-08
             </time>
@@ -283,15 +1177,15 @@
         
           
             <p>其实真的觉得即使自己能独立完成项目,还有是太多太多学习的地方可以不断提高,毕竟如果重复写一些代码是没有意义的.虽然说我已经使用了swift写了一个项目并且已经在AppStore里面发布,但是对于swift的认识还是很浅薄的.最近在重新看swift programming language一书,重新看了一遍里面的内容–其实对于泛型,我最初的理解是来源于Java,在项目中我真的比较少用到泛型.</p>
-<p>####泛型需求的产生<br>下面是书里面的代码:</p>
+<h4 id="泛型需求的产生"><a href="#泛型需求的产生" class="headerlink" title="泛型需求的产生"></a>泛型需求的产生</h4><p>下面是书里面的代码:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  func swapTwoInt(inout a:Int,inout b:Int)&#123;</div><div class="line">        let tempA = a;</div><div class="line">        a = b;</div><div class="line">        b = tempA</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>要是我有这个交换两个内容的要求,但是这紧紧单纯是对Int但种类型的配置,如果我还需要有String和Double的话,我必须要拷贝代码:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">func swapTwoString(inout a:String,inout b:String)&#123;</div><div class="line">          let tempA = a;</div><div class="line">          a = b;</div><div class="line">          b = tempA</div><div class="line">&#125;</div><div class="line"></div><div class="line">      func swapTwoDouble(inout a:Double,inout b:Double)&#123;</div><div class="line">          let tempA = a;</div><div class="line">          a = b;</div><div class="line">          b = tempA</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
 <p>于是我们产生了泛型,它可以定义一种统一的类型<t>,这个时候你可以在参数里面写入这个参数,它代表了前后一致的类型,如String,Int,Double…</t></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func swapTwoValues&lt;T&gt;(inout a: T, inout _ b: T)&#123;</div><div class="line">       let tempA = a;</div><div class="line">       a = b;</div><div class="line">       b = tempA</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
 <p>在我写泛型的时候,遇到的第一个问题是返回值怎么处理?<br>唔哼,这个问题让我们继续把泛型的其他定义看下去的时候再继续思考吧.</p>
-<p>####命名类型参数<br>那么,泛型的书写方法就是用一对箭括号把类型名称合并起来:如 <strong><em><t></t></em></strong>,当然,你也可以一两个其他字母表示,<strong><em><u,t></u,t></em></strong></p>
-<p>####泛型类型<br> 其中,书中里面举了一个泛型类型的例子是这样的:</p>
+<h4 id="命名类型参数"><a href="#命名类型参数" class="headerlink" title="命名类型参数"></a>命名类型参数</h4><p>那么,泛型的书写方法就是用一对箭括号把类型名称合并起来:如 <strong><em><t></t></em></strong>,当然,你也可以一两个其他字母表示,<strong><em><u,t></u,t></em></strong></p>
+<h4 id="泛型类型"><a href="#泛型类型" class="headerlink" title="泛型类型"></a>泛型类型</h4><p> 其中,书中里面举了一个泛型类型的例子是这样的:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">struct IntStack &#123;</div><div class="line">    var items = [Int]();</div><div class="line">    /*</div><div class="line">     mutating关键字:由于swift功能强大,不仅可以让class遵守,也可以让enum和struct遵守</div><div class="line">     mutating关键字在定义协议的方法的时候可以在前面加上,让其三种类型在遵守协议的时候对有关键字的方法有不同的&quot;提示&quot;:</div><div class="line">    class: 在class中实现带有mutating方法的接口时，不用mutating进行修饰。因为对于class来说，类的成员变量和方法都是透明的，所以不必使用 mutating 来进行修饰</div><div class="line">     enum:</div><div class="line">     struct:如果将struct中的mutating去掉，则会报错不能改变结构体的成员。</div><div class="line">    */</div><div class="line">    //将一个数值入栈</div><div class="line">    mutating func push(item:Int)</div><div class="line">    &#123;</div><div class="line">        items.append(item)</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    //和内存中的栈一样,先进后出,所以只要移除最后一个元素即可</div><div class="line">    mutating func pop() -&gt; Int&#123;</div><div class="line">        </div><div class="line">        return items.removeLast()</div><div class="line">      &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>但是只针对Int一种类型避免也显得太弱了吧,所以我们可以用泛型对其进行改良:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">struct Stack&lt;T&gt; &#123;</div><div class="line">      var items = [T]()</div><div class="line">      mutating func push(item: T) &#123;</div><div class="line">        items.append(item)</div><div class="line">      &#125;</div><div class="line">      mutating func pop() -&gt; T &#123;</div><div class="line">        return items.removeLast()</div><div class="line">      &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -305,13 +1199,13 @@ stringsInStack.pop()//1,2,3
 </code></pre><p>现在,有点明白了Array和Dictionary为什么可以指定类型了吧,其实无形中我们已经用了很多泛型的内容,只是我们缺少了总结和理解:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">     //定义了一个内容必须为字符串的数组</div><div class="line">  var arr :[String] = []</div><div class="line">     arr[0] = &quot;name&quot;;</div><div class="line">     arr[1] = &quot;age&quot;;</div><div class="line">     arr[3] = &quot;height&quot;;</div><div class="line"></div><div class="line">//定义了一个key为String,value为AnyObject的字典  </div><div class="line">   var parma : [String:AnyObject] = [:]</div><div class="line">      parma[&quot;name&quot;] = &quot;shiron&quot;</div><div class="line">      parma[&quot;age&quot;] = 22</div><div class="line">      parma[&quot;height&quot;] = 1.70</div></pre></td></tr></table></figure>
 <p>这里可以延伸出后面的一个话题:类型约束.</p>
-<p>####类型约束<br>输入Dictionary点进去可以看到该类的属性和方法:</p>
+<h4 id="类型约束"><a href="#类型约束" class="headerlink" title="类型约束"></a>类型约束</h4><p>输入Dictionary点进去可以看到该类的属性和方法:</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public struct Dictionary&lt;Key : Hashable, Value&gt; : CollectionType, DictionaryLiteralConvertible&#123;</div><div class="line">各种dict的属性和方法......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们发现在dict对泛型进行定义的时候,key有一个特殊的限制:</p>
 <p><strong><strong><key: hashable,value=""></key:></strong></strong><br>此时,我们可以看到key被强制遵守了一个hashable的协议(注意:Swift 标准库中定义的一个特定协议,所有的 Swift 基本类型(如 String , Int , Double 和 Bool )默认都是可哈希。)</p>
 <p>当你对泛型的有较高的输入要求时,可以限制某种类或者协议来进行类型约束,定义方法就是在泛型字母后面添加 T:SomeProtocol或者U:someClass</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func someFunction&lt;T:someClass,U:someProtocol&gt;(someT:T,someU:U)&#123;</div><div class="line">    //函数主体</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>####扩展一个泛型类型<br>当然我们泛型的好用之处不仅这么一点点.</p>
+<h4 id="扩展一个泛型类型"><a href="#扩展一个泛型类型" class="headerlink" title="扩展一个泛型类型"></a>扩展一个泛型类型</h4><p>当然我们泛型的好用之处不仅这么一点点.</p>
 <p>书中还对Stack的类型作出了一个扩展:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">extension Stack &#123;</div><div class="line">    var topItem: T? &#123;</div><div class="line">        return items.isEmpty ? nil : items[items.count - 1]</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> topItem 属性会返回一个 T 类型的可选值。当栈为空的时候, topItem 将会返回 nil ;当栈不为空的时候, topItem 会返回 items 数组中的最后一个元素,然而你注意到了吗?我们在扩展里面并没有使用泛型类型的定义,它是从结构体中直接带过来了,对它进行解包则可以自己使用:</p>
@@ -377,7 +1271,7 @@ stringsInStack.pop()//1,2,3
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-10-08T17:22:11+08:00" content="2016-10-08">
               2016-10-08
             </time>
@@ -444,9 +1338,8 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
 <li>Dictionary<string, array<t:="" mappable="">&gt;</string,></li>
 <li>Optionals of all the above</li>
 </ul>
-<p>###Mappable Protocol<br><strong><em>mutating func mapping(map: Map)</em></strong><br>这个函数里面定义了映射所需要指向的字符串,当解析JSON的过程中,创建好实例对象以后会去执行这个函数,当生成JSON的过程中,这个函数是唯一一个可以被叫做对象.</p>
-<p>###init?(_ map: Map)</p>
-<p>//翻译未完成,待续…其实ObjectMapper的使用非常简单,只要字符串和相对应的Object一一对应即可…</p>
+<h3 id="Mappable-Protocol"><a href="#Mappable-Protocol" class="headerlink" title="Mappable Protocol"></a>Mappable Protocol</h3><p><strong><em>mutating func mapping(map: Map)</em></strong><br>这个函数里面定义了映射所需要指向的字符串,当解析JSON的过程中,创建好实例对象以后会去执行这个函数,当生成JSON的过程中,这个函数是唯一一个可以被叫做对象.</p>
+<h3 id="init-map-Map"><a href="#init-map-Map" class="headerlink" title="init?(_ map: Map)"></a>init?(_ map: Map)</h3><p>//翻译未完成,待续…其实ObjectMapper的使用非常简单,只要字符串和相对应的Object一一对应即可…</p>
 
           
         
@@ -509,7 +1402,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-10-07T10:19:17+08:00" content="2016-10-07">
               2016-10-07
             </time>
@@ -540,7 +1433,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
       
         
           
-            <p>####在swift的环境下,配置RAC和RACObserve宏需要另外添加文件,如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import ReactiveCocoa</div><div class="line">public struct RAC  &#123;</div><div class="line">        var target : NSObject!</div><div class="line">        var keyPath : String!</div><div class="line">    var nilValue : AnyObject!</div><div class="line"></div><div class="line">    init(_ target: NSObject!, _ keyPath: String, nilValue: AnyObject? = nil) &#123;</div><div class="line">        self.target = target</div><div class="line">        self.keyPath = keyPath</div><div class="line">        self.nilValue = nilValue</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    func assignSignal(signal : RACSignal) &#123;</div><div class="line">        signal.setKeyPath(self.keyPath, onObject: self.target, nilValue: self.nilValue)</div><div class="line">      &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">public func RACObserve(target: NSObject!, keyPath: NSString) -&gt; RACSignal  &#123;</div><div class="line">       return target.rac_valuesForKeyPath(keyPath as String, observer: target)</div><div class="line">&#125;</div><div class="line"></div><div class="line">public func &lt;= (rac:RAC, signal:RACSignal)&#123;</div><div class="line">       rac.assignSignal(signal)</div><div class="line">&#125; </div><div class="line"></div><div class="line">public func &gt;=( signal:RACSignal, rac:RAC)&#123;</div><div class="line">     rac.assignSignal(signal)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+            <h4 id="在swift的环境下-配置RAC和RACObserve宏需要另外添加文件-如下"><a href="#在swift的环境下-配置RAC和RACObserve宏需要另外添加文件-如下" class="headerlink" title="在swift的环境下,配置RAC和RACObserve宏需要另外添加文件,如下:"></a>在swift的环境下,配置RAC和RACObserve宏需要另外添加文件,如下:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import ReactiveCocoa</div><div class="line">public struct RAC  &#123;</div><div class="line">        var target : NSObject!</div><div class="line">        var keyPath : String!</div><div class="line">    var nilValue : AnyObject!</div><div class="line"></div><div class="line">    init(_ target: NSObject!, _ keyPath: String, nilValue: AnyObject? = nil) &#123;</div><div class="line">        self.target = target</div><div class="line">        self.keyPath = keyPath</div><div class="line">        self.nilValue = nilValue</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    func assignSignal(signal : RACSignal) &#123;</div><div class="line">        signal.setKeyPath(self.keyPath, onObject: self.target, nilValue: self.nilValue)</div><div class="line">      &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">public func RACObserve(target: NSObject!, keyPath: NSString) -&gt; RACSignal  &#123;</div><div class="line">       return target.rac_valuesForKeyPath(keyPath as String, observer: target)</div><div class="line">&#125;</div><div class="line"></div><div class="line">public func &lt;= (rac:RAC, signal:RACSignal)&#123;</div><div class="line">       rac.assignSignal(signal)</div><div class="line">&#125; </div><div class="line"></div><div class="line">public func &gt;=( signal:RACSignal, rac:RAC)&#123;</div><div class="line">     rac.assignSignal(signal)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在学习swift导入RAC的过程中,由于宏在OC项目中非常好用,但是宏在swift中不好使,需要额外导入文件才能正常使用.<br>下面举了一个textFiled输入文字时,改变下面的那个label内容:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">  import UIKit</div><div class="line">  import SnapKit</div><div class="line">  import ReactiveCocoa</div><div class="line">  //import ReactiveCocoa.RACEXTScope</div><div class="line"></div><div class="line">  func == (Str1:String,Str:String) -&gt;Bool&#123;      </div><div class="line">      return true</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line">    </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        view.addSubview(textFiled)</div><div class="line">        view.addSubview(label)</div><div class="line">        </div><div class="line">        textFiled.snp_makeConstraints &#123; (make) in</div><div class="line">            make.center.equalTo(self.view)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        label.snp_makeConstraints &#123; (make) in</div><div class="line">            make.top.equalTo(textFiled).offset(20)</div><div class="line">            make.centerX.equalTo(textFiled)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        let str1 = &quot;1&quot;</div><div class="line">        let str2 = &quot;2&quot;</div><div class="line">        let bool = str1==str2</div><div class="line">        print(bool)</div><div class="line">        RAC(label,&quot;text&quot;) &lt;= textFiled.rac_textSignal()</div><div class="line"> </div><div class="line">  </div><div class="line"></div><div class="line">    RACObserve(label, keyPath: &quot;center&quot;) .subscribeNext &#123; (x) in</div><div class="line">            print(&quot;移动的距离为:\(x)&quot; </div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override func touchesBegan(touches: Set&lt;UITouch&gt;, withEvent event: UIEvent?) &#123;</div><div class="line">  //点击屏幕label向下移动</div><div class="line">        label.snp_remakeConstraints &#123; (make) in</div><div class="line">            make.top.equalTo(textFiled).offset( number * 20)</div><div class="line">            make.centerX.equalTo(textFiled)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        number += 1</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private lazy var textFiled : UITextField=&#123;</div><div class="line">        let textFiled = UITextField()</div><div class="line">        textFiled.placeholder = &quot;请输入文字&quot;</div><div class="line">        return textFiled</div><div class="line">    &#125;()</div><div class="line"></div><div class="line">    private lazy var label : UILabel=&#123;</div><div class="line">        let label = UILabel()</div><div class="line">        label.text = &quot;我是占位文字,textFiled改变时我也会改变&quot;</div><div class="line">        label.font = UIFont.systemFontOfSize(16)</div><div class="line">        </div><div class="line">        return label</div><div class="line">      &#125;()</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
@@ -602,8 +1495,8 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
             
               
                 
-                <a class="post-title-link" href="/2015/08/11/layoutIfNeeded-和-layoutSubviews/" itemprop="url">
-                  setNeedsUpdateConstraints 和 updateConstraintsIfNeeded
+                <a class="post-title-link" href="/2016/09/13/swift中懒加载的then语法/" itemprop="url">
+                  swift中懒加载的then语法
                 </a>
               
             
@@ -615,9 +1508,9 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2015-08-11T17:47:47+08:00" content="2015-08-11">
-              2015-08-11
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-09-13T23:19:27+08:00" content="2016-09-13">
+              2016-09-13
             </time>
           </span>
 
@@ -646,50 +1539,209 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
       
         
           
-            <p>###关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded</p>
-<p>之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么时机调用了</p>
-<p>####查了一下文档,先对layoutIfNeeded进行一个解释吧!</p>
+            <p>原文:<br><a href="http://mp.weixin.qq.com/s?__biz=MzI4NjAzODk0OQ==&amp;mid=2652684686&amp;idx=1&amp;sn=2adeb417aadd356fd615c6349a28e4f4&amp;chksm=f00b6f44c77ce6521a20506a99cf446792ac70b537c09d05b7ad4066aa4b8a4cfaba4bedb2af&amp;scene=0#wechat_redirect" target="_blank" rel="external">Swift：让人眼前一亮的初始化方式</a></p>
+<p>###then语法</p>
+<p>个人非常喜欢这种简介的懒加载模式,唔,不过有时候真的会觉得$0的时候,无法感应该类的属性真蛋疼. 以下是加载方式,供大家参考学习.</p>
+<pre><code>  import Foundation
+
+ public protocol Then {}
+
+ extension Then where Self: Any {
+         /// Makes it available to set properties with closures just after initializing.
+    ///
+    ///     let label = UILabel().then {
+    ///         $0.textAlignment = .Center
+    ///         $0.textColor = UIColor.blackColor()
+    ///         $0.text = &quot;Hello, World!&quot;
+    ///     }
+    public func then(@noescape block: inout Self -&gt; Void) -&gt; Self {
+        var copy = self
+        block(&amp;copy)
+        return copy
+    }
+     }
+
+ extension Then where Self: AnyObject {
+    /// Makes it available to set properties with closures just after initializing.
+    ///
+    ///     let label = UILabel().then {
+    ///         $0.textAlignment = .Center
+    ///         $0.textColor = UIColor.blackColor()
+    ///         $0.text = &quot;Hello, World!&quot;
+    ///     }
+    public func then(@noescape block: Self -&gt; Void) -&gt; Self {
+        block(self)
+        return self
+     }
+    }
+
+extension NSObject: Then {}
+
+
+  //textFiled的常用懒加载模式
+    private lazy var textFiled : UITextField={
+        let textFiled = UITextField()
+        textFiled.placeholder = &quot;请输入文字&quot;
+        return textFiled
+    }()
+
+  //在尾随闭包中实例化了UILabel时的写法
+     lazy var label : UILabel={
+
+        $0.text = &quot;我是占位文字,textFiled改变时我也会改变&quot;
+        $0.font = UIFont.systemFontOfSize(16)
+
+        return $0
+    }(UILabel())
+
+
+//文章开始时给出的then代码段,使得初始化更简洁
+ let label = UILabel().then {
+      $0.textAlignment = .Center
+      $0.textColor = .blackColor()
+      $0.text = &quot;Hello, World!&quot;
+    }
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/10/Java基础学习汇总/" itemprop="url">
+                  Java基础学习汇总
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-09-10T23:31:12+08:00" content="2016-09-10">
+              2016-09-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##Java基础学习汇总</p>
+<p>###多线程</p>
 <ul>
-<li>1、init初始化不会触发layoutSubviews   但是是用initWithFrame 进行初始化时，当rect的值不为CGRectZero时,也会触发</li>
-<li>2、addSubview会触发layoutSubviews</li>
-<li>3、设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</li>
-<li>4、滚动一个UIScrollView会触发layoutSubviews</li>
-<li>5、旋转Screen会触发父UIView上的layoutSubviews事件</li>
-<li>6、改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件</li>
+<li>了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.<h3 id="多线程的实现方法有两种"><a href="#多线程的实现方法有两种" class="headerlink" title="多线程的实现方法有两种"></a>多线程的实现方法有两种</h3></li>
+<li><p>1.继承Thread</p>
+<ul>
+<li>定义类继承Thread</li>
+<li>重写run方法</li>
+<li>把新线程要做的内容写在run方法中</li>
+<li>创建类的对象</li>
+<li>执行start方法</li>
+<li>注意:匿名内部类和普通类方式非常相似</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class Test &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">	//1.普通定义一个新的类来创建</div><div class="line">	Person p = new Person();</div><div class="line">	p.start();</div><div class="line">	//1.普通定义一个匿名类来创建</div><div class="line">	new Thread()&#123;</div><div class="line">		public void run()&#123;</div><div class="line">			System.out.println(&quot;Thread多线程启动(匿名内	部类)&quot;);</div><div class="line">			&#125;</div><div class="line">		&#125;.start();	</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//Thread方式</div><div class="line">class Person extends Thread &#123;</div><div class="line">	public void run()&#123;</div><div class="line">	System.out.println(&quot;Thread多线程启动,继承方式&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>####在官方文档上,对于setNeedsUpdateConstraints的解释是:</p>
-<pre><code>当你的自定义视图的属性发生变化将会影响约束,此时可以调用这个方法表明,约束需要更新在将来的某个时候。然后系统会调用updateConstraints()作为其正常布局的一部分通过。用这个作为优化工具批量约束变化。更新限制一次性前需要确保您不必重新计算约束当多个更改视图之间的布局。
-</code></pre><p>####对于updateConstraintsIfNeeded这个方法,则是:</p>
-<pre><code>每当一个新布局通过触发视图,系统调用这个方法来确保任何约束为视图和它的子视图更新的信息从当前视图层次及其约束。由系统自动调用此方法,但可能是手动调用如果你需要检查最新的约束。子类不应重写此方法。
-</code></pre><p>####关于UIView的Layer，IOS提供了三个方法：</p>
-<ol>
-<li><p><code>layoutSubviews</code></p>
-<p>在iOS5.1和之前的版本，此方法的缺省实现不会做任何事情(实现为空)，iOS5.1之后(iOS6开始)的版本，此方法的缺省实现是使用你设置在此view上面的constraints(Autolayout)去决定subviews的position和size。 UIView的子类如果需要对其subviews进行更精确的布局，则可以重写此方法。只有在autoresizing和constraint-based behaviors of subviews不能提供我们想要的布局结果的时候，我们才应该重写此方法。可以在此方法中直接设置subviews的frame。 我们不应该直接调用此方法，而应当用下面两个方法。</p>
 </li>
-<li><p><code>setNeedsLayout</code></p>
-<p>此方法会将view当前的layout设置为无效的，并在下一个upadte cycle里去触发layout更新。</p>
+<li><p>2.实现接口Runnable(Thread构造函数中传递了runnable的引用,通过init()方法传递target,用于判断是否执行run()方法)</p>
+<ul>
+<li>定义类实现Runnable</li>
+<li>实现run方法</li>
+<li>把操作写在run中</li>
+<li>创建Thread对象,传入runnable</li>
+<li>调用Runnable的start方法</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">public class Test &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">//1.普通类实现了runnable接口来实现调用里面的run方法</div><div class="line">Student s = new Student();</div><div class="line">Thread t = new Thread(s);</div><div class="line">t.start();</div><div class="line">//2.匿名类来实现runnable接口</div><div class="line">new Thread(new Runnable() &#123;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		System.out.println(&quot;匿名内部类Runnable多线程启动方法&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;).start();	</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">class Student implements Runnable&#123;</div><div class="line">@Override</div><div class="line">public void run() &#123;</div><div class="line">System.out.println(&quot;Runnable多线程启动方法,继承方式&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p><code>layoutIfNeeded</code></p>
-<p>使用此方法强制立即进行layout,从当前view开始，此方法会遍历整个view层次(包括superviews)请求layout。因此，调用此方法会强制整个view层次布局。</p>
+</ul>
 </li>
-</ol>
-<p>####基于约束的AutoLayer的方法：</p>
-<ol>
-<li><p><code>setNeedsUpdateConstraints</code></p>
-<p>当一个自定义view的某个属性发生改变，并且可能影响到constraint时，需要调用此方法去标记constraints需要在未来的某个点更新，系统然后调用updateConstraints.</p>
+</ul>
+<p>###两种线程的区别</p>
+<ul>
+<li>继承Thread<ul>
+<li>好处:可以直接使用Thread类中的方法,代码简单</li>
+<li>弊端:如果已经有父类,就不能用这种方式</li>
+</ul>
 </li>
-<li><p><code>needsUpdateConstraints</code></p>
-<p>constraint-based layout system使用此返回值去决定是否需要调用updateConstraints作为正常布局过程的一部分。</p>
+<li>实现Runnable<ul>
+<li>好处:可以有父类,直接只是实现接口</li>
+<li>弊端:间接把对象作为构造方法的参数传递进去,较为复杂,但自由度较大</li>
+</ul>
 </li>
-<li><p><code>updateConstraintsIfNeeded</code></p>
-<p>立即触发约束更新，自动更新布局。</p>
-</li>
-<li><p><code>updateConstraints</code></p>
-<p>自定义view应该重写此方法在其中建立constraints. 注意：要在实现在最后调用[super updateConstraints]</p>
-<p>下面一张经典的图是来自stackoverflow,图已经比较明白的显示了整个流程,不再作过多的解释.</p>
-</li>
-</ol>
-<p><img src="http://i.stack.imgur.com/i9YuN.png" alt="layout image"></p>
+</ul>
+<h3 id="线程中其他操作"><a href="#线程中其他操作" class="headerlink" title="线程中其他操作"></a>线程中其他操作</h3><ul>
+<li>通过getName()可以获得当前线程的名字</li>
+<li>通过setName(String)可以设置线程名字</li>
+<li>Thread.currentThread()可以获得当前线程对象,获得对象后可以对其进行操作(改名,获得名字)</li>
+<li>Thread.sleep(毫秒),类方法调用,可以使得当前线程休眠</li>
+<li>setPriority()设置线程的优先级</li>
+</ul>
 
           
         
@@ -721,6 +1773,10 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -759,8 +1815,8 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
@@ -769,8 +1825,8 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">Tags</span>
               </a>
             </div>
           
@@ -821,7 +1877,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

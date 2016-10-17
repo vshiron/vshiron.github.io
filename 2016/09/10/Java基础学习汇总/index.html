@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="OC," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -86,18 +86,40 @@
 
 
 
-<meta name="description" content="关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么">
+<meta name="description" content="##Java基础学习汇总
+###多线程
+
+了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.多线程的实现方法有两种
+1.继承Thread
+
+定义类继承Thread
+重写run方法
+把新线程要做的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="setNeedsUpdateConstraints 和 updateConstraintsIfNeeded">
-<meta property="og:url" content="http://yoursite.com/2015/08/11/layoutIfNeeded-和-layoutSubviews/index.html">
+<meta property="og:title" content="Java基础学习汇总">
+<meta property="og:url" content="http://yoursite.com/2016/09/10/Java基础学习汇总/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么">
-<meta property="og:image" content="http://i.stack.imgur.com/i9YuN.png">
-<meta property="og:updated_time" content="2016-10-10T14:07:49.000Z">
+<meta property="og:description" content="##Java基础学习汇总
+###多线程
+
+了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.多线程的实现方法有两种
+1.继承Thread
+
+定义类继承Thread
+重写run方法
+把新线程要做的">
+<meta property="og:updated_time" content="2016-10-13T15:32:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="setNeedsUpdateConstraints 和 updateConstraintsIfNeeded">
-<meta name="twitter:description" content="关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么">
-<meta name="twitter:image" content="http://i.stack.imgur.com/i9YuN.png">
+<meta name="twitter:title" content="Java基础学习汇总">
+<meta name="twitter:description" content="##Java基础学习汇总
+###多线程
+
+了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.多线程的实现方法有两种
+1.继承Thread
+
+定义类继承Thread
+重写run方法
+把新线程要做的">
 
 
 
@@ -118,10 +140,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/08/11/layoutIfNeeded-和-layoutSubviews/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/10/Java基础学习汇总/"/>
 
 
-  <title> setNeedsUpdateConstraints 和 updateConstraintsIfNeeded | Hexo </title>
+  <title> Java基础学习汇总 | Hexo </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="">
@@ -241,7 +263,7 @@
             
             
               
-                setNeedsUpdateConstraints 和 updateConstraintsIfNeeded
+                Java基础学习汇总
               
             
           </h1>
@@ -253,8 +275,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2015-08-11T17:47:47+08:00" content="2015-08-11">
-              2015-08-11
+            <time itemprop="dateCreated" datetime="2016-09-10T23:31:12+08:00" content="2016-09-10">
+              2016-09-10
             </time>
           </span>
 
@@ -281,44 +303,54 @@
       
 
       
-        <h3 id="关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded"><a href="#关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded" class="headerlink" title="关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded"></a>关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded</h3><p>之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么时机调用了</p>
-<h4 id="查了一下文档-先对layoutIfNeeded进行一个解释吧"><a href="#查了一下文档-先对layoutIfNeeded进行一个解释吧" class="headerlink" title="查了一下文档,先对layoutIfNeeded进行一个解释吧!"></a>查了一下文档,先对layoutIfNeeded进行一个解释吧!</h4><ul>
-<li>1、init初始化不会触发layoutSubviews   但是是用initWithFrame 进行初始化时，当rect的值不为CGRectZero时,也会触发</li>
-<li>2、addSubview会触发layoutSubviews</li>
-<li>3、设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</li>
-<li>4、滚动一个UIScrollView会触发layoutSubviews</li>
-<li>5、旋转Screen会触发父UIView上的layoutSubviews事件</li>
-<li>6、改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件</li>
+        <p>##Java基础学习汇总</p>
+<p>###多线程</p>
+<ul>
+<li>了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.<h3 id="多线程的实现方法有两种"><a href="#多线程的实现方法有两种" class="headerlink" title="多线程的实现方法有两种"></a>多线程的实现方法有两种</h3></li>
+<li><p>1.继承Thread</p>
+<ul>
+<li>定义类继承Thread</li>
+<li>重写run方法</li>
+<li>把新线程要做的内容写在run方法中</li>
+<li>创建类的对象</li>
+<li>执行start方法</li>
+<li>注意:匿名内部类和普通类方式非常相似</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class Test &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">	//1.普通定义一个新的类来创建</div><div class="line">	Person p = new Person();</div><div class="line">	p.start();</div><div class="line">	//1.普通定义一个匿名类来创建</div><div class="line">	new Thread()&#123;</div><div class="line">		public void run()&#123;</div><div class="line">			System.out.println(&quot;Thread多线程启动(匿名内	部类)&quot;);</div><div class="line">			&#125;</div><div class="line">		&#125;.start();	</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//Thread方式</div><div class="line">class Person extends Thread &#123;</div><div class="line">	public void run()&#123;</div><div class="line">	System.out.println(&quot;Thread多线程启动,继承方式&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<h4 id="在官方文档上-对于setNeedsUpdateConstraints的解释是"><a href="#在官方文档上-对于setNeedsUpdateConstraints的解释是" class="headerlink" title="在官方文档上,对于setNeedsUpdateConstraints的解释是:"></a>在官方文档上,对于setNeedsUpdateConstraints的解释是:</h4><pre><code>当你的自定义视图的属性发生变化将会影响约束,此时可以调用这个方法表明,约束需要更新在将来的某个时候。然后系统会调用updateConstraints()作为其正常布局的一部分通过。用这个作为优化工具批量约束变化。更新限制一次性前需要确保您不必重新计算约束当多个更改视图之间的布局。
-</code></pre><h4 id="对于updateConstraintsIfNeeded这个方法-则是"><a href="#对于updateConstraintsIfNeeded这个方法-则是" class="headerlink" title="对于updateConstraintsIfNeeded这个方法,则是:"></a>对于updateConstraintsIfNeeded这个方法,则是:</h4><pre><code>每当一个新布局通过触发视图,系统调用这个方法来确保任何约束为视图和它的子视图更新的信息从当前视图层次及其约束。由系统自动调用此方法,但可能是手动调用如果你需要检查最新的约束。子类不应重写此方法。
-</code></pre><h4 id="关于UIView的Layer，IOS提供了三个方法："><a href="#关于UIView的Layer，IOS提供了三个方法：" class="headerlink" title="关于UIView的Layer，IOS提供了三个方法："></a>关于UIView的Layer，IOS提供了三个方法：</h4><ol>
-<li><p><code>layoutSubviews</code></p>
-<p>在iOS5.1和之前的版本，此方法的缺省实现不会做任何事情(实现为空)，iOS5.1之后(iOS6开始)的版本，此方法的缺省实现是使用你设置在此view上面的constraints(Autolayout)去决定subviews的position和size。 UIView的子类如果需要对其subviews进行更精确的布局，则可以重写此方法。只有在autoresizing和constraint-based behaviors of subviews不能提供我们想要的布局结果的时候，我们才应该重写此方法。可以在此方法中直接设置subviews的frame。 我们不应该直接调用此方法，而应当用下面两个方法。</p>
 </li>
-<li><p><code>setNeedsLayout</code></p>
-<p>此方法会将view当前的layout设置为无效的，并在下一个upadte cycle里去触发layout更新。</p>
+<li><p>2.实现接口Runnable(Thread构造函数中传递了runnable的引用,通过init()方法传递target,用于判断是否执行run()方法)</p>
+<ul>
+<li>定义类实现Runnable</li>
+<li>实现run方法</li>
+<li>把操作写在run中</li>
+<li>创建Thread对象,传入runnable</li>
+<li>调用Runnable的start方法</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">public class Test &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">//1.普通类实现了runnable接口来实现调用里面的run方法</div><div class="line">Student s = new Student();</div><div class="line">Thread t = new Thread(s);</div><div class="line">t.start();</div><div class="line">//2.匿名类来实现runnable接口</div><div class="line">new Thread(new Runnable() &#123;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		System.out.println(&quot;匿名内部类Runnable多线程启动方法&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;).start();	</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">class Student implements Runnable&#123;</div><div class="line">@Override</div><div class="line">public void run() &#123;</div><div class="line">System.out.println(&quot;Runnable多线程启动方法,继承方式&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p><code>layoutIfNeeded</code></p>
-<p>使用此方法强制立即进行layout,从当前view开始，此方法会遍历整个view层次(包括superviews)请求layout。因此，调用此方法会强制整个view层次布局。</p>
+</ul>
 </li>
-</ol>
-<h4 id="基于约束的AutoLayer的方法："><a href="#基于约束的AutoLayer的方法：" class="headerlink" title="基于约束的AutoLayer的方法："></a>基于约束的AutoLayer的方法：</h4><ol>
-<li><p><code>setNeedsUpdateConstraints</code></p>
-<p>当一个自定义view的某个属性发生改变，并且可能影响到constraint时，需要调用此方法去标记constraints需要在未来的某个点更新，系统然后调用updateConstraints.</p>
+</ul>
+<p>###两种线程的区别</p>
+<ul>
+<li>继承Thread<ul>
+<li>好处:可以直接使用Thread类中的方法,代码简单</li>
+<li>弊端:如果已经有父类,就不能用这种方式</li>
+</ul>
 </li>
-<li><p><code>needsUpdateConstraints</code></p>
-<p>constraint-based layout system使用此返回值去决定是否需要调用updateConstraints作为正常布局过程的一部分。</p>
+<li>实现Runnable<ul>
+<li>好处:可以有父类,直接只是实现接口</li>
+<li>弊端:间接把对象作为构造方法的参数传递进去,较为复杂,但自由度较大</li>
+</ul>
 </li>
-<li><p><code>updateConstraintsIfNeeded</code></p>
-<p>立即触发约束更新，自动更新布局。</p>
-</li>
-<li><p><code>updateConstraints</code></p>
-<p>自定义view应该重写此方法在其中建立constraints. 注意：要在实现在最后调用[super updateConstraints]</p>
-<p>下面一张经典的图是来自stackoverflow,图已经比较明白的显示了整个流程,不再作过多的解释.</p>
-</li>
-</ol>
-<p><img src="http://i.stack.imgur.com/i9YuN.png" alt="layout image"></p>
+</ul>
+<h3 id="线程中其他操作"><a href="#线程中其他操作" class="headerlink" title="线程中其他操作"></a>线程中其他操作</h3><ul>
+<li>通过getName()可以获得当前线程的名字</li>
+<li>通过setName(String)可以设置线程名字</li>
+<li>Thread.currentThread()可以获得当前线程对象,获得对象后可以对其进行操作(改名,获得名字)</li>
+<li>Thread.sleep(毫秒),类方法调用,可以使得当前线程休眠</li>
+<li>setPriority()设置线程的优先级</li>
+</ul>
 
       
     </div>
@@ -339,23 +371,21 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/OC/" rel="tag">#OC</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/06/13/Java异常处理抛出/" rel="next" title="Java异常处理抛出">
+                <i class="fa fa-chevron-left"></i> Java异常处理抛出
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/08/13/NSEnumerator遍历/" rel="prev" title="NSEnumerator遍历">
-                NSEnumerator遍历 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/09/13/swift中懒加载的then语法/" rel="prev" title="swift中懒加载的then语法">
+                swift中懒加载的then语法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -470,7 +500,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded"><span class="nav-number">1.</span> <span class="nav-text">关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查了一下文档-先对layoutIfNeeded进行一个解释吧"><span class="nav-number">1.1.</span> <span class="nav-text">查了一下文档,先对layoutIfNeeded进行一个解释吧!</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在官方文档上-对于setNeedsUpdateConstraints的解释是"><span class="nav-number">1.2.</span> <span class="nav-text">在官方文档上,对于setNeedsUpdateConstraints的解释是:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对于updateConstraintsIfNeeded这个方法-则是"><span class="nav-number">1.3.</span> <span class="nav-text">对于updateConstraintsIfNeeded这个方法,则是:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于UIView的Layer，IOS提供了三个方法："><span class="nav-number">1.4.</span> <span class="nav-text">关于UIView的Layer，IOS提供了三个方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于约束的AutoLayer的方法："><span class="nav-number">1.5.</span> <span class="nav-text">基于约束的AutoLayer的方法：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程的实现方法有两种"><span class="nav-number">1.</span> <span class="nav-text">多线程的实现方法有两种</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程中其他操作"><span class="nav-number">2.</span> <span class="nav-text">线程中其他操作</span></a></li></ol></div>
             
           </div>
         </section>

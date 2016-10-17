@@ -87,18 +87,18 @@
 
 
 <meta name="description" content="其实真的觉得即使自己能独立完成项目,还有是太多太多学习的地方可以不断提高,毕竟如果重复写一些代码是没有意义的.虽然说我已经使用了swift写了一个项目并且已经在AppStore里面发布,但是对于swift的认识还是很浅薄的.最近在重新看swift programming language一书,重新看了一遍里面的内容–其实对于泛型,我最初的理解是来源于Java,在项目中我真的比较少用到泛型.
-###">
+泛型需">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift泛型初探">
 <meta property="og:url" content="http://yoursite.com/2016/10/08/Swift泛型初探/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="其实真的觉得即使自己能独立完成项目,还有是太多太多学习的地方可以不断提高,毕竟如果重复写一些代码是没有意义的.虽然说我已经使用了swift写了一个项目并且已经在AppStore里面发布,但是对于swift的认识还是很浅薄的.最近在重新看swift programming language一书,重新看了一遍里面的内容–其实对于泛型,我最初的理解是来源于Java,在项目中我真的比较少用到泛型.
-###">
-<meta property="og:updated_time" content="2016-10-08T15:22:42.000Z">
+泛型需">
+<meta property="og:updated_time" content="2016-10-10T14:07:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift泛型初探">
 <meta name="twitter:description" content="其实真的觉得即使自己能独立完成项目,还有是太多太多学习的地方可以不断提高,毕竟如果重复写一些代码是没有意义的.虽然说我已经使用了swift写了一个项目并且已经在AppStore里面发布,但是对于swift的认识还是很浅薄的.最近在重新看swift programming language一书,重新看了一遍里面的内容–其实对于泛型,我最初的理解是来源于Java,在项目中我真的比较少用到泛型.
-###">
+泛型需">
 
 
 
@@ -180,7 +180,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -190,7 +190,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -253,7 +253,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-10-08T22:33:34+08:00" content="2016-10-08">
               2016-10-08
             </time>
@@ -283,15 +283,15 @@
 
       
         <p>其实真的觉得即使自己能独立完成项目,还有是太多太多学习的地方可以不断提高,毕竟如果重复写一些代码是没有意义的.虽然说我已经使用了swift写了一个项目并且已经在AppStore里面发布,但是对于swift的认识还是很浅薄的.最近在重新看swift programming language一书,重新看了一遍里面的内容–其实对于泛型,我最初的理解是来源于Java,在项目中我真的比较少用到泛型.</p>
-<p>####泛型需求的产生<br>下面是书里面的代码:</p>
+<h4 id="泛型需求的产生"><a href="#泛型需求的产生" class="headerlink" title="泛型需求的产生"></a>泛型需求的产生</h4><p>下面是书里面的代码:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  func swapTwoInt(inout a:Int,inout b:Int)&#123;</div><div class="line">        let tempA = a;</div><div class="line">        a = b;</div><div class="line">        b = tempA</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>要是我有这个交换两个内容的要求,但是这紧紧单纯是对Int但种类型的配置,如果我还需要有String和Double的话,我必须要拷贝代码:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">func swapTwoString(inout a:String,inout b:String)&#123;</div><div class="line">          let tempA = a;</div><div class="line">          a = b;</div><div class="line">          b = tempA</div><div class="line">&#125;</div><div class="line"></div><div class="line">      func swapTwoDouble(inout a:Double,inout b:Double)&#123;</div><div class="line">          let tempA = a;</div><div class="line">          a = b;</div><div class="line">          b = tempA</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
 <p>于是我们产生了泛型,它可以定义一种统一的类型<t>,这个时候你可以在参数里面写入这个参数,它代表了前后一致的类型,如String,Int,Double…</t></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func swapTwoValues&lt;T&gt;(inout a: T, inout _ b: T)&#123;</div><div class="line">       let tempA = a;</div><div class="line">       a = b;</div><div class="line">       b = tempA</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
 <p>在我写泛型的时候,遇到的第一个问题是返回值怎么处理?<br>唔哼,这个问题让我们继续把泛型的其他定义看下去的时候再继续思考吧.</p>
-<p>####命名类型参数<br>那么,泛型的书写方法就是用一对箭括号把类型名称合并起来:如 <strong><em><t></t></em></strong>,当然,你也可以一两个其他字母表示,<strong><em><u,t></u,t></em></strong></p>
-<p>####泛型类型<br> 其中,书中里面举了一个泛型类型的例子是这样的:</p>
+<h4 id="命名类型参数"><a href="#命名类型参数" class="headerlink" title="命名类型参数"></a>命名类型参数</h4><p>那么,泛型的书写方法就是用一对箭括号把类型名称合并起来:如 <strong><em><t></t></em></strong>,当然,你也可以一两个其他字母表示,<strong><em><u,t></u,t></em></strong></p>
+<h4 id="泛型类型"><a href="#泛型类型" class="headerlink" title="泛型类型"></a>泛型类型</h4><p> 其中,书中里面举了一个泛型类型的例子是这样的:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">struct IntStack &#123;</div><div class="line">    var items = [Int]();</div><div class="line">    /*</div><div class="line">     mutating关键字:由于swift功能强大,不仅可以让class遵守,也可以让enum和struct遵守</div><div class="line">     mutating关键字在定义协议的方法的时候可以在前面加上,让其三种类型在遵守协议的时候对有关键字的方法有不同的&quot;提示&quot;:</div><div class="line">    class: 在class中实现带有mutating方法的接口时，不用mutating进行修饰。因为对于class来说，类的成员变量和方法都是透明的，所以不必使用 mutating 来进行修饰</div><div class="line">     enum:</div><div class="line">     struct:如果将struct中的mutating去掉，则会报错不能改变结构体的成员。</div><div class="line">    */</div><div class="line">    //将一个数值入栈</div><div class="line">    mutating func push(item:Int)</div><div class="line">    &#123;</div><div class="line">        items.append(item)</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    //和内存中的栈一样,先进后出,所以只要移除最后一个元素即可</div><div class="line">    mutating func pop() -&gt; Int&#123;</div><div class="line">        </div><div class="line">        return items.removeLast()</div><div class="line">      &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>但是只针对Int一种类型避免也显得太弱了吧,所以我们可以用泛型对其进行改良:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">struct Stack&lt;T&gt; &#123;</div><div class="line">      var items = [T]()</div><div class="line">      mutating func push(item: T) &#123;</div><div class="line">        items.append(item)</div><div class="line">      &#125;</div><div class="line">      mutating func pop() -&gt; T &#123;</div><div class="line">        return items.removeLast()</div><div class="line">      &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -305,13 +305,13 @@ stringsInStack.pop()//1,2,3
 </code></pre><p>现在,有点明白了Array和Dictionary为什么可以指定类型了吧,其实无形中我们已经用了很多泛型的内容,只是我们缺少了总结和理解:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">     //定义了一个内容必须为字符串的数组</div><div class="line">  var arr :[String] = []</div><div class="line">     arr[0] = &quot;name&quot;;</div><div class="line">     arr[1] = &quot;age&quot;;</div><div class="line">     arr[3] = &quot;height&quot;;</div><div class="line"></div><div class="line">//定义了一个key为String,value为AnyObject的字典  </div><div class="line">   var parma : [String:AnyObject] = [:]</div><div class="line">      parma[&quot;name&quot;] = &quot;shiron&quot;</div><div class="line">      parma[&quot;age&quot;] = 22</div><div class="line">      parma[&quot;height&quot;] = 1.70</div></pre></td></tr></table></figure>
 <p>这里可以延伸出后面的一个话题:类型约束.</p>
-<p>####类型约束<br>输入Dictionary点进去可以看到该类的属性和方法:</p>
+<h4 id="类型约束"><a href="#类型约束" class="headerlink" title="类型约束"></a>类型约束</h4><p>输入Dictionary点进去可以看到该类的属性和方法:</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public struct Dictionary&lt;Key : Hashable, Value&gt; : CollectionType, DictionaryLiteralConvertible&#123;</div><div class="line">各种dict的属性和方法......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们发现在dict对泛型进行定义的时候,key有一个特殊的限制:</p>
 <p><strong><strong><key: hashable,value=""></key:></strong></strong><br>此时,我们可以看到key被强制遵守了一个hashable的协议(注意:Swift 标准库中定义的一个特定协议,所有的 Swift 基本类型(如 String , Int , Double 和 Bool )默认都是可哈希。)</p>
 <p>当你对泛型的有较高的输入要求时,可以限制某种类或者协议来进行类型约束,定义方法就是在泛型字母后面添加 T:SomeProtocol或者U:someClass</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func someFunction&lt;T:someClass,U:someProtocol&gt;(someT:T,someU:U)&#123;</div><div class="line">    //函数主体</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>####扩展一个泛型类型<br>当然我们泛型的好用之处不仅这么一点点.</p>
+<h4 id="扩展一个泛型类型"><a href="#扩展一个泛型类型" class="headerlink" title="扩展一个泛型类型"></a>扩展一个泛型类型</h4><p>当然我们泛型的好用之处不仅这么一点点.</p>
 <p>书中还对Stack的类型作出了一个扩展:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">extension Stack &#123;</div><div class="line">    var topItem: T? &#123;</div><div class="line">        return items.isEmpty ? nil : items[items.count - 1]</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> topItem 属性会返回一个 T 类型的可选值。当栈为空的时候, topItem 将会返回 nil ;当栈不为空的时候, topItem 会返回 items 数组中的最后一个元素,然而你注意到了吗?我们在扩展里面并没有使用泛型类型的定义,它是从结构体中直接带过来了,对它进行解包则可以自己使用:</p>
@@ -353,6 +353,10 @@ stringsInStack.pop()//1,2,3
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/10/iOS-架构模式-–-简述-MVC-MVP-MVVM-和-VIPER-转/" rel="prev" title="iOS 架构模式 – 简述 MVC, MVP, MVVM 和 VIPER (转)">
+                iOS 架构模式 – 简述 MVC, MVP, MVVM 和 VIPER (转) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -401,10 +405,10 @@ stringsInStack.pop()//1,2,3
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -420,8 +424,8 @@ stringsInStack.pop()//1,2,3
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
@@ -430,8 +434,8 @@ stringsInStack.pop()//1,2,3
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">Tags</span>
               </a>
             </div>
           
@@ -466,7 +470,7 @@ stringsInStack.pop()//1,2,3
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型需求的产生"><span class="nav-number">1.</span> <span class="nav-text">泛型需求的产生</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名类型参数"><span class="nav-number">2.</span> <span class="nav-text">命名类型参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型类型"><span class="nav-number">3.</span> <span class="nav-text">泛型类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型约束"><span class="nav-number">4.</span> <span class="nav-text">类型约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展一个泛型类型"><span class="nav-number">5.</span> <span class="nav-text">扩展一个泛型类型</span></a></li></ol></div>
             
           </div>
         </section>
@@ -493,7 +497,7 @@ stringsInStack.pop()//1,2,3
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

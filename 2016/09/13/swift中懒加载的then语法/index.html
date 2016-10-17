@@ -86,12 +86,40 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/swift/index.html">
+<meta name="description" content="原文:Swift：让人眼前一亮的初始化方式
+###then语法
+个人非常喜欢这种简介的懒加载模式,唔,不过有时候真的会觉得$0的时候,无法感应该类的属性真蛋疼. 以下是加载方式,供大家参考学习.
+  import Foundation
+
+ public protocol Then {}
+
+ extension Then where Self: Any {
+         /// Makes it">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift中懒加载的then语法">
+<meta property="og:url" content="http://yoursite.com/2016/09/13/swift中懒加载的then语法/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原文:Swift：让人眼前一亮的初始化方式
+###then语法
+个人非常喜欢这种简介的懒加载模式,唔,不过有时候真的会觉得$0的时候,无法感应该类的属性真蛋疼. 以下是加载方式,供大家参考学习.
+  import Foundation
+
+ public protocol Then {}
+
+ extension Then where Self: Any {
+         /// Makes it">
+<meta property="og:updated_time" content="2016-10-13T15:22:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="swift中懒加载的then语法">
+<meta name="twitter:description" content="原文:Swift：让人眼前一亮的初始化方式
+###then语法
+个人非常喜欢这种简介的懒加载模式,唔,不过有时候真的会觉得$0的时候,无法感应该类的属性真蛋疼. 以下是加载方式,供大家参考学习.
+  import Foundation
+
+ public protocol Then {}
+
+ extension Then where Self: Any {
+         /// Makes it">
 
 
 
@@ -112,10 +140,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/swift/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/13/swift中懒加载的then语法/"/>
 
 
-  <title> Tag: swift | Hexo </title>
+  <title> swift中懒加载的then语法 | Hexo </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="">
@@ -136,7 +164,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -214,102 +242,181 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        swift
-        <small>Tag</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/10/08/Swift泛型初探/" itemprop="url">
-              
-                <span itemprop="name">Swift泛型初探</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-08T22:33:34+08:00"
-              content="2016-10-08" >
-          10-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/10/08/ObjectMapper/" itemprop="url">
-              
-                <span itemprop="name">ObjectMapper的使用</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-08T17:22:11+08:00"
-              content="2016-10-08" >
-          10-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/10/07/ReactiveCocoa在swift情况下使用宏/" itemprop="url">
-              
-                <span itemprop="name">ReactiveCocoa在swift情况下使用宏</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-07T10:19:17+08:00"
-              content="2016-10-07" >
-          10-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                swift中懒加载的then语法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-09-13T23:19:27+08:00" content="2016-09-13">
+              2016-09-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文:<br><a href="http://mp.weixin.qq.com/s?__biz=MzI4NjAzODk0OQ==&amp;mid=2652684686&amp;idx=1&amp;sn=2adeb417aadd356fd615c6349a28e4f4&amp;chksm=f00b6f44c77ce6521a20506a99cf446792ac70b537c09d05b7ad4066aa4b8a4cfaba4bedb2af&amp;scene=0#wechat_redirect" target="_blank" rel="external">Swift：让人眼前一亮的初始化方式</a></p>
+<p>###then语法</p>
+<p>个人非常喜欢这种简介的懒加载模式,唔,不过有时候真的会觉得$0的时候,无法感应该类的属性真蛋疼. 以下是加载方式,供大家参考学习.</p>
+<pre><code>  import Foundation
+
+ public protocol Then {}
+
+ extension Then where Self: Any {
+         /// Makes it available to set properties with closures just after initializing.
+    ///
+    ///     let label = UILabel().then {
+    ///         $0.textAlignment = .Center
+    ///         $0.textColor = UIColor.blackColor()
+    ///         $0.text = &quot;Hello, World!&quot;
+    ///     }
+    public func then(@noescape block: inout Self -&gt; Void) -&gt; Self {
+        var copy = self
+        block(&amp;copy)
+        return copy
+    }
+     }
+
+ extension Then where Self: AnyObject {
+    /// Makes it available to set properties with closures just after initializing.
+    ///
+    ///     let label = UILabel().then {
+    ///         $0.textAlignment = .Center
+    ///         $0.textColor = UIColor.blackColor()
+    ///         $0.text = &quot;Hello, World!&quot;
+    ///     }
+    public func then(@noescape block: Self -&gt; Void) -&gt; Self {
+        block(self)
+        return self
+     }
+    }
+
+extension NSObject: Then {}
+
+
+  //textFiled的常用懒加载模式
+    private lazy var textFiled : UITextField={
+        let textFiled = UITextField()
+        textFiled.placeholder = &quot;请输入文字&quot;
+        return textFiled
+    }()
+
+  //在尾随闭包中实例化了UILabel时的写法
+     lazy var label : UILabel={
+
+        $0.text = &quot;我是占位文字,textFiled改变时我也会改变&quot;
+        $0.font = UIFont.systemFontOfSize(16)
+
+        return $0
+    }(UILabel())
+
+
+//文章开始时给出的then代码段,使得初始化更简洁
+ let label = UILabel().then {
+      $0.textAlignment = .Center
+      $0.textColor = .blackColor()
+      $0.text = &quot;Hello, World!&quot;
+    }
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/10/Java基础学习汇总/" rel="next" title="Java基础学习汇总">
+                <i class="fa fa-chevron-left"></i> Java基础学习汇总
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/07/ReactiveCocoa在swift情况下使用宏/" rel="prev" title="ReactiveCocoa在swift情况下使用宏">
+                ReactiveCocoa在swift情况下使用宏 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -317,6 +424,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -336,8 +447,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -387,6 +507,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -483,6 +614,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
