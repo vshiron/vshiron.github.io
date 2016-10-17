@@ -5,11 +5,11 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-17T11:01:05.000Z</updated>
+  <updated>2016-10-17T12:02:35.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>shiron</name>
     
   </author>
   
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/10/17/Controller%E9%97%B4%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C/"/>
     <id>http://yoursite.com/2016/10/17/Controller间的自定义过渡效果/</id>
     <published>2016-10-17T10:58:48.000Z</published>
-    <updated>2016-10-17T11:01:05.000Z</updated>
+    <updated>2016-10-17T12:02:35.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处<a href="http://liuyanwei.jumppo.com/index.html" target="_blank" rel="external">阅读原文</a>)</strong></p>
 <p>下面继续对老师文章中<controller间的自定义过渡效果>进行学习~</controller间的自定义过渡效果></p>
@@ -36,6 +36,8 @@
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -43,7 +45,7 @@
     <link href="http://yoursite.com/2016/10/15/%E6%96%B0%E5%BB%BAReact-Native%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>http://yoursite.com/2016/10/15/新建React-Native报错解决办法/</id>
     <published>2016-10-15T07:59:44.000Z</published>
-    <updated>2016-10-15T09:22:48.000Z</updated>
+    <updated>2016-10-17T11:56:00.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="新建React-Native报错解决办法"><a href="#新建React-Native报错解决办法" class="headerlink" title="新建React-Native报错解决办法"></a>新建React-Native报错解决办法</h3><p>我在新建了一个项目的时候出现了如下错误,找了很多地方都没有正常解决:看上去是在描述没有使用正确的reactNative的框架导致的,但是按它的说明修改了框架也是无法继续正常运行,错误代码如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[error][tid:com.facebook.react.JavaScript] Seems you&apos;re trying to access &apos;ReactNative.createClass&apos; from the &apos;react-native&apos; package. Perhaps you meant to access &apos;React.createClass&apos; from the &apos;react&apos; package instead?</div><div class="line"></div><div class="line">For example, instead of:</div><div class="line"></div><div class="line">  import React, &#123; Component, View &#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">You should now do:</div><div class="line"></div><div class="line">  import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">  import &#123; View &#125; from &apos;react-native&apos;;</div></pre></td></tr></table></figure>
@@ -70,6 +72,8 @@
     </summary>
     
     
+      <category term="react native" scheme="http://yoursite.com/tags/react-native/"/>
+    
   </entry>
   
   <entry>
@@ -77,7 +81,7 @@
     <link href="http://yoursite.com/2016/10/14/UIView%E5%8A%A8%E7%94%BB%E5%92%8CCoreAnimation%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2016/10/14/UIView动画和CoreAnimation学习/</id>
     <published>2016-10-14T03:34:51.000Z</published>
-    <updated>2016-10-15T05:48:25.000Z</updated>
+    <updated>2016-10-17T11:54:29.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处<a href="http://liuyanwei.jumppo.com/index.html" target="_blank" rel="external">阅读原文</a>)</strong></p>
 <h5 id="以前在工作中一直都忽视了对动画方面的研究-现在看了一遍刘彦玮大神的博客-偶像啊啊-gt-lt-里面有关于对动画的一些博客-自己重新对动画的知识进行有体系的学习和研究-自己记录下来希望以后能够更好的使用-学习资料来源于iOS动画和特效专题"><a href="#以前在工作中一直都忽视了对动画方面的研究-现在看了一遍刘彦玮大神的博客-偶像啊啊-gt-lt-里面有关于对动画的一些博客-自己重新对动画的知识进行有体系的学习和研究-自己记录下来希望以后能够更好的使用-学习资料来源于iOS动画和特效专题" class="headerlink" title="以前在工作中一直都忽视了对动画方面的研究,现在看了一遍刘彦玮大神的博客(偶像啊啊!&gt;&lt;),里面有关于对动画的一些博客,自己重新对动画的知识进行有体系的学习和研究,自己记录下来希望以后能够更好的使用,学习资料来源于iOS动画和特效专题"></a>以前在工作中一直都忽视了对动画方面的研究,现在看了一遍<a href="http://liuyanwei.jumppo.com/index.html" target="_blank" rel="external">刘彦玮</a>大神的博客(偶像啊啊!&gt;&lt;),里面有关于对动画的一些博客,自己重新对动画的知识进行有体系的学习和研究,自己记录下来希望以后能够更好的使用,学习资料来源于<a href="http://liuyanwei.jumppo.com/2015/10/29/iOS-animation-0.html" target="_blank" rel="external">iOS动画和特效专题</a></h5><h3 id="一-从最简单的动画开始"><a href="#一-从最简单的动画开始" class="headerlink" title="一.从最简单的动画开始"></a>一.从最简单的动画开始</h3><p>在我们刚刚进入iOS的学习过程中,最先接触的,肯定是下面这个方式来做简答的动画吧!</p>
@@ -132,6 +136,8 @@
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -166,7 +172,7 @@
     <link href="http://yoursite.com/2016/10/11/iOS%E4%B8%AD%E6%A8%A1%E6%8B%9F%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82%E4%BB%A5%E5%8F%8A%E8%A7%A3%E6%9E%90xml/"/>
     <id>http://yoursite.com/2016/10/11/iOS中模拟发送http请求以及解析xml/</id>
     <published>2016-10-11T05:32:33.000Z</published>
-    <updated>2016-10-13T15:16:13.000Z</updated>
+    <updated>2016-10-17T11:54:38.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="AFNetWorking请求"><a href="#AFNetWorking请求" class="headerlink" title="AFNetWorking请求"></a>AFNetWorking请求</h3><p>这个不难,导入AFN框架,生成一个单例类,特别要注意的是,如果作为模拟请求http请求的话,返回的并不是json数据.</p>
 <h4 id="1-单例代码如下"><a href="#1-单例代码如下" class="headerlink" title="1.单例代码如下"></a>1.单例代码如下</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">import UIKit</div><div class="line"></div><div class="line">class NetworkTools: AFHTTPSessionManager &#123;</div><div class="line"></div><div class="line">		//设置单例</div><div class="line">    static let tools: NetworkTools = &#123;</div><div class="line">        </div><div class="line">        </div><div class="line">        let tool = NetworkTools()</div><div class="line">        </div><div class="line">        //设置类型</div><div class="line">        tool.responseSerializer.acceptableContentTypes =  NSSet(objects: &quot;application/json&quot;, &quot;text/html&quot;,&quot;text/json&quot;, &quot;text/javascript&quot;, &quot;text/plain&quot;,&quot;image/png&quot;) as? Set&lt;String&gt;</div><div class="line"></div><div class="line">        tool.responseSerializer = AFHTTPResponseSerializer()</div><div class="line">        </div><div class="line">        return tool</div><div class="line">    &#125;()</div><div class="line">    </div><div class="line">    //获取单例</div><div class="line">    class func shareNetworkTools() -&gt;NetworkTools&#123;</div><div class="line">        return tools</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -241,6 +247,8 @@
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -258,7 +266,7 @@
 <h4 id="Blockquotes"><a href="#Blockquotes" class="headerlink" title="Blockquotes"></a>Blockquotes</h4><blockquote>
 <p>Right angle brackets &gt; are used for block quotes.</p>
 </blockquote>
-<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#x65;&#64;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#x65;&#64;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a> link.</p>
+<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#x6d;">&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#x6d;</a> link.</p>
 <p>Simple inline link <a href="http://chenluois.com" target="_blank" rel="external">http://chenluois.com</a>, another inline link <a href="http://25.io/smaller/" target="_blank" rel="external">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension" target="_blank" rel="external">Resize</a>.</p>
 <p>A <a href="http://25.io/mou/" title="Markdown editor on Mac OS X" target="_blank" rel="external">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
 <p>Titles ( or called tool tips ) in the links are optional.</p>
@@ -446,7 +454,7 @@ var Mou = exactlyTheAppIwant;
     <link href="http://yoursite.com/2016/10/10/iOS-%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F-%E2%80%93-%E7%AE%80%E8%BF%B0-MVC-MVP-MVVM-%E5%92%8C-VIPER-%E8%BD%AC/"/>
     <id>http://yoursite.com/2016/10/10/iOS-架构模式-–-简述-MVC-MVP-MVVM-和-VIPER-转/</id>
     <published>2016-10-10T15:23:20.000Z</published>
-    <updated>2016-10-11T01:24:53.000Z</updated>
+    <updated>2016-10-17T11:54:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>在使用 iOS 的 MVC 时候感觉怪怪的？想要尝试下 MVVM？之前听说过 VIPER，但是又纠结是不是值得去学？</p>
 <p>继续阅读，你就会知道上面问题的答案 – 如果读完了还是不知道的话，欢迎留言评论。</p>
@@ -593,6 +601,8 @@ userCell.configureWithUser(user)
     
     </summary>
     
+    
+      <category term="oc" scheme="http://yoursite.com/tags/oc/"/>
     
   </entry>
   
@@ -745,7 +755,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
     <link href="http://yoursite.com/2016/09/13/swift%E4%B8%AD%E6%87%92%E5%8A%A0%E8%BD%BD%E7%9A%84then%E8%AF%AD%E6%B3%95/"/>
     <id>http://yoursite.com/2016/09/13/swift中懒加载的then语法/</id>
     <published>2016-09-13T15:19:27.000Z</published>
-    <updated>2016-10-13T15:22:17.000Z</updated>
+    <updated>2016-10-17T11:55:40.000Z</updated>
     
     <content type="html"><![CDATA[<p>原文:<br><a href="http://mp.weixin.qq.com/s?__biz=MzI4NjAzODk0OQ==&amp;mid=2652684686&amp;idx=1&amp;sn=2adeb417aadd356fd615c6349a28e4f4&amp;chksm=f00b6f44c77ce6521a20506a99cf446792ac70b537c09d05b7ad4066aa4b8a4cfaba4bedb2af&amp;scene=0#wechat_redirect" target="_blank" rel="external">Swift：让人眼前一亮的初始化方式</a></p>
 <p>###then语法</p>
@@ -818,6 +828,8 @@ extension NSObject: Then {}
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -825,7 +837,7 @@ extension NSObject: Then {}
     <link href="http://yoursite.com/2016/09/10/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%B1%87%E6%80%BB/"/>
     <id>http://yoursite.com/2016/09/10/Java基础学习汇总/</id>
     <published>2016-09-10T15:31:12.000Z</published>
-    <updated>2016-10-13T15:32:20.000Z</updated>
+    <updated>2016-10-17T11:53:33.000Z</updated>
     
     <content type="html"><![CDATA[<p>##Java基础学习汇总</p>
 <p>###多线程</p>
@@ -886,6 +898,8 @@ extension NSObject: Then {}
     
     </summary>
     
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
   </entry>
   
@@ -950,7 +964,7 @@ extension NSObject: Then {}
     <link href="http://yoursite.com/2016/05/23/%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1%E5%AD%98%E6%94%BE%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE/"/>
     <id>http://yoursite.com/2016/05/23/关联对象存放自定义数据/</id>
     <published>2016-05-23T15:23:04.000Z</published>
-    <updated>2016-10-13T15:24:59.000Z</updated>
+    <updated>2016-10-17T11:55:28.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="关联对象存放自定义数据"><a href="#关联对象存放自定义数据" class="headerlink" title="关联对象存放自定义数据"></a>关联对象存放自定义数据</h3><h4 id="关于objc-setAssociatedObject和objc-getAssociatedObject"><a href="#关于objc-setAssociatedObject和objc-getAssociatedObject" class="headerlink" title="关于objc_setAssociatedObject和objc_getAssociatedObject"></a>关于objc_setAssociatedObject和objc_getAssociatedObject</h4><p>最近是在52个提高IOS高质量代码中看到这个特性的.<br>在我写代码的过程中,我感觉这种方式可以提供代理中的高聚合(和RAC的函数式编程有异曲同工之妙)<br>先把代码上上来:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    - (void)viewDidLoad &#123;</div><div class="line">            [super viewDidLoad];</div><div class="line"></div><div class="line">                UIAlertView* alert =  [[UIAlertView alloc] initWithTitle:@&quot;信息&quot; message:@&quot;提示&quot; delegate:self cancelButtonTitle:@&quot;取消&quot; otherButtonTitles:@&quot;确认&quot;, nil];</div><div class="line">    </div><div class="line">                void (^block)(NSInteger) = ^(NSInteger buttonIndex)&#123;</div><div class="line">                    if (buttonIndex == 0) &#123;</div><div class="line">                        NSLog(@&quot;取消按钮&quot;);</div><div class="line">                    &#125;else if (buttonIndex == 1)&#123;</div><div class="line">                        NSLog(@&quot;确认按钮&quot;);</div><div class="line">                    &#125;</div><div class="line">                    </div><div class="line">                &#125;;</div><div class="line">    </div><div class="line">                objc_setAssociatedObject(alert, ALERTVIEWKEY, block,             OBJC_ASSOCIATION_COPY);</div><div class="line">            //</div><div class="line">            //    NSString* str = @&quot;存储自定义数据&quot;;</div><div class="line">            //    </div><div class="line">            //    objc_setAssociatedObject(alert, ALERTVIEWKEY, str,             OBJC_ASSOCIATION_COPY);</div><div class="line">                [alert show];</div><div class="line"></div><div class="line">            &#125;</div></pre></td></tr></table></figure>
@@ -987,6 +1001,8 @@ extension NSObject: Then {}
     </summary>
     
     
+      <category term="oc" scheme="http://yoursite.com/tags/oc/"/>
+    
   </entry>
   
   <entry>
@@ -994,7 +1010,7 @@ extension NSObject: Then {}
     <link href="http://yoursite.com/2016/03/28/swift%E4%B8%AD%E7%9A%84%E8%B7%91%E9%A9%AC%E7%81%AF%E5%AE%9E%E7%8E%B0%EF%BC%88%E5%AF%BC%E8%88%AA%E6%A0%8F%EF%BC%89/"/>
     <id>http://yoursite.com/2016/03/28/swift中的跑马灯实现（导航栏）/</id>
     <published>2016-03-27T19:28:57.000Z</published>
-    <updated>2016-10-13T15:29:28.000Z</updated>
+    <updated>2016-10-17T11:55:18.000Z</updated>
     
     <content type="html"><![CDATA[<p>首先是懒加载了runLabel：</p>
 <pre><code> private lazy var runLabel : UILabel={
@@ -1044,6 +1060,8 @@ UIView .commitAnimations()
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -1051,7 +1069,7 @@ UIView .commitAnimations()
     <link href="http://yoursite.com/2016/03/12/%E7%AC%AC%E4%B8%89%E6%96%B9HTML%E8%A7%A3%E6%9E%90-TFHpple-%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
     <id>http://yoursite.com/2016/03/12/第三方HTML解析-TFHpple-的简单使用/</id>
     <published>2016-03-12T08:42:32.000Z</published>
-    <updated>2016-10-13T16:17:16.000Z</updated>
+    <updated>2016-10-17T11:55:47.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="第三方HTML解析-TFHpple-的简单使用-swift版"><a href="#第三方HTML解析-TFHpple-的简单使用-swift版" class="headerlink" title="第三方HTML解析 TFHpple 的简单使用(swift版)"></a>第三方HTML解析 TFHpple 的简单使用(swift版)</h3><h3 id="一-使用TFHpple解析-必须导入文件和框架xmllib2"><a href="#一-使用TFHpple解析-必须导入文件和框架xmllib2" class="headerlink" title="一.使用TFHpple解析,必须导入文件和框架xmllib2"></a>一.使用TFHpple解析,必须导入文件和框架xmllib2</h3><p>(OS_导入libxml2.2框架后,找不到<libxml tree.h="">的解决办法)</libxml></p>
 <ol>
@@ -1289,6 +1307,8 @@ UIView .commitAnimations()
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -1296,7 +1316,7 @@ UIView .commitAnimations()
     <link href="http://yoursite.com/2016/03/12/swift-%E4%B8%AD%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86do-catch%E7%9A%84%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3/"/>
     <id>http://yoursite.com/2016/03/12/swift-中异常处理do-catch的简单理解/</id>
     <published>2016-03-12T05:19:47.000Z</published>
-    <updated>2016-10-12T07:22:32.000Z</updated>
+    <updated>2016-10-17T11:55:08.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="1-使用枚举来设置错误值是很好的办法"><a href="#1-使用枚举来设置错误值是很好的办法" class="headerlink" title="1. 使用枚举来设置错误值是很好的办法"></a>1. 使用枚举来设置错误值是很好的办法</h4><p>使用如下办法来创建异常类型</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">enum NetWorkingError:Error &#123;</div><div class="line">    case NilString</div><div class="line">    case WithoutUrl</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -1346,6 +1366,8 @@ UIView .commitAnimations()
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -1353,7 +1375,7 @@ UIView .commitAnimations()
     <link href="http://yoursite.com/2016/02/13/Swift%E4%B8%AD-enum%E5%92%8CSwitch%E7%9A%84%E5%BA%94%E7%94%A8/"/>
     <id>http://yoursite.com/2016/02/13/Swift中-enum和Switch的应用/</id>
     <published>2016-02-13T15:27:15.000Z</published>
-    <updated>2016-10-13T15:28:28.000Z</updated>
+    <updated>2016-10-17T11:53:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>###好处<br>其实在很多菜鸟中会忽视了枚举的好处,使用枚举最显而易见的好处是能让代码更加清晰,应用得最多的地方是选项在超过两项或两项以上的时候能让协同开发的小伙伴更加清晰.</p>
 <p>###例子<br>我新建了一个dome,里面创建了一个计算器calculatorControl的类,而在它里面又定义了一个calculatroEnum的枚举,此时枚举让整个语义更加清晰.但让我觉得比较有兴趣的是在加减乘除以后,我还定义了一个求勾股定理斜边的powerWihtNum(Double),和其他枚举不同的是这个枚举可以接受一个开多少次方的值</p>
@@ -1370,6 +1392,8 @@ UIView .commitAnimations()
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -1377,7 +1401,7 @@ UIView .commitAnimations()
     <link href="http://yoursite.com/2015/12/13/swift%E4%B8%AD%E5%8A%A8%E6%80%81%E8%8E%B7%E5%BE%97%E7%B1%BB%E5%9E%8B/"/>
     <id>http://yoursite.com/2015/12/13/swift中动态获得类型/</id>
     <published>2015-12-13T12:29:53.000Z</published>
-    <updated>2016-10-13T15:30:45.000Z</updated>
+    <updated>2016-10-17T12:02:56.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>在100个swift 的tips中无意中看到一直不懂的如何动态获得swift中类的类型。</strong><br>原来在swift中有一个关键字是可以动态获得类的类型的：dynamicType。<br>借用书上的例子就是使用：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let date = NSDate()</div><div class="line">let nameType: AnyClass! = object_getClass(date)</div><div class="line">print(nameType)获得</div><div class="line"></div><div class="line">let data = NSData()</div><div class="line">let nameType = data.dynamicType</div><div class="line">print(nameType)获得</div></pre></td></tr></table></figure>
@@ -1392,6 +1416,8 @@ UIView .commitAnimations()
     </summary>
     
     
+      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
+    
   </entry>
   
   <entry>
@@ -1399,7 +1425,7 @@ UIView .commitAnimations()
     <link href="http://yoursite.com/2015/08/13/NSEnumerator%E9%81%8D%E5%8E%86/"/>
     <id>http://yoursite.com/2015/08/13/NSEnumerator遍历/</id>
     <published>2015-08-13T15:26:00.000Z</published>
-    <updated>2016-10-13T15:26:54.000Z</updated>
+    <updated>2016-10-17T11:53:46.000Z</updated>
     
     <content type="html"><![CDATA[<p>今天在无意中看到MBProgressHUD源码解析中有这么一段代码:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+ (MB_INSTANCETYPE)HUDForView:(UIView *)view &#123; </div><div class="line">    NSEnumerator *subviewsEnum = [view.subviews    reverseObjectEnumerator];</div><div class="line">    for (UIView *subview in subviewsEnum) &#123; </div><div class="line">    if ([subview isKindOfClass:self]) &#123; return (MBProgressHUD *)subview; &#125; &#125; </div><div class="line">    return nil;&#125;</div></pre></td></tr></table></figure>
@@ -1436,6 +1462,8 @@ UIView .commitAnimations()
     
     </summary>
     
+    
+      <category term="oc" scheme="http://yoursite.com/tags/oc/"/>
     
   </entry>
   
