@@ -88,7 +88,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="shiron">
-<meta property="og:url" content="http://yoursite.com/archives/2016/05/index.html">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="shiron">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shiron">
@@ -112,10 +112,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/05/"/>
+  <link rel="canonical" href="http://yoursite.com/page/3/"/>
 
 
-  <title> Archive | shiron </title>
+  <title> shiron </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="">
@@ -136,7 +136,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -213,66 +215,145 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
+    
+      
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  
+  
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      Um..! 21 posts in total. Keep on posting.
-    </span>
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/11/layoutIfNeeded-和-layoutSubviews/" itemprop="url">
+                  setNeedsUpdateConstraints 和 updateConstraintsIfNeeded
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-08-11T17:47:47+08:00" content="2015-08-11">
+              2015-08-11
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/05/23/关联对象存放自定义数据/" itemprop="url">
-              
-                <span itemprop="name">关联对象存放自定义数据</span>
-              
-            </a>
+          
+            <h3 id="关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded"><a href="#关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded" class="headerlink" title="关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded"></a>关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded</h3><p>之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么时机调用了</p>
+<h4 id="查了一下文档-先对layoutIfNeeded进行一个解释吧"><a href="#查了一下文档-先对layoutIfNeeded进行一个解释吧" class="headerlink" title="查了一下文档,先对layoutIfNeeded进行一个解释吧!"></a>查了一下文档,先对layoutIfNeeded进行一个解释吧!</h4><ul>
+<li>1、init初始化不会触发layoutSubviews   但是是用initWithFrame 进行初始化时，当rect的值不为CGRectZero时,也会触发</li>
+<li>2、addSubview会触发layoutSubviews</li>
+<li>3、设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</li>
+<li>4、滚动一个UIScrollView会触发layoutSubviews</li>
+<li>5、旋转Screen会触发父UIView上的layoutSubviews事件</li>
+<li>6、改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件</li>
+</ul>
+<h4 id="在官方文档上-对于setNeedsUpdateConstraints的解释是"><a href="#在官方文档上-对于setNeedsUpdateConstraints的解释是" class="headerlink" title="在官方文档上,对于setNeedsUpdateConstraints的解释是:"></a>在官方文档上,对于setNeedsUpdateConstraints的解释是:</h4><pre><code>当你的自定义视图的属性发生变化将会影响约束,此时可以调用这个方法表明,约束需要更新在将来的某个时候。然后系统会调用updateConstraints()作为其正常布局的一部分通过。用这个作为优化工具批量约束变化。更新限制一次性前需要确保您不必重新计算约束当多个更改视图之间的布局。
+</code></pre><h4 id="对于updateConstraintsIfNeeded这个方法-则是"><a href="#对于updateConstraintsIfNeeded这个方法-则是" class="headerlink" title="对于updateConstraintsIfNeeded这个方法,则是:"></a>对于updateConstraintsIfNeeded这个方法,则是:</h4><pre><code>每当一个新布局通过触发视图,系统调用这个方法来确保任何约束为视图和它的子视图更新的信息从当前视图层次及其约束。由系统自动调用此方法,但可能是手动调用如果你需要检查最新的约束。子类不应重写此方法。
+</code></pre><h4 id="关于UIView的Layer，IOS提供了三个方法："><a href="#关于UIView的Layer，IOS提供了三个方法：" class="headerlink" title="关于UIView的Layer，IOS提供了三个方法："></a>关于UIView的Layer，IOS提供了三个方法：</h4><ol>
+<li><p><code>layoutSubviews</code></p>
+<p>在iOS5.1和之前的版本，此方法的缺省实现不会做任何事情(实现为空)，iOS5.1之后(iOS6开始)的版本，此方法的缺省实现是使用你设置在此view上面的constraints(Autolayout)去决定subviews的position和size。 UIView的子类如果需要对其subviews进行更精确的布局，则可以重写此方法。只有在autoresizing和constraint-based behaviors of subviews不能提供我们想要的布局结果的时候，我们才应该重写此方法。可以在此方法中直接设置subviews的frame。 我们不应该直接调用此方法，而应当用下面两个方法。</p>
+</li>
+<li><p><code>setNeedsLayout</code></p>
+<p>此方法会将view当前的layout设置为无效的，并在下一个upadte cycle里去触发layout更新。</p>
+</li>
+<li><p><code>layoutIfNeeded</code></p>
+<p>使用此方法强制立即进行layout,从当前view开始，此方法会遍历整个view层次(包括superviews)请求layout。因此，调用此方法会强制整个view层次布局。</p>
+</li>
+</ol>
+<h4 id="基于约束的AutoLayer的方法："><a href="#基于约束的AutoLayer的方法：" class="headerlink" title="基于约束的AutoLayer的方法："></a>基于约束的AutoLayer的方法：</h4><ol>
+<li><p><code>setNeedsUpdateConstraints</code></p>
+<p>当一个自定义view的某个属性发生改变，并且可能影响到constraint时，需要调用此方法去标记constraints需要在未来的某个点更新，系统然后调用updateConstraints.</p>
+</li>
+<li><p><code>needsUpdateConstraints</code></p>
+<p>constraint-based layout system使用此返回值去决定是否需要调用updateConstraints作为正常布局过程的一部分。</p>
+</li>
+<li><p><code>updateConstraintsIfNeeded</code></p>
+<p>立即触发约束更新，自动更新布局。</p>
+</li>
+<li><p><code>updateConstraints</code></p>
+<p>自定义view应该重写此方法在其中建立constraints. 注意：要在实现在最后调用[super updateConstraints]</p>
+<p>下面一张经典的图是来自stackoverflow,图已经比较明白的显示了整个流程,不再作过多的解释.</p>
+</li>
+</ol>
+<p><img src="http://i.stack.imgur.com/i9YuN.png" alt="layout image"></p>
+
+          
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-23T23:23:04+08:00"
-              content="2016-05-23" >
-          05-23
-        </time>
-      </div>
+    <div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
-
     
-
   </section>
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 
 
@@ -447,12 +528,6 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
-
 
   
 

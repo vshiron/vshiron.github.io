@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>shiron</title>
   
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-15T05:48:25.000Z</updated>
+  <updated>2016-10-17T11:01:05.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Controller间的自定义过渡效果</title>
+    <link href="http://yoursite.com/2016/10/17/Controller%E9%97%B4%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C/"/>
+    <id>http://yoursite.com/2016/10/17/Controller间的自定义过渡效果/</id>
+    <published>2016-10-17T10:58:48.000Z</published>
+    <updated>2016-10-17T11:01:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处<a href="http://liuyanwei.jumppo.com/index.html" target="_blank" rel="external">阅读原文</a>)</strong></p>
+<p>下面继续对老师文章中<controller间的自定义过渡效果>进行学习~</controller间的自定义过渡效果></p>
+<blockquote>
+<p>本篇文章主要讲的就是在学习了UIView的基础上,如何在学习UIViewController的自定义效果</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处&lt;a href=&quot;http://liuyanwei.jumppo.com/index.html&quot; target=&quot;_blank&quot; rel=&quot;external
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>新建React-Native报错解决办法</title>
+    <link href="http://yoursite.com/2016/10/15/%E6%96%B0%E5%BB%BAReact-Native%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/10/15/新建React-Native报错解决办法/</id>
+    <published>2016-10-15T07:59:44.000Z</published>
+    <updated>2016-10-15T09:22:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="新建React-Native报错解决办法"><a href="#新建React-Native报错解决办法" class="headerlink" title="新建React-Native报错解决办法"></a>新建React-Native报错解决办法</h3><p>我在新建了一个项目的时候出现了如下错误,找了很多地方都没有正常解决:看上去是在描述没有使用正确的reactNative的框架导致的,但是按它的说明修改了框架也是无法继续正常运行,错误代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[error][tid:com.facebook.react.JavaScript] Seems you&apos;re trying to access &apos;ReactNative.createClass&apos; from the &apos;react-native&apos; package. Perhaps you meant to access &apos;React.createClass&apos; from the &apos;react&apos; package instead?</div><div class="line"></div><div class="line">For example, instead of:</div><div class="line"></div><div class="line">  import React, &#123; Component, View &#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">You should now do:</div><div class="line"></div><div class="line">  import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">  import &#123; View &#125; from &apos;react-native&apos;;</div></pre></td></tr></table></figure>
+<p>提示的内容就是告诉我们需要把Component,React等从包 react 中引入,不能再从 react-native 中引入。</p>
+<p>如果要更新引入，基本上要修改所有的文件，还好我们从 更新说明 中可以看到有工具来做这个事情。</p>
+<p>提示的内容就是告诉我们需要把Component,React等从包react中引入,不能再从<code>react-native</code>中引入。<br>如果要更新引入，基本上要修改所有的文件，还好我们从更新说明中可以看到有工具来做这个事情。<br><code>codemod-RN24-to-RN25</code>是一个升级项目文件支持<code>React Native 25</code>的工具，更改文件的import，让需要引入react的文件能够正确的import。</p>
+<p>使用方法:</p>
+<ol>
+<li>安装jscodeshift<br><br><br>npm install -g jscodeshift</li>
+<li><p>clone项目<br><br>git clone git@github.com:sibeliusseraphini/codemod-RN24-to-RN25.git</p>
+</li>
+<li><p>copy transform.js<br><br>cd codemod-RN24-to-RN25<br><br>cp transform.js <code>YOUR_PROJECT_PATH</code></p>
+</li>
+<li><p>运行命令转换文件<br><br>cd <code>YOUR_PROJECT_PATH</code><br><br>jscodeshift transform.js</p>
+</li>
+</ol>
+<p>等待运行完成之后可以看到React以及Component等都能被正确的引用到react包下。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;新建React-Native报错解决办法&quot;&gt;&lt;a href=&quot;#新建React-Native报错解决办法&quot; class=&quot;headerlink&quot; title=&quot;新建React-Native报错解决办法&quot;&gt;&lt;/a&gt;新建React-Native报错解决办法&lt;/h3&gt;&lt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>UIView动画和CoreAnimation学习</title>
@@ -191,17 +248,17 @@
     <link href="http://yoursite.com/2016/10/10/Mou%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://yoursite.com/2016/10/10/Mou的使用/</id>
     <published>2016-10-10T15:40:53.000Z</published>
-    <updated>2016-10-10T15:49:45.000Z</updated>
+    <updated>2016-10-17T04:53:29.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Mou"><a href="#Mou" class="headerlink" title="Mou"></a>Mou</h1><p><img src="http://25.io/mou/Mou_128.png" alt="Mou icon"></p>
+    <content type="html"><![CDATA[<h1 id="Mou-help中的使用方法-Markdown查询"><a href="#Mou-help中的使用方法-Markdown查询" class="headerlink" title="Mou help中的使用方法(Markdown查询)"></a>Mou help中的使用方法(Markdown查询)</h1><p><img src="http://25.io/mou/Mou_128.png" alt="Mou icon"></p>
 <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><strong>Mou</strong>, the missing Markdown editor for <em>web developers</em>.</p>
-<h3 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h3><h4 id="Strong-and-Emphasize"><a href="#Strong-and-Emphasize" class="headerlink" title="Strong and Emphasize"></a>Strong and Emphasize</h4><p><strong>strong</strong> or <strong>strong</strong> ( Cmd + B )</p>
-<p><em>emphasize</em> or <em>emphasize</em> ( Cmd + I )</p>
+<h3 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h3><h4 id="加粗-和-强调"><a href="#加粗-和-强调" class="headerlink" title="加粗 和 强调"></a>加粗 和 强调</h4><p><strong>加粗</strong> or <strong>加粗</strong> ( Cmd + B )</p>
+<p><em>斜线强调</em> or <em>斜线强调</em> ( Cmd + I )</p>
 <p><strong>Sometimes I want a lot of text to be bold.<br>Like, seriously, a <em>LOT</em> of text</strong></p>
 <h4 id="Blockquotes"><a href="#Blockquotes" class="headerlink" title="Blockquotes"></a>Blockquotes</h4><blockquote>
 <p>Right angle brackets &gt; are used for block quotes.</p>
 </blockquote>
-<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;</a> link.</p>
+<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#x65;&#64;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#x65;&#64;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a> link.</p>
 <p>Simple inline link <a href="http://chenluois.com" target="_blank" rel="external">http://chenluois.com</a>, another inline link <a href="http://25.io/smaller/" target="_blank" rel="external">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension" target="_blank" rel="external">Resize</a>.</p>
 <p>A <a href="http://25.io/mou/" title="Markdown editor on Mac OS X" target="_blank" rel="external">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
 <p>Titles ( or called tool tips ) in the links are optional.</p>
@@ -326,7 +383,7 @@ var Mou = exactlyTheAppIwant;
 <li>行内嵌套代码 : 选择文字后 , Cmd + K</li>
 <li>删除线，加删除线 : 选择文字后 , Cmd + U</li>
 <li>链接到某网址: 选择文字后, Control + Shift + L</li>
-<li>Image: Select text, Control + Shift + I</li>
+<li>将图片链接到: select text, control + shift + i</li>
 <li>Select Word: Control + Option + W</li>
 <li>Select Line: Shift + Cmd + L</li>
 <li>Select All: Cmd + A</li>
@@ -336,20 +393,20 @@ var Mou = exactlyTheAppIwant;
 <li>首字母大写: Select text, Control + Option + U</li>
 <li>Convert to List: Select lines, Control + L</li>
 <li>Convert to Blockquote: Select lines, Control + Q</li>
-<li>Convert to H1: Cmd + 1</li>
-<li>Convert to H2: Cmd + 2</li>
-<li>Convert to H3: Cmd + 3</li>
-<li>Convert to H4: Cmd + 4</li>
-<li>Convert to H5: Cmd + 5</li>
-<li>Convert to H6: Cmd + 6</li>
-<li>Convert Spaces to Tabs: Control + [</li>
-<li>Convert Tabs to Spaces: Control + ]</li>
-<li>Insert Current Date: Control + Shift + 1</li>
-<li>Insert Current Time: Control + Shift + 2</li>
-<li>Insert entity &lt;: Control + Shift + ,</li>
-<li>Insert entity &gt;: Control + Shift + .</li>
-<li>Insert entity &amp;: Control + Shift + 7</li>
-<li>Insert entity Space: Control + Shift + Space</li>
+<li>转化为该字体大小 H1: Cmd + 1</li>
+<li>转化为该字体大小 H2: Cmd + 2</li>
+<li>转化为该字体大小 H3: Cmd + 3</li>
+<li>转化为该字体大小 H4: Cmd + 4</li>
+<li>转化为该字体大小 H5: Cmd + 5</li>
+<li>转化为该字体大小 H6: Cmd + 6</li>
+<li>转换 空格 成功 tabs: Control + [</li>
+<li>转换 tabs 成为 空格: Control + ]</li>
+<li>插入当前日期: Control + Shift + 1</li>
+<li>插入当前时间: Control + Shift + 2</li>
+<li>插入 &lt;  符号: Control + Shift + ,</li>
+<li>插入 &gt;  符号: Control + Shift + .</li>
+<li>插入 &amp;  符号: Control + Shift + 7</li>
+<li>插入 空格 符号: Control + Shift + Space</li>
 <li>Insert Scriptogr.am Header: Control + Shift + G</li>
 <li>Shift Line Left: Select lines, Cmd + [</li>
 <li>Shift Line Right: Select lines, Cmd + ]</li>
@@ -377,8 +434,7 @@ var Mou = exactlyTheAppIwant;
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Mou&quot;&gt;&lt;a href=&quot;#Mou&quot; class=&quot;headerlink&quot; title=&quot;Mou&quot;&gt;&lt;/a&gt;Mou&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://25.io/mou/Mou_128.png&quot; alt=&quot;Mou icon&quot;&gt;&lt;/p&gt;
-&lt;h2 id
+      &lt;h1 id=&quot;Mou-help中的使用方法-Markdown查询&quot;&gt;&lt;a href=&quot;#Mou-help中的使用方法-Markdown查询&quot; class=&quot;headerlink&quot; title=&quot;Mou help中的使用方法(Markdown查询)&quot;&gt;&lt;/a&gt;Mou help中的
     
     </summary>
     
@@ -1380,64 +1436,6 @@ UIView .commitAnimations()
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>setNeedsUpdateConstraints 和 updateConstraintsIfNeeded</title>
-    <link href="http://yoursite.com/2015/08/11/layoutIfNeeded-%E5%92%8C-layoutSubviews/"/>
-    <id>http://yoursite.com/2015/08/11/layoutIfNeeded-和-layoutSubviews/</id>
-    <published>2015-08-11T09:47:47.000Z</published>
-    <updated>2016-10-10T14:07:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded"><a href="#关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded" class="headerlink" title="关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded"></a>关于setNeedsUpdateConstraints 和 updateConstraintsIfNeeded</h3><p>之前有一段时间,我都把所有的布局都写在layoutSubviews里面,但是却不知道和直接写在init里面有什么区别,后面我看了一个dome,里面还含有了updateConstraintsIfNeeded和setNeedsUpdateConstraints两个方法,很好奇到底这些方法是什么时机调用了</p>
-<h4 id="查了一下文档-先对layoutIfNeeded进行一个解释吧"><a href="#查了一下文档-先对layoutIfNeeded进行一个解释吧" class="headerlink" title="查了一下文档,先对layoutIfNeeded进行一个解释吧!"></a>查了一下文档,先对layoutIfNeeded进行一个解释吧!</h4><ul>
-<li>1、init初始化不会触发layoutSubviews   但是是用initWithFrame 进行初始化时，当rect的值不为CGRectZero时,也会触发</li>
-<li>2、addSubview会触发layoutSubviews</li>
-<li>3、设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</li>
-<li>4、滚动一个UIScrollView会触发layoutSubviews</li>
-<li>5、旋转Screen会触发父UIView上的layoutSubviews事件</li>
-<li>6、改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件</li>
-</ul>
-<h4 id="在官方文档上-对于setNeedsUpdateConstraints的解释是"><a href="#在官方文档上-对于setNeedsUpdateConstraints的解释是" class="headerlink" title="在官方文档上,对于setNeedsUpdateConstraints的解释是:"></a>在官方文档上,对于setNeedsUpdateConstraints的解释是:</h4><pre><code>当你的自定义视图的属性发生变化将会影响约束,此时可以调用这个方法表明,约束需要更新在将来的某个时候。然后系统会调用updateConstraints()作为其正常布局的一部分通过。用这个作为优化工具批量约束变化。更新限制一次性前需要确保您不必重新计算约束当多个更改视图之间的布局。
-</code></pre><h4 id="对于updateConstraintsIfNeeded这个方法-则是"><a href="#对于updateConstraintsIfNeeded这个方法-则是" class="headerlink" title="对于updateConstraintsIfNeeded这个方法,则是:"></a>对于updateConstraintsIfNeeded这个方法,则是:</h4><pre><code>每当一个新布局通过触发视图,系统调用这个方法来确保任何约束为视图和它的子视图更新的信息从当前视图层次及其约束。由系统自动调用此方法,但可能是手动调用如果你需要检查最新的约束。子类不应重写此方法。
-</code></pre><h4 id="关于UIView的Layer，IOS提供了三个方法："><a href="#关于UIView的Layer，IOS提供了三个方法：" class="headerlink" title="关于UIView的Layer，IOS提供了三个方法："></a>关于UIView的Layer，IOS提供了三个方法：</h4><ol>
-<li><p><code>layoutSubviews</code></p>
-<p>在iOS5.1和之前的版本，此方法的缺省实现不会做任何事情(实现为空)，iOS5.1之后(iOS6开始)的版本，此方法的缺省实现是使用你设置在此view上面的constraints(Autolayout)去决定subviews的position和size。 UIView的子类如果需要对其subviews进行更精确的布局，则可以重写此方法。只有在autoresizing和constraint-based behaviors of subviews不能提供我们想要的布局结果的时候，我们才应该重写此方法。可以在此方法中直接设置subviews的frame。 我们不应该直接调用此方法，而应当用下面两个方法。</p>
-</li>
-<li><p><code>setNeedsLayout</code></p>
-<p>此方法会将view当前的layout设置为无效的，并在下一个upadte cycle里去触发layout更新。</p>
-</li>
-<li><p><code>layoutIfNeeded</code></p>
-<p>使用此方法强制立即进行layout,从当前view开始，此方法会遍历整个view层次(包括superviews)请求layout。因此，调用此方法会强制整个view层次布局。</p>
-</li>
-</ol>
-<h4 id="基于约束的AutoLayer的方法："><a href="#基于约束的AutoLayer的方法：" class="headerlink" title="基于约束的AutoLayer的方法："></a>基于约束的AutoLayer的方法：</h4><ol>
-<li><p><code>setNeedsUpdateConstraints</code></p>
-<p>当一个自定义view的某个属性发生改变，并且可能影响到constraint时，需要调用此方法去标记constraints需要在未来的某个点更新，系统然后调用updateConstraints.</p>
-</li>
-<li><p><code>needsUpdateConstraints</code></p>
-<p>constraint-based layout system使用此返回值去决定是否需要调用updateConstraints作为正常布局过程的一部分。</p>
-</li>
-<li><p><code>updateConstraintsIfNeeded</code></p>
-<p>立即触发约束更新，自动更新布局。</p>
-</li>
-<li><p><code>updateConstraints</code></p>
-<p>自定义view应该重写此方法在其中建立constraints. 注意：要在实现在最后调用[super updateConstraints]</p>
-<p>下面一张经典的图是来自stackoverflow,图已经比较明白的显示了整个流程,不再作过多的解释.</p>
-</li>
-</ol>
-<p><img src="http://i.stack.imgur.com/i9YuN.png" alt="layout image"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded&quot;&gt;&lt;a href=&quot;#关于setNeedsUpdateConstraints-和-updateConstraintsIfNeeded&quot; class=&quot;h
-    
-    </summary>
-    
-    
-      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
     
   </entry>
   

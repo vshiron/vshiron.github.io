@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="shiron" type="application/atom+xml" />
 
 
 
@@ -87,11 +87,11 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="shiron">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="shiron">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="shiron">
 
 
 
@@ -115,7 +115,7 @@
   <link rel="canonical" href="http://yoursite.com/"/>
 
 
-  <title> Hexo </title>
+  <title> shiron </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="">
@@ -148,7 +148,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Hexo</span>
+      <span class="site-title">shiron</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -175,7 +175,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -185,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -238,6 +238,213 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/17/Controller间的自定义过渡效果/" itemprop="url">
+                  Controller间的自定义过渡效果
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-17T18:58:48+08:00" content="2016-10-17">
+              2016-10-17
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处<a href="http://liuyanwei.jumppo.com/index.html" target="_blank" rel="external">阅读原文</a>)</strong></p>
+<p>下面继续对老师文章中<controller间的自定义过渡效果>进行学习~</controller间的自定义过渡效果></p>
+<blockquote>
+<p>本篇文章主要讲的就是在学习了UIView的基础上,如何在学习UIViewController的自定义效果</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/15/新建React-Native报错解决办法/" itemprop="url">
+                  新建React-Native报错解决办法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-15T15:59:44+08:00" content="2016-10-15">
+              2016-10-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="新建React-Native报错解决办法"><a href="#新建React-Native报错解决办法" class="headerlink" title="新建React-Native报错解决办法"></a>新建React-Native报错解决办法</h3><p>我在新建了一个项目的时候出现了如下错误,找了很多地方都没有正常解决:看上去是在描述没有使用正确的reactNative的框架导致的,但是按它的说明修改了框架也是无法继续正常运行,错误代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[error][tid:com.facebook.react.JavaScript] Seems you&apos;re trying to access &apos;ReactNative.createClass&apos; from the &apos;react-native&apos; package. Perhaps you meant to access &apos;React.createClass&apos; from the &apos;react&apos; package instead?</div><div class="line"></div><div class="line">For example, instead of:</div><div class="line"></div><div class="line">  import React, &#123; Component, View &#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">You should now do:</div><div class="line"></div><div class="line">  import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">  import &#123; View &#125; from &apos;react-native&apos;;</div></pre></td></tr></table></figure>
+<p>提示的内容就是告诉我们需要把Component,React等从包 react 中引入,不能再从 react-native 中引入。</p>
+<p>如果要更新引入，基本上要修改所有的文件，还好我们从 更新说明 中可以看到有工具来做这个事情。</p>
+<p>提示的内容就是告诉我们需要把Component,React等从包react中引入,不能再从<code>react-native</code>中引入。<br>如果要更新引入，基本上要修改所有的文件，还好我们从更新说明中可以看到有工具来做这个事情。<br><code>codemod-RN24-to-RN25</code>是一个升级项目文件支持<code>React Native 25</code>的工具，更改文件的import，让需要引入react的文件能够正确的import。</p>
+<p>使用方法:</p>
+<ol>
+<li>安装jscodeshift<br><br><br>npm install -g jscodeshift</li>
+<li><p>clone项目<br><br>git clone git@github.com:sibeliusseraphini/codemod-RN24-to-RN25.git</p>
+</li>
+<li><p>copy transform.js<br><br>cd codemod-RN24-to-RN25<br><br>cp transform.js <code>YOUR_PROJECT_PATH</code></p>
+</li>
+<li><p>运行命令转换文件<br><br>cd <code>YOUR_PROJECT_PATH</code><br><br>jscodeshift transform.js</p>
+</li>
+</ol>
+<p>等待运行完成之后可以看到React以及Component等都能被正确的引用到react包下。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/14/UIView动画和CoreAnimation学习/" itemprop="url">
                   UIView动画和CoreAnimation学习
                 </a>
@@ -251,7 +458,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-14T11:34:51+08:00" content="2016-10-14">
               2016-10-14
             </time>
@@ -388,7 +595,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-13T23:34:54+08:00" content="2016-10-13">
               2016-10-13
             </time>
@@ -487,7 +694,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-11T13:32:33+08:00" content="2016-10-11">
               2016-10-11
             </time>
@@ -644,7 +851,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-10T23:40:53+08:00" content="2016-10-10">
               2016-10-10
             </time>
@@ -675,15 +882,15 @@
       
         
           
-            <h1 id="Mou"><a href="#Mou" class="headerlink" title="Mou"></a>Mou</h1><p><img src="http://25.io/mou/Mou_128.png" alt="Mou icon"></p>
+            <h1 id="Mou-help中的使用方法-Markdown查询"><a href="#Mou-help中的使用方法-Markdown查询" class="headerlink" title="Mou help中的使用方法(Markdown查询)"></a>Mou help中的使用方法(Markdown查询)</h1><p><img src="http://25.io/mou/Mou_128.png" alt="Mou icon"></p>
 <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><strong>Mou</strong>, the missing Markdown editor for <em>web developers</em>.</p>
-<h3 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h3><h4 id="Strong-and-Emphasize"><a href="#Strong-and-Emphasize" class="headerlink" title="Strong and Emphasize"></a>Strong and Emphasize</h4><p><strong>strong</strong> or <strong>strong</strong> ( Cmd + B )</p>
-<p><em>emphasize</em> or <em>emphasize</em> ( Cmd + I )</p>
+<h3 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h3><h4 id="加粗-和-强调"><a href="#加粗-和-强调" class="headerlink" title="加粗 和 强调"></a>加粗 和 强调</h4><p><strong>加粗</strong> or <strong>加粗</strong> ( Cmd + B )</p>
+<p><em>斜线强调</em> or <em>斜线强调</em> ( Cmd + I )</p>
 <p><strong>Sometimes I want a lot of text to be bold.<br>Like, seriously, a <em>LOT</em> of text</strong></p>
 <h4 id="Blockquotes"><a href="#Blockquotes" class="headerlink" title="Blockquotes"></a>Blockquotes</h4><blockquote>
 <p>Right angle brackets &gt; are used for block quotes.</p>
 </blockquote>
-<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;</a> link.</p>
+<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#x65;&#64;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#x65;&#64;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a> link.</p>
 <p>Simple inline link <a href="http://chenluois.com" target="_blank" rel="external">http://chenluois.com</a>, another inline link <a href="http://25.io/smaller/" target="_blank" rel="external">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension" target="_blank" rel="external">Resize</a>.</p>
 <p>A <a href="http://25.io/mou/" title="Markdown editor on Mac OS X" target="_blank" rel="external">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
 <p>Titles ( or called tool tips ) in the links are optional.</p>
@@ -808,7 +1015,7 @@ var Mou = exactlyTheAppIwant;
 <li>行内嵌套代码 : 选择文字后 , Cmd + K</li>
 <li>删除线，加删除线 : 选择文字后 , Cmd + U</li>
 <li>链接到某网址: 选择文字后, Control + Shift + L</li>
-<li>Image: Select text, Control + Shift + I</li>
+<li>将图片链接到: select text, control + shift + i</li>
 <li>Select Word: Control + Option + W</li>
 <li>Select Line: Shift + Cmd + L</li>
 <li>Select All: Cmd + A</li>
@@ -818,20 +1025,20 @@ var Mou = exactlyTheAppIwant;
 <li>首字母大写: Select text, Control + Option + U</li>
 <li>Convert to List: Select lines, Control + L</li>
 <li>Convert to Blockquote: Select lines, Control + Q</li>
-<li>Convert to H1: Cmd + 1</li>
-<li>Convert to H2: Cmd + 2</li>
-<li>Convert to H3: Cmd + 3</li>
-<li>Convert to H4: Cmd + 4</li>
-<li>Convert to H5: Cmd + 5</li>
-<li>Convert to H6: Cmd + 6</li>
-<li>Convert Spaces to Tabs: Control + [</li>
-<li>Convert Tabs to Spaces: Control + ]</li>
-<li>Insert Current Date: Control + Shift + 1</li>
-<li>Insert Current Time: Control + Shift + 2</li>
-<li>Insert entity &lt;: Control + Shift + ,</li>
-<li>Insert entity &gt;: Control + Shift + .</li>
-<li>Insert entity &amp;: Control + Shift + 7</li>
-<li>Insert entity Space: Control + Shift + Space</li>
+<li>转化为该字体大小 H1: Cmd + 1</li>
+<li>转化为该字体大小 H2: Cmd + 2</li>
+<li>转化为该字体大小 H3: Cmd + 3</li>
+<li>转化为该字体大小 H4: Cmd + 4</li>
+<li>转化为该字体大小 H5: Cmd + 5</li>
+<li>转化为该字体大小 H6: Cmd + 6</li>
+<li>转换 空格 成功 tabs: Control + [</li>
+<li>转换 tabs 成为 空格: Control + ]</li>
+<li>插入当前日期: Control + Shift + 1</li>
+<li>插入当前时间: Control + Shift + 2</li>
+<li>插入 &lt;  符号: Control + Shift + ,</li>
+<li>插入 &gt;  符号: Control + Shift + .</li>
+<li>插入 &amp;  符号: Control + Shift + 7</li>
+<li>插入 空格 符号: Control + Shift + Space</li>
 <li>Insert Scriptogr.am Header: Control + Shift + G</li>
 <li>Shift Line Left: Select lines, Cmd + [</li>
 <li>Shift Line Right: Select lines, Cmd + ]</li>
@@ -917,7 +1124,7 @@ var Mou = exactlyTheAppIwant;
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-10T23:23:20+08:00" content="2016-10-10">
               2016-10-10
             </time>
@@ -1145,7 +1352,7 @@ userCell.configureWithUser(user)
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-08T22:33:34+08:00" content="2016-10-08">
               2016-10-08
             </time>
@@ -1271,7 +1478,7 @@ stringsInStack.pop()//1,2,3
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-08T17:22:11+08:00" content="2016-10-08">
               2016-10-08
             </time>
@@ -1402,7 +1609,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-07T10:19:17+08:00" content="2016-10-07">
               2016-10-07
             </time>
@@ -1474,307 +1681,11 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/13/swift中懒加载的then语法/" itemprop="url">
-                  swift中懒加载的then语法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-09-13T23:19:27+08:00" content="2016-09-13">
-              2016-09-13
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>原文:<br><a href="http://mp.weixin.qq.com/s?__biz=MzI4NjAzODk0OQ==&amp;mid=2652684686&amp;idx=1&amp;sn=2adeb417aadd356fd615c6349a28e4f4&amp;chksm=f00b6f44c77ce6521a20506a99cf446792ac70b537c09d05b7ad4066aa4b8a4cfaba4bedb2af&amp;scene=0#wechat_redirect" target="_blank" rel="external">Swift：让人眼前一亮的初始化方式</a></p>
-<p>###then语法</p>
-<p>个人非常喜欢这种简介的懒加载模式,唔,不过有时候真的会觉得$0的时候,无法感应该类的属性真蛋疼. 以下是加载方式,供大家参考学习.</p>
-<pre><code>  import Foundation
-
- public protocol Then {}
-
- extension Then where Self: Any {
-         /// Makes it available to set properties with closures just after initializing.
-    ///
-    ///     let label = UILabel().then {
-    ///         $0.textAlignment = .Center
-    ///         $0.textColor = UIColor.blackColor()
-    ///         $0.text = &quot;Hello, World!&quot;
-    ///     }
-    public func then(@noescape block: inout Self -&gt; Void) -&gt; Self {
-        var copy = self
-        block(&amp;copy)
-        return copy
-    }
-     }
-
- extension Then where Self: AnyObject {
-    /// Makes it available to set properties with closures just after initializing.
-    ///
-    ///     let label = UILabel().then {
-    ///         $0.textAlignment = .Center
-    ///         $0.textColor = UIColor.blackColor()
-    ///         $0.text = &quot;Hello, World!&quot;
-    ///     }
-    public func then(@noescape block: Self -&gt; Void) -&gt; Self {
-        block(self)
-        return self
-     }
-    }
-
-extension NSObject: Then {}
-
-
-  //textFiled的常用懒加载模式
-    private lazy var textFiled : UITextField={
-        let textFiled = UITextField()
-        textFiled.placeholder = &quot;请输入文字&quot;
-        return textFiled
-    }()
-
-  //在尾随闭包中实例化了UILabel时的写法
-     lazy var label : UILabel={
-
-        $0.text = &quot;我是占位文字,textFiled改变时我也会改变&quot;
-        $0.font = UIFont.systemFontOfSize(16)
-
-        return $0
-    }(UILabel())
-
-
-//文章开始时给出的then代码段,使得初始化更简洁
- let label = UILabel().then {
-      $0.textAlignment = .Center
-      $0.textColor = .blackColor()
-      $0.text = &quot;Hello, World!&quot;
-    }
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/10/Java基础学习汇总/" itemprop="url">
-                  Java基础学习汇总
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-09-10T23:31:12+08:00" content="2016-09-10">
-              2016-09-10
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Java基础学习汇总</p>
-<p>###多线程</p>
-<ul>
-<li>了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.<h3 id="多线程的实现方法有两种"><a href="#多线程的实现方法有两种" class="headerlink" title="多线程的实现方法有两种"></a>多线程的实现方法有两种</h3></li>
-<li><p>1.继承Thread</p>
-<ul>
-<li>定义类继承Thread</li>
-<li>重写run方法</li>
-<li>把新线程要做的内容写在run方法中</li>
-<li>创建类的对象</li>
-<li>执行start方法</li>
-<li>注意:匿名内部类和普通类方式非常相似</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class Test &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">	//1.普通定义一个新的类来创建</div><div class="line">	Person p = new Person();</div><div class="line">	p.start();</div><div class="line">	//1.普通定义一个匿名类来创建</div><div class="line">	new Thread()&#123;</div><div class="line">		public void run()&#123;</div><div class="line">			System.out.println(&quot;Thread多线程启动(匿名内	部类)&quot;);</div><div class="line">			&#125;</div><div class="line">		&#125;.start();	</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//Thread方式</div><div class="line">class Person extends Thread &#123;</div><div class="line">	public void run()&#123;</div><div class="line">	System.out.println(&quot;Thread多线程启动,继承方式&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>2.实现接口Runnable(Thread构造函数中传递了runnable的引用,通过init()方法传递target,用于判断是否执行run()方法)</p>
-<ul>
-<li>定义类实现Runnable</li>
-<li>实现run方法</li>
-<li>把操作写在run中</li>
-<li>创建Thread对象,传入runnable</li>
-<li>调用Runnable的start方法</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">public class Test &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">//1.普通类实现了runnable接口来实现调用里面的run方法</div><div class="line">Student s = new Student();</div><div class="line">Thread t = new Thread(s);</div><div class="line">t.start();</div><div class="line">//2.匿名类来实现runnable接口</div><div class="line">new Thread(new Runnable() &#123;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		System.out.println(&quot;匿名内部类Runnable多线程启动方法&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;).start();	</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">class Student implements Runnable&#123;</div><div class="line">@Override</div><div class="line">public void run() &#123;</div><div class="line">System.out.println(&quot;Runnable多线程启动方法,继承方式&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>###两种线程的区别</p>
-<ul>
-<li>继承Thread<ul>
-<li>好处:可以直接使用Thread类中的方法,代码简单</li>
-<li>弊端:如果已经有父类,就不能用这种方式</li>
-</ul>
-</li>
-<li>实现Runnable<ul>
-<li>好处:可以有父类,直接只是实现接口</li>
-<li>弊端:间接把对象作为构造方法的参数传递进去,较为复杂,但自由度较大</li>
-</ul>
-</li>
-</ul>
-<h3 id="线程中其他操作"><a href="#线程中其他操作" class="headerlink" title="线程中其他操作"></a>线程中其他操作</h3><ul>
-<li>通过getName()可以获得当前线程的名字</li>
-<li>通过setName(String)可以设置线程名字</li>
-<li>Thread.currentThread()可以获得当前线程对象,获得对象后可以对其进行操作(改名,获得名字)</li>
-<li>Thread.sleep(毫秒),类方法调用,可以使得当前线程休眠</li>
-<li>setPriority()设置线程的优先级</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1815,8 +1726,8 @@ extension NSObject: Then {}
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
@@ -1826,7 +1737,7 @@ extension NSObject: Then {}
             <div class="site-state-item site-state-tags">
               <a href="/tags">
                 <span class="site-state-item-count">2</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           
@@ -1877,7 +1788,7 @@ extension NSObject: Then {}
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
