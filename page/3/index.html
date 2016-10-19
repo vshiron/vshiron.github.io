@@ -248,6 +248,345 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/19/IOS-关闭键盘-退出键盘-的5种方式/" itemprop="url">
+                  IOS 关闭键盘 退出键盘 的5种方式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-19T17:47:18+08:00" content="2015-12-19">
+              2015-12-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="IOS-关闭键盘-退出键盘-的5种方式主要有以下几种形式"><a href="#IOS-关闭键盘-退出键盘-的5种方式主要有以下几种形式" class="headerlink" title="IOS 关闭键盘 退出键盘 的5种方式主要有以下几种形式:"></a>IOS 关闭键盘 退出键盘 的5种方式主要有以下几种形式:</h3><hr>
+<h4 id="1、点击编辑区以外的地方（UIView）"><a href="#1、点击编辑区以外的地方（UIView）" class="headerlink" title="1、点击编辑区以外的地方（UIView）"></a>1、点击编辑区以外的地方（UIView）</h4><h4 id="2、点击编辑区域以外的地方（UIControl）"><a href="#2、点击编辑区域以外的地方（UIControl）" class="headerlink" title="2、点击编辑区域以外的地方（UIControl）"></a>2、点击编辑区域以外的地方（UIControl）</h4><h4 id="3、使用制作收起键盘的按钮"><a href="#3、使用制作收起键盘的按钮" class="headerlink" title="3、使用制作收起键盘的按钮"></a>3、使用制作收起键盘的按钮</h4><h4 id="4、使用判断输入字元"><a href="#4、使用判断输入字元" class="headerlink" title="4、使用判断输入字元"></a>4、使用判断输入字元</h4><h4 id="5、关于键盘遮蔽的问题"><a href="#5、关于键盘遮蔽的问题" class="headerlink" title="5、关于键盘遮蔽的问题"></a>5、关于键盘遮蔽的问题</h4><h4 id="1-点击编辑区以外的地方（UIView）"><a href="#1-点击编辑区以外的地方（UIView）" class="headerlink" title="1.点击编辑区以外的地方（UIView）"></a>1.点击编辑区以外的地方（UIView）</h4><p>这是一种很直觉的方法，当不再需要使用虚拟键盘时，只要点击虚拟键盘和编辑区域外的地方，就可以将键盘收起，下面程式码是在 UIView 中内建的触碰事件方法函式，您可以参考 Touch Panel / 触碰萤幕 / 压力感应器的基本使用方式一文，找到更多关于触碰事件的方法函式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event &#123;</div><div class="line">    if (![myTextView isExclusiveTouch]) &#123;</div><div class="line">        [myTextView resignFirstResponder];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果要使用此方式请务必记得，你操作画面的 Custom Class 一定要是 UIView 才行。</p>
+<p>画面的 Custom Class 为 UIView</p>
+<h4 id="2-点击编辑区域以外的地方（UIControl）"><a href="#2-点击编辑区域以外的地方（UIControl）" class="headerlink" title="2.点击编辑区域以外的地方（UIControl）"></a>2.点击编辑区域以外的地方（UIControl）</h4><p>收起虚拟键盘的方式与前一种相同，但是如果你的触碰事件里已经且写满了程式码，那么就可以考虑使用，UIControl 的 Touch Up Inside 事件来收起键盘，方法是将以下程式码与 UIControl 的 Touch Up Inside 事件连结即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (IBAction)dismissKeyboard:(id)sender &#123;</div><div class="line">    [myTextView resignFirstResponder];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 如果要使用此方式请务必记得，你操作画面的 Custom Class 一定要是 UIControl 才行。<br> 画面的 Custom Class 为 UIControl</p>
+<p> 将收起键盘的方法与 UIControl 事件连结</p>
+<h4 id="3-使用制作收起键盘的按钮"><a href="#3-使用制作收起键盘的按钮" class="headerlink" title="3.使用制作收起键盘的按钮"></a>3.使用制作收起键盘的按钮</h4><p>当没有编辑区域以外的地方可供点击来收起键盘，自己制作一个按钮来收起目前的虚拟键盘，也是一个不错的方法，由于按钮必须在虚拟键盘出现才能显示于画面上，因此必须借用 NSNotificationCenter 来帮助我们判断目前键盘的状态。</p>
+<p>首先在 viewDidLoad: 事件中，向 NSNotificationCenter 进行註册，告诉 NSNotificationCenter 我们的 doneButtonshow: 方法函式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">   [super viewDidLoad];</div><div class="line">   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector (doneButtonshow:) name: UIKeyboardDidShowNotification object:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在每当虚拟键盘出现时，就会自动呼叫我们自定义的 doneButtonshow: 方法函式，接下来只要在该方法函式里定义按钮出现的方法即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-(void) doneButtonshow: (NSNotification *)notification &#123;</div><div class="line">   doneButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];</div><div class="line">   doneButton.frame = CGRectMake(0, 228, 70, 35);</div><div class="line">   [doneButton setTitle:@&quot;完成编辑&quot; forState: UIControlStateNormal];</div><div class="line">   [doneButton addTarget: self action:@selector(hideKeyboard) forControlEvents: UIControlEventTouchUpInside];</div><div class="line"></div><div class="line">   [self.view addSubview:doneButton];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后是实作按钮按下去时的 hideKeyboard: 方法函式，务必记得要在函式中移除该按钮。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-(void) hideKeyboard &#123;</div><div class="line">   [doneButton removeFromSuperview];</div><div class="line">   [myTextView resignFirstResponder];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="4-使用判断输入字元"><a href="#4-使用判断输入字元" class="headerlink" title="4.使用判断输入字元"></a>4.使用判断输入字元</h4><p>如果要使用输入特定字元（例如 return 换行字元）来收起键盘，必须先在类别内的 @interface 区段採用  协定，您可以参考 Protocol 协定的使用方式一文，获得更多关于协定的资讯。<br>在采用  协定之后，接着实作出协定内的 textView:shouldChangeTextInRange:replacementText:方法函式，此方法函式会在字元输入时触发，而回传的 BOOL 值则代表该字元是否要作用，下列程式码就是在此方法函式中，使用判断输入字元的方式来收起虚拟键盘（判断字元为 return 换行字元）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text &#123;</div><div class="line">    if ([text isEqualToString:@&quot;\n&quot;]) &#123;</div><div class="line">        [myTextView resignFirstResponder];</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后别忘记在 viewDidLoad: 事件中，将 UITextView 的代理物件指向自己，这样程式才能正确找到实作  协定方法函式的类别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad  &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    myTextView.delegate = self;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="5-关于键盘遮蔽的问题"><a href="#5-关于键盘遮蔽的问题" class="headerlink" title="5.关于键盘遮蔽的问题"></a>5.关于键盘遮蔽的问题</h4><p>如果您在实作上有遭遇到键盘遮蔽编辑区域的问题，可以参考使用 Animation 解决小键盘挡住 UITextField 的问题一文，透过 Core Graphic 的 Animation 功能，在键盘出现时同时移动编辑区域来解决遮蔽的问题。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/18/swift中闭包和OC的block的对比/" itemprop="url">
+                  swift中闭包和OC的block的对比
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-18T10:56:09+08:00" content="2015-12-18">
+              2015-12-18
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>swift中的block</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line">    override func viewDidLoad() &#123;</div><div class="line"></div><div class="line">        super.viewDidLoad()</div><div class="line"></div><div class="line">        // Do any additional setup after loading the view, typically from a nib.</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        //swift中函数调用时候第一个参数可以省略</div><div class="line"></div><div class="line">    //        print(sum(10, y: 20))</div><div class="line"></div><div class="line">    //        print(sum2(num1: 10, num2: 21))</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        //demo2()</div><div class="line"></div><div class="line">        //demo3()</div><div class="line"></div><div class="line">        //demo4()</div><div class="line"></div><div class="line">        demo5()</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //函数</div><div class="line"></div><div class="line">    func sum(x:Int, y:Int) -&gt;Int &#123;</div><div class="line"></div><div class="line">        return x + y</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //外部参数 不会影响函数内部代码的执行  方便阅读</div><div class="line"></div><div class="line">    //外部参数在闭包中很重要  </div><div class="line"></div><div class="line">    //没有返回值的情况</div><div class="line"></div><div class="line">    //1.什么都不写   2.Void     3,.()</div><div class="line"></div><div class="line">    func sum2(num1 x:Int, num2 y:Int) -&gt; Int &#123;</div><div class="line"></div><div class="line">        return x + y</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //MARK:-闭包的定义</div><div class="line"></div><div class="line">    //先看block，一组预先准备好的代码 在需要的时候执行 可以当参数传递 出现self注意循环引用</div><div class="line"></div><div class="line">    //在swift中 函数本身就可以做参数传递</div><div class="line"></div><div class="line">    //函数作为参数的例子</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //定义闭包</div><div class="line"></div><div class="line"> /// 闭包的所有代码［参数 返回值 执行代码］都放在｛｝中</div><div class="line"></div><div class="line"> //in  是用来区分函数定义和执行代码</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    func demo2() &#123;</div><div class="line"></div><div class="line">        let sumFunc = &#123; (num1 x:Int, num2 y: Int) -&gt; Int</div><div class="line"></div><div class="line">            in</div><div class="line"></div><div class="line">            return x + y</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    //     print(sumFunc(2,3))</div><div class="line"></div><div class="line">    print(sumFunc (num1: 1, num2: 2))</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //闭包的格式</div><div class="line"></div><div class="line">    //｛（外部参数  形参列表 -&gt; 返回值 in ／／ 代码执行｝</div><div class="line"></div><div class="line">    //    简单的闭包 没有参数和返回值 和in</div><div class="line"></div><div class="line">    func demo3() &#123;</div><div class="line"></div><div class="line">        let  demo = &#123;</div><div class="line"></div><div class="line">            print(&quot;hello&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        demo()</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //MARK:-闭包的演练</div><div class="line"></div><div class="line">    func demo4() &#123;</div><div class="line"></div><div class="line">    //block 从使用场景 －－通常在异步加载网络数据 完成回调</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        func loadData(finish:()-&gt;()) &#123;</div><div class="line"></div><div class="line">            dispatch_async(dispatch_get_global_queue(0, 0)) &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                print(&quot;耗时操作\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                //里面通常加载数据</div><div class="line"></div><div class="line">                dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                    print(&quot;完成\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                    //执行finish回调</div><div class="line"></div><div class="line">                    finish()</div><div class="line"></div><div class="line">                &#125;)</div><div class="line"></div><div class="line">              </div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        loadData &#123; () -&gt; () in</div><div class="line"></div><div class="line">            print(&quot;回调的代码&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">     </div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    func demo5() &#123;</div><div class="line"></div><div class="line">        //blcok的使用场景 －-有参数的传递</div><div class="line"></div><div class="line">        func loaddata(finished:(html:String)-&gt;()) &#123;</div><div class="line"></div><div class="line">            dispatch_async(dispatch_get_global_queue(0, 0)) &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                print(&quot;耗时操作\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                //里面加载数据</div><div class="line"></div><div class="line">                dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                    print(&quot;完成\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                    finished(html: &quot;&lt;html&gt;&lt;html&gt;&quot;)</div><div class="line"></div><div class="line">                &#125;)</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        loaddata &#123; (string) -&gt; () in</div><div class="line"></div><div class="line">            print(&quot;完成回调代码&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> </div><div class="line">OC中的block的</div></pre></td></tr></table></figure>
+<pre><code> - (void)viewDidLoad {
+
+   [super viewDidLoad];
+
+// Do any additional setup after loading the view.
+
+   [self laodData:^(NSString *html) {
+
+    NSLog(@&quot;回调代码 %@&quot;,html);
+
+   }];
+
+}
+
+
+
+-(void)laodData:(void (^)(NSString *html)) finished {
+
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+
+    NSLog(@&quot;耗时操作&quot;);
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        NSLog(@&quot;准备主线陈的回调&quot;);
+
+        finished(@&quot;&lt;html&gt;&quot;);
+
+    });
+
+  });
+
+}
+</code></pre><p>```</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/13/swift中动态获得类型/" itemprop="url">
+                  swift中动态获得类型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-13T20:29:53+08:00" content="2015-12-13">
+              2015-12-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>在100个swift 的tips中无意中看到一直不懂的如何动态获得swift中类的类型。</strong><br>原来在swift中有一个关键字是可以动态获得类的类型的：dynamicType。<br>借用书上的例子就是使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let date = NSDate()</div><div class="line">let nameType: AnyClass! = object_getClass(date)</div><div class="line">print(nameType)获得</div><div class="line"></div><div class="line">let data = NSData()</div><div class="line">let nameType = data.dynamicType</div><div class="line">print(nameType)获得</div></pre></td></tr></table></figure>
+<p>swift中的类型如String也一样可以使用，另外我还发现原来在swift中即使没有导入runtime的头文件，也可以直接调用runtime.h的类方法。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/11/30/Mou的使用/" itemprop="url">
                   Mou的使用
                 </a>
@@ -300,7 +639,7 @@
 <h4 id="Blockquotes"><a href="#Blockquotes" class="headerlink" title="Blockquotes"></a>Blockquotes</h4><blockquote>
 <p>Right angle brackets &gt; are used for block quotes.</p>
 </blockquote>
-<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#101;&#x78;&#97;&#109;&#112;&#x6c;&#101;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;">&#101;&#x78;&#97;&#109;&#112;&#x6c;&#101;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;</a> link.</p>
+<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#109;">&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#109;</a> link.</p>
 <p>Simple inline link <a href="http://chenluois.com" target="_blank" rel="external">http://chenluois.com</a>, another inline link <a href="http://25.io/smaller/" target="_blank" rel="external">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension" target="_blank" rel="external">Resize</a>.</p>
 <p>A <a href="http://25.io/mou/" title="Markdown editor on Mac OS X" target="_blank" rel="external">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
 <p>Titles ( or called tool tips ) in the links are optional.</p>
@@ -1029,7 +1368,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1039,7 +1378,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

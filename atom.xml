@@ -224,11 +224,10 @@ stringsInStack.pop()//1,2,3
     <link href="http://yoursite.com/2016/09/13/swift%E4%B8%AD%E6%87%92%E5%8A%A0%E8%BD%BD%E7%9A%84then%E8%AF%AD%E6%B3%95/"/>
     <id>http://yoursite.com/2016/09/13/swift中懒加载的then语法/</id>
     <published>2016-09-13T15:19:27.000Z</published>
-    <updated>2016-10-17T11:55:40.000Z</updated>
+    <updated>2016-10-19T09:44:04.000Z</updated>
     
     <content type="html"><![CDATA[<p>原文:<br><a href="http://mp.weixin.qq.com/s?__biz=MzI4NjAzODk0OQ==&amp;mid=2652684686&amp;idx=1&amp;sn=2adeb417aadd356fd615c6349a28e4f4&amp;chksm=f00b6f44c77ce6521a20506a99cf446792ac70b537c09d05b7ad4066aa4b8a4cfaba4bedb2af&amp;scene=0#wechat_redirect" target="_blank" rel="external">Swift：让人眼前一亮的初始化方式</a></p>
-<p>###then语法</p>
-<p>个人非常喜欢这种简介的懒加载模式,唔,不过有时候真的会觉得$0的时候,无法感应该类的属性真蛋疼. 以下是加载方式,供大家参考学习.</p>
+<h3 id="then语法"><a href="#then语法" class="headerlink" title="then语法"></a>then语法</h3><p>个人非常喜欢这种简介的懒加载模式,唔,不过有时候真的会觉得$0的时候,无法感应该类的属性真蛋疼. 以下是加载方式,供大家参考学习.</p>
 <pre><code>  import Foundation
 
  public protocol Then {}
@@ -306,11 +305,9 @@ extension NSObject: Then {}
     <link href="http://yoursite.com/2016/09/10/Java%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E6%B1%87%E6%80%BB/"/>
     <id>http://yoursite.com/2016/09/10/Java基础学习汇总/</id>
     <published>2016-09-10T15:31:12.000Z</published>
-    <updated>2016-10-17T11:53:33.000Z</updated>
+    <updated>2016-10-19T09:44:19.000Z</updated>
     
-    <content type="html"><![CDATA[<p>##Java基础学习汇总</p>
-<p>###多线程</p>
-<ul>
+    <content type="html"><![CDATA[<h2 id="Java基础学习汇总"><a href="#Java基础学习汇总" class="headerlink" title="Java基础学习汇总"></a>Java基础学习汇总</h2><h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><ul>
 <li>了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.<h3 id="多线程的实现方法有两种"><a href="#多线程的实现方法有两种" class="headerlink" title="多线程的实现方法有两种"></a>多线程的实现方法有两种</h3></li>
 <li><p>1.继承Thread</p>
 <ul>
@@ -336,8 +333,7 @@ extension NSObject: Then {}
 </ul>
 </li>
 </ul>
-<p>###两种线程的区别</p>
-<ul>
+<h3 id="两种线程的区别"><a href="#两种线程的区别" class="headerlink" title="两种线程的区别"></a>两种线程的区别</h3><ul>
 <li>继承Thread<ul>
 <li>好处:可以直接使用Thread类中的方法,代码简单</li>
 <li>弊端:如果已经有父类,就不能用这种方式</li>
@@ -360,10 +356,7 @@ extension NSObject: Then {}
     
     <summary type="html">
     
-      &lt;p&gt;##Java基础学习汇总&lt;/p&gt;
-&lt;p&gt;###多线程&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时
+      &lt;h2 id=&quot;Java基础学习汇总&quot;&gt;&lt;a href=&quot;#Java基础学习汇总&quot; class=&quot;headerlink&quot; title=&quot;Java基础学习汇总&quot;&gt;&lt;/a&gt;Java基础学习汇总&lt;/h2&gt;&lt;h3 id=&quot;多线程&quot;&gt;&lt;a href=&quot;#多线程&quot; class=&quot;header
     
     </summary>
     
@@ -678,6 +671,33 @@ userCell.configureWithUser(user)
     
     
       <category term="oc" scheme="http://yoursite.com/tags/oc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>哪部电影曾经让你在深夜中痛哭？</title>
+    <link href="http://yoursite.com/2016/05/19/%E5%93%AA%E9%83%A8%E7%94%B5%E5%BD%B1%E6%9B%BE%E7%BB%8F%E8%AE%A9%E4%BD%A0%E5%9C%A8%E6%B7%B1%E5%A4%9C%E4%B8%AD%E7%97%9B%E5%93%AD%EF%BC%9F/"/>
+    <id>http://yoursite.com/2016/05/19/哪部电影曾经让你在深夜中痛哭？/</id>
+    <published>2016-05-19T09:52:04.000Z</published>
+    <updated>2016-10-19T12:36:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>点击<a href="https://www.zhihu.com/question/37206525/answer/72868899" target="_blank" rel="external">《爆裂鼓手》</a>查看原文</p>
+<p><strong>在知乎上看到这个答案非常喜欢,所以保存了下来,曾经我也以为我是很喜欢写代码的,但是看过这片文章以后才发现直接并不是那么的热爱–曾经看过一个视频问,你渴望成功?渴望的程度会想被泡在水里想要呼吸的欲望吗?</strong></p>
+<p><strong>我问了自己很久,其实我也并没有那么热爱,起码不能说像呼吸那么热爱.说真的就是会觉得编程的世界很广阔,可以让我学习到很多不同的知识和认识很多很厉害的人.正是因为认识了他们,所以我才会明白自己的不足.
+</strong></p>
+<p><strong>然后对于生活的抉择,我也在迷茫,我也不知道要往哪里走,只是希望一切能顺顺利利的.说到身在福中不知福,突然就想到小时候没有好好的享受童年,现在等到有很大工作压力的时候才来后悔啊啊,以后一定让自己的孩子好好学习,不要浪费有趣的童年.</strong></p>
+<p><strong>我本来是有很多奇奇怪怪的话要说的,但是刚刚打了一篇文章,放在了日记里面,现在不那么想说了,一份日记承载了我所以的心情,点点滴滴.回顾起来,突然想问自己,什么才叫成功,什么才叫幸福呢?我们之所以努力,不是为了过上更好的日子吗?</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;点击&lt;a href=&quot;https://www.zhihu.com/question/37206525/answer/72868899&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《爆裂鼓手》&lt;/a&gt;查看原文&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在知乎上看到这个
+    
+    </summary>
+    
+    
+      <category term="life" scheme="http://yoursite.com/tags/life/"/>
     
   </entry>
   
@@ -1254,6 +1274,48 @@ UIView .commitAnimations()
   </entry>
   
   <entry>
+    <title>（UIVibrancyEffect、 UIBlurEffect（毛玻片效果））</title>
+    <link href="http://yoursite.com/2016/01/28/%EF%BC%88UIVibrancyEffect%E3%80%81-UIBlurEffect%EF%BC%88%E6%AF%9B%E7%8E%BB%E7%89%87%E6%95%88%E6%9E%9C%EF%BC%89%EF%BC%89/"/>
+    <id>http://yoursite.com/2016/01/28/（UIVibrancyEffect、-UIBlurEffect（毛玻片效果））/</id>
+    <published>2016-01-28T09:58:29.000Z</published>
+    <updated>2016-10-19T10:03:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在iOS 8后，苹果开放了不少创建特效的接口，其中就包括创建毛玻璃(blur)的接口。</p>
+<p>通常要想创建一个特殊效果(如blur效果)，可以创建一个<strong>UIVisualEffectView</strong>视图对象，这个对象提供了一种简单的方式来实现复杂的视觉效果。这个可以把这个对象看作是效果的一个容器，实际的效果会影响到该视图对象底下的内容，或者是添加到该视图对象的<strong>contentVie</strong>w中的内容。</p>
+<p>我们举个例子来看看如果使用UIVisualEffectView：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let bgView: UIImageView = UIImageView(image: UIImage(named: &quot;visual&quot;))</div><div class="line">bgView.frame = self.view.bounds</div><div class="line">self.view.addSubview(bgView)</div><div class="line">let blurEffect: UIBlurEffect = UIBlurEffect(style: .Light)</div><div class="line">let blurView: UIVisualEffectView = UIVisualEffectView(effect: blurEffect)</div><div class="line">blurView.frame = CGRectMake(50.0, 50.0, self.view.frame.width - 100.0, 200.0)</div><div class="line">self.view.addSubview(blurView)</div></pre></td></tr></table></figure>
+<p>这段代码是在当前视图控制器上添加了一个UIImageView作为背景图。然后在视图的一小部分中使用了blur效果。</p>
+<p>我们可以看到<strong>UIVisualEffectView</strong>还是非常简单的。需要注意是的，不应该直接添加子视图到<strong>UIVisualEffectView</strong>视图中，而是应该添加到<strong>UIVisualEffectView</strong>对象的contentView中。</p>
+<p>另外，尽量避免将UIVisualEffectView对象的alpha值设置为小于1.0的值，因为创建半透明的视图会导致系统在离屏渲染时去对UIVisualEffectView对象及所有的相关的子视图做混合操作。这不但消耗CPU/GPU，也可能会导致许多效果显示不正确或者根本不显示。</p>
+<p>我们在上面看到，初始化一个UIVisualEffectView对象的方法是<code>UIVisualEffectView(effect: blurEffect)</code>，其定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">init(effect effect: UIVisualEffect)</div></pre></td></tr></table></figure>
+<p>这个方法的参数是一个UIVisualEffect对象。我们查看官方文档，可以看到在UIKit中，定义了几个专门用来创建视觉特效的，它们分别是UIVisualEffect、UIBlurEffect和UIVibrancyEffect。它们的继承层次如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSObject</div><div class="line">| -- UIVisualEffect</div><div class="line">    | -- UIBlurEffect</div><div class="line">    | -- UIVibrancyEffect</div></pre></td></tr></table></figure>
+<p>UIVisualEffect是一个继承自NSObject的创建视觉效果的基类，然而这个类除了继承自NSObject的属性和方法外，没有提供任何新的属性和方法。其主要目的是用于初始化UIVisualEffectView，在这个初始化方法中可以传入UIBlurEffect或者UIVibrancyEffect对象。</p>
+<p>一个UIBlurEffect对象用于将blur(毛玻璃)效果应用于UIVisualEffectView视图下面的内容。如上面的示例所示。不过，这个对象的效果并不影响UIVisualEffectView对象的contentView中的内容。</p>
+<p>UIBlurEffect主要定义了三种效果，这些效果由枚举UIBlurEffectStyle来确定，该枚举的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">enum UIBlurEffectStyle : Int &#123;</div><div class="line">    case ExtraLight</div><div class="line">    case Light</div><div class="line">    case Dark</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其主要是根据色调(hue)来确定特效视图与底部视图的混合。</p>
+<p>与UIBlurEffect不同的是，UIVibrancyEffect主要用于放大和调整UIVisualEffectView视图下面的内容的颜色，同时让UIVisualEffectView的contentView中的内容看起来更加生动。通常UIVibrancyEffect对象是与UIBlurEffect一起使用，主要用于处理在UIBlurEffect特效上的一些显示效果。接上面的代码，我们看看在blur的视图上添加一些新的特效，如下代码所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let vibrancyView: UIVisualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))</div><div class="line">vibrancyView.setTranslatesAutoresizingMaskIntoConstraints(false)</div><div class="line">blurView.contentView.addSubview(vibrancyView)</div><div class="line">var label: UILabel = UILabel()</div><div class="line">label.setTranslatesAutoresizingMaskIntoConstraints(false)</div><div class="line">label.text = &quot;Vibrancy Effect&quot;</div><div class="line">label.font = UIFont(name: &quot;HelveticaNeue-Bold&quot;, size: 30)</div><div class="line">label.textAlignment = .Center</div><div class="line">label.textColor = UIColor.whiteColor()</div><div class="line">vibrancyView.contentView.addSubview(label)</div></pre></td></tr></table></figure>
+<p>vibrancy特效是取决于颜色值的。所有添加到contentView的子视图都必须实现tintColorDidChange方法并更新自己。需要注意的是，我们使用<code>UIVibrancyEffect(forBlurEffect:)</code>方法创建UIVibrancyEffect时，参数blurEffect必须是我们想加效果的那个blurEffect，否则可能不是我们想要的效果。</p>
+<p>另外，UIVibrancyEffect还提供了一个类方法<code>notificationCenterVibrancyEffect</code>，其声明如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class func notificationCenterVibrancyEffect() -&gt; UIVibrancyEffect!</div></pre></td></tr></table></figure>
+<p>这个方法创建一个用于通知中心的Today扩展的vibrancy特效。</p>
+<p><strong>本文为过去学习的时候留下来的笔记,现在已经找不到原文出处,如果发现,请联系303661702</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在iOS 8后，苹果开放了不少创建特效的接口，其中就包括创建毛玻璃(blur)的接口。&lt;/p&gt;
+&lt;p&gt;通常要想创建一个特殊效果(如blur效果)，可以创建一个&lt;strong&gt;UIVisualEffectView&lt;/strong&gt;视图对象，这个对象提供了一种简单的方式来实现复
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>放肆的使用UIBezierPath和CAShapeLayer画各种图形</title>
     <link href="http://yoursite.com/2016/01/19/%E6%94%BE%E8%82%86%E7%9A%84%E4%BD%BF%E7%94%A8UIBezierPath%E5%92%8CCAShapeLayer%E7%94%BB%E5%90%84%E7%A7%8D%E5%9B%BE%E5%BD%A2/"/>
     <id>http://yoursite.com/2016/01/19/放肆的使用UIBezierPath和CAShapeLayer画各种图形/</id>
@@ -1317,87 +1379,6 @@ UIView .commitAnimations()
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>swift中闭包和OC的block的对比</title>
-    <link href="http://yoursite.com/2015/12/18/swift%E4%B8%AD%E9%97%AD%E5%8C%85%E5%92%8COC%E7%9A%84block%E7%9A%84%E5%AF%B9%E6%AF%94/"/>
-    <id>http://yoursite.com/2015/12/18/swift中闭包和OC的block的对比/</id>
-    <published>2015-12-18T02:56:09.000Z</published>
-    <updated>2016-10-18T03:05:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>swift中的block</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line">    override func viewDidLoad() &#123;</div><div class="line"></div><div class="line">        super.viewDidLoad()</div><div class="line"></div><div class="line">        // Do any additional setup after loading the view, typically from a nib.</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        //swift中函数调用时候第一个参数可以省略</div><div class="line"></div><div class="line">    //        print(sum(10, y: 20))</div><div class="line"></div><div class="line">    //        print(sum2(num1: 10, num2: 21))</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        //demo2()</div><div class="line"></div><div class="line">        //demo3()</div><div class="line"></div><div class="line">        //demo4()</div><div class="line"></div><div class="line">        demo5()</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //函数</div><div class="line"></div><div class="line">    func sum(x:Int, y:Int) -&gt;Int &#123;</div><div class="line"></div><div class="line">        return x + y</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //外部参数 不会影响函数内部代码的执行  方便阅读</div><div class="line"></div><div class="line">    //外部参数在闭包中很重要  </div><div class="line"></div><div class="line">    //没有返回值的情况</div><div class="line"></div><div class="line">    //1.什么都不写   2.Void     3,.()</div><div class="line"></div><div class="line">    func sum2(num1 x:Int, num2 y:Int) -&gt; Int &#123;</div><div class="line"></div><div class="line">        return x + y</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //MARK:-闭包的定义</div><div class="line"></div><div class="line">    //先看block，一组预先准备好的代码 在需要的时候执行 可以当参数传递 出现self注意循环引用</div><div class="line"></div><div class="line">    //在swift中 函数本身就可以做参数传递</div><div class="line"></div><div class="line">    //函数作为参数的例子</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //定义闭包</div><div class="line"></div><div class="line"> /// 闭包的所有代码［参数 返回值 执行代码］都放在｛｝中</div><div class="line"></div><div class="line"> //in  是用来区分函数定义和执行代码</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    func demo2() &#123;</div><div class="line"></div><div class="line">        let sumFunc = &#123; (num1 x:Int, num2 y: Int) -&gt; Int</div><div class="line"></div><div class="line">            in</div><div class="line"></div><div class="line">            return x + y</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    //     print(sumFunc(2,3))</div><div class="line"></div><div class="line">    print(sumFunc (num1: 1, num2: 2))</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //闭包的格式</div><div class="line"></div><div class="line">    //｛（外部参数  形参列表 -&gt; 返回值 in ／／ 代码执行｝</div><div class="line"></div><div class="line">    //    简单的闭包 没有参数和返回值 和in</div><div class="line"></div><div class="line">    func demo3() &#123;</div><div class="line"></div><div class="line">        let  demo = &#123;</div><div class="line"></div><div class="line">            print(&quot;hello&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        demo()</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //MARK:-闭包的演练</div><div class="line"></div><div class="line">    func demo4() &#123;</div><div class="line"></div><div class="line">    //block 从使用场景 －－通常在异步加载网络数据 完成回调</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        func loadData(finish:()-&gt;()) &#123;</div><div class="line"></div><div class="line">            dispatch_async(dispatch_get_global_queue(0, 0)) &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                print(&quot;耗时操作\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                //里面通常加载数据</div><div class="line"></div><div class="line">                dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                    print(&quot;完成\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                    //执行finish回调</div><div class="line"></div><div class="line">                    finish()</div><div class="line"></div><div class="line">                &#125;)</div><div class="line"></div><div class="line">              </div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        loadData &#123; () -&gt; () in</div><div class="line"></div><div class="line">            print(&quot;回调的代码&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">     </div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    func demo5() &#123;</div><div class="line"></div><div class="line">        //blcok的使用场景 －-有参数的传递</div><div class="line"></div><div class="line">        func loaddata(finished:(html:String)-&gt;()) &#123;</div><div class="line"></div><div class="line">            dispatch_async(dispatch_get_global_queue(0, 0)) &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                print(&quot;耗时操作\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                //里面加载数据</div><div class="line"></div><div class="line">                dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                    print(&quot;完成\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                    finished(html: &quot;&lt;html&gt;&lt;html&gt;&quot;)</div><div class="line"></div><div class="line">                &#125;)</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        loaddata &#123; (string) -&gt; () in</div><div class="line"></div><div class="line">            print(&quot;完成回调代码&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> </div><div class="line">OC中的block的</div></pre></td></tr></table></figure>
-<pre><code> - (void)viewDidLoad {
-
-   [super viewDidLoad];
-
-// Do any additional setup after loading the view.
-
-   [self laodData:^(NSString *html) {
-
-    NSLog(@&quot;回调代码 %@&quot;,html);
-
-   }];
-
-}
-
-
-
--(void)laodData:(void (^)(NSString *html)) finished {
-
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-
-    NSLog(@&quot;耗时操作&quot;);
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-
-        NSLog(@&quot;准备主线陈的回调&quot;);
-
-        finished(@&quot;&lt;html&gt;&quot;);
-
-    });
-
-  });
-
-}
-</code></pre><p>```</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;swift中的block&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;di
-    
-    </summary>
-    
-    
-      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>swift中动态获得类型</title>
-    <link href="http://yoursite.com/2015/12/13/swift%E4%B8%AD%E5%8A%A8%E6%80%81%E8%8E%B7%E5%BE%97%E7%B1%BB%E5%9E%8B/"/>
-    <id>http://yoursite.com/2015/12/13/swift中动态获得类型/</id>
-    <published>2015-12-13T12:29:53.000Z</published>
-    <updated>2016-10-17T12:02:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>在100个swift 的tips中无意中看到一直不懂的如何动态获得swift中类的类型。</strong><br>原来在swift中有一个关键字是可以动态获得类的类型的：dynamicType。<br>借用书上的例子就是使用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let date = NSDate()</div><div class="line">let nameType: AnyClass! = object_getClass(date)</div><div class="line">print(nameType)获得</div><div class="line"></div><div class="line">let data = NSData()</div><div class="line">let nameType = data.dynamicType</div><div class="line">print(nameType)获得</div></pre></td></tr></table></figure>
-<p>swift中的类型如String也一样可以使用，另外我还发现原来在swift中即使没有导入runtime的头文件，也可以直接调用runtime.h的类方法。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;在100个swift 的tips中无意中看到一直不懂的如何动态获得swift中类的类型。&lt;/strong&gt;&lt;br&gt;原来在swift中有一个关键字是可以动态获得类的类型的：dynamicType。&lt;br&gt;借用书上的例子就是使用：&lt;/p&gt;
-&lt;figure cla
-    
-    </summary>
-    
-    
-      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
     
   </entry>
   
