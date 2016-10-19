@@ -1,0 +1,621 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="swift," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="shiron" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="访问控制和其他高级语言一样Swift中也增加了访问控制，在Swift中提供了private、internal、public三种访问级别，但是不同的是Swift中的访问级别是基于模块（module，或者target）和源文件（.swift文件）的，而不是基于类型、命名空间声明。
+
+private:只能访问当前源文件中的实体（注意Swift中的private和其他语言不太一样，它是基于源文件的，作用范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-访问控制">
+<meta property="og:url" content="http://yoursite.com/2016/07/18/Swift-访问控制/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="访问控制和其他高级语言一样Swift中也增加了访问控制，在Swift中提供了private、internal、public三种访问级别，但是不同的是Swift中的访问级别是基于模块（module，或者target）和源文件（.swift文件）的，而不是基于类型、命名空间声明。
+
+private:只能访问当前源文件中的实体（注意Swift中的private和其他语言不太一样，它是基于源文件的，作用范">
+<meta property="og:updated_time" content="2016-10-18T09:26:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-访问控制">
+<meta name="twitter:description" content="访问控制和其他高级语言一样Swift中也增加了访问控制，在Swift中提供了private、internal、public三种访问级别，但是不同的是Swift中的访问级别是基于模块（module，或者target）和源文件（.swift文件）的，而不是基于类型、命名空间声明。
+
+private:只能访问当前源文件中的实体（注意Swift中的private和其他语言不太一样，它是基于源文件的，作用范">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/18/Swift-访问控制/"/>
+
+
+  <title> Swift-访问控制 | shiron </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">shiron</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift-访问控制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-18T17:22:13+08:00" content="2016-07-18">
+              2016-07-18
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h2><p>和其他高级语言一样Swift中也增加了访问控制，在Swift中提供了private、internal、public三种访问级别，但是不同的是Swift中的访问级别是基于模块（module，或者target）和源文件（.swift文件）的，而不是基于类型、命名空间声明。</p>
+<ul>
+<li>private:只能访问当前源文件中的实体（注意Swift中的private和其他语言不太一样，它是基于源文件的，作用范围是整个源文件，如果一个源文件中有两个类，那么一个类可以访问另外一个类的私有成员）。</li>
+<li>internal:可以访问当前模块中的其他任何实体，但是在模块外无法访问，这是所有实体的默认访问级别（通常在一个单目标Application中不需要自行设置访问级别）。</li>
+<li>public:可以访问当前模块及其他模块中的任何实体（通常用于Framework）。</li>
+</ul>
+<p>下面是关于Swift关于不同成员访问级别的约定规则：</p>
+<ol>
+<li>如果一个类的访问级别是private那么该类的所有成员都是private（此时成员无法修改访问级别），如果一个类的访问级别是internal或者public那么它的所有成员都是internal（如果类的访问级别是public，成员默认internal，此时可以单独修改成员的访问级别），类成员的访问级别不能高于类的访问级别(注意：嵌套类型的访问级别也符合此条规则)；</li>
+<li>常量、变量、属性、下标脚本访问级别低于其所声明的类型级别，并且如果不是默认访问级别（internal）要明确声明访问级别（例如一个常量是一个private类型的类类型，那么此常量必须声明为private）；</li>
+<li>在不违反1、2两条规则的情况下，setter的访问级别可以低于getter的访问级别(例如一个属性访问级别是internal，那么可以添加private(set)修饰将setter权限设置为private，在当前模块中只有此源文件可以访问，对外部是只读的);</li>
+<li>必要构造方法（required修饰）的访问级别必须和类访问级别相同，结构体的默认逐一构造函数的访问级别不高于其成员的访问级别（例如一个成员是private那么这个构造函数就是private，但是可以通过自定义来声明一个public的构造函数）,其他方法（包括其他构造方法和普通方法）的访问级别遵循规则1；</li>
+<li>子类的访问级别不高于父类的访问级别，但是在遵循三种访问级别作用范围的前提下子类可以将父类低访问级别的成员重写成更高的访问级别（例如父类A和子类B在同一个源文件，A的访问级别是public，B的访问级别是internal，其中A有一个private方法，那么A可以覆盖其private方法并重写为internal）；</li>
+<li>协议中所有必须实现的成员的访问级别和协议本身的访问级别相同，其子协议的访问级别不高于父协议；</li>
+<li>如果一个类继承于另一个类的同时实现了某个协议那么这个类的访问级别为父类和协议的最低访问级别，并且此类中方法访问级别和所实现的协议中的方法相同；</li>
+<li>扩展的成员访问级别遵循规则1，但是对于类、结构体、枚举的扩展可以明确声明访问级别并且可以更低（例如对于internal的类，你可以声明一个private的扩展），而协议的访问级别不可以明确声明；</li>
+<li>元组的访问级别是元组中各个元素的最低访问级别，注意：元组的访问级别是自动推导的，无法直接使用以上三个关键字修饰其访问级别；<ol>
+<li>函数的访问级是函数的参数、返回值的最低级别，并且如果其访问级别和默认访问级别（internal）不符需要明确声明；</li>
+<li>枚举成员的访问级别等同于枚举的访问级别（无法单独设置），同时枚举的原始值、关联值的访问级别不能低于枚举的访问级别；</li>
+</ol>
+</li>
+<li>泛型类型或泛型函数的访问级别是泛型类型、泛型函数、泛型类型参数三者中最低的一个；</li>
+<li><p>类型别名的访问级别不能高于原类型的访问级别；</p>
+<p>上面这些规则看上去比较繁琐，但其实很多内容理解起来也是顺理成章的（如果你是一个语言设计者相信大部分规则也会这么设计），下面通过一个例子对于规则3做一解释，这一点和其他语言有所不同但是却更加实用。在使用ObjC开发时大家通常会有这样的经验：在一个类中希望某个属性对外界是只读的，但是自己又需要在类中对属性进行写操作，此时只能直接访问属性对应的成员变量，而不能直接访问属性进行设置。但是Swift为了让语法尽可能精简，并没有成员变量的概念，此时就可以通过访问控制来实现。</p>
+</li>
+</ol>
+<p>Person.swift</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"> </div><div class="line">public class Person &#123;</div><div class="line">    //设置setter私有，但是getter为public</div><div class="line">    public private(set) var name:String</div><div class="line">     </div><div class="line">    public init(name:String)&#123;</div><div class="line">        self.name = name</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    public func showMessage()&#123;</div><div class="line">        println(&quot;name=\(name)&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>main.swift</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import Foundation</div><div class="line"> </div><div class="line">var p =  Person(name:&quot;Kenshin&quot;)</div><div class="line">//此时不能设置name属性，但是可读</div><div class="line">//p.name = &quot;Kaoru&quot;</div><div class="line">println(&quot;name=\(p.name)&quot;)</div><div class="line">p.showMessage()</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag">#swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/13/Java异常处理抛出/" rel="next" title="Java异常处理抛出">
+                <i class="fa fa-chevron-left"></i> Java异常处理抛出
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/10/Java基础学习汇总/" rel="prev" title="Java基础学习汇总">
+                Java基础学习汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wuzhi.me/avatar/112063.1460211687.jpg"
+               alt="shiron" />
+          <p class="site-author-name" itemprop="name">shiron</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#访问控制"><span class="nav-number">1.</span> <span class="nav-text">访问控制</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shiron</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="shiron" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="本文转自放肆的使用UIBezierPath和CAShapeLayer画各种图形,有需要的同学直接到原文查看,本文仅为个人学习记录所用~!
+CAShapeLayer 是 CALayer 的子类，但是比 CALayer 更灵活，可以画出各种图形，当然，你也可以使用其他方式来画，随你。其实我还想说,基本上CAShapeLayer和UIBezierPath已经可以虐杀大部分的画了.
+杂谈在 CAShape">
+<meta property="og:type" content="article">
+<meta property="og:title" content="放肆的使用UIBezierPath和CAShapeLayer画各种图形">
+<meta property="og:url" content="http://yoursite.com/2016/01/19/放肆的使用UIBezierPath和CAShapeLayer画各种图形/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="本文转自放肆的使用UIBezierPath和CAShapeLayer画各种图形,有需要的同学直接到原文查看,本文仅为个人学习记录所用~!
+CAShapeLayer 是 CALayer 的子类，但是比 CALayer 更灵活，可以画出各种图形，当然，你也可以使用其他方式来画，随你。其实我还想说,基本上CAShapeLayer和UIBezierPath已经可以虐杀大部分的画了.
+杂谈在 CAShape">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-cabed9c2ad73957b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-c62af1131985de8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-9823776fce62dd7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-0d0087ee3b02abc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-7f77dcb0cc28e0ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-0d292e7a1fab289b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-f19bd76f1caa0c35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-8290d12457b8f5ea.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-7e70eca941c957c4.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-1899225022c2b637.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-7b526aaef0bbdc19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-06410bfad53fb73e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/120336-3c41264e40f49e68.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2016-10-19T09:24:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="放肆的使用UIBezierPath和CAShapeLayer画各种图形">
+<meta name="twitter:description" content="本文转自放肆的使用UIBezierPath和CAShapeLayer画各种图形,有需要的同学直接到原文查看,本文仅为个人学习记录所用~!
+CAShapeLayer 是 CALayer 的子类，但是比 CALayer 更灵活，可以画出各种图形，当然，你也可以使用其他方式来画，随你。其实我还想说,基本上CAShapeLayer和UIBezierPath已经可以虐杀大部分的画了.
+杂谈在 CAShape">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/120336-cabed9c2ad73957b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/19/放肆的使用UIBezierPath和CAShapeLayer画各种图形/"/>
+
+
+  <title> 放肆的使用UIBezierPath和CAShapeLayer画各种图形 | shiron </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">shiron</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                放肆的使用UIBezierPath和CAShapeLayer画各种图形
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-19T14:51:31+08:00" content="2016-01-19">
+              2016-01-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文转自<a href="http://www.jianshu.com/p/c5cbb5e05075" target="_blank" rel="external">放肆的使用UIBezierPath和CAShapeLayer画各种图形</a>,有需要的同学直接到原文查看,本文仅为个人学习记录所用~!</p>
+<p>CAShapeLayer 是 CALayer 的子类，但是比 CALayer 更灵活，可以画出各种图形，当然，你也可以使用其他方式来画，随你。其实我还想说,基本上CAShapeLayer和UIBezierPath已经可以虐杀大部分的画了.</p>
+<h3 id="杂谈"><a href="#杂谈" class="headerlink" title="杂谈"></a>杂谈</h3><p>在 CAShapeLayer 中，也可以像 CALayer 一样指定它的 frame 来画，就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let layer = CAShapeLayer()</div><div class="line">layer.frame = CGRectMake(110, 100, 150, 100)</div><div class="line">layer.backgroundColor = UIColor.blackColor().CGColor</div><div class="line"></div><div class="line">view.layer.addSublayer(layer)</div></pre></td></tr></table></figure>
+<p>然后你就会得到如图这样的黑色矩形,如下图所示:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-cabed9c2ad73957b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt=""></p>
+<p>但是，CAShapeLayer 有一个神奇的属性 <code>path</code> 用这个属性配合上 UIBezierPath 这个类就可以达到超神的效果。</p>
+<p>UIBezierPath 顾名思义，这是用贝塞尔曲线的方式来构建一段弧线，你可以用任意条弧线来组成你想要的形状，比如，你想用它来和上面一样画一个矩形，那就可以这样子来做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let path = UIBezierPath(rect: CGRectMake(110, 100, 150, 100))</div><div class="line">let layer = CAShapeLayer()</div><div class="line">layer.path = path.CGPath</div><div class="line">layer.fillColor = UIColor.blackColor().CGColor</div><div class="line">view.layer.addSublayer(layer)</div></pre></td></tr></table></figure>
+<p>要注意的是，这里就不要用backgroundColor 这个属性了，而要使用 <code>fillColor</code> 和 <code>strokeColor</code> ，前者代表设置这个 Layer 的填充色，后者代表设置它的边框色:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">layer.fillColor = UIColor.clearColor().CGColor</div><div class="line">layer.strokeColor = UIColor.blackColor().CGColor</div></pre></td></tr></table></figure>
+<p>可以试一下把上面代码设置颜色的部分改成这个样子，那么运行程序的时候就会是这种样子:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-c62af1131985de8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt=""></p>
+<h3 id="玩一下UIBezierPath"><a href="#玩一下UIBezierPath" class="headerlink" title="玩一下UIBezierPath"></a>玩一下UIBezierPath</h3><p>在说回 UIBezierPath ，在 UIBezierPath 的 init 方法中，就有很多方便你画各种图形的方法，比如你可以画一个带圆角的图形</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let path = UIBezierPath(roundedRect: CGRectMake(110, 100, 150, 100), cornerRadius: 50)</div><div class="line">let layer = CAShapeLayer()</div><div class="line">layer.path = path.CGPath</div><div class="line">layer.fillColor = UIColor.clearColor().CGColor</div><div class="line">layer.strokeColor = UIColor.blackColor().CGColor</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-9823776fce62dd7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt=""></p>
+<p>还可以指定起始角和半径画圆:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let radius: CGFloat = 60.0</div><div class="line">let startAngle: CGFloat = 0.0</div><div class="line">let endAngle: CGFloat = CGFloat(M_PI * 2)</div><div class="line">let path = UIBezierPath(arcCenter: view.center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)</div><div class="line">let layer = CAShapeLayer()</div><div class="line">layer.path = path.CGPath</div><div class="line">layer.fillColor = UIColor.clearColor().CGColor</div><div class="line">layer.strokeColor = UIColor.blackColor().CGColor</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-0d0087ee3b02abc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt=""></p>
+<p>在这里涉及到角度的问题，起始角和结束角，这里的角度使使用弧度制来表示，这里我收藏了一张图片，以方便参考</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-7f77dcb0cc28e0ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="怎么画曲线"><a href="#怎么画曲线" class="headerlink" title="怎么画曲线"></a>怎么画曲线</h3><p>贝塞尔曲线的画法是由起点、终点、控制点三个参数来画的，为了解释清楚这个点，我写了几行代码来解释它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let startPoint = CGPointMake(50, 300)</div><div class="line">let endPoint = CGPointMake(300, 300)</div><div class="line">let controlPoint = CGPointMake(170, 200)</div><div class="line"></div><div class="line">let layer1 = CALayer()</div><div class="line">layer1.frame = CGRectMake(startPoint.x, startPoint.y, 5, 5)</div><div class="line">layer1.backgroundColor = UIColor.redColor().CGColor</div><div class="line"></div><div class="line">let layer2 = CALayer()</div><div class="line">layer2.frame = CGRectMake(endPoint.x, endPoint.y, 5, 5)</div><div class="line">layer2.backgroundColor = UIColor.redColor().CGColor</div><div class="line"></div><div class="line">let layer3 = CALayer()</div><div class="line">layer3.frame = CGRectMake(controlPoint.x, controlPoint.y, 5, 5)</div><div class="line">layer3.backgroundColor = UIColor.redColor().CGColor</div><div class="line"></div><div class="line">let path = UIBezierPath()</div><div class="line">let layer = CAShapeLayer()</div><div class="line"></div><div class="line">path.moveToPoint(startPoint)</div><div class="line">path.addQuadCurveToPoint(endPoint, controlPoint: controlPoint)</div><div class="line"></div><div class="line">layer.path = path.CGPath</div><div class="line">layer.fillColor = UIColor.clearColor().CGColor</div><div class="line">layer.strokeColor = UIColor.blackColor().CGColor</div><div class="line"></div><div class="line">view.layer.addSublayer(layer)</div><div class="line">view.layer.addSublayer(layer1)</div><div class="line">view.layer.addSublayer(layer2)</div><div class="line">view.layer.addSublayer(layer3)</div></pre></td></tr></table></figure>
+<p>我很随意的定义了三个点，为了清楚显示它们的位置，我放了三个矩形在上面以便观察，然后调用 <code>path.moveToPoint(startPoint)</code>让它移动到起始点，然后调用<code>path.addQuadCurveToPoint(endPoint, controlPoint: controlPoint)</code> 这个方法告诉它结束点和控制点，这样它就能画出一条有弧度的线条了，如果把<code>fillColor</code>设置一个颜色，那么它就会变成一个很丑的形状了，示例图如下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-0d292e7a1fab289b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image"></p>
+<p>控制点决定了它的曲率，曲线的顶点不等于控制点的位置，具体可以看一下贝塞尔曲线的定义，你还可以使用两个控制点来画，两个控制点可以使用方法 path.addCurveToPoint(endPoint, controlPoint1: controlPoint, controlPoint2: controlPoint2)来搞定,这样它会是这个样子</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-f19bd76f1caa0c35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image"></p>
+<h3 id="再来说说-CAShapeLayer"><a href="#再来说说-CAShapeLayer" class="headerlink" title="再来说说 CAShapeLayer"></a>再来说说 CAShapeLayer</h3><p>CAShapeLayer 是个神奇的东西，给它一个<code>path</code>它就能变成你想要的形状，它还有很多可以玩的地方。综合使用可以组合成不同的动画，比如下面这样<br><img src="http://upload-images.jianshu.io/upload_images/120336-8290d12457b8f5ea.gif?imageMogr2/auto-orient/strip" alt="image"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-7e70eca941c957c4.gif?imageMogr2/auto-orient/strip" alt="image"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-1899225022c2b637.gif?imageMogr2/auto-orient/strip" alt="image"></p>
+<p>这三个动画就是使用了<code>strokeEnd strokeStart lineWidth</code> 三个属性，第一个动画用了<code>strokeEnd</code>这个属性的值范围是0-1，动画显示了从0到1之间每一个值对这条曲线的影响，<code>strokeStart</code>的方法则是相反的，如果把这两个值首先都设置成0.5然后慢慢改变成0和1的时候就会变成第二个动画，配合lineWidth则曲线会慢慢变粗，这里的很多属性都是支持动画的。</p>
+<p>示例代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">private func animation1() &#123;</div><div class="line">        let animation = CABasicAnimation(keyPath: &quot;strokeEnd&quot;)</div><div class="line">        animation.fromValue = 0</div><div class="line">        animation.toValue = 1</div><div class="line">        animation.duration = 2</div><div class="line">        layer.addAnimation(animation, forKey: &quot;&quot;)</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> private func animation2() &#123;</div><div class="line">     layer.strokeStart = 0.5</div><div class="line">     layer.strokeEnd = 0.5</div><div class="line"></div><div class="line">     let animation = CABasicAnimation(keyPath: &quot;strokeStart&quot;)</div><div class="line">     animation.fromValue = 0.5</div><div class="line">     animation.toValue = 0</div><div class="line">     animation.duration = 2</div><div class="line"></div><div class="line">     let animation2 = CABasicAnimation(keyPath: &quot;strokeEnd&quot;)</div><div class="line">     animation2.fromValue = 0.5</div><div class="line">     animation2.toValue = 1</div><div class="line">     animation2.duration = 2</div><div class="line"></div><div class="line">     layer.addAnimation(animation, forKey: &quot;&quot;)</div><div class="line">     layer.addAnimation(animation2, forKey: &quot;&quot;)</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> private func animation3() &#123;</div><div class="line">     let animation = CABasicAnimation(keyPath: &quot;lineWidth&quot;)</div><div class="line">     animation.fromValue = 1</div><div class="line">     animation.toValue = 10</div><div class="line">     animation.duration = 2</div><div class="line">     layer.addAnimation(animation, forKey: &quot;&quot;)</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h3 id="应用一下"><a href="#应用一下" class="headerlink" title="应用一下"></a>应用一下</h3><p>前一阵子在仿时光网这个APP，其中有一个Layer的形状很怪异，是这样的</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-7b526aaef0bbdc19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image"></p>
+<p>很明显它可以用 CAShapeLayer + UIBezierPath 来做，思路大概是这样，先移动到左上方的位置，然后向下划线，然后往右划线，然后往上划线，还剩一个盖子，这个盖子就用一个控制点控制曲率，非常简单，代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let finalSize = CGSizeMake(CGRectGetWidth(view.frame), 400)</div><div class="line">let layerHeight = finalSize.height * 0.2</div><div class="line">let layer = CAShapeLayer()</div><div class="line">let bezier = UIBezierPath()</div><div class="line">bezier.moveToPoint(CGPointMake(0, finalSize.height - layerHeight))</div><div class="line">bezier.addLineToPoint(CGPointMake(0, finalSize.height - 1))</div><div class="line">bezier.addLineToPoint(CGPointMake(finalSize.width, finalSize.height - 1))</div><div class="line">bezier.addLineToPoint(CGPointMake(finalSize.width, finalSize.height - layerHeight))</div><div class="line">bezier.addQuadCurveToPoint(CGPointMake(0,finalSize.height - layerHeight),</div><div class="line">    controlPoint: CGPointMake(finalSize.width / 2, (finalSize.height - layerHeight) - 40))</div><div class="line">layer.path = bezier.CGPath</div><div class="line">layer.fillColor = UIColor.blackColor().CGColor</div><div class="line">view.layer.addSublayer(layer)</div></pre></td></tr></table></figure>
+<p>就能画出这样的形状来</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-06410bfad53fb73e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image"></p>
+<p>再来一个复杂点的，微信下拉拍小视频的那只眼睛很有趣，来模仿一下那个效果吧，它是这样的</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/120336-3c41264e40f49e68.gif?imageMogr2/auto-orient/strip" alt="image"><br>首先你得画出这只眼睛，这是眼睛包括5个部分组成（这个是用OC写的）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@property (strong, nonatomic) CAShapeLayer *eyeFirstLightLayer;</div><div class="line">@property (strong, nonatomic) CAShapeLayer *eyeSecondLightLayer;</div><div class="line">@property (strong, nonatomic) CAShapeLayer *eyeballLayer;</div><div class="line">@property (strong, nonatomic) CAShapeLayer *topEyesocketLayer;</div><div class="line">@property (strong, nonatomic) CAShapeLayer *bottomEyesocketLayer;</div></pre></td></tr></table></figure>
+<p>然后，还是通过 UIBezierPath 和 CAShapeLayer 这样的老套路来画，代码较多</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line">- (CAShapeLayer *)eyeFirstLightLayer &#123;</div><div class="line">    if (!_eyeFirstLightLayer) &#123;</div><div class="line">        _eyeFirstLightLayer = [CAShapeLayer layer];</div><div class="line">        CGPoint center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2);</div><div class="line">        UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center</div><div class="line">                                                            radius:CGRectGetWidth(self.frame) * 0.2</div><div class="line">                                                        startAngle:(230.f / 180.f) * M_PI</div><div class="line">                                                          endAngle:(265.f / 180.f) * M_PI</div><div class="line">                                                         clockwise:YES];</div><div class="line">        _eyeFirstLightLayer.borderColor = [UIColor blackColor].CGColor;</div><div class="line">        _eyeFirstLightLayer.lineWidth = 5.f;</div><div class="line">        _eyeFirstLightLayer.path = path.CGPath;</div><div class="line">        _eyeFirstLightLayer.fillColor = [UIColor clearColor].CGColor;</div><div class="line">        _eyeFirstLightLayer.strokeColor = [UIColor whiteColor].CGColor;</div><div class="line">    &#125;</div><div class="line">    return _eyeFirstLightLayer;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CAShapeLayer *)eyeSecondLightLayer &#123;</div><div class="line">    if (!_eyeSecondLightLayer) &#123;</div><div class="line">        _eyeSecondLightLayer = [CAShapeLayer layer];</div><div class="line">        CGPoint center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2);</div><div class="line">        UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center</div><div class="line">                                                            radius:CGRectGetWidth(self.frame) * 0.2</div><div class="line">                                                        startAngle:(211.f / 180.f) * M_PI</div><div class="line">                                                          endAngle:(220.f / 180.f) * M_PI</div><div class="line">                                                         clockwise:YES];</div><div class="line">        _eyeSecondLightLayer.borderColor = [UIColor blackColor].CGColor;</div><div class="line">        _eyeSecondLightLayer.lineWidth = 5.f;</div><div class="line">        _eyeSecondLightLayer.path = path.CGPath;</div><div class="line">        _eyeSecondLightLayer.fillColor = [UIColor clearColor].CGColor;</div><div class="line">        _eyeSecondLightLayer.strokeColor = [UIColor whiteColor].CGColor;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return _eyeSecondLightLayer;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CAShapeLayer *)eyeballLayer &#123;</div><div class="line">    if (!_eyeballLayer) &#123;</div><div class="line">        _eyeballLayer = [CAShapeLayer layer];</div><div class="line">        CGPoint center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2);</div><div class="line">        UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center</div><div class="line">                                                            radius:CGRectGetWidth(self.frame) * 0.3</div><div class="line">                                                        startAngle:(0.f / 180.f) * M_PI</div><div class="line">                                                          endAngle:(360.f / 180.f) * M_PI</div><div class="line">                                                         clockwise:YES];</div><div class="line">        _eyeballLayer.borderColor = [UIColor blackColor].CGColor;</div><div class="line">        _eyeballLayer.lineWidth = 1.f;</div><div class="line">        _eyeballLayer.path = path.CGPath;</div><div class="line">        _eyeballLayer.fillColor = [UIColor clearColor].CGColor;</div><div class="line">        _eyeballLayer.strokeColor = [UIColor whiteColor].CGColor;</div><div class="line">        _eyeballLayer.anchorPoint = CGPointMake(0.5, 0.5);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return _eyeballLayer;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CAShapeLayer *)topEyesocketLayer &#123;</div><div class="line">    if (!_topEyesocketLayer) &#123;</div><div class="line">        _topEyesocketLayer = [CAShapeLayer layer];</div><div class="line">        CGPoint center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2);</div><div class="line">        UIBezierPath *path = [UIBezierPath bezierPath];</div><div class="line">        [path moveToPoint:CGPointMake(0, CGRectGetHeight(self.frame) / 2)];</div><div class="line">        [path addQuadCurveToPoint:CGPointMake(CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) / 2)</div><div class="line">                     controlPoint:CGPointMake(CGRectGetWidth(self.frame) / 2, center.y - center.y - 20)];</div><div class="line">        _topEyesocketLayer.borderColor = [UIColor blackColor].CGColor;</div><div class="line">        _topEyesocketLayer.lineWidth = 1.f;</div><div class="line">        _topEyesocketLayer.path = path.CGPath;</div><div class="line">        _topEyesocketLayer.fillColor = [UIColor clearColor].CGColor;</div><div class="line">        _topEyesocketLayer.strokeColor = [UIColor whiteColor].CGColor;</div><div class="line">    &#125;</div><div class="line">    return _topEyesocketLayer;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CAShapeLayer *)bottomEyesocketLayer &#123;</div><div class="line">    if (!_bottomEyesocketLayer) &#123;</div><div class="line">        _bottomEyesocketLayer = [CAShapeLayer layer];</div><div class="line">        CGPoint center = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2);</div><div class="line">        UIBezierPath *path = [UIBezierPath bezierPath];</div><div class="line">        [path moveToPoint:CGPointMake(0, CGRectGetHeight(self.frame) / 2)];</div><div class="line">        [path addQuadCurveToPoint:CGPointMake(CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) / 2)</div><div class="line">                     controlPoint:CGPointMake(CGRectGetWidth(self.frame) / 2, center.y + center.y + 20)];</div><div class="line">        _bottomEyesocketLayer.borderColor = [UIColor blackColor].CGColor;</div><div class="line">        _bottomEyesocketLayer.lineWidth = 1.f;</div><div class="line">        _bottomEyesocketLayer.path = path.CGPath;</div><div class="line">        _bottomEyesocketLayer.fillColor = [UIColor clearColor].CGColor;</div><div class="line">        _bottomEyesocketLayer.strokeColor = [UIColor whiteColor].CGColor;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return _bottomEyesocketLayer;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后更改一下某些属性的值，方便稍后的动画</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (void)setupAnimation &#123;</div><div class="line">    self.eyeFirstLightLayer.lineWidth = 0.f;</div><div class="line">    self.eyeSecondLightLayer.lineWidth = 0.f;</div><div class="line">    self.eyeballLayer.opacity = 0.f;</div><div class="line">    _bottomEyesocketLayer.strokeStart = 0.5f;</div><div class="line">    _bottomEyesocketLayer.strokeEnd = 0.5f;</div><div class="line">    _topEyesocketLayer.strokeStart = 0.5f;</div><div class="line">    _topEyesocketLayer.strokeEnd = 0.5f;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后根据 UIScrollView 的 <code>contentOffset</code> 来控制各种属性，办法较笨，但管用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">- (void)animationWith:(CGFloat)y &#123;</div><div class="line">    CGFloat flag = self.frame.origin.y * 2.f - 20.f;</div><div class="line">    if (y &lt; flag) &#123;</div><div class="line">        if (self.eyeFirstLightLayer.lineWidth &lt; 5.f) &#123;</div><div class="line">            self.eyeFirstLightLayer.lineWidth += 1.f;</div><div class="line">            self.eyeSecondLightLayer.lineWidth += 1.f;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if(y &lt; flag - 20) &#123;</div><div class="line">        if (self.eyeballLayer.opacity &lt;= 1.0f) &#123;</div><div class="line">            self.eyeballLayer.opacity += 0.1f;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (y &lt; flag - 40) &#123;</div><div class="line">        if (self.topEyesocketLayer.strokeEnd &lt; 1.f &amp;&amp; self.topEyesocketLayer.strokeStart &gt; 0.f) &#123;</div><div class="line">            self.topEyesocketLayer.strokeEnd += 0.1f;</div><div class="line">            self.topEyesocketLayer.strokeStart -= 0.1f;</div><div class="line">            self.bottomEyesocketLayer.strokeEnd += 0.1f;</div><div class="line">            self.bottomEyesocketLayer.strokeStart -= 0.1f;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (y &gt; flag - 40) &#123;</div><div class="line">        if (self.topEyesocketLayer.strokeEnd &gt; 0.5f &amp;&amp; self.topEyesocketLayer.strokeStart &lt; 0.5f) &#123;</div><div class="line">            self.topEyesocketLayer.strokeEnd -= 0.1f;</div><div class="line">            self.topEyesocketLayer.strokeStart += 0.1f;</div><div class="line">            self.bottomEyesocketLayer.strokeEnd -= 0.1f;</div><div class="line">            self.bottomEyesocketLayer.strokeStart += 0.1f;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (y &gt; flag - 20) &#123;</div><div class="line">        if (self.eyeballLayer.opacity &gt;= 0.0f) &#123;</div><div class="line">            self.eyeballLayer.opacity -= 0.1f;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (y &gt; flag) &#123;</div><div class="line">        if (self.eyeFirstLightLayer.lineWidth &gt; 0.f) &#123;</div><div class="line">            self.eyeFirstLightLayer.lineWidth -= 1.f;</div><div class="line">            self.eyeSecondLightLayer.lineWidth -= 1.f;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>总之使用 UIbezierPath 和 CAShapeLayer 可以画出你想要的任何形状，没有它做不到，只有你想不到，搞定了它们你就可以轻松定制你想要的任何控件了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/18/swift中闭包和OC的block的对比/" rel="next" title="swift中闭包和OC的block的对比">
+                <i class="fa fa-chevron-left"></i> swift中闭包和OC的block的对比
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/13/Swift中-enum和Switch的应用/" rel="prev" title="Swift中 enum和Switch的应用">
+                Swift中 enum和Switch的应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wuzhi.me/avatar/112063.1460211687.jpg"
+               alt="shiron" />
+          <p class="site-author-name" itemprop="name">shiron</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#杂谈"><span class="nav-number">1.</span> <span class="nav-text">杂谈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#玩一下UIBezierPath"><span class="nav-number">2.</span> <span class="nav-text">玩一下UIBezierPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么画曲线"><span class="nav-number">3.</span> <span class="nav-text">怎么画曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再来说说-CAShapeLayer"><span class="nav-number">4.</span> <span class="nav-text">再来说说 CAShapeLayer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一下"><span class="nav-number">5.</span> <span class="nav-text">应用一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shiron</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
