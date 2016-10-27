@@ -248,6 +248,110 @@
             
               
                 
+                <a class="post-title-link" href="/2015/08/27/代码和stroyboard拉伸/" itemprop="url">
+                  代码和stroyboard拉伸
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-27T19:36:55+08:00" content="2015-08-27">
+              2015-08-27
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>通过storyboard拉伸，但该方法只能实现在imageView里面，button等UI控件不支持，设置参数如下即可：</li>
+</ol>
+<p>storyboard-&gt;属性,拉倒最下面有一个streching属性,可以在这里设置</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/7616e2bagw1f972czp650j20dm074wey.jpg" alt="image"></p>
+<ol>
+<li><p>通过resizableImage方法拉伸，只要传入拉伸上下左右极限即可<br>[image resizableImageWithCapInsets:UIEdgeInsetsMake(&lt;#CGFloat top#&gt;, &lt;#CGFloat left#&gt;, &lt;#CGFloat bottom#&gt;, &lt;#CGFloat right#&gt;)];</p>
+</li>
+<li><p>可以直接使用stretchableImage进行拉伸，一般情况下是拉伸中间一个像素点，然后可以提取为Category作为常用工具类使用</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)imageWithResizableImageName:(NSString*)imageName&#123;</div><div class="line">    UIImage * image = [UIImage imageNamed:imageName];</div><div class="line">    image = [image stretchableImageWithLeftCapWidth:image.size.width * 0.5 topCapHeight:image.size.width * 0.5];</div><div class="line">    return image;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/08/19/CGRectInset和CGRectOffset的理解/" itemprop="url">
                   CGRectInset和CGRectOffset的理解
                 </a>
@@ -756,7 +860,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
