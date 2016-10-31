@@ -248,6 +248,112 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/07/ReactiveCocoa在swift情况下使用宏/" itemprop="url">
+                  ReactiveCocoa在swift情况下使用宏
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-07T10:19:17+08:00" content="2016-03-07">
+              2016-03-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="在swift的环境下-配置RAC和RACObserve宏需要另外添加文件-如下"><a href="#在swift的环境下-配置RAC和RACObserve宏需要另外添加文件-如下" class="headerlink" title="在swift的环境下,配置RAC和RACObserve宏需要另外添加文件,如下:"></a>在swift的环境下,配置RAC和RACObserve宏需要另外添加文件,如下:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import ReactiveCocoa</div><div class="line">public struct RAC  &#123;</div><div class="line">        var target : NSObject!</div><div class="line">        var keyPath : String!</div><div class="line">    var nilValue : AnyObject!</div><div class="line"></div><div class="line">    init(_ target: NSObject!, _ keyPath: String, nilValue: AnyObject? = nil) &#123;</div><div class="line">        self.target = target</div><div class="line">        self.keyPath = keyPath</div><div class="line">        self.nilValue = nilValue</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    func assignSignal(signal : RACSignal) &#123;</div><div class="line">        signal.setKeyPath(self.keyPath, onObject: self.target, nilValue: self.nilValue)</div><div class="line">      &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">public func RACObserve(target: NSObject!, keyPath: NSString) -&gt; RACSignal  &#123;</div><div class="line">       return target.rac_valuesForKeyPath(keyPath as String, observer: target)</div><div class="line">&#125;</div><div class="line"></div><div class="line">public func &lt;= (rac:RAC, signal:RACSignal)&#123;</div><div class="line">       rac.assignSignal(signal)</div><div class="line">&#125; </div><div class="line"></div><div class="line">public func &gt;=( signal:RACSignal, rac:RAC)&#123;</div><div class="line">     rac.assignSignal(signal)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在学习swift导入RAC的过程中,由于宏在OC项目中非常好用,但是宏在swift中不好使,需要额外导入文件才能正常使用.<br>下面举了一个textFiled输入文字时,改变下面的那个label内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">  import UIKit</div><div class="line">  import SnapKit</div><div class="line">  import ReactiveCocoa</div><div class="line">  //import ReactiveCocoa.RACEXTScope</div><div class="line"></div><div class="line">  func == (Str1:String,Str:String) -&gt;Bool&#123;      </div><div class="line">      return true</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line">    </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        view.addSubview(textFiled)</div><div class="line">        view.addSubview(label)</div><div class="line">        </div><div class="line">        textFiled.snp_makeConstraints &#123; (make) in</div><div class="line">            make.center.equalTo(self.view)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        label.snp_makeConstraints &#123; (make) in</div><div class="line">            make.top.equalTo(textFiled).offset(20)</div><div class="line">            make.centerX.equalTo(textFiled)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        let str1 = &quot;1&quot;</div><div class="line">        let str2 = &quot;2&quot;</div><div class="line">        let bool = str1==str2</div><div class="line">        print(bool)</div><div class="line">        RAC(label,&quot;text&quot;) &lt;= textFiled.rac_textSignal()</div><div class="line"> </div><div class="line">  </div><div class="line"></div><div class="line">    RACObserve(label, keyPath: &quot;center&quot;) .subscribeNext &#123; (x) in</div><div class="line">            print(&quot;移动的距离为:\(x)&quot; </div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override func touchesBegan(touches: Set&lt;UITouch&gt;, withEvent event: UIEvent?) &#123;</div><div class="line">  //点击屏幕label向下移动</div><div class="line">        label.snp_remakeConstraints &#123; (make) in</div><div class="line">            make.top.equalTo(textFiled).offset( number * 20)</div><div class="line">            make.centerX.equalTo(textFiled)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        number += 1</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private lazy var textFiled : UITextField=&#123;</div><div class="line">        let textFiled = UITextField()</div><div class="line">        textFiled.placeholder = &quot;请输入文字&quot;</div><div class="line">        return textFiled</div><div class="line">    &#125;()</div><div class="line"></div><div class="line">    private lazy var label : UILabel=&#123;</div><div class="line">        let label = UILabel()</div><div class="line">        label.text = &quot;我是占位文字,textFiled改变时我也会改变&quot;</div><div class="line">        label.font = UIFont.systemFontOfSize(16)</div><div class="line">        </div><div class="line">        return label</div><div class="line">      &#125;()</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>其中textFiled绑定label的核心代码就是:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 只要文本框文字改变，就会修改label的文字</div><div class="line">RAC(label,&quot;text&quot;) &lt;= textFiled.rac_textSignal()</div></pre></td></tr></table></figure>
+<p>一句话就可以实现绑定textFiled变化时,label也跟着变化</p>
+<ul>
+<li>其中点击屏幕label往下移动的核心代码是:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">        RACObserve(label, keyPath:&quot;center&quot;) .subscribeNext &#123; (x) in</div><div class="line">            print(&quot;移动的距离为:\(x)&quot; </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>RACObserve宏代码会让其返回一个Signal,我们使用订阅的时候,即可像KVO一样绑定信息,监控对象某个属性的变化.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/13/Swift中-enum和Switch的应用/" itemprop="url">
                   Swift中 enum和Switch的应用
                 </a>
@@ -1091,7 +1197,7 @@
 <h4 id="Blockquotes"><a href="#Blockquotes" class="headerlink" title="Blockquotes"></a>Blockquotes</h4><blockquote>
 <p>Right angle brackets &gt; are used for block quotes.</p>
 </blockquote>
-<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#58;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#x40;&#101;&#120;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;">&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#x40;&#101;&#120;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;</a> link.</p>
+<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#x40;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#x2e;&#x63;&#111;&#109;">&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#x40;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#x2e;&#x63;&#111;&#109;</a> link.</p>
 <p>Simple inline link <a href="http://chenluois.com" target="_blank" rel="external">http://chenluois.com</a>, another inline link <a href="http://25.io/smaller/" target="_blank" rel="external">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension" target="_blank" rel="external">Resize</a>.</p>
 <p>A <a href="http://25.io/mou/" title="Markdown editor on Mac OS X" target="_blank" rel="external">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
 <p>Titles ( or called tool tips ) in the links are optional.</p>
@@ -1404,111 +1510,6 @@ var Mou = exactlyTheAppIwant;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/27/iOS中的initialize与load两个类方法简单理解/" itemprop="url">
-                  iOS中的initialize与load两个类方法简单理解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-27T19:34:02+08:00" content="2015-10-27">
-              2015-10-27
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="如果你在一个UIViewController中重写了这两个类方法-那么你会在在这个控制器中发现一下现象"><a href="#如果你在一个UIViewController中重写了这两个类方法-那么你会在在这个控制器中发现一下现象" class="headerlink" title="如果你在一个UIViewController中重写了这两个类方法,那么你会在在这个控制器中发现一下现象:"></a>如果你在一个UIViewController中重写了这两个类方法,那么你会在在这个控制器中发现一下现象:</h4><h4 id="1-相同之处"><a href="#1-相同之处" class="headerlink" title="1,相同之处:"></a>1,相同之处:</h4><ol>
-<li>这两个类方法在init之前就调用了</li>
-<li>在整个应用app中无论你用到这个类多少次,这两个类方法均只会被调用一次</li>
-</ol>
-<h4 id="2-不同之处"><a href="#2-不同之处" class="headerlink" title="2,不同之处:"></a>2,不同之处:</h4><ol>
-<li><p>load是在initialize之前被调用</p>
-</li>
-<li><p>更特别的是,如果你没有用到你重写的这个控制器.那你重写的load类方法也会调用.换句话说,这个load方法是在didFinishLaunchingWithOptions方法之前就被调用了.(神奇)</p>
-</li>
-</ol>
-<h4 id="3-用法-load类方法-歌没有用过-只是用过initialize类方法-所以…"><a href="#3-用法-load类方法-歌没有用过-只是用过initialize类方法-所以…" class="headerlink" title="3,用法:load类方法,歌没有用过.只是用过initialize类方法.所以…."></a>3,用法:load类方法,歌没有用过.只是用过initialize类方法.所以….</h4><p>　　initialize类方法的一个金典应用:</p>
-<p>　　往往在一个应用APP中,导航条控制器的导航条几乎是统一的.再加上,一般情况一个应用APP会重写一个导航控制器类.那么initialize类方法就能出场了.比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">+ (void)initialize &#123;</div><div class="line"></div><div class="line">    NSLog(@&quot;%s:%s&quot;,__FILE__,__func__);</div><div class="line"></div><div class="line"></div><div class="line">    //设置导航栏主题</div><div class="line"></div><div class="line">    UINavigationBar *navBar = [UINavigationBar appearance];</div><div class="line"></div><div class="line"></div><div class="line">    //接下来就可以对navBar坐各种统一的设置处理了.比如字体,背景....</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1554,7 +1555,7 @@ var Mou = exactlyTheAppIwant;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

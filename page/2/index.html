@@ -248,6 +248,137 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/06/ObjectMapper/" itemprop="url">
+                  ObjectMapper的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-06T17:47:47+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="关于ObjectMapper"><a href="#关于ObjectMapper" class="headerlink" title="关于ObjectMapper"></a>关于ObjectMapper</h3><p>关于这个第三方库,我也是最近才接触到,在转到swift的项目当中,其实很长时间都在寻找一个适合库来做网络请求回来的JSON解析,但一直都没有找到较好的,所以之前的项目一直都是手动字典转模型,最近发现了一个轻巧又实用的库–而且再多层嵌套,也可以用几句代码完成转换,简直可以媲美OC中字典转模型的第三方框架.</p>
+<p>Github的地址为:<a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="external">https://github.com/Hearst-DD/ObjectMapper</a></p>
+<p>本文主要是翻译github的内容,大家如果英文阅读能力较好的可以自己翻看英文文档</p>
+<h3 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h3><p>如果一个类或者结构体的接口实现了<strong><em>Mappable</em></strong>接口的时,便可以支持映射,然后还需要实现协议中的两个接口:</p>
+<pre><code>init?(_ map: Map)mutating 
+func mapping(map: Map)
+</code></pre><p>ObjectMapper实用了一个操作符 “&lt;-“来定义成员变量的映射和JSON的转换.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">//这里要定义好需要转换的内容相对于的字段和类型,以后日后方便赋值转换</div><div class="line"> </div><div class="line">  </div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line">    var weight: Double!</div><div class="line">    var array: [AnyObject]?</div><div class="line">    var dictionary: [String : AnyObject] = [:]</div><div class="line">    var bestFriend: User?                       // Nested User object</div><div class="line">    var friends: [User]?                        // Array of Users</div><div class="line">    var birthday: NSDate?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">  //根据字典中的内容用&quot;&lt;-&quot;操作符号来映射相应的内容,将其转换到定义好的成员变量中</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">        weight      &lt;- map[&quot;weight&quot;]</div><div class="line">        array       &lt;- map[&quot;arr&quot;]</div><div class="line">        dictionary  &lt;- map[&quot;dict&quot;]</div><div class="line">        bestFriend  &lt;- map[&quot;best_friend&quot;]</div><div class="line">        friends     &lt;- map[&quot;friends&quot;]</div><div class="line">        birthday    &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"> //结构体的话也是执行相应的操作</div><div class="line">struct Temperature: Mappable &#123;</div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line">    </div><div class="line">    init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    mutating func mapping(map: Map) &#123;</div><div class="line">        celsius     &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit  &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>唔,一旦你的类接口定义了Mappable,那么你这个类就可以调用简答的方法进行字典转模型的转换啦.</p>
+<p>转换一个JSON成相应的类模型:</p>
+<pre><code>let user = User(JSONSting:jsonString)
+</code></pre><p>转换一个模型成相应的字符串:</p>
+<pre><code>let jsonString = user.toJSONString(prettyPrint:true)
+</code></pre><p>除了这种转换方式,Mapper.swfit类还提供了扩展的方法也可以进行同样的转换:</p>
+<pre><code> // 字典转模型
+let user = Mapper&lt;User&gt;().map(JSONString: JSONString)
+//字典转模型
+let JSONString = Mapper().toJSONString(user, prettyPrint: true)
+</code></pre><p>ObjectMapper支持以下的数据类型</p>
+<ul>
+<li>Int</li>
+<li>Bool</li>
+<li>Double</li>
+<li>Float</li>
+<li>String</li>
+<li>RawRepresentable(Enums)</li>
+<li>Array<anyobject></anyobject></li>
+<li>Dictionary<string, anyobject=""></string,></li>
+<li>Object<t: mappable=""></t:></li>
+<li>Array<t: mappable=""></t:></li>
+<li>Array<array<t: mappable="">&gt;</array<t:></li>
+<li>Set<t: mappable=""></t:></li>
+<li>Dictionary<string, t:="" mappable=""></string,></li>
+<li>Dictionary<string, array<t:="" mappable="">&gt;</string,></li>
+<li>Optionals of all the above</li>
+</ul>
+<h3 id="Mappable-Protocol"><a href="#Mappable-Protocol" class="headerlink" title="Mappable Protocol"></a>Mappable Protocol</h3><p><strong><em>mutating func mapping(map: Map)</em></strong><br>这个函数里面定义了映射所需要指向的字符串,当解析JSON的过程中,创建好实例对象以后会去执行这个函数,当生成JSON的过程中,这个函数是唯一一个可以被叫做对象.</p>
+<h3 id="init-map-Map"><a href="#init-map-Map" class="headerlink" title="init?(_ map: Map)"></a>init?(_ map: Map)</h3><p>//翻译未完成,待续…其实ObjectMapper的使用非常简单,只要字符串和相对应的Object一一对应即可…</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/23/关联对象存放自定义数据/" itemprop="url">
                   关联对象存放自定义数据
                 </a>
@@ -1674,112 +1805,6 @@ UIView .commitAnimations()
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/07/ReactiveCocoa在swift情况下使用宏/" itemprop="url">
-                  ReactiveCocoa在swift情况下使用宏
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-07T10:19:17+08:00" content="2016-03-07">
-              2016-03-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="在swift的环境下-配置RAC和RACObserve宏需要另外添加文件-如下"><a href="#在swift的环境下-配置RAC和RACObserve宏需要另外添加文件-如下" class="headerlink" title="在swift的环境下,配置RAC和RACObserve宏需要另外添加文件,如下:"></a>在swift的环境下,配置RAC和RACObserve宏需要另外添加文件,如下:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import ReactiveCocoa</div><div class="line">public struct RAC  &#123;</div><div class="line">        var target : NSObject!</div><div class="line">        var keyPath : String!</div><div class="line">    var nilValue : AnyObject!</div><div class="line"></div><div class="line">    init(_ target: NSObject!, _ keyPath: String, nilValue: AnyObject? = nil) &#123;</div><div class="line">        self.target = target</div><div class="line">        self.keyPath = keyPath</div><div class="line">        self.nilValue = nilValue</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    func assignSignal(signal : RACSignal) &#123;</div><div class="line">        signal.setKeyPath(self.keyPath, onObject: self.target, nilValue: self.nilValue)</div><div class="line">      &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">public func RACObserve(target: NSObject!, keyPath: NSString) -&gt; RACSignal  &#123;</div><div class="line">       return target.rac_valuesForKeyPath(keyPath as String, observer: target)</div><div class="line">&#125;</div><div class="line"></div><div class="line">public func &lt;= (rac:RAC, signal:RACSignal)&#123;</div><div class="line">       rac.assignSignal(signal)</div><div class="line">&#125; </div><div class="line"></div><div class="line">public func &gt;=( signal:RACSignal, rac:RAC)&#123;</div><div class="line">     rac.assignSignal(signal)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在学习swift导入RAC的过程中,由于宏在OC项目中非常好用,但是宏在swift中不好使,需要额外导入文件才能正常使用.<br>下面举了一个textFiled输入文字时,改变下面的那个label内容:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">  import UIKit</div><div class="line">  import SnapKit</div><div class="line">  import ReactiveCocoa</div><div class="line">  //import ReactiveCocoa.RACEXTScope</div><div class="line"></div><div class="line">  func == (Str1:String,Str:String) -&gt;Bool&#123;      </div><div class="line">      return true</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line">    </div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line">        view.addSubview(textFiled)</div><div class="line">        view.addSubview(label)</div><div class="line">        </div><div class="line">        textFiled.snp_makeConstraints &#123; (make) in</div><div class="line">            make.center.equalTo(self.view)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        label.snp_makeConstraints &#123; (make) in</div><div class="line">            make.top.equalTo(textFiled).offset(20)</div><div class="line">            make.centerX.equalTo(textFiled)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        let str1 = &quot;1&quot;</div><div class="line">        let str2 = &quot;2&quot;</div><div class="line">        let bool = str1==str2</div><div class="line">        print(bool)</div><div class="line">        RAC(label,&quot;text&quot;) &lt;= textFiled.rac_textSignal()</div><div class="line"> </div><div class="line">  </div><div class="line"></div><div class="line">    RACObserve(label, keyPath: &quot;center&quot;) .subscribeNext &#123; (x) in</div><div class="line">            print(&quot;移动的距离为:\(x)&quot; </div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    override func touchesBegan(touches: Set&lt;UITouch&gt;, withEvent event: UIEvent?) &#123;</div><div class="line">  //点击屏幕label向下移动</div><div class="line">        label.snp_remakeConstraints &#123; (make) in</div><div class="line">            make.top.equalTo(textFiled).offset( number * 20)</div><div class="line">            make.centerX.equalTo(textFiled)</div><div class="line">            make.width.equalTo(100)</div><div class="line">            make.height.equalTo(30)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        number += 1</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private lazy var textFiled : UITextField=&#123;</div><div class="line">        let textFiled = UITextField()</div><div class="line">        textFiled.placeholder = &quot;请输入文字&quot;</div><div class="line">        return textFiled</div><div class="line">    &#125;()</div><div class="line"></div><div class="line">    private lazy var label : UILabel=&#123;</div><div class="line">        let label = UILabel()</div><div class="line">        label.text = &quot;我是占位文字,textFiled改变时我也会改变&quot;</div><div class="line">        label.font = UIFont.systemFontOfSize(16)</div><div class="line">        </div><div class="line">        return label</div><div class="line">      &#125;()</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>其中textFiled绑定label的核心代码就是:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 只要文本框文字改变，就会修改label的文字</div><div class="line">RAC(label,&quot;text&quot;) &lt;= textFiled.rac_textSignal()</div></pre></td></tr></table></figure>
-<p>一句话就可以实现绑定textFiled变化时,label也跟着变化</p>
-<ul>
-<li>其中点击屏幕label往下移动的核心代码是:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">        RACObserve(label, keyPath:&quot;center&quot;) .subscribeNext &#123; (x) in</div><div class="line">            print(&quot;移动的距离为:\(x)&quot; </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<p>RACObserve宏代码会让其返回一个Signal,我们使用订阅的时候,即可像KVO一样绑定信息,监控对象某个属性的变化.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1825,7 +1850,7 @@ UIView .commitAnimations()
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

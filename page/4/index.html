@@ -248,6 +248,111 @@
             
               
                 
+                <a class="post-title-link" href="/2015/10/27/iOS中的initialize与load两个类方法简单理解/" itemprop="url">
+                  iOS中的initialize与load两个类方法简单理解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-27T19:34:02+08:00" content="2015-10-27">
+              2015-10-27
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="如果你在一个UIViewController中重写了这两个类方法-那么你会在在这个控制器中发现一下现象"><a href="#如果你在一个UIViewController中重写了这两个类方法-那么你会在在这个控制器中发现一下现象" class="headerlink" title="如果你在一个UIViewController中重写了这两个类方法,那么你会在在这个控制器中发现一下现象:"></a>如果你在一个UIViewController中重写了这两个类方法,那么你会在在这个控制器中发现一下现象:</h4><h4 id="1-相同之处"><a href="#1-相同之处" class="headerlink" title="1,相同之处:"></a>1,相同之处:</h4><ol>
+<li>这两个类方法在init之前就调用了</li>
+<li>在整个应用app中无论你用到这个类多少次,这两个类方法均只会被调用一次</li>
+</ol>
+<h4 id="2-不同之处"><a href="#2-不同之处" class="headerlink" title="2,不同之处:"></a>2,不同之处:</h4><ol>
+<li><p>load是在initialize之前被调用</p>
+</li>
+<li><p>更特别的是,如果你没有用到你重写的这个控制器.那你重写的load类方法也会调用.换句话说,这个load方法是在didFinishLaunchingWithOptions方法之前就被调用了.(神奇)</p>
+</li>
+</ol>
+<h4 id="3-用法-load类方法-歌没有用过-只是用过initialize类方法-所以…"><a href="#3-用法-load类方法-歌没有用过-只是用过initialize类方法-所以…" class="headerlink" title="3,用法:load类方法,歌没有用过.只是用过initialize类方法.所以…."></a>3,用法:load类方法,歌没有用过.只是用过initialize类方法.所以….</h4><p>　　initialize类方法的一个金典应用:</p>
+<p>　　往往在一个应用APP中,导航条控制器的导航条几乎是统一的.再加上,一般情况一个应用APP会重写一个导航控制器类.那么initialize类方法就能出场了.比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">+ (void)initialize &#123;</div><div class="line"></div><div class="line">    NSLog(@&quot;%s:%s&quot;,__FILE__,__func__);</div><div class="line"></div><div class="line"></div><div class="line">    //设置导航栏主题</div><div class="line"></div><div class="line">    UINavigationBar *navBar = [UINavigationBar appearance];</div><div class="line"></div><div class="line"></div><div class="line">    //接下来就可以对navBar坐各种统一的设置处理了.比如字体,背景....</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/08/27/代码和stroyboard拉伸/" itemprop="url">
                   代码和stroyboard拉伸
                 </a>
@@ -729,7 +834,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
