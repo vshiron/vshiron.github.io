@@ -248,192 +248,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/25/swift中的extension-持续更新/" itemprop="url">
-                  swift中的extension(持续更新)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-25T12:36:39+08:00" content="2016-10-25">
-              2016-10-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="在工作中会遇到很多关于extension的扩展-我把一些有趣的扩展都存下来-以便以后学习使用"><a href="#在工作中会遇到很多关于extension的扩展-我把一些有趣的扩展都存下来-以便以后学习使用" class="headerlink" title="在工作中会遇到很多关于extension的扩展,我把一些有趣的扩展都存下来,以便以后学习使用~~"></a>在工作中会遇到很多关于extension的扩展,我把一些有趣的扩展都存下来,以便以后学习使用~~</h4><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">extension String&#123;</div><div class="line">    </div><div class="line">      /**</div><div class="line">     将时间戳转换成时间</div><div class="line">     </div><div class="line">     - parameter timestamp: 时间戳</div><div class="line">     - parameter formatter: 时间格式</div><div class="line">     */</div><div class="line">    static func stringFromTimestamp(timestamp: String?, withFormatter formatter: String?) -&gt; String? &#123;</div><div class="line">        guard let stamp = timestamp, fm = formatter else &#123; return nil &#125;</div><div class="line">        let nsStamp = NSString(string: stamp)</div><div class="line">        let date = NSDate(timeIntervalSince1970: nsStamp.doubleValue)</div><div class="line">        let dateFormatter = NSDateFormatter()</div><div class="line">        dateFormatter.dateFormat = fm</div><div class="line">        return dateFormatter.stringFromDate(date)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     将时间转换成字符串</div><div class="line">     </div><div class="line">     */</div><div class="line">    static func stringFromDate(date: NSDate?, withFormatter formatter: String?) -&gt; String? &#123;</div><div class="line">        guard let timeDate = date, fm = formatter else &#123; return nil &#125;</div><div class="line">        let dateFormatter = NSDateFormatter()</div><div class="line">        dateFormatter.dateFormat = fm</div><div class="line">        return dateFormatter.stringFromDate(timeDate)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">    手机号验证</div><div class="line">    </div><div class="line">    - parameter mobile: 手机号</div><div class="line">    </div><div class="line">    - returns: true/fales 符合条件,不符合条件</div><div class="line">    */</div><div class="line">    static func isValidateMobile(mobile: String?) -&gt; Bool &#123;</div><div class="line">        let phoneRegex = &quot;^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d&#123;8&#125;$&quot;</div><div class="line">        let phoneTest = NSPredicate(format: &quot;SELF MATCHES %@&quot;, phoneRegex)</div><div class="line">        if mobile != nil &#123;</div><div class="line">            return phoneTest.evaluateWithObject(mobile)</div><div class="line">        &#125; else &#123;</div><div class="line">            return false</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">    四舍五入</div><div class="line">    </div><div class="line">    - parameter price:    要四舍五入的值</div><div class="line">    - parameter position: 保留多少小数位</div><div class="line">    </div><div class="line">    - returns: 返回四舍五入后的值</div><div class="line">    */</div><div class="line">    static func notRounding(price: Float, afterPoint position: Int16) -&gt; NSString? &#123;</div><div class="line">        let roundingBehavior = NSDecimalNumberHandler(roundingMode: NSRoundingMode.RoundUp, scale: position, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)</div><div class="line">        var ouncesDecimal: NSDecimalNumber</div><div class="line">        var roundedOunces: NSDecimalNumber</div><div class="line">        </div><div class="line">        ouncesDecimal = NSDecimalNumber(float: price)</div><div class="line">        roundedOunces = ouncesDecimal.decimalNumberByRoundingAccordingToBehavior(roundingBehavior)</div><div class="line">        </div><div class="line">        return roundedOunces.stringValue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">    获取当前星期几</div><div class="line">    </div><div class="line">    - parameter date: 传入的时间</div><div class="line">    </div><div class="line">    - returns: 返回当前为星期几元祖</div><div class="line">    */</div><div class="line">    static func getCurrentWeekDay(date: NSDate) -&gt; (String, Int)? &#123;</div><div class="line">        let arrWeek = [&quot;星期日&quot;, &quot;星期一&quot;, &quot;星期二&quot;, &quot;星期三&quot;, &quot;星期四&quot;, &quot;星期五&quot;, &quot;星期六&quot;]</div><div class="line">        let date = NSDate()</div><div class="line">        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)</div><div class="line">        let timeZone = NSTimeZone(name: &quot;Asia/Shanghai&quot;)</div><div class="line">        calendar!.timeZone = timeZone!</div><div class="line">        var comps = NSDateComponents()</div><div class="line">        comps = calendar!.components(NSCalendarUnit.Weekday, fromDate: date)</div><div class="line">        let week = comps.weekday</div><div class="line">        return (arrWeek[week - 1], week - 1)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     本地化字符串</div><div class="line">     </div><div class="line">     - parameter tableName: 文件名称</div><div class="line">     - parameter comment:   注释名称</div><div class="line">     </div><div class="line">     - returns: 本地化后的字符串</div><div class="line">     */</div><div class="line">    func localizedWithComment(tableName: String?, comment: String?) -&gt; String &#123;</div><div class="line">        </div><div class="line">        guard let commentStr = comment else &#123;</div><div class="line">            return NSLocalizedString(self, tableName: tableName!, bundle: NSBundle.mainBundle(), value: &quot;&quot;, comment: &quot;&quot;)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return NSLocalizedString(self, tableName: tableName!, bundle: NSBundle.mainBundle(), value: &quot;&quot;, comment: commentStr)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     本地化字符串</div><div class="line">     </div><div class="line">     - parameter tableName: 文件名称</div><div class="line">     </div><div class="line">     - returns: 本地化后的字符串</div><div class="line">     */</div><div class="line">    func localizedWithComment(tableName: String?) -&gt; String &#123;</div><div class="line">        return NSLocalizedString(self, tableName: tableName!, bundle: NSBundle.mainBundle(), value: &quot;&quot;, comment: &quot;&quot;)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // 对应默认的Localizable.strings</div><div class="line">    var localized: String &#123;</div><div class="line">        return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: &quot;&quot;, comment: &quot;&quot;)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">    浮点数相乘</div><div class="line">    */</div><div class="line">    static func decimalNumberMutiplyWithString(multiplierValue: String, andOtherString otherString: String) -&gt; String &#123;</div><div class="line">        let multiplierNumber = NSDecimalNumber(string: multiplierValue)</div><div class="line">        let multiplicandNumber = NSDecimalNumber(string: otherString)</div><div class="line">        let product = multiplicandNumber.decimalNumberByMultiplyingBy(multiplierNumber)</div><div class="line">        return product.stringValue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     浮点数相加</div><div class="line">     */</div><div class="line">    static func decimalNumberByAdding(multiplierValue: String, andOtherString otherString: String) -&gt; String &#123;</div><div class="line">        let multiplierNumber = NSDecimalNumber(string: multiplierValue)</div><div class="line">        let multiplicandNumber = NSDecimalNumber(string: otherString)</div><div class="line">        let product = multiplicandNumber.decimalNumberByAdding(multiplierNumber)</div><div class="line">        return product.stringValue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     浮点数相减</div><div class="line">     */</div><div class="line">    static func decimalNumberBySubtracting(multiplierValue: String, andOtherString otherString: String) -&gt; String &#123;</div><div class="line">        let multiplierNumber = NSDecimalNumber(string: multiplierValue)</div><div class="line">        let multiplicandNumber = NSDecimalNumber(string: otherString)</div><div class="line">        let product = multiplierNumber.decimalNumberBySubtracting(multiplicandNumber)</div><div class="line">        return product.stringValue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     过滤空格</div><div class="line">     */</div><div class="line">    static func trimmingCharactersWhite(str: String) -&gt; String &#123;</div><div class="line">        // 去除两端空格</div><div class="line">        let temp = str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())</div><div class="line">        // 去除其余空格</div><div class="line">        let text = temp.stringByReplacingOccurrencesOfString(&quot; &quot;, withString: &quot;&quot;)</div><div class="line">        return text</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line">    //截取特定字符串</div><div class="line">    subscript (r: Range&lt;Int&gt;) -&gt; String &#123;</div><div class="line">        get &#123;</div><div class="line">            let startIndex = self.startIndex.advancedBy(r.startIndex)</div><div class="line">            let endIndex = self.startIndex.advancedBy(r.endIndex)</div><div class="line">            </div><div class="line">            return self[Range(start: startIndex, end: endIndex)]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     将当前字符串拼接到cache目录后面</div><div class="line">     */</div><div class="line">    func cacheDir() -&gt; String&#123;</div><div class="line">        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last!  as NSString</div><div class="line">        return path.appendingPathComponent((self as NSString).lastPathComponent)</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     将当前字符串拼接到doc目录后面</div><div class="line">     */</div><div class="line">    func docDir() -&gt; String</div><div class="line">    &#123;</div><div class="line">        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last!  as NSString</div><div class="line">        return path.appendingPathComponent((self as NSString).lastPathComponent)</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     将当前字符串拼接到tmp目录后面</div><div class="line">     */</div><div class="line">    func tmpDir() -&gt; String</div><div class="line">    &#123;</div><div class="line">        let path = NSTemporaryDirectory() as NSString</div><div class="line">        return path.appendingPathComponent((self as NSString).lastPathComponent)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/20/String-Category/" itemprop="url">
-                  String+Category
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-20T10:21:55+08:00" content="2016-10-20">
-              2016-10-20
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/10/17/Controller间的自定义过渡效果/" itemprop="url">
                   Controller间的自定义过渡效果
                 </a>
@@ -487,7 +301,7 @@
 <li>点击模态controller，会弹出一个新的绿色UIViewController，手指下滑可以dismiss这个controller</li>
 <li>四个角的按钮可以自定义圆形切换的过渡效果切换的一个红色的UIViewController，点击返回用同样的方式切换回来</li>
 </ul>
-<a href="!--![](http://liuyanwei.jumppo.com/assets/uploads/ControllerTransitioning1.gif)--">!--![](http://liuyanwei.jumppo.com/assets/uploads/ControllerTransitioning1.gif)--</a>
+<p><a href="http://liuyanwei.jumppo.com/assets/uploads/ControllerTransitioning1.gif" target="_blank" rel="external"></a></p>
 <h4 id="出场人物介绍"><a href="#出场人物介绍" class="headerlink" title="出场人物介绍"></a>出场人物介绍</h4><blockquote>
 <p>介绍一下Controller过渡和交互用到的类</p>
 </blockquote>
@@ -1221,6 +1035,99 @@ extension NSObject: Then {}
             
               
                 
+                <a class="post-title-link" href="/2016/08/25/swift中的extension-持续更新/" itemprop="url">
+                  swift中的extension(持续更新)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-25T12:36:39+08:00" content="2016-08-25">
+              2016-08-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="在工作中会遇到很多关于extension的扩展-我把一些有趣的扩展都存下来-以便以后学习使用"><a href="#在工作中会遇到很多关于extension的扩展-我把一些有趣的扩展都存下来-以便以后学习使用" class="headerlink" title="在工作中会遇到很多关于extension的扩展,我把一些有趣的扩展都存下来,以便以后学习使用~~"></a>在工作中会遇到很多关于extension的扩展,我把一些有趣的扩展都存下来,以便以后学习使用~~</h4><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">extension String&#123;</div><div class="line">    </div><div class="line">      /**</div><div class="line">     将时间戳转换成时间</div><div class="line">     </div><div class="line">     - parameter timestamp: 时间戳</div><div class="line">     - parameter formatter: 时间格式</div><div class="line">     */</div><div class="line">    static func stringFromTimestamp(timestamp: String?, withFormatter formatter: String?) -&gt; String? &#123;</div><div class="line">        guard let stamp = timestamp, fm = formatter else &#123; return nil &#125;</div><div class="line">        let nsStamp = NSString(string: stamp)</div><div class="line">        let date = NSDate(timeIntervalSince1970: nsStamp.doubleValue)</div><div class="line">        let dateFormatter = NSDateFormatter()</div><div class="line">        dateFormatter.dateFormat = fm</div><div class="line">        return dateFormatter.stringFromDate(date)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     将时间转换成字符串</div><div class="line">     </div><div class="line">     */</div><div class="line">    static func stringFromDate(date: NSDate?, withFormatter formatter: String?) -&gt; String? &#123;</div><div class="line">        guard let timeDate = date, fm = formatter else &#123; return nil &#125;</div><div class="line">        let dateFormatter = NSDateFormatter()</div><div class="line">        dateFormatter.dateFormat = fm</div><div class="line">        return dateFormatter.stringFromDate(timeDate)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">    手机号验证</div><div class="line">    </div><div class="line">    - parameter mobile: 手机号</div><div class="line">    </div><div class="line">    - returns: true/fales 符合条件,不符合条件</div><div class="line">    */</div><div class="line">    static func isValidateMobile(mobile: String?) -&gt; Bool &#123;</div><div class="line">        let phoneRegex = &quot;^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d&#123;8&#125;$&quot;</div><div class="line">        let phoneTest = NSPredicate(format: &quot;SELF MATCHES %@&quot;, phoneRegex)</div><div class="line">        if mobile != nil &#123;</div><div class="line">            return phoneTest.evaluateWithObject(mobile)</div><div class="line">        &#125; else &#123;</div><div class="line">            return false</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">    四舍五入</div><div class="line">    </div><div class="line">    - parameter price:    要四舍五入的值</div><div class="line">    - parameter position: 保留多少小数位</div><div class="line">    </div><div class="line">    - returns: 返回四舍五入后的值</div><div class="line">    */</div><div class="line">    static func notRounding(price: Float, afterPoint position: Int16) -&gt; NSString? &#123;</div><div class="line">        let roundingBehavior = NSDecimalNumberHandler(roundingMode: NSRoundingMode.RoundUp, scale: position, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)</div><div class="line">        var ouncesDecimal: NSDecimalNumber</div><div class="line">        var roundedOunces: NSDecimalNumber</div><div class="line">        </div><div class="line">        ouncesDecimal = NSDecimalNumber(float: price)</div><div class="line">        roundedOunces = ouncesDecimal.decimalNumberByRoundingAccordingToBehavior(roundingBehavior)</div><div class="line">        </div><div class="line">        return roundedOunces.stringValue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">    获取当前星期几</div><div class="line">    </div><div class="line">    - parameter date: 传入的时间</div><div class="line">    </div><div class="line">    - returns: 返回当前为星期几元祖</div><div class="line">    */</div><div class="line">    static func getCurrentWeekDay(date: NSDate) -&gt; (String, Int)? &#123;</div><div class="line">        let arrWeek = [&quot;星期日&quot;, &quot;星期一&quot;, &quot;星期二&quot;, &quot;星期三&quot;, &quot;星期四&quot;, &quot;星期五&quot;, &quot;星期六&quot;]</div><div class="line">        let date = NSDate()</div><div class="line">        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)</div><div class="line">        let timeZone = NSTimeZone(name: &quot;Asia/Shanghai&quot;)</div><div class="line">        calendar!.timeZone = timeZone!</div><div class="line">        var comps = NSDateComponents()</div><div class="line">        comps = calendar!.components(NSCalendarUnit.Weekday, fromDate: date)</div><div class="line">        let week = comps.weekday</div><div class="line">        return (arrWeek[week - 1], week - 1)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     本地化字符串</div><div class="line">     </div><div class="line">     - parameter tableName: 文件名称</div><div class="line">     - parameter comment:   注释名称</div><div class="line">     </div><div class="line">     - returns: 本地化后的字符串</div><div class="line">     */</div><div class="line">    func localizedWithComment(tableName: String?, comment: String?) -&gt; String &#123;</div><div class="line">        </div><div class="line">        guard let commentStr = comment else &#123;</div><div class="line">            return NSLocalizedString(self, tableName: tableName!, bundle: NSBundle.mainBundle(), value: &quot;&quot;, comment: &quot;&quot;)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return NSLocalizedString(self, tableName: tableName!, bundle: NSBundle.mainBundle(), value: &quot;&quot;, comment: commentStr)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     本地化字符串</div><div class="line">     </div><div class="line">     - parameter tableName: 文件名称</div><div class="line">     </div><div class="line">     - returns: 本地化后的字符串</div><div class="line">     */</div><div class="line">    func localizedWithComment(tableName: String?) -&gt; String &#123;</div><div class="line">        return NSLocalizedString(self, tableName: tableName!, bundle: NSBundle.mainBundle(), value: &quot;&quot;, comment: &quot;&quot;)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // 对应默认的Localizable.strings</div><div class="line">    var localized: String &#123;</div><div class="line">        return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: &quot;&quot;, comment: &quot;&quot;)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">    浮点数相乘</div><div class="line">    */</div><div class="line">    static func decimalNumberMutiplyWithString(multiplierValue: String, andOtherString otherString: String) -&gt; String &#123;</div><div class="line">        let multiplierNumber = NSDecimalNumber(string: multiplierValue)</div><div class="line">        let multiplicandNumber = NSDecimalNumber(string: otherString)</div><div class="line">        let product = multiplicandNumber.decimalNumberByMultiplyingBy(multiplierNumber)</div><div class="line">        return product.stringValue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     浮点数相加</div><div class="line">     */</div><div class="line">    static func decimalNumberByAdding(multiplierValue: String, andOtherString otherString: String) -&gt; String &#123;</div><div class="line">        let multiplierNumber = NSDecimalNumber(string: multiplierValue)</div><div class="line">        let multiplicandNumber = NSDecimalNumber(string: otherString)</div><div class="line">        let product = multiplicandNumber.decimalNumberByAdding(multiplierNumber)</div><div class="line">        return product.stringValue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     浮点数相减</div><div class="line">     */</div><div class="line">    static func decimalNumberBySubtracting(multiplierValue: String, andOtherString otherString: String) -&gt; String &#123;</div><div class="line">        let multiplierNumber = NSDecimalNumber(string: multiplierValue)</div><div class="line">        let multiplicandNumber = NSDecimalNumber(string: otherString)</div><div class="line">        let product = multiplierNumber.decimalNumberBySubtracting(multiplicandNumber)</div><div class="line">        return product.stringValue</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     过滤空格</div><div class="line">     */</div><div class="line">    static func trimmingCharactersWhite(str: String) -&gt; String &#123;</div><div class="line">        // 去除两端空格</div><div class="line">        let temp = str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())</div><div class="line">        // 去除其余空格</div><div class="line">        let text = temp.stringByReplacingOccurrencesOfString(&quot; &quot;, withString: &quot;&quot;)</div><div class="line">        return text</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line">    //截取特定字符串</div><div class="line">    subscript (r: Range&lt;Int&gt;) -&gt; String &#123;</div><div class="line">        get &#123;</div><div class="line">            let startIndex = self.startIndex.advancedBy(r.startIndex)</div><div class="line">            let endIndex = self.startIndex.advancedBy(r.endIndex)</div><div class="line">            </div><div class="line">            return self[Range(start: startIndex, end: endIndex)]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /**</div><div class="line">     将当前字符串拼接到cache目录后面</div><div class="line">     */</div><div class="line">    func cacheDir() -&gt; String&#123;</div><div class="line">        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last!  as NSString</div><div class="line">        return path.appendingPathComponent((self as NSString).lastPathComponent)</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     将当前字符串拼接到doc目录后面</div><div class="line">     */</div><div class="line">    func docDir() -&gt; String</div><div class="line">    &#123;</div><div class="line">        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last!  as NSString</div><div class="line">        return path.appendingPathComponent((self as NSString).lastPathComponent)</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     将当前字符串拼接到tmp目录后面</div><div class="line">     */</div><div class="line">    func tmpDir() -&gt; String</div><div class="line">    &#123;</div><div class="line">        let path = NSTemporaryDirectory() as NSString</div><div class="line">        return path.appendingPathComponent((self as NSString).lastPathComponent)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/18/Swift-访问控制/" itemprop="url">
                   Swift-访问控制
                 </a>
@@ -1453,6 +1360,137 @@ extension NSObject: Then {}
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/06/ObjectMapper/" itemprop="url">
+                  ObjectMapper的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-06T17:47:47+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="关于ObjectMapper"><a href="#关于ObjectMapper" class="headerlink" title="关于ObjectMapper"></a>关于ObjectMapper</h3><p>关于这个第三方库,我也是最近才接触到,在转到swift的项目当中,其实很长时间都在寻找一个适合库来做网络请求回来的JSON解析,但一直都没有找到较好的,所以之前的项目一直都是手动字典转模型,最近发现了一个轻巧又实用的库–而且再多层嵌套,也可以用几句代码完成转换,简直可以媲美OC中字典转模型的第三方框架.</p>
+<p>Github的地址为:<a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="external">https://github.com/Hearst-DD/ObjectMapper</a></p>
+<p>本文主要是翻译github的内容,大家如果英文阅读能力较好的可以自己翻看英文文档</p>
+<h3 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h3><p>如果一个类或者结构体的接口实现了<strong><em>Mappable</em></strong>接口的时,便可以支持映射,然后还需要实现协议中的两个接口:</p>
+<pre><code>init?(_ map: Map)mutating 
+func mapping(map: Map)
+</code></pre><p>ObjectMapper实用了一个操作符 “&lt;-“来定义成员变量的映射和JSON的转换.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">//这里要定义好需要转换的内容相对于的字段和类型,以后日后方便赋值转换</div><div class="line"> </div><div class="line">  </div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line">    var weight: Double!</div><div class="line">    var array: [AnyObject]?</div><div class="line">    var dictionary: [String : AnyObject] = [:]</div><div class="line">    var bestFriend: User?                       // Nested User object</div><div class="line">    var friends: [User]?                        // Array of Users</div><div class="line">    var birthday: NSDate?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">  //根据字典中的内容用&quot;&lt;-&quot;操作符号来映射相应的内容,将其转换到定义好的成员变量中</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">        weight      &lt;- map[&quot;weight&quot;]</div><div class="line">        array       &lt;- map[&quot;arr&quot;]</div><div class="line">        dictionary  &lt;- map[&quot;dict&quot;]</div><div class="line">        bestFriend  &lt;- map[&quot;best_friend&quot;]</div><div class="line">        friends     &lt;- map[&quot;friends&quot;]</div><div class="line">        birthday    &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"> //结构体的话也是执行相应的操作</div><div class="line">struct Temperature: Mappable &#123;</div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line">    </div><div class="line">    init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    mutating func mapping(map: Map) &#123;</div><div class="line">        celsius     &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit  &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>唔,一旦你的类接口定义了Mappable,那么你这个类就可以调用简答的方法进行字典转模型的转换啦.</p>
+<p>转换一个JSON成相应的类模型:</p>
+<pre><code>let user = User(JSONSting:jsonString)
+</code></pre><p>转换一个模型成相应的字符串:</p>
+<pre><code>let jsonString = user.toJSONString(prettyPrint:true)
+</code></pre><p>除了这种转换方式,Mapper.swfit类还提供了扩展的方法也可以进行同样的转换:</p>
+<pre><code> // 字典转模型
+let user = Mapper&lt;User&gt;().map(JSONString: JSONString)
+//字典转模型
+let JSONString = Mapper().toJSONString(user, prettyPrint: true)
+</code></pre><p>ObjectMapper支持以下的数据类型</p>
+<ul>
+<li>Int</li>
+<li>Bool</li>
+<li>Double</li>
+<li>Float</li>
+<li>String</li>
+<li>RawRepresentable(Enums)</li>
+<li>Array<anyobject></anyobject></li>
+<li>Dictionary<string, anyobject=""></string,></li>
+<li>Object<t: mappable=""></t:></li>
+<li>Array<t: mappable=""></t:></li>
+<li>Array<array<t: mappable="">&gt;</array<t:></li>
+<li>Set<t: mappable=""></t:></li>
+<li>Dictionary<string, t:="" mappable=""></string,></li>
+<li>Dictionary<string, array<t:="" mappable="">&gt;</string,></li>
+<li>Optionals of all the above</li>
+</ul>
+<h3 id="Mappable-Protocol"><a href="#Mappable-Protocol" class="headerlink" title="Mappable Protocol"></a>Mappable Protocol</h3><p><strong><em>mutating func mapping(map: Map)</em></strong><br>这个函数里面定义了映射所需要指向的字符串,当解析JSON的过程中,创建好实例对象以后会去执行这个函数,当生成JSON的过程中,这个函数是唯一一个可以被叫做对象.</p>
+<h3 id="init-map-Map"><a href="#init-map-Map" class="headerlink" title="init?(_ map: Map)"></a>init?(_ map: Map)</h3><p>//翻译未完成,待续…其实ObjectMapper的使用非常简单,只要字符串和相对应的Object一一对应即可…</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1498,7 +1536,7 @@ extension NSObject: Then {}
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

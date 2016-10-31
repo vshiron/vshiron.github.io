@@ -684,137 +684,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/06/ObjectMapper/" itemprop="url">
-                  ObjectMapper的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-06-06T17:47:47+08:00" content="2015-06-06">
-              2015-06-06
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="关于ObjectMapper"><a href="#关于ObjectMapper" class="headerlink" title="关于ObjectMapper"></a>关于ObjectMapper</h3><p>关于这个第三方库,我也是最近才接触到,在转到swift的项目当中,其实很长时间都在寻找一个适合库来做网络请求回来的JSON解析,但一直都没有找到较好的,所以之前的项目一直都是手动字典转模型,最近发现了一个轻巧又实用的库–而且再多层嵌套,也可以用几句代码完成转换,简直可以媲美OC中字典转模型的第三方框架.</p>
-<p>Github的地址为:<a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="external">https://github.com/Hearst-DD/ObjectMapper</a></p>
-<p>本文主要是翻译github的内容,大家如果英文阅读能力较好的可以自己翻看英文文档</p>
-<h3 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h3><p>如果一个类或者结构体的接口实现了<strong><em>Mappable</em></strong>接口的时,便可以支持映射,然后还需要实现协议中的两个接口:</p>
-<pre><code>init?(_ map: Map)mutating 
-func mapping(map: Map)
-</code></pre><p>ObjectMapper实用了一个操作符 “&lt;-“来定义成员变量的映射和JSON的转换.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">//这里要定义好需要转换的内容相对于的字段和类型,以后日后方便赋值转换</div><div class="line"> </div><div class="line">  </div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line">    var weight: Double!</div><div class="line">    var array: [AnyObject]?</div><div class="line">    var dictionary: [String : AnyObject] = [:]</div><div class="line">    var bestFriend: User?                       // Nested User object</div><div class="line">    var friends: [User]?                        // Array of Users</div><div class="line">    var birthday: NSDate?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">  //根据字典中的内容用&quot;&lt;-&quot;操作符号来映射相应的内容,将其转换到定义好的成员变量中</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">        weight      &lt;- map[&quot;weight&quot;]</div><div class="line">        array       &lt;- map[&quot;arr&quot;]</div><div class="line">        dictionary  &lt;- map[&quot;dict&quot;]</div><div class="line">        bestFriend  &lt;- map[&quot;best_friend&quot;]</div><div class="line">        friends     &lt;- map[&quot;friends&quot;]</div><div class="line">        birthday    &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"> //结构体的话也是执行相应的操作</div><div class="line">struct Temperature: Mappable &#123;</div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line">    </div><div class="line">    init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    mutating func mapping(map: Map) &#123;</div><div class="line">        celsius     &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit  &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>唔,一旦你的类接口定义了Mappable,那么你这个类就可以调用简答的方法进行字典转模型的转换啦.</p>
-<p>转换一个JSON成相应的类模型:</p>
-<pre><code>let user = User(JSONSting:jsonString)
-</code></pre><p>转换一个模型成相应的字符串:</p>
-<pre><code>let jsonString = user.toJSONString(prettyPrint:true)
-</code></pre><p>除了这种转换方式,Mapper.swfit类还提供了扩展的方法也可以进行同样的转换:</p>
-<pre><code> // 字典转模型
-let user = Mapper&lt;User&gt;().map(JSONString: JSONString)
-//字典转模型
-let JSONString = Mapper().toJSONString(user, prettyPrint: true)
-</code></pre><p>ObjectMapper支持以下的数据类型</p>
-<ul>
-<li>Int</li>
-<li>Bool</li>
-<li>Double</li>
-<li>Float</li>
-<li>String</li>
-<li>RawRepresentable(Enums)</li>
-<li>Array<anyobject></anyobject></li>
-<li>Dictionary<string, anyobject=""></string,></li>
-<li>Object<t: mappable=""></t:></li>
-<li>Array<t: mappable=""></t:></li>
-<li>Array<array<t: mappable="">&gt;</array<t:></li>
-<li>Set<t: mappable=""></t:></li>
-<li>Dictionary<string, t:="" mappable=""></string,></li>
-<li>Dictionary<string, array<t:="" mappable="">&gt;</string,></li>
-<li>Optionals of all the above</li>
-</ul>
-<h3 id="Mappable-Protocol"><a href="#Mappable-Protocol" class="headerlink" title="Mappable Protocol"></a>Mappable Protocol</h3><p><strong><em>mutating func mapping(map: Map)</em></strong><br>这个函数里面定义了映射所需要指向的字符串,当解析JSON的过程中,创建好实例对象以后会去执行这个函数,当生成JSON的过程中,这个函数是唯一一个可以被叫做对象.</p>
-<h3 id="init-map-Map"><a href="#init-map-Map" class="headerlink" title="init?(_ map: Map)"></a>init?(_ map: Map)</h3><p>//翻译未完成,待续…其实ObjectMapper的使用非常简单,只要字符串和相对应的Object一一对应即可…</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -860,7 +729,7 @@ let JSONString = Mapper().toJSONString(user, prettyPrint: true)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
