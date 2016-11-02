@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="life," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -86,22 +86,25 @@
 
 
 
-<meta name="description" content="点击《爆裂鼓手》查看原文
-   在知乎上看到这个答案非常喜欢,所以保存了下来,曾经我也以为我是很喜欢写代码的,但是看过这片文章以后才发现直接并不是那么的热爱–曾经看过一个视频问,你渴望成功?渴望的程度会想被泡在水里想要呼吸的欲望吗?
-   我问了自己很久,其实我也并没有那么热爱,起码不能说像呼吸那么热爱.说真的就是会觉得编程的世界很广阔,可以让我学习到很多不同的知识和认识很多很厉害的人.正是因为认">
+<meta name="description" content="很多东西在写个过程中才去找速度太慢了,但又不是经常用的内容,遗忘的概念也是非常大的,故此还是大概的记录一下关于NSString的那些特殊的字符串吧~
+很多时候我们在传递数据给服务器的时候,会需要带上一些特殊的字符,比如”上下引号,本来是字符串的结束标记,但是这个时候如果你不想结束怎么办呢?我们可以添加一个\来进行一个转义:
+
+12345NSString* str = @&amp;quot;let \&amp;qu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="哪部电影曾经让你在深夜中痛哭？">
-<meta property="og:url" content="http://yoursite.com/2016/05/19/哪部电影曾经让你在深夜中痛哭？/index.html">
+<meta property="og:title" content="NSString中特殊字符的处理">
+<meta property="og:url" content="http://yoursite.com/2016/03/01/NSString中特殊字符的处理/index.html">
 <meta property="og:site_name" content="shiron">
-<meta property="og:description" content="点击《爆裂鼓手》查看原文
-   在知乎上看到这个答案非常喜欢,所以保存了下来,曾经我也以为我是很喜欢写代码的,但是看过这片文章以后才发现直接并不是那么的热爱–曾经看过一个视频问,你渴望成功?渴望的程度会想被泡在水里想要呼吸的欲望吗?
-   我问了自己很久,其实我也并没有那么热爱,起码不能说像呼吸那么热爱.说真的就是会觉得编程的世界很广阔,可以让我学习到很多不同的知识和认识很多很厉害的人.正是因为认">
-<meta property="og:updated_time" content="2016-10-19T12:39:36.000Z">
+<meta property="og:description" content="很多东西在写个过程中才去找速度太慢了,但又不是经常用的内容,遗忘的概念也是非常大的,故此还是大概的记录一下关于NSString的那些特殊的字符串吧~
+很多时候我们在传递数据给服务器的时候,会需要带上一些特殊的字符,比如”上下引号,本来是字符串的结束标记,但是这个时候如果你不想结束怎么办呢?我们可以添加一个\来进行一个转义:
+
+12345NSString* str = @&amp;quot;let \&amp;qu">
+<meta property="og:updated_time" content="2016-11-01T04:58:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="哪部电影曾经让你在深夜中痛哭？">
-<meta name="twitter:description" content="点击《爆裂鼓手》查看原文
-   在知乎上看到这个答案非常喜欢,所以保存了下来,曾经我也以为我是很喜欢写代码的,但是看过这片文章以后才发现直接并不是那么的热爱–曾经看过一个视频问,你渴望成功?渴望的程度会想被泡在水里想要呼吸的欲望吗?
-   我问了自己很久,其实我也并没有那么热爱,起码不能说像呼吸那么热爱.说真的就是会觉得编程的世界很广阔,可以让我学习到很多不同的知识和认识很多很厉害的人.正是因为认">
+<meta name="twitter:title" content="NSString中特殊字符的处理">
+<meta name="twitter:description" content="很多东西在写个过程中才去找速度太慢了,但又不是经常用的内容,遗忘的概念也是非常大的,故此还是大概的记录一下关于NSString的那些特殊的字符串吧~
+很多时候我们在传递数据给服务器的时候,会需要带上一些特殊的字符,比如”上下引号,本来是字符串的结束标记,但是这个时候如果你不想结束怎么办呢?我们可以添加一个\来进行一个转义:
+
+12345NSString* str = @&amp;quot;let \&amp;qu">
 
 
 
@@ -122,10 +125,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/05/19/哪部电影曾经让你在深夜中痛哭？/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/03/01/NSString中特殊字符的处理/"/>
 
 
-  <title> 哪部电影曾经让你在深夜中痛哭？ | shiron </title>
+  <title> NSString中特殊字符的处理 | shiron </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -255,7 +258,7 @@
             
             
               
-                哪部电影曾经让你在深夜中痛哭？
+                NSString中特殊字符的处理
               
             
           </h1>
@@ -267,8 +270,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-19T17:52:04+08:00" content="2016-05-19">
-              2016-05-19
+            <time itemprop="dateCreated" datetime="2016-03-01T12:13:31+08:00" content="2016-03-01">
+              2016-03-01
             </time>
           </span>
 
@@ -295,12 +298,22 @@
       
 
       
-        <p>点击<a href="https://www.zhihu.com/question/37206525/answer/72868899" target="_blank" rel="external">《爆裂鼓手》</a>查看原文</p>
-<p>   <strong>在知乎上看到这个答案非常喜欢,所以保存了下来,曾经我也以为我是很喜欢写代码的,但是看过这片文章以后才发现直接并不是那么的热爱–曾经看过一个视频问,你渴望成功?渴望的程度会想被泡在水里想要呼吸的欲望吗?</strong></p>
-<p>   <strong>我问了自己很久,其实我也并没有那么热爱,起码不能说像呼吸那么热爱.说真的就是会觉得编程的世界很广阔,可以让我学习到很多不同的知识和认识很多很厉害的人.正是因为认识了他们,所以我才会明白自己的不足.</strong></p>
-<p>   <strong>然后对于生活的抉择,我也在迷茫,我也不知道要往哪里走,只是希望一切能顺顺利利的.说到身在福中不知福,突然就想到小时候没有好好的享受童年,现在等到有很大工作压力的时候才来后悔啊啊,以后一定让自己的孩子好好学习,不要浪费有趣的童年.</strong></p>
-<p>   <strong>我本来是有很多奇奇怪怪的话要说的,但是刚刚打了一篇文章,放在了日记里面,现在不那么想说了,一份日记承载了我所以的心情,点点滴滴.回顾起来,突然想问自己,什么才叫成功,什么才叫幸福呢?我们之所以努力,不是为了过上更好的日子吗?</strong></p>
-
+        <h5 id="很多东西在写个过程中才去找速度太慢了-但又不是经常用的内容-遗忘的概念也是非常大的-故此还是大概的记录一下关于NSString的那些特殊的字符串吧"><a href="#很多东西在写个过程中才去找速度太慢了-但又不是经常用的内容-遗忘的概念也是非常大的-故此还是大概的记录一下关于NSString的那些特殊的字符串吧" class="headerlink" title="很多东西在写个过程中才去找速度太慢了,但又不是经常用的内容,遗忘的概念也是非常大的,故此还是大概的记录一下关于NSString的那些特殊的字符串吧~"></a>很多东西在写个过程中才去找速度太慢了,但又不是经常用的内容,遗忘的概念也是非常大的,故此还是大概的记录一下关于NSString的那些特殊的字符串吧~</h5><ul>
+<li>很多时候我们在传递数据给服务器的时候,会需要带上一些特殊的字符,比如”上下引号,本来是字符串的结束标记,但是这个时候如果你不想结束怎么办呢?我们可以添加一个<code>\</code>来进行一个转义:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSString* str = @&quot;let \&quot; 如果不写斜杠的话会报错 \&quot; &quot;;</div><div class="line"></div><div class="line">NSLog(@&quot;--%@&quot;,str);</div><div class="line"></div><div class="line">打印结果: --let &quot; 如果不写斜杠的话会报错 &quot;</div></pre></td></tr></table></figure>
+<ul>
+<li>如果有特殊字符串%的话,可以用两个同样的%来显示:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSUInteger count = 80;</div><div class="line"></div><div class="line">NSString* str =  [NSString stringWithFormat:@&quot;%zd%%&quot;,count];</div><div class="line"></div><div class="line">NSLog(@&quot;--%@&quot;,str);</div><div class="line"></div><div class="line">打印结果:--80%</div></pre></td></tr></table></figure>
+<ul>
+<li>有时候因为业务需要,需要有0来作占位符,补全0的方法是:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSUInteger count = 80;</div><div class="line">//有多少位数就在前面写数字多少,空的会自动填上</div><div class="line">NSString* str =  [NSString stringWithFormat:@&quot;%05zd&quot;,count];</div><div class="line"></div><div class="line">NSLog(@&quot;--%@&quot;,str);</div><div class="line"></div><div class="line">打印结果:--00080</div></pre></td></tr></table></figure>
+<ul>
+<li>保留2位小数点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">NSString* str =  [NSString stringWithFormat:@&quot;%.3f&quot;,M_PI];</div><div class="line"></div><div class="line">NSLog(@&quot;--%@&quot;,str);</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -320,27 +333,21 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/life/" rel="tag">#life</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/05/iOS中模拟发送http请求以及解析xml/" rel="next" title="iOS中模拟发送http请求以及解析xml">
-                <i class="fa fa-chevron-left"></i> iOS中模拟发送http请求以及解析xml
+              <a href="/2016/02/13/Swift中-enum和Switch的应用/" rel="next" title="Swift中 enum和Switch的应用">
+                <i class="fa fa-chevron-left"></i> Swift中 enum和Switch的应用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/19/iOS-架构模式-–-简述-MVC-MVP-MVVM-和-VIPER-转/" rel="prev" title="iOS 架构模式 – 简述 MVC, MVP, MVVM 和 VIPER (转)">
-                iOS 架构模式 – 简述 MVC, MVP, MVVM 和 VIPER (转) <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/07/ReactiveCocoa在swift情况下使用宏/" rel="prev" title="ReactiveCocoa在swift情况下使用宏">
+                ReactiveCocoa在swift情况下使用宏 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -455,7 +462,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#很多东西在写个过程中才去找速度太慢了-但又不是经常用的内容-遗忘的概念也是非常大的-故此还是大概的记录一下关于NSString的那些特殊的字符串吧"><span class="nav-number">1.</span> <span class="nav-text">很多东西在写个过程中才去找速度太慢了,但又不是经常用的内容,遗忘的概念也是非常大的,故此还是大概的记录一下关于NSString的那些特殊的字符串吧~</span></a></li></ol></div>
             
           </div>
         </section>

@@ -248,6 +248,136 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/13/Java异常处理抛出/" itemprop="url">
+                  Java异常处理抛出
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-13T14:34:48+08:00" content="2016-06-13">
+              2016-06-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>其实在Java中的异常在Swift中也曾看到过,但是在实际中没有用过,所以也不知道具体的效果,可能在Siwft中的异常处理机制比较温和吧,Java中数组越界,或者其他错误都会导致程序直接停止.所以异常对于Java来说其实也是很重要的一个机制吧.</p>
+<p>###1.所谓的异常就是在Java程序运行过程中出现的错误.</p>
+<ul>
+<li>Error : 直接的错误信息,网络回调错误,数据库异常等.</li>
+<li>Execption : 异常信息,较为核心的是RuntimeException子类<br>######<em>注:以上两个类都是继承了Throwable的类</em></li>
+</ul>
+<p>###2.try…catch 的格式(方式)</p>
+<ul>
+<li>A:异常处理的两种方式<ul>
+<li>a:try…catch…finally<br><em>注意:1.被finally控制的语句体一定会执行</em><br><em>2.用于释放资源，在IO流操作和数据库操作中会见到</em><ul>
+<li>try catch</li>
+<li>try catch finally</li>
+<li>try finally </li>
+</ul>
+</li>
+<li>b:throws</li>
+</ul>
+</li>
+<li>B:try…catch处理异常的基本格式<ul>
+<li>try…catch…finally</li>
+</ul>
+</li>
+</ul>
+<p>###3.那么我们如何选择异常处理的方式呢?</p>
+<ul>
+<li>原则:如果该功能内部可以将问题处理,用try,如果处理不了,交由调用者处理,这是用throws</li>
+<li>区别:<ul>
+<li>后续程序需要继续运行就try</li>
+<li>后续程序不需要继续运行就throws</li>
+</ul>
+</li>
+</ul>
+<p>###4.自定义异常的主要原因是为了可以快速定位异常的原因</p>
+<ul>
+<li>一种是继承自RuntimeException,另外一种是继承Exception.</li>
+</ul>
+<p><em>其实对于异常的使用,还是不是特别理解,日后回来再填坑.</em></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/06/ObjectMapper/" itemprop="url">
                   ObjectMapper的使用
                 </a>
@@ -1673,138 +1803,6 @@ UIView .commitAnimations()
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/12/swift-中异常处理do-catch的简单理解/" itemprop="url">
-                  swift 中异常处理do...catch的简单理解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-12T13:19:47+08:00" content="2016-03-12">
-              2016-03-12
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="1-使用枚举来设置错误值是很好的办法"><a href="#1-使用枚举来设置错误值是很好的办法" class="headerlink" title="1. 使用枚举来设置错误值是很好的办法"></a>1. 使用枚举来设置错误值是很好的办法</h4><p>使用如下办法来创建异常类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">enum NetWorkingError:Error &#123;</div><div class="line">    case NilString</div><div class="line">    case WithoutUrl</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="2-怎么去抛出异常"><a href="#2-怎么去抛出异常" class="headerlink" title="2. 怎么去抛出异常"></a>2. 怎么去抛出异常</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">func getString(Str:String?) throws -&gt;String</div></pre></td></tr></table></figure>
-<p>聪明的你,肯定一眼就能看明白,只想要在返回值前面写一个throws关键字就可以定义异常抛出了,其实感觉有点象以后oc中带一个error的参数.不过在swift中含有error的api几乎都改成了异常抛出了.<br>那么,如何使用呢?</p>
-<p>我们只需在调用方法的时候使用do…catch就可以了:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">do &#123;</div><div class="line">			//如果无法处理该方法,则直接跳去catch里面</div><div class="line">         let s = try getString(Str: nil)</div><div class="line">         print(s)</div><div class="line">     &#125; catch &#123;</div><div class="line">         print(&quot;错误处理&quot;)</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
-<p>如果你觉得你已经做好了处理,肯定不会产生异常信息,可以使用<code>try!</code>,这种方法去解析,但一般不建议这样使用</p>
-<pre><code>let str = try! getString(Str:&quot;abc&quot;)
-</code></pre><h4 id="3-如果写入一个异常"><a href="#3-如果写入一个异常" class="headerlink" title="3. 如果写入一个异常?"></a>3. 如果写入一个异常?</h4><p>我们还没有说到异常是怎么抛出的,作为一种新的语言,swift还提供了优雅的方式来处理异常:<code>guard</code>,如果换成用语言来描述的话:条件成立的时候跳过else里面处理方式,所以有下面的写法:</p>
-<pre><code>func getString(Str:String?) throws -&gt;String{
-
-    guard let str = Str else {
-        throw NetWorkingError.NilString
-    }
-    return &quot;........\(str)&quot;
-}
-</code></pre><p>这个时候就可以定义了异常的抛出了,swift也支持了 Pattern Matching 功能,是不是很像Java中的抛出?</p>
-<p>所以,在代码中我们可以再作处理:</p>
-<pre><code> func getString(Str:String?,Url:String?) throws -&gt;String{
-
-    guard let str = Str else {
-    //抛出一个异常
-        throw NetWorkingError.NilString
-    }
-
-    guard let str = Url else {
-    //抛出第二个异常
-        throw NetWorkingError.WithoutUrl
-    }
-
-    return &quot;........\(str)&quot;
-}
-</code></pre><p>那么,我们在使用的时候就可以对异常进行二次捕抓:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">do &#123;</div><div class="line">    try functionWillThrowError()</div><div class="line">    //</div><div class="line">  &#125; catch NetWorkingError.NilString &#123;</div><div class="line">    // deal with not exist</div><div class="line">  &#125; catch NetWorkingError.WithoutUrl &#123;</div><div class="line">    // deal with not exist</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结:"></a>4. 总结:</h4><ul>
-<li>使用 ErrorType 的帮助建立你的异常类型</li>
-<li>使用 throws 来声明异常，用 throw 来抛出异常</li>
-<li>使用 do-catch 机制来获取和处理异常</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1850,7 +1848,7 @@ UIView .commitAnimations()
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
