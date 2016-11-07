@@ -248,6 +248,102 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/13/swift中动态获得类型/" itemprop="url">
+                  swift中动态获得类型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-13T20:29:53+08:00" content="2015-12-13">
+              2015-12-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>在100个swift 的tips中无意中看到一直不懂的如何动态获得swift中类的类型。</strong><br>原来在swift中有一个关键字是可以动态获得类的类型的：dynamicType。<br>借用书上的例子就是使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">let date = NSDate()</div><div class="line">let nameType: AnyClass! = object_getClass(date)</div><div class="line">print(nameType)获得</div><div class="line"></div><div class="line">let data = NSData()</div><div class="line">let nameType = data.dynamicType</div><div class="line">print(nameType)获得</div></pre></td></tr></table></figure>
+<p>swift中的类型如String也一样可以使用，另外我还发现原来在swift中即使没有导入runtime的头文件，也可以直接调用runtime.h的类方法。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/11/30/Mou的使用/" itemprop="url">
                   Mou的使用
                 </a>
@@ -300,7 +396,7 @@
 <h4 id="Blockquotes"><a href="#Blockquotes" class="headerlink" title="Blockquotes"></a>Blockquotes</h4><blockquote>
 <p>Right angle brackets &gt; are used for block quotes.</p>
 </blockquote>
-<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#64;&#x65;&#120;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;">&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#64;&#x65;&#120;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;</a> link.</p>
+<h4 id="Links-and-Email"><a href="#Links-and-Email" class="headerlink" title="Links and Email"></a>Links and Email</h4><p>An email <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a> link.</p>
 <p>Simple inline link <a href="http://chenluois.com" target="_blank" rel="external">http://chenluois.com</a>, another inline link <a href="http://25.io/smaller/" target="_blank" rel="external">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension" target="_blank" rel="external">Resize</a>.</p>
 <p>A <a href="http://25.io/mou/" title="Markdown editor on Mac OS X" target="_blank" rel="external">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
 <p>Titles ( or called tool tips ) in the links are optional.</p>
@@ -586,6 +682,99 @@ var Mou = exactlyTheAppIwant;
 </li>
 </ol>
 
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/03/iOS的WebView自适应内容高度/" itemprop="url">
+                  iOS的WebView自适应内容高度
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-03T08:30:16+08:00" content="2015-11-03">
+              2015-11-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">////////初始化，self.view是父控件///////////</div><div class="line">    _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 0)];</div><div class="line">    _webView.delegate = self;</div><div class="line">    _webView.scrollView.bounces = NO;</div><div class="line">    _webView.scrollView.showsHorizontalScrollIndicator = NO;</div><div class="line">    _webView.scrollView.scrollEnabled = NO;</div><div class="line">    [_webView sizeToFit];</div><div class="line"></div><div class="line">   //////////设置内容，这里包装一层div，用来获取内容实际高度（像素），htmlcontent是html格式的字符串//////////////    </div><div class="line">    NSString * htmlcontent = [NSString stringWithFormat:@&quot;&lt;div id=\&quot;webview_content_wrapper\&quot;&gt;%@&lt;/div&gt;&quot;, htmlcontent];</div><div class="line">    [_webView loadHTMLString:htmlcontent baseURL:nil];</div><div class="line"></div><div class="line"> ////////////delegate的方法重载//////////////////</div><div class="line">- (void)webViewDidFinishLoad:(UIWebView *)webView</div><div class="line">&#123;</div><div class="line">    //获取页面高度（像素）</div><div class="line">    NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @&quot;document.body.clientHeight&quot;];</div><div class="line">    float clientheight = [clientheight_str floatValue];</div><div class="line">    //设置到WebView上</div><div class="line">    webView.frame = CGRectMake(0, 0, self.view.frame.size.width, clientheight);</div><div class="line">    //获取WebView最佳尺寸（点）</div><div class="line">    CGSize frame = [webView sizeThatFits:webView.frame.size];</div><div class="line">    </div><div class="line">   //获取内容实际高度（像素）</div><div class="line">    NSString * height_str= [webView stringByEvaluatingJavaScriptFromString: @&quot;document.getElementById(&apos;webview_content_wrapper&apos;).clientHeight + parseInt(window.getComputedStyle(document.getElementsByTagName(&apos;body&apos;)[0]).getPropertyValue(&apos;margin-top&apos;))  + parseInt(window.getComputedStyle(document.getElementsByTagName(&apos;body&apos;)[0]).getPropertyValue(&apos;margin-bottom&apos;))&quot;];</div><div class="line">    float height = [height_str floatValue];</div><div class="line">    //内容实际高度（像素）* 点和像素的比</div><div class="line">    height = height * frame.height / clientheight;</div><div class="line">    //再次设置WebView高度（点）</div><div class="line">    webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           
         
       
@@ -1220,7 +1409,7 @@ var Mou = exactlyTheAppIwant;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
