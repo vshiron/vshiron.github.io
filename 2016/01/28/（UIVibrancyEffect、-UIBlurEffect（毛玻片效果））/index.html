@@ -1,0 +1,608 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="shiron" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="在iOS 8后，苹果开放了不少创建特效的接口，其中就包括创建毛玻璃(blur)的接口。
+通常要想创建一个特殊效果(如blur效果)，可以创建一个UIVisualEffectView视图对象，这个对象提供了一种简单的方式来实现复杂的视觉效果。这个可以把这个对象看作是效果的一个容器，实际的效果会影响到该视图对象底下的内容，或者是添加到该视图对象的contentView中的内容。
+我们举个例子来看看如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（UIVibrancyEffect、 UIBlurEffect（毛玻片效果））">
+<meta property="og:url" content="http://yoursite.com/2016/01/28/（UIVibrancyEffect、-UIBlurEffect（毛玻片效果））/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="在iOS 8后，苹果开放了不少创建特效的接口，其中就包括创建毛玻璃(blur)的接口。
+通常要想创建一个特殊效果(如blur效果)，可以创建一个UIVisualEffectView视图对象，这个对象提供了一种简单的方式来实现复杂的视觉效果。这个可以把这个对象看作是效果的一个容器，实际的效果会影响到该视图对象底下的内容，或者是添加到该视图对象的contentView中的内容。
+我们举个例子来看看如果">
+<meta property="og:updated_time" content="2016-10-19T10:03:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="（UIVibrancyEffect、 UIBlurEffect（毛玻片效果））">
+<meta name="twitter:description" content="在iOS 8后，苹果开放了不少创建特效的接口，其中就包括创建毛玻璃(blur)的接口。
+通常要想创建一个特殊效果(如blur效果)，可以创建一个UIVisualEffectView视图对象，这个对象提供了一种简单的方式来实现复杂的视觉效果。这个可以把这个对象看作是效果的一个容器，实际的效果会影响到该视图对象底下的内容，或者是添加到该视图对象的contentView中的内容。
+我们举个例子来看看如果">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/28/（UIVibrancyEffect、-UIBlurEffect（毛玻片效果））/"/>
+
+
+  <title> （UIVibrancyEffect、 UIBlurEffect（毛玻片效果）） | shiron </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">shiron</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                （UIVibrancyEffect、 UIBlurEffect（毛玻片效果））
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-28T17:58:29+08:00" content="2016-01-28">
+              2016-01-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在iOS 8后，苹果开放了不少创建特效的接口，其中就包括创建毛玻璃(blur)的接口。</p>
+<p>通常要想创建一个特殊效果(如blur效果)，可以创建一个<strong>UIVisualEffectView</strong>视图对象，这个对象提供了一种简单的方式来实现复杂的视觉效果。这个可以把这个对象看作是效果的一个容器，实际的效果会影响到该视图对象底下的内容，或者是添加到该视图对象的<strong>contentVie</strong>w中的内容。</p>
+<p>我们举个例子来看看如果使用UIVisualEffectView：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let bgView: UIImageView = UIImageView(image: UIImage(named: &quot;visual&quot;))</div><div class="line">bgView.frame = self.view.bounds</div><div class="line">self.view.addSubview(bgView)</div><div class="line">let blurEffect: UIBlurEffect = UIBlurEffect(style: .Light)</div><div class="line">let blurView: UIVisualEffectView = UIVisualEffectView(effect: blurEffect)</div><div class="line">blurView.frame = CGRectMake(50.0, 50.0, self.view.frame.width - 100.0, 200.0)</div><div class="line">self.view.addSubview(blurView)</div></pre></td></tr></table></figure>
+<p>这段代码是在当前视图控制器上添加了一个UIImageView作为背景图。然后在视图的一小部分中使用了blur效果。</p>
+<p>我们可以看到<strong>UIVisualEffectView</strong>还是非常简单的。需要注意是的，不应该直接添加子视图到<strong>UIVisualEffectView</strong>视图中，而是应该添加到<strong>UIVisualEffectView</strong>对象的contentView中。</p>
+<p>另外，尽量避免将UIVisualEffectView对象的alpha值设置为小于1.0的值，因为创建半透明的视图会导致系统在离屏渲染时去对UIVisualEffectView对象及所有的相关的子视图做混合操作。这不但消耗CPU/GPU，也可能会导致许多效果显示不正确或者根本不显示。</p>
+<p>我们在上面看到，初始化一个UIVisualEffectView对象的方法是<code>UIVisualEffectView(effect: blurEffect)</code>，其定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">init(effect effect: UIVisualEffect)</div></pre></td></tr></table></figure>
+<p>这个方法的参数是一个UIVisualEffect对象。我们查看官方文档，可以看到在UIKit中，定义了几个专门用来创建视觉特效的，它们分别是UIVisualEffect、UIBlurEffect和UIVibrancyEffect。它们的继承层次如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSObject</div><div class="line">| -- UIVisualEffect</div><div class="line">    | -- UIBlurEffect</div><div class="line">    | -- UIVibrancyEffect</div></pre></td></tr></table></figure>
+<p>UIVisualEffect是一个继承自NSObject的创建视觉效果的基类，然而这个类除了继承自NSObject的属性和方法外，没有提供任何新的属性和方法。其主要目的是用于初始化UIVisualEffectView，在这个初始化方法中可以传入UIBlurEffect或者UIVibrancyEffect对象。</p>
+<p>一个UIBlurEffect对象用于将blur(毛玻璃)效果应用于UIVisualEffectView视图下面的内容。如上面的示例所示。不过，这个对象的效果并不影响UIVisualEffectView对象的contentView中的内容。</p>
+<p>UIBlurEffect主要定义了三种效果，这些效果由枚举UIBlurEffectStyle来确定，该枚举的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">enum UIBlurEffectStyle : Int &#123;</div><div class="line">    case ExtraLight</div><div class="line">    case Light</div><div class="line">    case Dark</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其主要是根据色调(hue)来确定特效视图与底部视图的混合。</p>
+<p>与UIBlurEffect不同的是，UIVibrancyEffect主要用于放大和调整UIVisualEffectView视图下面的内容的颜色，同时让UIVisualEffectView的contentView中的内容看起来更加生动。通常UIVibrancyEffect对象是与UIBlurEffect一起使用，主要用于处理在UIBlurEffect特效上的一些显示效果。接上面的代码，我们看看在blur的视图上添加一些新的特效，如下代码所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">let vibrancyView: UIVisualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))</div><div class="line">vibrancyView.setTranslatesAutoresizingMaskIntoConstraints(false)</div><div class="line">blurView.contentView.addSubview(vibrancyView)</div><div class="line">var label: UILabel = UILabel()</div><div class="line">label.setTranslatesAutoresizingMaskIntoConstraints(false)</div><div class="line">label.text = &quot;Vibrancy Effect&quot;</div><div class="line">label.font = UIFont(name: &quot;HelveticaNeue-Bold&quot;, size: 30)</div><div class="line">label.textAlignment = .Center</div><div class="line">label.textColor = UIColor.whiteColor()</div><div class="line">vibrancyView.contentView.addSubview(label)</div></pre></td></tr></table></figure>
+<p>vibrancy特效是取决于颜色值的。所有添加到contentView的子视图都必须实现tintColorDidChange方法并更新自己。需要注意的是，我们使用<code>UIVibrancyEffect(forBlurEffect:)</code>方法创建UIVibrancyEffect时，参数blurEffect必须是我们想加效果的那个blurEffect，否则可能不是我们想要的效果。</p>
+<p>另外，UIVibrancyEffect还提供了一个类方法<code>notificationCenterVibrancyEffect</code>，其声明如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class func notificationCenterVibrancyEffect() -&gt; UIVibrancyEffect!</div></pre></td></tr></table></figure>
+<p>这个方法创建一个用于通知中心的Today扩展的vibrancy特效。</p>
+<p><strong>本文为过去学习的时候留下来的笔记,现在已经找不到原文出处,如果发现,请联系303661702</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/19/放肆的使用UIBezierPath和CAShapeLayer画各种图形/" rel="next" title="放肆的使用UIBezierPath和CAShapeLayer画各种图形">
+                <i class="fa fa-chevron-left"></i> 放肆的使用UIBezierPath和CAShapeLayer画各种图形
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/13/Swift中-enum和Switch的应用/" rel="prev" title="Swift中 enum和Switch的应用">
+                Swift中 enum和Switch的应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wuzhi.me/avatar/112063.1460211687.jpg"
+               alt="shiron" />
+          <p class="site-author-name" itemprop="name">shiron</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shiron</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="swift," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="shiron" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处阅读原文)
+
+本篇文章主要讲的就是在学习了UIView的基础上,如何在学习UIViewController的自定义效果
+
+效果图如下:
+
+点击模态controller，会弹出一个新的绿色UIViewController，手指下滑可以dismiss这个controller
+四个角的按钮可以自定义圆形">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Controller间的自定义过渡效果">
+<meta property="og:url" content="http://yoursite.com/2016/10/17/Controller间的自定义过渡效果/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处阅读原文)
+
+本篇文章主要讲的就是在学习了UIView的基础上,如何在学习UIViewController的自定义效果
+
+效果图如下:
+
+点击模态controller，会弹出一个新的绿色UIViewController，手指下滑可以dismiss这个controller
+四个角的按钮可以自定义圆形">
+<meta property="og:updated_time" content="2016-10-27T13:28:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Controller间的自定义过渡效果">
+<meta name="twitter:description" content="(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处阅读原文)
+
+本篇文章主要讲的就是在学习了UIView的基础上,如何在学习UIViewController的自定义效果
+
+效果图如下:
+
+点击模态controller，会弹出一个新的绿色UIViewController，手指下滑可以dismiss这个controller
+四个角的按钮可以自定义圆形">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/17/Controller间的自定义过渡效果/"/>
+
+
+  <title> Controller间的自定义过渡效果 | shiron </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">shiron</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Controller间的自定义过渡效果
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-17T18:58:48+08:00" content="2016-10-17">
+              2016-10-17
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处<a href="http://liuyanwei.jumppo.com/index.html" target="_blank" rel="external">阅读原文</a>)</strong></p>
+<blockquote>
+<p>本篇文章主要讲的就是在学习了UIView的基础上,如何在学习UIViewController的自定义效果</p>
+</blockquote>
+<p>效果图如下:</p>
+<ul>
+<li>点击模态controller，会弹出一个新的绿色UIViewController，手指下滑可以dismiss这个controller</li>
+<li>四个角的按钮可以自定义圆形切换的过渡效果切换的一个红色的UIViewController，点击返回用同样的方式切换回来</li>
+</ul>
+<p><a href="http://liuyanwei.jumppo.com/assets/uploads/ControllerTransitioning1.gif" target="_blank" rel="external"></a></p>
+<h4 id="出场人物介绍"><a href="#出场人物介绍" class="headerlink" title="出场人物介绍"></a>出场人物介绍</h4><blockquote>
+<p>介绍一下Controller过渡和交互用到的类</p>
+</blockquote>
+<h5 id="presention-and-presented"><a href="#presention-and-presented" class="headerlink" title="presention and presented"></a><code>presention and presented</code></h5><pre><code>A中模态显示B,那么A就是presention，b就是presented，后续内容会使用这种叫法称呼Modal下的2个controller
+</code></pre><h5 id="UIViewControllerTransitioningDelegate"><a href="#UIViewControllerTransitioningDelegate" class="headerlink" title="UIViewControllerTransitioningDelegate"></a><code>UIViewControllerTransitioningDelegate</code></h5><pre><code>Controller modal过渡的presented和dismiss的动画交互协议，你需要实现协议，它会询问你：
+</code></pre><ul>
+<li>当PresentedController时，你要使用怎样的动画类（UIViewControllerAnimatedTransitioning）展示过渡效果？</li>
+<li>当DismissedController时，你要使用怎样的动画类（UIViewControllerAnimatedTransitioning）展示过渡效果？</li>
+<li>当PresentedController时，你要使用怎样的过渡交互类（UIViewControllerInteractiveTransitioning）处理过渡交互？</li>
+<li>当DismissedController时，你要使用怎样的过渡交互类（UIViewControllerInteractiveTransitioning）处理过渡交互？</li>
+</ul>
+<h5 id="UIViewControllerAnimatedTransitioning"><a href="#UIViewControllerAnimatedTransitioning" class="headerlink" title="UIViewControllerAnimatedTransitioning"></a><code>UIViewControllerAnimatedTransitioning</code></h5><p>过渡动画效果的具体实现的接口，需要实现它的3个方法，即可完成一个controller过渡动画效果</p>
+<ul>
+<li><code>func animationEnded</code>：过渡动画完成后要执行的代码可以写到这个方法中</li>
+<li><code>func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -&gt; NSTimeInterval</code>：给定一个过渡动画的执行时间</li>
+<li><code>func animateTransition(transitionContext: UIViewControllerContextTransitioning)</code> ：具体过渡动画都在这个方法里面实现，在这个方法中可以通过transitionContext拿到一切你需要的对象，后面会有讲到</li>
+</ul>
+<h5 id="UINavigationControllerDelegate"><a href="#UINavigationControllerDelegate" class="headerlink" title="UINavigationControllerDelegate"></a><code>UINavigationControllerDelegate</code></h5><pre><code>Controller 非模态状态下的的过渡动画，就不能使用之前说的那个UIViewControllerTransitioningDelegate委托解决了，就需要用UINavigationControllerDelegate，接口方法比较类似，但也不完全一样
+</code></pre><ul>
+<li>你要使用怎样的动画类（UIViewControllerAnimatedTransitioning）展示过渡效果？</li>
+<li>你要使用怎样的过渡交互类（UIViewControllerInteractiveTransitioning）处理过渡交互？</li>
+<li>willShowViewController，didShowViewController ： 生命周期事件</li>
+<li>navigationControllerSupportedInterfaceOrientations: 屏幕支持的方向</li>
+</ul>
+<h5 id="UIViewControllerInteractiveTransitioning"><a href="#UIViewControllerInteractiveTransitioning" class="headerlink" title="UIViewControllerInteractiveTransitioning"></a><code>UIViewControllerInteractiveTransitioning</code></h5><pre><code>这个类用于实现在转场过路效果中的交互，比如在demo中，用它实现了一个手指下滑解除modal状态的效果
+</code></pre><h5 id="UIViewControllerContextTransitioning"><a href="#UIViewControllerContextTransitioning" class="headerlink" title="UIViewControllerContextTransitioning"></a><code>UIViewControllerContextTransitioning</code></h5><p>UIViewControllerAnimatedTransitioning协议的关键方法<code>animateTransition(transitionContext: UIViewControllerContextTransitioning)</code>里面可以得到，使用transitionContext可以获取一些重要的上下文信息，比如前后的controller，转换时的容器等，示例如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//拿到前后的两个controller</div><div class="line">        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!</div><div class="line">        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!</div><div class="line">        //拿到Presenting的最终Frame</div><div class="line">        let finalFrameForVC = transitionContext.finalFrameForViewController(toVC)</div><div class="line">        //拿到转换的容器view</div><div class="line">        let containerView = transitionContext.containerView()</div><div class="line">        //拿到过渡动画执行时间</div><div class="line">        transitionDuration(transitionContext)</div></pre></td></tr></table></figure>
+<h4 id="Controller-modal过渡效果"><a href="#Controller-modal过渡效果" class="headerlink" title="Controller modal过渡效果"></a>Controller modal过渡效果</h4><p>我们先来实现一个简单的示例，点击一个按钮，出现一个modal controller，自定义从下往上弹出并且有些回弹效果的过渡动画。从这个例子中我们可以了解</p>
+<ul>
+<li>如何实现UIViewControllerTransitioningDelegate</li>
+<li>如何实现UIViewControllerAnimatedTransitioning</li>
+<li>如何组合在一起完成功能</li>
+</ul>
+<p>示例效果见demo点击后，弹出的绿色界</p>
+<h5 id="步骤1：界面画出按钮，点击之后用-modal-显示-To2ViewController，并设置transitioningDelegate指向自己"><a href="#步骤1：界面画出按钮，点击之后用-modal-显示-To2ViewController，并设置transitioningDelegate指向自己" class="headerlink" title="步骤1：界面画出按钮，点击之后用 modal 显示 To2ViewController，并设置transitioningDelegate指向自己"></a><code>步骤1：界面画出按钮，点击之后用 modal 显示 To2ViewController，并设置transitioningDelegate指向自己</code></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//模态视图切换效果</div><div class="line">   @IBAction func Transitioning2(sender: AnyObject) &#123;</div><div class="line">       let toVC = To2ViewController()</div><div class="line">       //设置transitioning委托为自己</div><div class="line">       toVC.transitioningDelegate = self</div><div class="line">       navigationController?.presentViewController(toVC, animated: true, completion: nil)</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h5 id="步骤2：controller-实现-UIViewControllerTransitioningDelegate"><a href="#步骤2：controller-实现-UIViewControllerTransitioningDelegate" class="headerlink" title="步骤2：controller 实现 UIViewControllerTransitioningDelegate"></a>步骤2：<code>controller 实现 UIViewControllerTransitioningDelegate</code></h5><p>demo中使用了extension的方式继承UIViewControllerTransitioningDelegate，好处是代码逻辑分离</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//模态视图切换效果</div><div class="line">extension ControllerTransitioningDemoViewController:UIViewControllerTransitioningDelegate&#123;</div><div class="line"></div><div class="line">    //返回Presented使用的UIViewControllerAnimatedTransitioning类</div><div class="line">    </div><div class="line">    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -&gt; UIViewControllerAnimatedTransitioning?&#123;</div><div class="line">        return PresentedAnimation() // PresentedAnimation 是自定义的过渡动画效果的实现类，继承自UIViewControllerAnimatedTransitioning 步骤3中介绍它</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="步骤3-实现一个过渡效果为自下而上弹出并有些晃动的UIViewControllerAnimatedTransitioning类"><a href="#步骤3-实现一个过渡效果为自下而上弹出并有些晃动的UIViewControllerAnimatedTransitioning类" class="headerlink" title="步骤3: 实现一个过渡效果为自下而上弹出并有些晃动的UIViewControllerAnimatedTransitioning类"></a>步骤3: <code>实现一个过渡效果为自下而上弹出并有些晃动的UIViewControllerAnimatedTransitioning类</code></h5><p>就如之前对UIViewControllerAnimatedTransitioning介绍的那样，需要继承自UIViewControllerAnimatedTransitioning，然后实现它的三个委托方法，具体实现请看代码注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">import UIKit</div><div class="line"></div><div class="line">public class PresentedAnimation: NSObject,UIViewControllerAnimatedTransitioning &#123;</div><div class="line"></div><div class="line">    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -&gt; NSTimeInterval&#123;</div><div class="line">        //转场过渡动画的执行时间</div><div class="line">        return 0.6</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // This method can only  be a nop if the transition is interactive and not a percentDriven interactive transition.</div><div class="line">    //在进行切换的时候将调用该方法，我们对于切换时的UIView的设置和动画都在这个方法中完成。</div><div class="line">    public func animateTransition(transitionContext: UIViewControllerContextTransitioning)&#123;</div><div class="line">        //拿到前后的两个controller</div><div class="line">        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!</div><div class="line">        //弹出的控制器</div><div class="line">        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!</div><div class="line">        //拿到Presenting的最终Frame</div><div class="line">        let finalFrameForVC = transitionContext.finalFrameForViewController(toVC)</div><div class="line">        //拿到转换的容器view</div><div class="line">        let containerView = transitionContext.containerView()</div><div class="line">        //获取屏幕宽高</div><div class="line">        let bounds = UIScreen.mainScreen().bounds</div><div class="line">        //设置弹出控制器的初始位置</div><div class="line">        toVC.view.frame = CGRectOffset(finalFrameForVC, 0, bounds.size.height)</div><div class="line">        containerView!.addSubview(toVC.view)</div><div class="line"></div><div class="line">        //自下而上弹出toVC的动画</div><div class="line">        UIView.animateWithDuration(transitionDuration(transitionContext),</div><div class="line">                                    delay: 0.0,</div><div class="line">                                    usingSpringWithDamping: 0.7,</div><div class="line">                                    initialSpringVelocity: 0.0,</div><div class="line">                                    options: .CurveLinear,</div><div class="line">                                    animations: &#123;</div><div class="line">                                    //执行的动画</div><div class="line">                                    //原来的控制给透明度</div><div class="line">                                    fromVC.view.alpha = 0.5</div><div class="line">                                    //修改弹出控制的frame</div><div class="line">                                    toVC.view.frame = finalFrameForVC</div><div class="line">                                    &#125;, completion: &#123;</div><div class="line">                                        finished in</div><div class="line">                                        	//动画完成后执行</div><div class="line">                                        	transitionContext.completeTransition(true)</div><div class="line">                                        	</div><div class="line">                                        fromVC.view.alpha = 1.0</div><div class="line">                                    &#125;)</div><div class="line">         NSLog(&quot;animateTransition&quot;)</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">   &lt;!-- UIView.animateWithDuration(1.0, animations: &#123; </div><div class="line">            </div><div class="line">            toVC.view.frame = finalFrameForVC;</div><div class="line">            fromVC.view.alpha = 0.5</div><div class="line">            </div><div class="line">            &#125;) &#123; (isCompletion) in</div><div class="line">                transitionContext.completeTransition(true)</div><div class="line">                fromVC.view.alpha = 1.0</div><div class="line">        &#125;--&gt;</div><div class="line"></div><div class="line"></div><div class="line">    //执行完成后的回调</div><div class="line">    public func animationEnded(transitionCompleted: Bool)&#123;</div><div class="line">            NSLog(&quot;animation ended&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>madal的转场动画分为2类，present和dismiss，刚才我们实现的是animationControllerForPresentedController，这是present类，下节我们实现dissmiss的转场过渡效果</p>
+<h4 id="Controller-dismiss过渡效果"><a href="#Controller-dismiss过渡效果" class="headerlink" title="Controller dismiss过渡效果"></a><code>Controller dismiss过渡效果</code></h4><p>present的过渡效果实现和modal过渡效果类似，也是设置委托、实现委托、实现动画，就不详细说明了，大家可以参考demo。这里我们只说说和present过渡的区别</p>
+<h5 id="区别1-委托入口不同"><a href="#区别1-委托入口不同" class="headerlink" title="区别1 委托入口不同"></a><code>区别1 委托入口不同</code></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//Presented使用的委托</div><div class="line">   func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -&gt; UIViewControllerAnimatedTransitioning?&#123;</div><div class="line"></div><div class="line">   &#125;</div><div class="line"></div><div class="line">   //Dismiss使用的委托</div><div class="line">   func animationControllerForDismissedController(dismissed: UIViewController) -&gt; UIViewControllerAnimatedTransitioning? &#123;</div><div class="line">       //返回一个UIViewControllerAnimatedTransitioning类型</div><div class="line">       return DismissAnimation()</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h5 id="区别2-动画效果区别（这点其实不算真正的区别，因为你也可以设置为相同的效果）：demo中present动画是从下而上，而dismiss的动画是自上而下。"><a href="#区别2-动画效果区别（这点其实不算真正的区别，因为你也可以设置为相同的效果）：demo中present动画是从下而上，而dismiss的动画是自上而下。" class="headerlink" title="区别2 动画效果区别（这点其实不算真正的区别，因为你也可以设置为相同的效果）：demo中present动画是从下而上，而dismiss的动画是自上而下。"></a>区别2 动画效果区别（这点其实不算真正的区别，因为你也可以设置为相同的效果）：demo中present动画是从下而上，而dismiss的动画是自上而下。</h5><p>DismissAnimation的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">class DismissAnimation: NSObject,UIViewControllerAnimatedTransitioning &#123;</div><div class="line"></div><div class="line">    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -&gt; NSTimeInterval &#123;</div><div class="line">        return 0.6</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func animateTransition(transitionContext: UIViewControllerContextTransitioning) &#123;</div><div class="line">        //当前控制器</div><div class="line">        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!</div><div class="line">        print(fromVC.dynamicType)//toViewController</div><div class="line">        //后控制器</div><div class="line">        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!</div><div class="line">         print(toVC.dynamicType)//UINavigationController</div><div class="line">        </div><div class="line">        //获得大小</div><div class="line">        let screenBounds = UIScreen.mainScreen().bounds</div><div class="line">        </div><div class="line">        //当前控制器初始化大小</div><div class="line">        let initFrame = transitionContext.initialFrameForViewController(fromVC)</div><div class="line">        </div><div class="line">        //控制器最终的位置</div><div class="line">        let finalFrame = CGRectOffset(initFrame, 0, screenBounds.size.height)</div><div class="line">        //获得视图容器</div><div class="line">        let containerView = transitionContext.containerView()</div><div class="line">        //容器中添加后面控制的view</div><div class="line">        containerView?.addSubview(toVC.view)</div><div class="line">        //????</div><div class="line">        containerView?.sendSubviewToBack(toVC.view)</div><div class="line">        //获得切换时间</div><div class="line">        let duration: NSTimeInterval = self.transitionDuration(transitionContext)</div><div class="line">        </div><div class="line">        </div><div class="line">        UIView.animateWithDuration(duration, animations: &#123;</div><div class="line">            </div><div class="line">            fromVC.view.frame = finalFrame</div><div class="line">            </div><div class="line">            &#125;, completion: &#123;</div><div class="line">                (finished: Bool) in</div><div class="line">                </div><div class="line">                //是否完成</div><div class="line">                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="Controller-push、pop过渡效果"><a href="#Controller-push、pop过渡效果" class="headerlink" title="Controller push、pop过渡效果"></a><code>Controller push、pop过渡效果</code></h4><p>push、pop和present、dismiss的过渡走的是两个完全不同的委托，委托里面的方法有相似之处，比如都可以分为过渡和交互两类。交互的内容后面再说，先说过渡效果的区别。</p>
+<ul>
+<li><p><strong>实现的委托不同</strong>: push、pop自定义过渡动画，需要实现UINavigationControllerDelegate，而present、dismiss实现的是UIViewControllerTransitioningDelegate</p>
+</li>
+<li><p><strong>区分类型方式不同</strong>: UIViewControllerTransitioningDelegate通过2个委托present和dismiss区分开来，而在UINavigationControllerDelegate中，对应转场过渡动画只有一个委托，通过委托中的参数operation: UINavigationControllerOperation 区分pop和push</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//push、pop视图切换</div><div class="line">extension ControllerTransitioningDemoViewController:UINavigationControllerDelegate&#123;</div><div class="line">    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -&gt; UIViewControllerAnimatedTransitioning?&#123;</div><div class="line"></div><div class="line">        let transitioningAnimation = ExpandAnimation(type:operation)</div><div class="line">        transitioningAnimation.sender = transitioningSender</div><div class="line">        //返回动画的实现类</div><div class="line">        return transitioningAnimation</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="UIViewControllerAnimatedTransitioning动画类的实现，完成点击后圆形区域放大过渡的动画效果"><a href="#UIViewControllerAnimatedTransitioning动画类的实现，完成点击后圆形区域放大过渡的动画效果" class="headerlink" title="UIViewControllerAnimatedTransitioning动画类的实现，完成点击后圆形区域放大过渡的动画效果"></a>UIViewControllerAnimatedTransitioning动画类的实现，完成点击后圆形区域放大过渡的动画效果</h4><h4 id="步骤1添加一个按钮，点击使用push的方式跳转到页面To1ViewController，并设置委托"><a href="#步骤1添加一个按钮，点击使用push的方式跳转到页面To1ViewController，并设置委托" class="headerlink" title="步骤1添加一个按钮，点击使用push的方式跳转到页面To1ViewController，并设置委托"></a><code>步骤1添加一个按钮，点击使用push的方式跳转到页面To1ViewController，并设置委托</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//推出视图切换效果</div><div class="line">    @IBAction func Transitioning1(sender: AnyObject) &#123;</div><div class="line">        let toVC = To1ViewController()</div><div class="line">        //设置委托</div><div class="line">        navigationController?.delegate = self</div><div class="line">        //主要是动画实现圆形扩大效果，需要知道一个初始园的位置，所以把uiview传过去。这种方式传递uiview不是一个很好的方式，这里为了demo能尽量的简单，所以这么做了</div><div class="line">        transitioningSender = sender as! UIView</div><div class="line">        navigationController?.pushViewController(toVC, animated: true)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="步骤2实现UINavigationControllerDelegate"><a href="#步骤2实现UINavigationControllerDelegate" class="headerlink" title="步骤2实现UINavigationControllerDelegate"></a><code>步骤2实现UINavigationControllerDelegate</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//push、pop视图切换</div><div class="line">extension ControllerTransitioningDemoViewController:UINavigationControllerDelegate&#123;</div><div class="line">    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -&gt; UIViewControllerAnimatedTransitioning?&#123;</div><div class="line"></div><div class="line">        let transitioningAnimation = ExpandAnimation(type:operation)</div><div class="line">        transitioningAnimation.sender = transitioningSender</div><div class="line">        //返回动画的实现类</div><div class="line">        return transitioningAnimation</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="步骤3-完成点击后圆形区域放大过渡的动画效果的实现类ExpandAnimation"><a href="#步骤3-完成点击后圆形区域放大过渡的动画效果的实现类ExpandAnimation" class="headerlink" title="步骤3 完成点击后圆形区域放大过渡的动画效果的实现类ExpandAnimation"></a><code>步骤3 完成点击后圆形区域放大过渡的动画效果的实现类ExpandAnimation</code></h4><p>这个动画效果我就简单说说实现步骤，其余的大家看看代码。下面的参考文章中，有一篇对这个效果说的比较详细，大家可以去阅读</p>
+<p>实现这样一个效果，基本原理是使用遮罩层，罩住presenting，有一个小圆是初始按钮点击的圆形路径，一个大圆是大于presenting的圆形路径。大圆和小圆作为遮罩的路径。判断过渡类型是presention -》 presenting还是presenting -》 presention，分别做不同的处理</p>
+<p>presention -》 presenting ： 小圆作为初始遮罩层路径，罩住presenting，使用baseAnimation动画把遮罩层的路径从小圆路径变为大圆路径，presenting即可显示出来，完成过渡效果。 小圆的位置是通过跳转点击按钮决定的，小圆位置不同会影响到大圆结束的位置，所以分了左上、左下、右上、右下四个位置分别处理。这个步骤由于偷懒在presenting -》 presention这个过程里面被省略了，每次都指定了固定的小圆位置</p>
+<p>presenting -》 presention ： 使用大圆遮住presenting，使用baseAnimation动画把遮罩层的路径从大圆路径变为小圆路径，presenting慢慢变小到看不见，presention慢慢即可显示出来，完成过渡效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">class ExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning &#123;</div><div class="line"></div><div class="line">    //保存上下文</div><div class="line">    var transitionContext:UIViewControllerContextTransitioning!</div><div class="line">    //Pop or push</div><div class="line">    var type:UINavigationControllerOperation!</div><div class="line">    //初始点击的uiview对象，需要他的frame作为初始位置</div><div class="line">    var sender:UIView?</div><div class="line"></div><div class="line">    convenience init(type:UINavigationControllerOperation) &#123;</div><div class="line">        self.init()</div><div class="line">        self.type = type</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -&gt; NSTimeInterval&#123;</div><div class="line">        return 0.5</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    func animateTransition(transitionContext: UIViewControllerContextTransitioning)&#123;</div><div class="line">        self.transitionContext = transitionContext</div><div class="line">        NSLog(&quot;animateTransition&quot;)</div><div class="line">        if(type == .Push)&#123;</div><div class="line">            PushTransition(transitionContext)</div><div class="line">        &#125;else if(type == .Pop)&#123;</div><div class="line">            PopTransition(transitionContext)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    func animationEnded(transitionCompleted: Bool)&#123;</div><div class="line">        NSLog(&quot;animation ended&quot;)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //弹出效果 在固定位置进行的动画，可以根据需要改成动态位置触发</div><div class="line">    func PopTransition(transitionContext: UIViewControllerContextTransitioning)&#123;</div><div class="line"></div><div class="line">        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!</div><div class="line">        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!</div><div class="line">        let containerView = transitionContext.containerView()</div><div class="line">        let view = toVC.view!</div><div class="line"></div><div class="line">        containerView!.addSubview(toVC.view)</div><div class="line">        containerView!.addSubview(fromVC.view)</div><div class="line"></div><div class="line">        //遮罩层</div><div class="line">        let mask = CAShapeLayer()</div><div class="line">        fromVC.view.layer.mask = mask</div><div class="line"></div><div class="line">        //画出小圆</div><div class="line">        let s_center = CGPoint(x: 50, y: 50)</div><div class="line">        let s_radius:CGFloat =  sqrt(800)</div><div class="line">        let s_maskPath = UIBezierPath(ovalInRect:CGRectInset(CGRect(x: s_center.x, y: s_center.y, width: 1, height: 1), -s_radius, -s_radius))</div><div class="line">        //        mask.path = s_maskPath.CGPath</div><div class="line"></div><div class="line">        //画出大圆</div><div class="line">        let l_center = CGPoint(x: 50, y: 50)</div><div class="line">        let l_radius = sqrt( pow(view.bounds.width - l_center.x, 2) + pow(view.bounds.height - l_center.y, 2) ) + 150</div><div class="line">        let l_maskPath = UIBezierPath(ovalInRect:CGRectInset(CGRect(x: l_center.x, y: l_center.y, width: 1, height: 1), -l_radius, -l_radius))</div><div class="line"></div><div class="line">        let baseAnimation = CABasicAnimation(keyPath: &quot;path&quot;)</div><div class="line">        baseAnimation.duration = transitionDuration(transitionContext)</div><div class="line"></div><div class="line">        baseAnimation.fromValue = l_maskPath.CGPath</div><div class="line">        baseAnimation.toValue = s_maskPath.CGPath</div><div class="line"></div><div class="line">        baseAnimation.delegate = self</div><div class="line">        baseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)</div><div class="line">        mask.addAnimation(baseAnimation, forKey: &quot;path&quot;)</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //present 动画，根据触发点的位置开始启动动画</div><div class="line">    func PushTransition(transitionContext: UIViewControllerContextTransitioning)&#123;</div><div class="line"></div><div class="line">        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!</div><div class="line">        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!</div><div class="line">        let finalFrame = transitionContext.finalFrameForViewController(toVC)</div><div class="line">        let containerView = transitionContext.containerView()</div><div class="line">        let view = toVC.view!</div><div class="line"></div><div class="line">        containerView!.addSubview(toVC.view)</div><div class="line"></div><div class="line">        //小圆路径</div><div class="line">        let s_maskPath = UIBezierPath(ovalInRect:(sender?.frame)!)</div><div class="line"></div><div class="line">        //大圆路径</div><div class="line">        let l_center =  (sender?.center)!</div><div class="line"></div><div class="line">        var l_radius:CGFloat</div><div class="line">        if(sender!.frame.origin.x &gt; (toVC.view.bounds.size.width / 2))&#123;</div><div class="line">            if (sender!.frame.origin.y &lt; (toVC.view.bounds.size.height / 2)) &#123;</div><div class="line">                //右上角</div><div class="line">                l_radius = sqrt( pow(0 - l_center.x, 2) + pow(CGRectGetMaxY(view.frame) - l_center.y, 2) )</div><div class="line">            &#125;else&#123;</div><div class="line">                //右下角</div><div class="line">                l_radius = sqrt( pow(0 - l_center.x, 2) + pow(0 - l_center.y, 2) )</div><div class="line">            &#125;</div><div class="line">        &#125;else&#123;</div><div class="line">            if (sender!.frame.origin.y &lt; (toVC.view.bounds.size.height / 2)) &#123;</div><div class="line">                //左上角</div><div class="line">                l_radius = sqrt( pow(CGRectGetMaxX(view.frame) - l_center.x, 2) + pow(CGRectGetMaxY(view.frame) - l_center.y, 2) )</div><div class="line">            &#125;else&#123;</div><div class="line">                //左下角</div><div class="line">                l_radius = sqrt( pow(CGRectGetMaxX(view.frame) - l_center.x, 2) + pow(0 - l_center.y, 2) )</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        l_radius += 50 //稍微增加一些位置</div><div class="line">        let l_maskPath = UIBezierPath(ovalInRect:CGRectInset(CGRect(x: l_center.x, y: l_center.y, width: 1, height: 1), -l_radius, -l_radius))</div><div class="line"></div><div class="line">        //遮罩层</div><div class="line">        let mask = CAShapeLayer()</div><div class="line">        mask.path = l_maskPath.CGPath</div><div class="line">        view.layer.mask = mask</div><div class="line"></div><div class="line"></div><div class="line">        ////错误用法，animationWithDuration不能通过操作layer产生动画</div><div class="line">        //UIView.animateWithDuration(5) &#123; () -&gt; Void in</div><div class="line">        //     mask.path = b_maskPath.CGPath</div><div class="line">        //&#125;</div><div class="line"></div><div class="line">        let baseAnimation = CABasicAnimation(keyPath: &quot;path&quot;)</div><div class="line">        baseAnimation.duration = transitionDuration(transitionContext)</div><div class="line"></div><div class="line">        baseAnimation.fromValue = s_maskPath.CGPath</div><div class="line">        baseAnimation.toValue = l_maskPath.CGPath</div><div class="line"></div><div class="line">        baseAnimation.delegate = self</div><div class="line">        baseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)</div><div class="line">        mask.addAnimation(baseAnimation, forKey: &quot;path&quot;)</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">    override func animationDidStop(anim: CAAnimation, finished flag: Bool) &#123;</div><div class="line">        //动画完成后去处遮罩</div><div class="line">        self.transitionContext.completeTransition(true)</div><div class="line">        //动画完成后去处遮罩</div><div class="line">        self.transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)?.view.layer.mask = nil</div><div class="line">        self.transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)?.view.layer.mask = nil</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag">#swift</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/15/新建React-Native报错解决办法/" rel="next" title="新建React-Native报错解决办法">
+                <i class="fa fa-chevron-left"></i> 新建React-Native报错解决办法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/31/如何在项目已初始化成功以后建立git仓库/" rel="prev" title="如何在项目已初始化成功以后建立git仓库">
+                如何在项目已初始化成功以后建立git仓库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wuzhi.me/avatar/112063.1460211687.jpg"
+               alt="shiron" />
+          <p class="site-author-name" itemprop="name">shiron</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#出场人物介绍"><span class="nav-number">1.</span> <span class="nav-text">出场人物介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#presention-and-presented"><span class="nav-number">1.1.</span> <span class="nav-text">presention and presented</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UIViewControllerTransitioningDelegate"><span class="nav-number">1.2.</span> <span class="nav-text">UIViewControllerTransitioningDelegate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UIViewControllerAnimatedTransitioning"><span class="nav-number">1.3.</span> <span class="nav-text">UIViewControllerAnimatedTransitioning</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UINavigationControllerDelegate"><span class="nav-number">1.4.</span> <span class="nav-text">UINavigationControllerDelegate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UIViewControllerInteractiveTransitioning"><span class="nav-number">1.5.</span> <span class="nav-text">UIViewControllerInteractiveTransitioning</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UIViewControllerContextTransitioning"><span class="nav-number">1.6.</span> <span class="nav-text">UIViewControllerContextTransitioning</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller-modal过渡效果"><span class="nav-number">2.</span> <span class="nav-text">Controller modal过渡效果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤1：界面画出按钮，点击之后用-modal-显示-To2ViewController，并设置transitioningDelegate指向自己"><span class="nav-number">2.1.</span> <span class="nav-text">步骤1：界面画出按钮，点击之后用 modal 显示 To2ViewController，并设置transitioningDelegate指向自己</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤2：controller-实现-UIViewControllerTransitioningDelegate"><span class="nav-number">2.2.</span> <span class="nav-text">步骤2：controller 实现 UIViewControllerTransitioningDelegate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤3-实现一个过渡效果为自下而上弹出并有些晃动的UIViewControllerAnimatedTransitioning类"><span class="nav-number">2.3.</span> <span class="nav-text">步骤3: 实现一个过渡效果为自下而上弹出并有些晃动的UIViewControllerAnimatedTransitioning类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller-dismiss过渡效果"><span class="nav-number">3.</span> <span class="nav-text">Controller dismiss过渡效果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#区别1-委托入口不同"><span class="nav-number">3.1.</span> <span class="nav-text">区别1 委托入口不同</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#区别2-动画效果区别（这点其实不算真正的区别，因为你也可以设置为相同的效果）：demo中present动画是从下而上，而dismiss的动画是自上而下。"><span class="nav-number">3.2.</span> <span class="nav-text">区别2 动画效果区别（这点其实不算真正的区别，因为你也可以设置为相同的效果）：demo中present动画是从下而上，而dismiss的动画是自上而下。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller-push、pop过渡效果"><span class="nav-number">4.</span> <span class="nav-text">Controller push、pop过渡效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UIViewControllerAnimatedTransitioning动画类的实现，完成点击后圆形区域放大过渡的动画效果"><span class="nav-number">5.</span> <span class="nav-text">UIViewControllerAnimatedTransitioning动画类的实现，完成点击后圆形区域放大过渡的动画效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤1添加一个按钮，点击使用push的方式跳转到页面To1ViewController，并设置委托"><span class="nav-number">6.</span> <span class="nav-text">步骤1添加一个按钮，点击使用push的方式跳转到页面To1ViewController，并设置委托</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤2实现UINavigationControllerDelegate"><span class="nav-number">7.</span> <span class="nav-text">步骤2实现UINavigationControllerDelegate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤3-完成点击后圆形区域放大过渡的动画效果的实现类ExpandAnimation"><span class="nav-number">8.</span> <span class="nav-text">步骤3 完成点击后圆形区域放大过渡的动画效果的实现类ExpandAnimation</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shiron</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

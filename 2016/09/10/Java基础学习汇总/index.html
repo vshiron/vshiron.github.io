@@ -1,0 +1,648 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="shiron" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Java基础学习汇总多线程
+了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.多线程的实现方法有两种
+1.继承Thread
+
+定义类继承Thread
+重写run方法
+把新线程要做的内容写在run">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础学习汇总">
+<meta property="og:url" content="http://yoursite.com/2016/09/10/Java基础学习汇总/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="Java基础学习汇总多线程
+了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.多线程的实现方法有两种
+1.继承Thread
+
+定义类继承Thread
+重写run方法
+把新线程要做的内容写在run">
+<meta property="og:updated_time" content="2016-10-19T09:44:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础学习汇总">
+<meta name="twitter:description" content="Java基础学习汇总多线程
+了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.多线程的实现方法有两种
+1.继承Thread
+
+定义类继承Thread
+重写run方法
+把新线程要做的内容写在run">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/10/Java基础学习汇总/"/>
+
+
+  <title> Java基础学习汇总 | shiron </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">shiron</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java基础学习汇总
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-10T23:31:12+08:00" content="2016-09-10">
+              2016-09-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Java基础学习汇总"><a href="#Java基础学习汇总" class="headerlink" title="Java基础学习汇总"></a>Java基础学习汇总</h2><h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><ul>
+<li>了解:所谓多线程,即是在一个进程中,可以同时运行的多任务.如果把现实中的每个人理解为一个进程(QQ),那每个人可以同时处理多项任务,如一边听歌一边写作业可以理解为多线程开启.一个进程占用CUP时间是有限的,通常我们感觉不到有切换是因为CUP切换的速度极快.<h3 id="多线程的实现方法有两种"><a href="#多线程的实现方法有两种" class="headerlink" title="多线程的实现方法有两种"></a>多线程的实现方法有两种</h3></li>
+<li><p>1.继承Thread</p>
+<ul>
+<li>定义类继承Thread</li>
+<li>重写run方法</li>
+<li>把新线程要做的内容写在run方法中</li>
+<li>创建类的对象</li>
+<li>执行start方法</li>
+<li>注意:匿名内部类和普通类方式非常相似</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class Test &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">	//1.普通定义一个新的类来创建</div><div class="line">	Person p = new Person();</div><div class="line">	p.start();</div><div class="line">	//1.普通定义一个匿名类来创建</div><div class="line">	new Thread()&#123;</div><div class="line">		public void run()&#123;</div><div class="line">			System.out.println(&quot;Thread多线程启动(匿名内	部类)&quot;);</div><div class="line">			&#125;</div><div class="line">		&#125;.start();	</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//Thread方式</div><div class="line">class Person extends Thread &#123;</div><div class="line">	public void run()&#123;</div><div class="line">	System.out.println(&quot;Thread多线程启动,继承方式&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>2.实现接口Runnable(Thread构造函数中传递了runnable的引用,通过init()方法传递target,用于判断是否执行run()方法)</p>
+<ul>
+<li>定义类实现Runnable</li>
+<li>实现run方法</li>
+<li>把操作写在run中</li>
+<li>创建Thread对象,传入runnable</li>
+<li>调用Runnable的start方法</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">public class Test &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">//1.普通类实现了runnable接口来实现调用里面的run方法</div><div class="line">Student s = new Student();</div><div class="line">Thread t = new Thread(s);</div><div class="line">t.start();</div><div class="line">//2.匿名类来实现runnable接口</div><div class="line">new Thread(new Runnable() &#123;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		System.out.println(&quot;匿名内部类Runnable多线程启动方法&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;).start();	</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">class Student implements Runnable&#123;</div><div class="line">@Override</div><div class="line">public void run() &#123;</div><div class="line">System.out.println(&quot;Runnable多线程启动方法,继承方式&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="两种线程的区别"><a href="#两种线程的区别" class="headerlink" title="两种线程的区别"></a>两种线程的区别</h3><ul>
+<li>继承Thread<ul>
+<li>好处:可以直接使用Thread类中的方法,代码简单</li>
+<li>弊端:如果已经有父类,就不能用这种方式</li>
+</ul>
+</li>
+<li>实现Runnable<ul>
+<li>好处:可以有父类,直接只是实现接口</li>
+<li>弊端:间接把对象作为构造方法的参数传递进去,较为复杂,但自由度较大</li>
+</ul>
+</li>
+</ul>
+<h3 id="线程中其他操作"><a href="#线程中其他操作" class="headerlink" title="线程中其他操作"></a>线程中其他操作</h3><ul>
+<li>通过getName()可以获得当前线程的名字</li>
+<li>通过setName(String)可以设置线程名字</li>
+<li>Thread.currentThread()可以获得当前线程对象,获得对象后可以对其进行操作(改名,获得名字)</li>
+<li>Thread.sleep(毫秒),类方法调用,可以使得当前线程休眠</li>
+<li>setPriority()设置线程的优先级</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/25/swift中的extension-持续更新/" rel="next" title="swift中的extension(持续更新)">
+                <i class="fa fa-chevron-left"></i> swift中的extension(持续更新)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/13/swift中懒加载的then语法/" rel="prev" title="swift中懒加载的then语法">
+                swift中懒加载的then语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://wuzhi.me/avatar/112063.1460211687.jpg"
+               alt="shiron" />
+          <p class="site-author-name" itemprop="name">shiron</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java基础学习汇总"><span class="nav-number">1.</span> <span class="nav-text">Java基础学习汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">1.1.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程的实现方法有两种"><span class="nav-number">1.2.</span> <span class="nav-text">多线程的实现方法有两种</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两种线程的区别"><span class="nav-number">1.3.</span> <span class="nav-text">两种线程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程中其他操作"><span class="nav-number">1.4.</span> <span class="nav-text">线程中其他操作</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shiron</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
