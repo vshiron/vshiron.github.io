@@ -248,6 +248,107 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/09/52个建议中的-class-continuation分类/" itemprop="url">
+                  52个建议中的'class-continuation分类'
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-09T21:24:01+08:00" content="2016-11-09">
+              2016-11-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="一开始看书的时候是有点懵逼的-但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白-个人认为核心的要点就是在实现文件类再一次做分类-类似于一个内部类一样吧-先上一下代码吧"><a href="#一开始看书的时候是有点懵逼的-但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白-个人认为核心的要点就是在实现文件类再一次做分类-类似于一个内部类一样吧-先上一下代码吧" class="headerlink" title="一开始看书的时候是有点懵逼的,但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白,个人认为核心的要点就是在实现文件类再一次做分类,类似于一个内部类一样吧.先上一下代码吧."></a>一开始看书的时候是有点懵逼的,但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白,个人认为核心的要点就是在实现文件类再一次做分类,类似于一个内部类一样吧.先上一下代码吧.</h4><h3 id="Pseron-h"><a href="#Pseron-h" class="headerlink" title="Pseron.h"></a>Pseron.h</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Person : NSObject</div><div class="line">@property (nonatomic ,copy,readonly ) NSString* name;</div><div class="line">@property (nonatomic , assign,readonly ) NSUInteger age;</div><div class="line">-(instancetype)initWithName:(NSString*)name WithAge:(NSUInteger)age;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>然后在接口.h文件,属性使用了readonly关键字,使得外部只能获取,不能修改这个属性,因为每个人的年龄和姓名不是说修改就修改的,考虑到这个逻辑的话,最好就是在接口文件里面修改成只读类型.</p>
+<h3 id="Person-m"><a href="#Person-m" class="headerlink" title="Person.m"></a>Person.m</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#import &quot;Person.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line">@interface Person()</div><div class="line">@property (nonatomic ,copy ,readwrite) NSString* name;</div><div class="line">@property (nonatomic ,assign,readwrite ) NSUInteger age;</div><div class="line">@end</div><div class="line"></div><div class="line"></div><div class="line">@implementation Person</div><div class="line"></div><div class="line">-(instancetype)initWithName:(NSString *)name WithAge:(NSUInteger)age&#123;</div><div class="line">    </div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        _name = name;</div><div class="line">        _age = age;</div><div class="line">    &#125;</div><div class="line">    return  self;</div><div class="line">&#125;</div><div class="line">@end</div><div class="line"></div><div class="line"></div><div class="line">@interface Person (Student)</div><div class="line">//在分类中添加的属性,必须由我们自己来配置get和set属性~</div><div class="line">@property (nonatomic ,copy ) NSString * firstName;</div><div class="line">@end</div><div class="line">@implementation Person(Student)</div><div class="line">static char * PersonFirstName = &quot;PersonFirstName&quot;;</div><div class="line"></div><div class="line">-(void)setFirstName:(NSString *)firstName&#123;</div><div class="line">//此处使用runtime来添加这个属性,因为在分类里面是无法直接添加属性的,只有通过运行时才能添加熟悉,该方法是设置属性的方法,其中`static char * PersonFirstName = &quot;PersonFirstName&quot;;`这个是一个定义常量,必须是C语言字符串</div><div class="line">    objc_setAssociatedObject(self, PersonFirstName, firstName, OBJC_ASSOCIATION_COPY_NONATOMIC);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(NSString *)firstName&#123;</div><div class="line">    //该方法是货到属性的方法</div><div class="line">    return objc_getAssociatedObject(self, PersonFirstName);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="Runtime的使用就不再这里多说明了-主要表达的是"><a href="#Runtime的使用就不再这里多说明了-主要表达的是" class="headerlink" title="Runtime的使用就不再这里多说明了,主要表达的是:"></a>Runtime的使用就不再这里多说明了,主要表达的是:</h4><ol>
+<li>我们可以在实现文件里面再写多一个类的分类,加深了这种类文件和方法加密的方式,更好的隐蔽了我们的类</li>
+<li>同时,个人还觉得如果有一些类只使用一次,我们也可以直接封装在某个.m文件下面做一个匿名的类使用.</li>
+<li>或者如同52个建议里面所说的,可以在分类中添加实例变量,如果想类所遵循的协议隐藏,也可以使用class-continuation分类</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/07/tableView代理的分离/" itemprop="url">
                   tableView代理的分离
                 </a>
@@ -1319,105 +1420,6 @@ extension NSObject: Then {}
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/02/cell中的折叠效果如何实现/" itemprop="url">
-                  cell中的折叠效果如何实现?
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-02T14:35:46+08:00" content="2016-08-02">
-              2016-08-02
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="有时候我们需要实现一种点击cell的时候-展开和收起cell的内容这种效果-类似QQ的分组-点开后可以查看具体的联系人-那么这种效果是如何实现的呢"><a href="#有时候我们需要实现一种点击cell的时候-展开和收起cell的内容这种效果-类似QQ的分组-点开后可以查看具体的联系人-那么这种效果是如何实现的呢" class="headerlink" title="有时候我们需要实现一种点击cell的时候,展开和收起cell的内容这种效果,类似QQ的分组,点开后可以查看具体的联系人.那么这种效果是如何实现的呢?"></a>有时候我们需要实现一种点击cell的时候,展开和收起cell的内容这种效果,类似QQ的分组,点开后可以查看具体的联系人.那么这种效果是如何实现的呢?</h4><p><img src="http://ww3.sinaimg.cn/mw690/7616e2bagw1f9dr91e3pyj20kk11uabk.jpg" alt="image"></p>
-<p>这里列举一种最简答的实现方法,主要核心代码是要在模型中设置一个是否展开的属性,根据这个属性来判断是否要展开cell,如果NO的时候,只要在<code>tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section</code>返回中返回0即可,如果YES的时候,则需要返回一个cell中具体的行数.header只要给定一个点击事件来刷新tableView就可以了(此时要修改是否要展示的属性).</p>
-<p>下面分部讲解一下设置的方法:</p>
-<h3 id="1-先设置一个模型数组-里面含有一下几个属性"><a href="#1-先设置一个模型数组-里面含有一下几个属性" class="headerlink" title="1. 先设置一个模型数组,里面含有一下几个属性"></a>1. 先设置一个模型数组,里面含有一下几个属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface MyData : NSObject</div><div class="line">//名称 ABCD...</div><div class="line">@property (nonatomic ,copy ) NSString* name;</div><div class="line">//是否展示</div><div class="line">@property (nonatomic , assign ) BOOL isShow;</div><div class="line">//子数组 </div><div class="line">@property (nonatomic , strong ) NSMutableArray* array;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<h3 id="2-添加视图View和数据源数据"><a href="#2-添加视图View和数据源数据" class="headerlink" title="2. 添加视图View和数据源数据"></a>2. 添加视图View和数据源数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    //数据源数组,里面装的是模型数组</div><div class="line">    _dataArray = [NSMutableArray array];</div><div class="line">    </div><div class="line">    //设置数据</div><div class="line">    for (int i = &apos;A&apos;; i&lt;= &apos;Z&apos;; i++) &#123;</div><div class="line">        MyData * mydata =  [[MyData alloc] init];</div><div class="line">        NSLog(@&quot;%c&quot; , i);</div><div class="line">        mydata.name =  [NSString stringWithFormat:@&quot;%c&quot;,i];</div><div class="line">        </div><div class="line">        mydata.array =  [NSMutableArray array];</div><div class="line">        for (int j = 0;  j &lt;= 10; j++) &#123;</div><div class="line">            [mydata.array addObject:[NSString stringWithFormat:@&quot;%c-%d&quot;,i,j]];</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        [_dataArray addObject:mydata];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">	//设置tableView,一定要注意,这里的样式是要选组样式</div><div class="line">    _myTableview =  [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStyleGrouped];</div><div class="line">    _myTableview.dataSource = self;</div><div class="line">    _myTableview.delegate = self;</div><div class="line">    _myTableview.rowHeight = 30;</div><div class="line">    [self.view addSubview:_myTableview];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="3-设置tableView的代理内容-主要是常用的两个加上在section中要设置判断条件"><a href="#3-设置tableView的代理内容-主要是常用的两个加上在section中要设置判断条件" class="headerlink" title="3. 设置tableView的代理内容,主要是常用的两个加上在section中要设置判断条件"></a>3. 设置tableView的代理内容,主要是常用的两个加上在section中要设置判断条件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//显示多少组</div><div class="line">-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView&#123;</div><div class="line">    return self.dataArray.count;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//每一组里面显示多少个cell</div><div class="line">-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section&#123;</div><div class="line">    </div><div class="line">    MyData* data =  [self.dataArray objectAtIndex:section];</div><div class="line">    </div><div class="line">    if (data.isShow)&#123;</div><div class="line">        return data.array.count;</div><div class="line">    &#125;else&#123;</div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">//设置cell的样式</div><div class="line">-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</div><div class="line">    static NSString * cellName = @&quot;cell&quot;;</div><div class="line">    UITableViewCell* cell =  [tableView dequeueReusableCellWithIdentifier:cellName ];</div><div class="line">    </div><div class="line">    if (!cell)&#123;</div><div class="line">        </div><div class="line">        cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellName];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    MyData* data =  [self.dataArray objectAtIndex:indexPath.section];</div><div class="line">    cell.textLabel.text = [data.array objectAtIndex:indexPath.row];</div><div class="line">    return  cell;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="4-设置headerView-并且设置点击时展开和闭合cell"><a href="#4-设置headerView-并且设置点击时展开和闭合cell" class="headerlink" title="4. 设置headerView,并且设置点击时展开和闭合cell"></a>4. 设置headerView,并且设置点击时展开和闭合cell</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section&#123;</div><div class="line">    //获取数组</div><div class="line">    MyData* data =  [self.dataArray objectAtIndex:section];</div><div class="line">    //生成btn的属性,并添加到headerView中</div><div class="line">    UIButton* btn =  [UIButton buttonWithType:UIButtonTypeCustom];</div><div class="line">    btn.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30);</div><div class="line">    [btn setTitle:data.name forState:UIControlStateNormal];</div><div class="line">    btn.tag = section;</div><div class="line">    [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">    if (section%2)&#123;</div><div class="line">        </div><div class="line">        btn.backgroundColor =  [UIColor darkGrayColor];</div><div class="line">        </div><div class="line">    &#125;else&#123;</div><div class="line">        </div><div class="line">        btn.backgroundColor =  [UIColor grayColor];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return btn;</div><div class="line">    </div><div class="line">&#125;</div><div class="line">//设置headerView的高度</div><div class="line">-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section&#123;</div><div class="line">    return 30;</div><div class="line">&#125;</div><div class="line">//设置footerView的高度,这家伙如果不设置或者设置为0的是否都好像会显示和headerView一样的高度</div><div class="line">-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section&#123;</div><div class="line">    return 0.1;</div><div class="line">&#125;</div><div class="line">//点击事件,展开和收合cell</div><div class="line">-(void)btnClick:(UIButton*) btn&#123;</div><div class="line">    MyData* data =  [self.dataArray  objectAtIndex:btn.tag];</div><div class="line">    if (data.isShow) &#123;</div><div class="line">        data.isShow = NO;</div><div class="line">    &#125;else&#123;</div><div class="line">        data.isShow = YES;</div><div class="line">    &#125;</div><div class="line">    //刷新动画样式</div><div class="line">    [_myTableview reloadSections:[NSIndexSet indexSetWithIndex:btn.tag] withRowAnimation:UITableViewRowAnimationFade];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1463,7 +1465,7 @@ extension NSObject: Then {}
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">40</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -248,6 +248,133 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/28/swift中的跑马灯实现（导航栏）/" itemprop="url">
+                  swift中的跑马灯实现（导航栏）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-28T03:28:57+08:00" content="2016-03-28">
+              2016-03-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先是懒加载了runLabel：</p>
+<pre><code> private lazy var runLabel : UILabel={
+     let label = UILabel()
+     label.sizeToFit()
+
+    label.font = UIFont(name: kMyFontName, size: kFontSize14)
+    label.textColor = UIColor.blackColor()
+    return label
+}()
+</code></pre><p>然后在viewDidLoad中实现addsubView方法：</p>
+<pre><code>/// 跑马灯
+self.navigationItem.titleView?.addSubview(runLabel)
+//设置label的原始位置
+runLabel.frame.origin.x = kScreenWidth
+
+
+UIView.beginAnimations(self.productName, context: nil)
+UIView.setAnimationDuration(16)
+UIView.setAnimationCurve(UIViewAnimationCurve.Linear)
+UIView.setAnimationDelegate(self)
+UIView.setAnimationRepeatCount(999999)
+
+runLabel.frame.origin.x = -runLabel.frame.size.width
+UIView .commitAnimations()
+</code></pre><p>另外如果文字过长的话建议直接计算文字宽度（做个简单的分类即可）</p>
+<pre><code>extension String {
+  func getTitleW() -&gt; CGFloat{
+     /// 计算文字宽度
+     var dict:[String:AnyObject] = [:]
+      dict[NSFontAttributeName] = UIFont(name: kMyFontName, size:   kFontSize14)
+          return NSString(string:     self).boundingRectWithSize(CGSizeMake(999, 14), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: dict, context: nil).size.width + 24
+
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/12/第三方HTML解析-TFHpple-的简单使用/" itemprop="url">
                   第三方HTML解析 TFHpple 的简单使用
                 </a>
@@ -1459,135 +1586,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/18/swift中闭包和OC的block的对比/" itemprop="url">
-                  swift中闭包和OC的block的对比
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-18T10:56:09+08:00" content="2015-12-18">
-              2015-12-18
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>swift中的block</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line">    override func viewDidLoad() &#123;</div><div class="line"></div><div class="line">        super.viewDidLoad()</div><div class="line"></div><div class="line">        // Do any additional setup after loading the view, typically from a nib.</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        //swift中函数调用时候第一个参数可以省略</div><div class="line"></div><div class="line">    //        print(sum(10, y: 20))</div><div class="line"></div><div class="line">    //        print(sum2(num1: 10, num2: 21))</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        //demo2()</div><div class="line"></div><div class="line">        //demo3()</div><div class="line"></div><div class="line">        //demo4()</div><div class="line"></div><div class="line">        demo5()</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //函数</div><div class="line"></div><div class="line">    func sum(x:Int, y:Int) -&gt;Int &#123;</div><div class="line"></div><div class="line">        return x + y</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //外部参数 不会影响函数内部代码的执行  方便阅读</div><div class="line"></div><div class="line">    //外部参数在闭包中很重要  </div><div class="line"></div><div class="line">    //没有返回值的情况</div><div class="line"></div><div class="line">    //1.什么都不写   2.Void     3,.()</div><div class="line"></div><div class="line">    func sum2(num1 x:Int, num2 y:Int) -&gt; Int &#123;</div><div class="line"></div><div class="line">        return x + y</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //MARK:-闭包的定义</div><div class="line"></div><div class="line">    //先看block，一组预先准备好的代码 在需要的时候执行 可以当参数传递 出现self注意循环引用</div><div class="line"></div><div class="line">    //在swift中 函数本身就可以做参数传递</div><div class="line"></div><div class="line">    //函数作为参数的例子</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //定义闭包</div><div class="line"></div><div class="line"> /// 闭包的所有代码［参数 返回值 执行代码］都放在｛｝中</div><div class="line"></div><div class="line"> //in  是用来区分函数定义和执行代码</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    func demo2() &#123;</div><div class="line"></div><div class="line">        let sumFunc = &#123; (num1 x:Int, num2 y: Int) -&gt; Int</div><div class="line"></div><div class="line">            in</div><div class="line"></div><div class="line">            return x + y</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    //     print(sumFunc(2,3))</div><div class="line"></div><div class="line">    print(sumFunc (num1: 1, num2: 2))</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //闭包的格式</div><div class="line"></div><div class="line">    //｛（外部参数  形参列表 -&gt; 返回值 in ／／ 代码执行｝</div><div class="line"></div><div class="line">    //    简单的闭包 没有参数和返回值 和in</div><div class="line"></div><div class="line">    func demo3() &#123;</div><div class="line"></div><div class="line">        let  demo = &#123;</div><div class="line"></div><div class="line">            print(&quot;hello&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        demo()</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    //MARK:-闭包的演练</div><div class="line"></div><div class="line">    func demo4() &#123;</div><div class="line"></div><div class="line">    //block 从使用场景 －－通常在异步加载网络数据 完成回调</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        func loadData(finish:()-&gt;()) &#123;</div><div class="line"></div><div class="line">            dispatch_async(dispatch_get_global_queue(0, 0)) &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                print(&quot;耗时操作\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                //里面通常加载数据</div><div class="line"></div><div class="line">                dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                    print(&quot;完成\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                    //执行finish回调</div><div class="line"></div><div class="line">                    finish()</div><div class="line"></div><div class="line">                &#125;)</div><div class="line"></div><div class="line">              </div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        loadData &#123; () -&gt; () in</div><div class="line"></div><div class="line">            print(&quot;回调的代码&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">     </div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    func demo5() &#123;</div><div class="line"></div><div class="line">        //blcok的使用场景 －-有参数的传递</div><div class="line"></div><div class="line">        func loaddata(finished:(html:String)-&gt;()) &#123;</div><div class="line"></div><div class="line">            dispatch_async(dispatch_get_global_queue(0, 0)) &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                print(&quot;耗时操作\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                //里面加载数据</div><div class="line"></div><div class="line">                dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; Void in</div><div class="line"></div><div class="line">                    print(&quot;完成\(NSThread.currentThread())&quot;)</div><div class="line"></div><div class="line">                    finished(html: &quot;&lt;html&gt;&lt;html&gt;&quot;)</div><div class="line"></div><div class="line">                &#125;)</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        </div><div class="line"></div><div class="line">        loaddata &#123; (string) -&gt; () in</div><div class="line"></div><div class="line">            print(&quot;完成回调代码&quot;)</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> </div><div class="line">OC中的block的</div></pre></td></tr></table></figure>
-<pre><code> - (void)viewDidLoad {
-
-   [super viewDidLoad];
-
-// Do any additional setup after loading the view.
-
-   [self laodData:^(NSString *html) {
-
-    NSLog(@&quot;回调代码 %@&quot;,html);
-
-   }];
-
-}
-
-
-
--(void)laodData:(void (^)(NSString *html)) finished {
-
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-
-    NSLog(@&quot;耗时操作&quot;);
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-
-        NSLog(@&quot;准备主线陈的回调&quot;);
-
-        finished(@&quot;&lt;html&gt;&quot;);
-
-    });
-
-  });
-
-}
-</code></pre><p>```</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1633,7 +1631,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">40</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

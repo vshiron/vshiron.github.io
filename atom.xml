@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-07T08:45:57.000Z</updated>
+  <updated>2016-11-09T14:04:58.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>52个建议中的&#39;class-continuation分类&#39;</title>
+    <link href="http://yoursite.com/2016/11/09/52%E4%B8%AA%E5%BB%BA%E8%AE%AE%E4%B8%AD%E7%9A%84-class-continuation%E5%88%86%E7%B1%BB/"/>
+    <id>http://yoursite.com/2016/11/09/52个建议中的-class-continuation分类/</id>
+    <published>2016-11-09T13:24:01.000Z</published>
+    <updated>2016-11-09T14:04:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一开始看书的时候是有点懵逼的-但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白-个人认为核心的要点就是在实现文件类再一次做分类-类似于一个内部类一样吧-先上一下代码吧"><a href="#一开始看书的时候是有点懵逼的-但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白-个人认为核心的要点就是在实现文件类再一次做分类-类似于一个内部类一样吧-先上一下代码吧" class="headerlink" title="一开始看书的时候是有点懵逼的,但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白,个人认为核心的要点就是在实现文件类再一次做分类,类似于一个内部类一样吧.先上一下代码吧."></a>一开始看书的时候是有点懵逼的,但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白,个人认为核心的要点就是在实现文件类再一次做分类,类似于一个内部类一样吧.先上一下代码吧.</h4><h3 id="Pseron-h"><a href="#Pseron-h" class="headerlink" title="Pseron.h"></a>Pseron.h</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Person : NSObject</div><div class="line">@property (nonatomic ,copy,readonly ) NSString* name;</div><div class="line">@property (nonatomic , assign,readonly ) NSUInteger age;</div><div class="line">-(instancetype)initWithName:(NSString*)name WithAge:(NSUInteger)age;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>然后在接口.h文件,属性使用了readonly关键字,使得外部只能获取,不能修改这个属性,因为每个人的年龄和姓名不是说修改就修改的,考虑到这个逻辑的话,最好就是在接口文件里面修改成只读类型.</p>
+<h3 id="Person-m"><a href="#Person-m" class="headerlink" title="Person.m"></a>Person.m</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#import &quot;Person.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line">@interface Person()</div><div class="line">@property (nonatomic ,copy ,readwrite) NSString* name;</div><div class="line">@property (nonatomic ,assign,readwrite ) NSUInteger age;</div><div class="line">@end</div><div class="line"></div><div class="line"></div><div class="line">@implementation Person</div><div class="line"></div><div class="line">-(instancetype)initWithName:(NSString *)name WithAge:(NSUInteger)age&#123;</div><div class="line">    </div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        _name = name;</div><div class="line">        _age = age;</div><div class="line">    &#125;</div><div class="line">    return  self;</div><div class="line">&#125;</div><div class="line">@end</div><div class="line"></div><div class="line"></div><div class="line">@interface Person (Student)</div><div class="line">//在分类中添加的属性,必须由我们自己来配置get和set属性~</div><div class="line">@property (nonatomic ,copy ) NSString * firstName;</div><div class="line">@end</div><div class="line">@implementation Person(Student)</div><div class="line">static char * PersonFirstName = &quot;PersonFirstName&quot;;</div><div class="line"></div><div class="line">-(void)setFirstName:(NSString *)firstName&#123;</div><div class="line">//此处使用runtime来添加这个属性,因为在分类里面是无法直接添加属性的,只有通过运行时才能添加熟悉,该方法是设置属性的方法,其中`static char * PersonFirstName = &quot;PersonFirstName&quot;;`这个是一个定义常量,必须是C语言字符串</div><div class="line">    objc_setAssociatedObject(self, PersonFirstName, firstName, OBJC_ASSOCIATION_COPY_NONATOMIC);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(NSString *)firstName&#123;</div><div class="line">    //该方法是货到属性的方法</div><div class="line">    return objc_getAssociatedObject(self, PersonFirstName);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="Runtime的使用就不再这里多说明了-主要表达的是"><a href="#Runtime的使用就不再这里多说明了-主要表达的是" class="headerlink" title="Runtime的使用就不再这里多说明了,主要表达的是:"></a>Runtime的使用就不再这里多说明了,主要表达的是:</h4><ol>
+<li>我们可以在实现文件里面再写多一个类的分类,加深了这种类文件和方法加密的方式,更好的隐蔽了我们的类</li>
+<li>同时,个人还觉得如果有一些类只使用一次,我们也可以直接封装在某个.m文件下面做一个匿名的类使用.</li>
+<li>或者如同52个建议里面所说的,可以在分类中添加实例变量,如果想类所遵循的协议隐藏,也可以使用class-continuation分类</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;一开始看书的时候是有点懵逼的-但是后来慢慢的理解后才觉得其实是书本上描述得让我没有明白-个人认为核心的要点就是在实现文件类再一次做分类-类似于一个内部类一样吧-先上一下代码吧&quot;&gt;&lt;a href=&quot;#一开始看书的时候是有点懵逼的-但是后来慢慢的理解后才觉得其实是书本
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>tableView代理的分离</title>
@@ -1058,65 +1084,6 @@ userCell.configureWithUser(user)
     <summary type="html">
     
       &lt;p&gt;&lt;strong&gt;(注意:本文为参考刘老师博客中的心得再实践一遍的个人学习笔记,并非原创,建议查看老师写的原文,点击此处&lt;a href=&quot;http://liuyanwei.jumppo.com/index.html&quot; target=&quot;_blank&quot; rel=&quot;external
-    
-    </summary>
-    
-    
-      <category term="swift" scheme="http://yoursite.com/tags/swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>swift中的跑马灯实现（导航栏）</title>
-    <link href="http://yoursite.com/2016/03/28/swift%E4%B8%AD%E7%9A%84%E8%B7%91%E9%A9%AC%E7%81%AF%E5%AE%9E%E7%8E%B0%EF%BC%88%E5%AF%BC%E8%88%AA%E6%A0%8F%EF%BC%89/"/>
-    <id>http://yoursite.com/2016/03/28/swift中的跑马灯实现（导航栏）/</id>
-    <published>2016-03-27T19:28:57.000Z</published>
-    <updated>2016-10-17T11:55:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>首先是懒加载了runLabel：</p>
-<pre><code> private lazy var runLabel : UILabel={
-     let label = UILabel()
-     label.sizeToFit()
-
-    label.font = UIFont(name: kMyFontName, size: kFontSize14)
-    label.textColor = UIColor.blackColor()
-    return label
-}()
-</code></pre><p>然后在viewDidLoad中实现addsubView方法：</p>
-<pre><code>/// 跑马灯
-self.navigationItem.titleView?.addSubview(runLabel)
-//设置label的原始位置
-runLabel.frame.origin.x = kScreenWidth
-
-
-UIView.beginAnimations(self.productName, context: nil)
-UIView.setAnimationDuration(16)
-UIView.setAnimationCurve(UIViewAnimationCurve.Linear)
-UIView.setAnimationDelegate(self)
-UIView.setAnimationRepeatCount(999999)
-
-runLabel.frame.origin.x = -runLabel.frame.size.width
-UIView .commitAnimations()
-</code></pre><p>另外如果文字过长的话建议直接计算文字宽度（做个简单的分类即可）</p>
-<pre><code>extension String {
-  func getTitleW() -&gt; CGFloat{
-     /// 计算文字宽度
-     var dict:[String:AnyObject] = [:]
-      dict[NSFontAttributeName] = UIFont(name: kMyFontName, size:   kFontSize14)
-          return NSString(string:     self).boundingRectWithSize(CGSizeMake(999, 14), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: dict, context: nil).size.width + 24
-
-    }
-}
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;首先是懒加载了runLabel：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; private lazy var runLabel : UILabel={
-     let label = UILabel()
-     label.sizeToFit()
-
-    label.font 
     
     </summary>
     
