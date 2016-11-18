@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      js在ES6中可以使用iterable进行遍历 | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="使用iterable的时候首先要确认浏览器时候支持ES6的语法,可以使用以下代码来检查是否适配:
+123456&amp;apos;ues strict&amp;apos;var a = [1,2,3];for (var x of a) &amp;#123;  &amp;#125;alert(&amp;apos;你的浏览器支持for ... of&amp;apos;);
+在正常情况下,Array可以支持以下两种形式来进行下标遍历:
+1234567">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js在ES6中可以使用iterable进行遍历 | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/11/15/js在ES6中可以使用iterable进行遍历/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="使用iterable的时候首先要确认浏览器时候支持ES6的语法,可以使用以下代码来检查是否适配:
+123456&amp;apos;ues strict&amp;apos;var a = [1,2,3];for (var x of a) &amp;#123;  &amp;#125;alert(&amp;apos;你的浏览器支持for ... of&amp;apos;);
+在正常情况下,Array可以支持以下两种形式来进行下标遍历:
+1234567">
+<meta property="og:updated_time" content="2016-11-15T11:50:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js在ES6中可以使用iterable进行遍历 | shiron">
+<meta name="twitter:description" content="使用iterable的时候首先要确认浏览器时候支持ES6的语法,可以使用以下代码来检查是否适配:
+123456&amp;apos;ues strict&amp;apos;var a = [1,2,3];for (var x of a) &amp;#123;  &amp;#125;alert(&amp;apos;你的浏览器支持for ... of&amp;apos;);
+在正常情况下,Array可以支持以下两种形式来进行下标遍历:
+1234567">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">js在ES6中可以使用iterable进行遍历</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-11-15" class="post-meta__date date">2016-11-15</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>使用iterable的时候首先要确认浏览器时候支持ES6的语法,可以使用以下代码来检查是否适配:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&apos;ues strict&apos;</div><div class="line">var a = [1,2,3];</div><div class="line">for (var x of a) &#123;</div><div class="line">  </div><div class="line">&#125;</div><div class="line">alert(&apos;你的浏览器支持for ... of&apos;);</div></pre></td></tr></table></figure>
+<p>在正常情况下,<code>Array</code>可以支持以下两种形式来进行下标遍历:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> for (var i = 0; i &lt; array.length; i++) &#123;</div><div class="line">   array[i]</div><div class="line">   for (var variable in object) &#123;</div><div class="line">     if (object.hasOwnProperty(variable)) &#123;</div><div class="line">       </div><div class="line">   	&#125;</div><div class="line">   &#125;</div><div class="line"> &#125;</div><div class="line">for (var variable in object) &#123;</div><div class="line">   if (object.hasOwnProperty(variable)) &#123;</div><div class="line">     </div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>但是对于ES6新增的<code>Set</code>和<code>Map</code>类型就无法使用该方法来进行遍历了,因此在ES6中引入了一个新的解决模式:<code>iterable</code>类型的模式来进行<code>for...of</code>遍历.样式如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var a = [&apos;A&apos;,&apos;B&apos;,&apos;C&apos;];</div><div class="line">    var s = new Set([&apos;A&apos;,&apos;B&apos;,&apos;C&apos;]);</div><div class="line">    var m = new Map([[1,&apos;x&apos;],[2,&apos;y&apos;],[3,&apos;z&apos;]]);</div><div class="line"></div><div class="line">    for (var x of a) &#123;</div><div class="line">      console.log(x);</div><div class="line">    &#125;;</div><div class="line">//A -&gt; B  -&gt; C</div><div class="line"></div><div class="line">    for (var x of s) &#123;</div><div class="line">      console.log(x);</div><div class="line">    &#125;</div><div class="line">//A -&gt; B  -&gt; C</div><div class="line">    for (var x of m) &#123;</div><div class="line">      console.log(x);</div><div class="line">    &#125;</div><div class="line">//[1,&apos;x&apos;]-&gt;  [2,&apos;y&apos;] -&gt; [3,&apos;z&apos;]</div></pre></td></tr></table></figure>
+<p><code>for...in</code>实际上和最新的<code>for...of</code>是有区别的,<code>for...in</code>它遍历的实际上是对象的属性名称。一个Array数组实际上也是一个对象，它的每个元素的索引被视为一个属性。</p>
+<p>当我们手动给<code>Array</code>对象添加了额外的属性后，<code>for ... in</code>循环将带来意想不到的意外效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var a = [1,2,3];</div><div class="line">a.name = &apos;xiaoming&apos;;</div><div class="line">for (var b in a) &#123;</div><div class="line">  console.log(b);</div><div class="line">&#125;</div><div class="line">/*</div><div class="line">结果如下:</div><div class="line">0</div><div class="line">1</div><div class="line">2</div><div class="line">name</div><div class="line"> */</div></pre></td></tr></table></figure>
+<p><code>for ... in</code>循环将把name包括在内，但<code>Array</code>的<code>length</code>属性却不包括在内。</p>
+<p><code>for ... of</code>循环则完全修复了这些问题，它只循环集合本身的元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];</div><div class="line">a.name = &apos;Hello&apos;;</div><div class="line">for (var x of a) &#123;</div><div class="line">    alert(x); // &apos;A&apos;, &apos;B&apos;, &apos;C&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这就是为什么要引入新的<code>for ... of</code>循环。</p>
+<p>然而，更好的方式是直接使用iterable内置的<code>forEach</code>方法，它接收一个函数，每次迭代就自动回调该函数。以<code>Array</code>为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];</div><div class="line">a.forEach(function (element, index, array) &#123;</div><div class="line">    // element: 指向当前元素的值</div><div class="line">    // index: 指向当前索引</div><div class="line">    // array: 指向Array对象本身</div><div class="line">    alert(element);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>注意，<code>forEach()</code>方法是ES5.1标准引入的，你需要测试浏览器是否支持。</p>
+<p><code>Set</code>与<code>Array</code>类似，但<code>Set</code>没有索引，因此回调函数的前两个参数都是元素本身：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var s = new Set([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]);</div><div class="line">s.forEach(function (element, sameElement, set) &#123;</div><div class="line">    alert(element);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>Map</code>的回调函数参数依次为<code>value</code>、<code>key</code>和<code>map</code>本身：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var m = new Map([[1, &apos;x&apos;], [2, &apos;y&apos;], [3, &apos;z&apos;]]);</div><div class="line">m.forEach(function (value, key, map) &#123;</div><div class="line">    alert(value);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>如果对某些参数不感兴趣，由于JavaScript的函数调用不要求参数必须一致，因此可以忽略它们。例如，只需要获得<code>Array</code>的<code>element</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];</div><div class="line">a.forEach(function (element) &#123;</div><div class="line">    alert(element);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

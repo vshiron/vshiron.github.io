@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      runtime之获得一个类的成员变量 | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="如何获得一个类的成员变量?对于runtime这个Objective-C的黑魔法,其实我在理论中并没有理解得很到位,但是在开发中慢慢变更的需求,我们开始就会按照网上的模板来写代码,写得多了,其实就会有”到位”的感觉.
+使用runtime获得成员变量最常用的地方就是在一个对象归档和解档的时候使用了,因为如果每次都要手动写比较累,而且也容易写错,那不如我们直接用这项黑魔法来减轻我们的工作量–
+&amp;gt;/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="runtime之获得一个类的成员变量 | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/11/12/runtime之获得一个类的成员变量/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="如何获得一个类的成员变量?对于runtime这个Objective-C的黑魔法,其实我在理论中并没有理解得很到位,但是在开发中慢慢变更的需求,我们开始就会按照网上的模板来写代码,写得多了,其实就会有”到位”的感觉.
+使用runtime获得成员变量最常用的地方就是在一个对象归档和解档的时候使用了,因为如果每次都要手动写比较累,而且也容易写错,那不如我们直接用这项黑魔法来减轻我们的工作量–
+&amp;gt;/">
+<meta property="og:updated_time" content="2016-11-12T11:07:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="runtime之获得一个类的成员变量 | shiron">
+<meta name="twitter:description" content="如何获得一个类的成员变量?对于runtime这个Objective-C的黑魔法,其实我在理论中并没有理解得很到位,但是在开发中慢慢变更的需求,我们开始就会按照网上的模板来写代码,写得多了,其实就会有”到位”的感觉.
+使用runtime获得成员变量最常用的地方就是在一个对象归档和解档的时候使用了,因为如果每次都要手动写比较累,而且也容易写错,那不如我们直接用这项黑魔法来减轻我们的工作量–
+&amp;gt;/">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">runtime之获得一个类的成员变量</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-11-12" class="post-meta__date date">2016-11-12</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h4 id="如何获得一个类的成员变量"><a href="#如何获得一个类的成员变量" class="headerlink" title="如何获得一个类的成员变量?"></a>如何获得一个类的成员变量?</h4><p>对于runtime这个Objective-C的黑魔法,其实我在理论中并没有理解得很到位,但是在开发中慢慢变更的需求,我们开始就会按照网上的模板来写代码,写得多了,其实就会有”到位”的感觉.</p>
+<p>使用runtime获得成员变量最常用的地方就是在一个对象归档和解档的时候使用了,因为如果每次都要手动写比较累,而且也容易写错,那不如我们直接用这项黑魔法来减轻我们的工作量–</p>
+<p>&gt;<br>//必须要导入的头文件</p>
+<objc runtime.h="">
+
+<ol>
+<li>获得某个类的所有成员变量（outCount 会返回成员变量的总数）<br><code>Ivar *class_copyIvarList(Class cls , unsigned int *outCount)</code><br>第一个参数是:类的类型<br>第二个参数是:unsigned int *outCount放一个接收值的地址，用来存放属性的个数</li>
+<li>获得成员变量的名字<br><code>const char *ivar_getName(Ivar v)</code></li>
+<li>获得成员变量的类型<br><code>const char *ivar_getTypeEndcoding(Ivar v)</code></li>
+</ol>
+<h4 id="举一个普通的例子"><a href="#举一个普通的例子" class="headerlink" title="举一个普通的例子"></a>举一个普通的例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">unsigned int outCount = 0;</div><div class="line">Ivar *ivars = class_copyIvarList([Person class], &amp;outCount);</div><div class="line"></div><div class="line">// 遍历所有成员变量</div><div class="line">for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">    // 取出i位置对应的成员变量</div><div class="line">    Ivar ivar = ivars[i];</div><div class="line">    const char *name = ivar_getName(ivar);</div><div class="line">    const char *type = ivar_getTypeEncoding(ivar);</div><div class="line">    NSLog(@&quot;成员变量名：%s 成员变量类型：%s&quot;,name,type);</div><div class="line">&#125;</div><div class="line">// 注意释放内存！</div><div class="line">free(ivars);</div></pre></td></tr></table></figure>
+<h4 id="利用runtime-获取所有属性来重写归档解档方法"><a href="#利用runtime-获取所有属性来重写归档解档方法" class="headerlink" title="利用runtime 获取所有属性来重写归档解档方法"></a>利用runtime 获取所有属性来重写归档解档方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">// 设置不需要归解档的属性</div><div class="line">- (NSArray *)ignoredNames &#123;</div><div class="line">    return @[@&quot;_aaa&quot;,@&quot;_bbb&quot;,@&quot;_ccc&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 解档方法</div><div class="line">- (instancetype)initWithCoder:(NSCoder *)aDecoder &#123;</div><div class="line">    if (self = [super initWithCoder:aDecoder]) &#123;</div><div class="line">        // 获取所有成员变量</div><div class="line">        unsigned int outCount = 0;</div><div class="line">        Ivar *ivars = class_copyIvarList([self class], &amp;outCount);</div><div class="line"></div><div class="line">        for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">            Ivar ivar = ivars[i];</div><div class="line">            // 将每个成员变量名转换为NSString对象类型</div><div class="line">            NSString *key = [NSString stringWithUTF8String:ivar_getName(ivar)];</div><div class="line"></div><div class="line">            // 忽略不需要解档的属性</div><div class="line">            if ([[self ignoredNames] containsObject:key]) &#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 根据变量名解档取值，无论是什么类型</div><div class="line">            id value = [aDecoder decodeObjectForKey:key];</div><div class="line">            // 取出的值再设置给属性</div><div class="line">            [self setValue:value forKey:key];</div><div class="line">            // 这两步就相当于以前的 self.age = [aDecoder decodeObjectForKey:@&quot;_age&quot;];</div><div class="line">        &#125;</div><div class="line">        free(ivars);</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 归档调用方法</div><div class="line">- (void)encodeWithCoder:(NSCoder *)aCoder &#123;</div><div class="line">     // 获取所有成员变量</div><div class="line">    unsigned int outCount = 0;</div><div class="line">    Ivar *ivars = class_copyIvarList([self class], &amp;outCount);</div><div class="line">    for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">        Ivar ivar = ivars[i];</div><div class="line">        // 将每个成员变量名转换为NSString对象类型</div><div class="line">        NSString *key = [NSString stringWithUTF8String:ivar_getName(ivar)];</div><div class="line"></div><div class="line">        // 忽略不需要归档的属性</div><div class="line">        if ([[self ignoredNames] containsObject:key]) &#123;</div><div class="line">            continue;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 通过成员变量名，取出成员变量的值</div><div class="line">        id value = [self valueForKeyPath:key];</div><div class="line">        // 再将值归档</div><div class="line">        [aCoder encodeObject:value forKey:key];</div><div class="line">        // 这两步就相当于 [aCoder encodeObject:@(self.age) forKey:@&quot;_age&quot;];</div><div class="line">    &#125;</div><div class="line">    free(ivars);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>依据上面的原理我们就可以给NSObject做一个分类，让我们不需要每次都写这么一长串代码，只要实现一小段代码就可以让一个对象具有归解档的能力。</p>
+<p><strong>注意，下面的代码我换了一个方法名（不然会覆盖系统原来的方法！），加了一个忽略属性方法是否被实现的判断，并加上了对父类属性的归解档循环。</strong></p>
+<p><code>NSObject+Extension.h</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface NSObject (Extension)</div><div class="line"></div><div class="line">- (NSArray *)ignoredNames;</div><div class="line">- (void)encode:(NSCoder *)aCoder;</div><div class="line">- (void)decode:(NSCoder *)aDecoder;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p><code>NSObject+Extension.m</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">#import &quot;NSObject+Extension.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line">@implementation NSObject (Extension)</div><div class="line"></div><div class="line">- (void)decode:(NSCoder *)aDecoder &#123;</div><div class="line">    // 一层层父类往上查找，对父类的属性执行归解档方法</div><div class="line">    Class c = self.class;</div><div class="line">    while (c &amp;&amp;c != [NSObject class]) &#123;</div><div class="line"></div><div class="line">        unsigned int outCount = 0;</div><div class="line">        Ivar *ivars = class_copyIvarList(c, &amp;outCount);</div><div class="line">        for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">            Ivar ivar = ivars[i];</div><div class="line">            NSString *key = [NSString stringWithUTF8String:ivar_getName(ivar)];</div><div class="line"></div><div class="line">            // 如果有实现该方法再去调用</div><div class="line">            if ([self respondsToSelector:@selector(ignoredNames)]) &#123;</div><div class="line">                if ([[self ignoredNames] containsObject:key]) continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            id value = [aDecoder decodeObjectForKey:key];</div><div class="line">            [self setValue:value forKey:key];</div><div class="line">        &#125;</div><div class="line">        free(ivars);</div><div class="line">        c = [c superclass];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)encode:(NSCoder *)aCoder &#123;</div><div class="line">    // 一层层父类往上查找，对父类的属性执行归解档方法</div><div class="line">    Class c = self.class;</div><div class="line">    while (c &amp;&amp;c != [NSObject class]) &#123;</div><div class="line"></div><div class="line">        unsigned int outCount = 0;</div><div class="line">        Ivar *ivars = class_copyIvarList([self class], &amp;outCount);</div><div class="line">        for (int i = 0; i &lt; outCount; i++) &#123;</div><div class="line">            Ivar ivar = ivars[i];</div><div class="line">            NSString *key = [NSString stringWithUTF8String:ivar_getName(ivar)];</div><div class="line"></div><div class="line">            // 如果有实现该方法再去调用</div><div class="line">            if ([self respondsToSelector:@selector(ignoredNames)]) &#123;</div><div class="line">                if ([[self ignoredNames] containsObject:key]) continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            id value = [self valueForKeyPath:key];</div><div class="line">            [aCoder encodeObject:value forKey:key];</div><div class="line">        &#125;</div><div class="line">        free(ivars);</div><div class="line">        c = [c superclass];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>上面分类使用方法：在需要归解档的对象中实现下面方法即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 设置需要忽略的属性</div><div class="line">- (NSArray *)ignoredNames &#123;</div><div class="line">    return @[@&quot;bone&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 在系统方法内来调用我们的方法</div><div class="line">- (instancetype)initWithCoder:(NSCoder *)aDecoder &#123;</div><div class="line">    if (self = [super init]) &#123;</div><div class="line">        [self decode:aDecoder];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)encodeWithCoder:(NSCoder *)aCoder &#123;</div><div class="line">    [self encode:aCoder];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样看来，我们每次又要写同样的代码，我们可以将归解档两个方法封装为宏，在需要的地方一句宏搞定，如果有不需要归解档的属性就实现ignoredNames 方法，具体可以看我的demo，这个也是MJExtension中那个一句宏就可以解决归解档的实现原理。</p>
+</objc>
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      52个建议中的&#39;别忘了NSTimer会保留其目标对象&#39; | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="估计大家在开发中也经常遇到关于NSTimer循环引用的问题,在书中提及了使用块的方法来解决我们使用NSTimer时造成的循环引用.(主要是我们有可能会忘记NSTimer的作用失去时,接触对其的强引用,解除循环引用)
+NSTimer+XHUsingBlock.h123456789#import &amp;lt;Foundation/Foundation.h&amp;gt;@interface NSTimer (XH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="52个建议中的'别忘了NSTimer会保留其目标对象' | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/06/13/52个建议-别忘了NSTimer会保留其目标对象/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="估计大家在开发中也经常遇到关于NSTimer循环引用的问题,在书中提及了使用块的方法来解决我们使用NSTimer时造成的循环引用.(主要是我们有可能会忘记NSTimer的作用失去时,接触对其的强引用,解除循环引用)
+NSTimer+XHUsingBlock.h123456789#import &amp;lt;Foundation/Foundation.h&amp;gt;@interface NSTimer (XH">
+<meta property="og:updated_time" content="2016-11-13T14:43:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="52个建议中的'别忘了NSTimer会保留其目标对象' | shiron">
+<meta name="twitter:description" content="估计大家在开发中也经常遇到关于NSTimer循环引用的问题,在书中提及了使用块的方法来解决我们使用NSTimer时造成的循环引用.(主要是我们有可能会忘记NSTimer的作用失去时,接触对其的强引用,解除循环引用)
+NSTimer+XHUsingBlock.h123456789#import &amp;lt;Foundation/Foundation.h&amp;gt;@interface NSTimer (XH">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">52个建议中的&#39;别忘了NSTimer会保留其目标对象&#39;</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-06-13" class="post-meta__date date">2016-06-13</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>估计大家在开发中也经常遇到关于NSTimer循环引用的问题,在书中提及了使用块的方法来解决我们使用NSTimer时造成的循环引用.(主要是我们有可能会忘记NSTimer的作用失去时,接触对其的强引用,解除循环引用)</p>
+<h5 id="NSTimer-XHUsingBlock-h"><a href="#NSTimer-XHUsingBlock-h" class="headerlink" title="NSTimer+XHUsingBlock.h"></a>NSTimer+XHUsingBlock.h</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface NSTimer (XHUsingBlock)</div><div class="line"></div><div class="line">+(NSTimer*)xh_scheduledTimerWithTimeInterval:(NSTimeInterval)ti</div><div class="line">                                       block:(void(^)())block</div><div class="line">                                     repeats:(BOOL)repeats;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h5 id="NSTimer-XHUsingBlock-m"><a href="#NSTimer-XHUsingBlock-m" class="headerlink" title="NSTimer+XHUsingBlock.m"></a>NSTimer+XHUsingBlock.m</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#import &quot;NSTimer+XHUsingBlock.h&quot;</div><div class="line"></div><div class="line">@implementation NSTimer (XHUsingBlock)</div><div class="line"></div><div class="line">+(NSTimer*)xh_scheduledTimerWithTimeInterval:(NSTimeInterval)ti</div><div class="line">                                       block:(void(^)())block</div><div class="line">                                     repeats:(BOOL)repeats&#123;</div><div class="line">    </div><div class="line">    return  [self scheduledTimerWithTimeInterval:ti target:self selector:@selector(xh_blockInvoke:) userInfo:[block copy] repeats:repeats];</div><div class="line">    </div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">+(void)xh_blockInvoke:(NSTimer*)timer&#123;</div><div class="line">    </div><div class="line">    void(^block)() = timer.userInfo;</div><div class="line">    if (block) &#123;</div><div class="line">        block();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>这个使用,我们在使用这段代码时注意给类换上弱引用效果就可以解决内存泄露的问题了.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    _timer =  [NSTimer xh_scheduledTimerWithTimeInterval:0.1 block:^&#123;</div><div class="line">    </div><div class="line">        __strong typeof(self) strongSelf = weakSelf;</div><div class="line">        </div><div class="line">        [strongSelf run];</div><div class="line">        </div><div class="line">    &#125; repeats:YES];</div><div class="line">    </div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)run&#123;</div><div class="line">    </div><div class="line">    NSLog(@&quot;run&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      js中的Promise函数使用 | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="初闻Promise先贴上Promise的使用吧,其实我对它的理解并不是特别深厚,厉害理解透彻了再回来重新深刻的理解,本文中代码出于廖雪峰老师的博客,仅学习记录之用,并非人原创~
+123456789101112131415161718192021new Promise(function(resolve,reject)&amp;#123;          console.log(&amp;apos;start ne">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中的Promise函数使用 | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/11/16/js中的Promise函数使用/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="初闻Promise先贴上Promise的使用吧,其实我对它的理解并不是特别深厚,厉害理解透彻了再回来重新深刻的理解,本文中代码出于廖雪峰老师的博客,仅学习记录之用,并非人原创~
+123456789101112131415161718192021new Promise(function(resolve,reject)&amp;#123;          console.log(&amp;apos;start ne">
+<meta property="og:updated_time" content="2016-11-16T12:17:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js中的Promise函数使用 | shiron">
+<meta name="twitter:description" content="初闻Promise先贴上Promise的使用吧,其实我对它的理解并不是特别深厚,厉害理解透彻了再回来重新深刻的理解,本文中代码出于廖雪峰老师的博客,仅学习记录之用,并非人原创~
+123456789101112131415161718192021new Promise(function(resolve,reject)&amp;#123;          console.log(&amp;apos;start ne">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">js中的Promise函数使用</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-11-16" class="post-meta__date date">2016-11-16</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h5 id="初闻Promise"><a href="#初闻Promise" class="headerlink" title="初闻Promise"></a>初闻Promise</h5><p>先贴上Promise的使用吧,其实我对它的理解并不是特别深厚,厉害理解透彻了再回来重新深刻的理解,本文中代码出于<a href="http://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014345008539155e93fc16046d4bb7854943814c4f9dc2000#0" target="_blank" rel="external">廖雪峰老师的博客</a>,仅学习记录之用,并非人原创~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">new Promise(function(resolve,reject)&#123;</div><div class="line">          console.log(&apos;start new Promise&apos;);</div><div class="line">            var timeOut = Math.random() * 2;</div><div class="line">            console.log(&apos;set timeout to: &apos; + timeOut + &apos; seconds.&apos;);</div><div class="line">            setTimeout(function()&#123;</div><div class="line">                  if(timeOut&lt;1)&#123;</div><div class="line">                    console.log(&apos;call resolver()...&apos;);</div><div class="line">                    resolve(&apos;200 ok&apos;);</div><div class="line">                    //reject(&apos;失败原因是注释了代码&apos;);</div><div class="line">                  &#125;else &#123;</div><div class="line">                    console.log(&apos;call reject()...&apos;);</div><div class="line">                    reject(&apos;timeout in &apos; + timeOut + &apos; seconds.&apos;);</div><div class="line">                  &#125;</div><div class="line">            &#125;,timeOut * 1000);</div><div class="line">        </div><div class="line">        &#125;).then(function(result)&#123;</div><div class="line">          console.log(&apos;成功&apos;+result);</div><div class="line">        &#125;).catch(function (reason) &#123;</div><div class="line">          console.log(&apos;Failed: &apos; + reason);</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<p>该段代码打印的结果是:<code>成功200 ok</code></p>
+<h5 id="进行链式编程"><a href="#进行链式编程" class="headerlink" title="进行链式编程"></a>进行链式编程</h5><p>最初的时候我感觉很不明白为何只是执行了两个参数的其中一个为何能够调用下面then的函数,后来通过注释…只要我执行了resolve的话,肯定回调then中的代码,如果我执行了reject的话,就会执行catch中的代码,这里还会把参数带过去给then和catch中的函数,那么,如果一直调用then的话,就可以进行链式变成了,返回的对象当然是要<code>Promise</code>对象~我们来看老师下面这段代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">function multiply(input)&#123;</div><div class="line">    return new Promise(function(resolve,reject)&#123;</div><div class="line">        console.log(&apos;calculating &apos; + input + &apos; x &apos; + input + &apos;...&apos;);</div><div class="line">        setTimeout(resolve,500,input* input);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function add(input) &#123;</div><div class="line">  return new Promise(function(resolve,reject) &#123;</div><div class="line">    console.log(&apos;calculating &apos; + input + &apos; + &apos; + input + &apos;...&apos;);</div><div class="line">    setTimeout(resolve, 500, input + input);</div><div class="line"></div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p = new Promise(function (resolve, reject) &#123;</div><div class="line">    console.log(&apos;start new Promise...&apos;);</div><div class="line">    resolve(123);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">p.then(add)</div><div class="line">.then(multiply)</div><div class="line">.then(add)</div><div class="line">.then(function (result) &#123;</div><div class="line">  console.log(&apos;Got value: &apos; + result);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>因为每一次返回值都是Promise对象,所以还是可以.then来延时调用,等待函数体内自行了resolve的时候真正执行该函数.</p>
+<h5 id="封装ajax"><a href="#封装ajax" class="headerlink" title="封装ajax"></a>封装ajax</h5><p>基于Promise的原理,我们也可以对ajax进行一个简单的封装:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">// ajax函数将返回Promise对象:</div><div class="line">function ajax(method, url, data) &#123;</div><div class="line">    var request = new XMLHttpRequest();</div><div class="line">    return new Promise(function (resolve, reject) &#123;</div><div class="line">        request.onreadystatechange = function () &#123;</div><div class="line">            if (request.readyState === 4) &#123;</div><div class="line">                if (request.status === 200) &#123;</div><div class="line">                //成功时把参数传出去</div><div class="line">                    resolve(request.responseText);</div><div class="line">                &#125; else &#123;</div><div class="line">                //失败时把失败原因回调</div><div class="line">                    reject(request.status);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        request.open(method, url);</div><div class="line">        request.send(data);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p = ajax(&apos;GET&apos;, &apos;/api/categories&apos;);</div><div class="line">p.then(function (text) &#123; // 如果AJAX成功，获得响应内容</div><div class="line">    log.innerText = text;</div><div class="line">&#125;).catch(function (status) &#123; // 如果AJAX失败，获得响应代码</div><div class="line">    log.innerText = &apos;ERROR: &apos; + status;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这种封装的感觉其实就跟OC中网络请求的闭包回调非常相似,大家可以类比的进行学习</p>
+<h5 id="所谓的Promise到底是"><a href="#所谓的Promise到底是" class="headerlink" title="所谓的Promise到底是?"></a>所谓的Promise到底是?</h5><p>Promise就是一个对象，用来传递异步操作的消息。它代表了某个未来才会知道结果的事件（通常是一个异步操作），并且这个事件提供统一的 API，可供进一步处理。</p>
+<p>Promise 对象有以下两个特点。</p>
+<ol>
+<li><p>对象的状态不受外界影响。Promise 对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和 Rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是 Promise 这个名字的由来，它的英语意思就是「承诺」，表示其他手段无法改变。</p>
+</li>
+<li><p>一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise 对象的状态改变，只有两种可能：从 Pending 变为 Resolved 和从 Pending 变为 Rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。就算改变已经发生了，你再对 Promise 对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。</p>
+</li>
+</ol>
+<p>有了 Promise 对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise 对象提供统一的接口，使得控制异步操作更加容易。</p>
+<p><strong>Promise 也有一些缺点。首先，无法取消 Promise，一旦新建它就会立即执行，无法中途取消。其次，如果不设置回调函数，Promise 内部抛出的错误，不会反应到外部。第三，当处于 Pending 状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。</strong><br>来自:<a href="http://www.cnblogs.com/libin-1/p/5947602.html" target="_blank" rel="external">彻底理解Javascript 中的 Promise</a></p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

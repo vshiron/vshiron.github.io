@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      iOS 万能跳转界面方法 | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="本文转载自:cocoaChina的汉斯哈哈哈
+在开发项目中，会有这样变态的需求：
+
+推送：根据服务端推送过来的数据规则，跳转到对应的控制器
+
+feeds列表：不同类似的cell，可能跳转不同的控制器（嘘！产品经理是这样要求：我也不确定会跳转哪个界面哦，可能是这个又可能是那个，能给我做灵活吗？根据后台返回规则任意跳转？）
+
+
+思考：wocao！这变态的需求，要拒绝他吗？
+switch判断呗，考虑所有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 万能跳转界面方法 | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/08/15/iOS-万能跳转界面方法/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="本文转载自:cocoaChina的汉斯哈哈哈
+在开发项目中，会有这样变态的需求：
+
+推送：根据服务端推送过来的数据规则，跳转到对应的控制器
+
+feeds列表：不同类似的cell，可能跳转不同的控制器（嘘！产品经理是这样要求：我也不确定会跳转哪个界面哦，可能是这个又可能是那个，能给我做灵活吗？根据后台返回规则任意跳转？）
+
+
+思考：wocao！这变态的需求，要拒绝他吗？
+switch判断呗，考虑所有">
+<meta property="og:updated_time" content="2016-11-15T01:57:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 万能跳转界面方法 | shiron">
+<meta name="twitter:description" content="本文转载自:cocoaChina的汉斯哈哈哈
+在开发项目中，会有这样变态的需求：
+
+推送：根据服务端推送过来的数据规则，跳转到对应的控制器
+
+feeds列表：不同类似的cell，可能跳转不同的控制器（嘘！产品经理是这样要求：我也不确定会跳转哪个界面哦，可能是这个又可能是那个，能给我做灵活吗？根据后台返回规则任意跳转？）
+
+
+思考：wocao！这变态的需求，要拒绝他吗？
+switch判断呗，考虑所有">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">iOS 万能跳转界面方法</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-08-15" class="post-meta__date date">2016-08-15</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>本文转载自:<a href="http://www.cocoachina.com/ios/20150824/13104.html" target="_blank" rel="external">cocoaChina的汉斯哈哈哈</a></p>
+<p>在开发项目中，会有这样变态的需求：</p>
+<ul>
+<li><p>推送：根据服务端推送过来的数据规则，跳转到对应的控制器</p>
+</li>
+<li><p>feeds列表：不同类似的cell，可能跳转不同的控制器（嘘！产品经理是这样要求：我也不确定会跳转哪个界面哦，可能是这个又可能是那个，能给我做灵活吗？根据后台返回规则任意跳转？）</p>
+</li>
+</ul>
+<p>思考：wocao！这变态的需求，要拒绝他吗？</p>
+<p>switch判断呗，考虑所有跳转的因素？这不得写死我…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">switch () &#123;</div><div class="line">    case :</div><div class="line">        break;</div><div class="line">    default:</div><div class="line">        break;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>我是这么个实现的（runtime是个好东西）</strong></p>
+<p>利用runtime动态生成对象、属性、方法这特性，我们可以先跟服务端商量好，定义跳转规则，比如要跳转到A控制器，需要传属性id、type，那么服务端返回字典给我，里面有控制器名，两个属性名跟属性值，客户端就可以根据控制器名生成对象，再用kvc给对象赋值，这样就搞定了 —O(∩_∩)O哈哈哈</p>
+<p>比如：根据推送规则跳转对应界面HSFeedsViewController</p>
+<p>HSFeedsViewController.h：</p>
+<ul>
+<li>进入该界面需要传的属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">@interface HSFeedsViewController : UIViewController</div><div class="line">// 注：根据下面的两个属性，可以从服务器获取对应的频道列表数据</div><div class="line">/** 频道ID */</div><div class="line">@property (nonatomic, copy) NSString *ID;</div><div class="line">/** 频道type */</div><div class="line">@property (nonatomic, copy) NSString *type;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>AppDelegate.m：</p>
+<ul>
+<li>推送过来的消息规则</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 这个规则肯定事先跟服务端沟通好，跳转对应的界面需要对应的参数</div><div class="line">NSDictionary *userInfo = @&#123;</div><div class="line">                           @&quot;class&quot;: @&quot;HSFeedsViewController&quot;,</div><div class="line">                           @&quot;property&quot;: @&#123;</div><div class="line">                                        @&quot;ID&quot;: @&quot;123&quot;,</div><div class="line">                                        @&quot;type&quot;: @&quot;12&quot;</div><div class="line">                                   &#125;</div><div class="line">                           &#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>接收推送消息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo</div><div class="line">&#123;</div><div class="line">    [self push:userInfo];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>跳转界面</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">- (void)push:(NSDictionary *)params</div><div class="line">&#123;</div><div class="line">    // 类名</div><div class="line">    NSString *class =[NSString stringWithFormat:@&quot;%@&quot;, params[@&quot;class&quot;]];</div><div class="line">    const char *className = [class cStringUsingEncoding:NSASCIIStringEncoding];</div><div class="line">    // 从一个字串返回一个类</div><div class="line">    Class newClass = objc_getClass(className);</div><div class="line">    if (!newClass)</div><div class="line">    &#123;</div><div class="line">        // 创建一个类</div><div class="line">        Class superClass = [NSObject class];</div><div class="line">        newClass = objc_allocateClassPair(superClass, className, 0);</div><div class="line">        // 注册你创建的这个类</div><div class="line">        objc_registerClassPair(newClass);</div><div class="line">    &#125;</div><div class="line">    // 创建对象</div><div class="line">    id instance = [[newClass alloc] init];</div><div class="line">    // 对该对象赋值属性</div><div class="line">    NSDictionary * propertys = params[@&quot;property&quot;];</div><div class="line">    [propertys enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) &#123;</div><div class="line">        // 检测这个对象是否存在该属性</div><div class="line">        if ([self checkIsExistPropertyWithInstance:instance verifyPropertyName:key]) &#123;</div><div class="line">            // 利用kvc赋值</div><div class="line">            [instance setValue:obj forKey:key];</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">    // 获取导航控制器</div><div class="line">    UITabBarController *tabVC = (UITabBarController *)self.window.rootViewController;</div><div class="line">    UINavigationController *pushClassStance = (UINavigationController *)tabVC.viewControllers[tabVC.selectedIndex];</div><div class="line">    // 跳转到对应的控制器</div><div class="line">    [pushClassStance pushViewController:instance animated:YES];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>检测对象是否存在该属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">- (BOOL)checkIsExistPropertyWithInstance:(id)instance verifyPropertyName:(NSString *)verifyPropertyName</div><div class="line">&#123;</div><div class="line">    unsigned int outCount, i;</div><div class="line">    // 获取对象里的属性列表</div><div class="line">    objc_property_t * properties = class_copyPropertyList([instance</div><div class="line">                                                           class], &amp;outCount);</div><div class="line">    for (i = 0; i &lt; outCount; i++) &#123;</div><div class="line">        objc_property_t property =properties[i];</div><div class="line">        //  属性名转成字符串</div><div class="line">        NSString *propertyName = [[NSString alloc] initWithCString:property_getName(property) encoding:NSUTF8StringEncoding];</div><div class="line">        // 判断该属性是否存在</div><div class="line">        if ([propertyName isEqualToString:verifyPropertyName]) &#123;</div><div class="line">            free(properties);</div><div class="line">            return YES;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    free(properties);</div><div class="line">    return NO;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

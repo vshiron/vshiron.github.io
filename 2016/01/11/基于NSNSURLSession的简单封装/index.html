@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      基于NSNSURLSession的简单封装 | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="前言你有没有觉得每次项目都要导入AFN这个第三方框架很麻烦?明明只是做一些小测试,但是却要动用体积那么庞大的框架,那么你有没有考虑过,AFNetWroking的核心核心是由什么组成的呢?别急,我们一步步来对这个框架进行分析,但是首先第一步,我们还是要解决一个主要问题,那就是简单的封装一个网络库方便我们调试使用,其核心是封装NSURLSession的各个方法,我们先来看看基本的get请求吧.
+GET">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于NSNSURLSession的简单封装 | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/01/11/基于NSNSURLSession的简单封装/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="前言你有没有觉得每次项目都要导入AFN这个第三方框架很麻烦?明明只是做一些小测试,但是却要动用体积那么庞大的框架,那么你有没有考虑过,AFNetWroking的核心核心是由什么组成的呢?别急,我们一步步来对这个框架进行分析,但是首先第一步,我们还是要解决一个主要问题,那就是简单的封装一个网络库方便我们调试使用,其核心是封装NSURLSession的各个方法,我们先来看看基本的get请求吧.
+GET">
+<meta property="og:updated_time" content="2016-11-11T11:32:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于NSNSURLSession的简单封装 | shiron">
+<meta name="twitter:description" content="前言你有没有觉得每次项目都要导入AFN这个第三方框架很麻烦?明明只是做一些小测试,但是却要动用体积那么庞大的框架,那么你有没有考虑过,AFNetWroking的核心核心是由什么组成的呢?别急,我们一步步来对这个框架进行分析,但是首先第一步,我们还是要解决一个主要问题,那就是简单的封装一个网络库方便我们调试使用,其核心是封装NSURLSession的各个方法,我们先来看看基本的get请求吧.
+GET">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">基于NSNSURLSession的简单封装</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-01-11" class="post-meta__date date">2016-01-11</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>你有没有觉得每次项目都要导入AFN这个第三方框架很麻烦?明明只是做一些小测试,但是却要动用体积那么庞大的框架,那么你有没有考虑过,AFNetWroking的核心核心是由什么组成的呢?<br>别急,我们一步步来对这个框架进行分析,但是首先第一步,我们还是要解决一个主要问题,那就是简单的封装一个网络库方便我们调试使用,其核心是封装NSURLSession的各个方法,我们先来看看基本的get请求吧.</p>
+<h4 id="GET请求核心代码"><a href="#GET请求核心代码" class="headerlink" title="GET请求核心代码:"></a>GET请求核心代码:</h4><p>其主要核心是使用<code>NSURLSessionDataTask</code>这个类来方法请求,已回调请求数据.<br>我们先要生成一个<code>NSURLSession</code>的实例对象,由于它是一个单例,所以我们可以调用他的<code>sharedSession</code>获得.然后在实例上使用<code>dataTaskWithURL:...completionHandler:...</code>这个方法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    NSString* fitString = [urlString stringByAppendingString:[XHNetWorking dictChangeString:parameters]];</div><div class="line">    </div><div class="line">    NSURL* url =  [NSURL URLWithString:fitString];</div><div class="line">    </div><div class="line">    NSURLSession * session =  [NSURLSession sharedSession];</div><div class="line">    </div><div class="line">    NSURLSessionDataTask* dataTask =  [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</div><div class="line">        //解析服务器返回的数据</div><div class="line">//        NSLog(@&quot;可以回调该数据%@&quot;,[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);</div><div class="line">        </div><div class="line">        //默认在子线程中解析数据</div><div class="line">//        NSLog(@&quot;执行该代码的时候是在%@线程&quot;, [NSThread currentThread]);</div><div class="line">        </div><div class="line">    &#125;];</div><div class="line"> </div><div class="line">    [dataTask resume];</div></pre></td></tr></table></figure>
+<h4 id="POST请求核心代码"><a href="#POST请求核心代码" class="headerlink" title="POST请求核心代码:"></a>POST请求核心代码:</h4><p>在知道了get的请求办法以后,post的也变得很容易了,主要是要设置好请求头和请求方案,我们先要实例化一个<code>NSMutableURLRequest</code>对象,然后下面用代码进行解释:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//确定请求路径</div><div class="line">    NSURL* url =  [NSURL URLWithString:urlString];</div><div class="line">    NSMutableURLRequest* requestM =  [NSMutableURLRequest requestWithURL:url];</div><div class="line">    //修改请求方法</div><div class="line">    requestM.HTTPMethod = @&quot;POST&quot;;</div><div class="line">     //设置请求体</div><div class="line">    requestM.HTTPBody = [[XHNetWorking dictChangeString:parameters] dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    //创建会话对象</div><div class="line">    NSURLSession * session =  [NSURLSession sharedSession];</div><div class="line">    </div><div class="line">    NSURLSessionDataTask* dataTaks =  [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</div><div class="line">//        NSLog(@&quot;可以回调该数据%@&quot;,[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);</div><div class="line"></div><div class="line">        </div><div class="line">    &#125;];</div><div class="line">    [dataTaks resume];</div></pre></td></tr></table></figure>
+<p>其实封装的方法很简答,但是AFN又怎么可能是如此轻易就能让我们分析完整呢?接下里我们会一点一点的按照思路去剖析按AFNetWroking的代码.<br>先把这部分的完整代码贴上,方便大家做简答的请求吧:</p>
+<h5 id="XHNetWorking-h"><a href="#XHNetWorking-h" class="headerlink" title="XHNetWorking.h"></a>XHNetWorking.h</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface XHNetWorking : NSObject</div><div class="line">/**</div><div class="line"> *  返回单例</div><div class="line"> */</div><div class="line">+(instancetype)sharedXHNetWorking;</div><div class="line">/**</div><div class="line"> *  GET请求</div><div class="line"> *</div><div class="line"> *  @param urlString  base字符串</div><div class="line"> *  @param parameters 字典参数,字符串+字符串</div><div class="line"> *  @param success    成功后回调</div><div class="line"> *  @param failure    失败后回调</div><div class="line"> */</div><div class="line">+(void)GetWithUrl:(NSString*)urlString parameters:(NSDictionary*)parameters success:(void(^)(id json))success failure:(void(^)(NSError* error))failure;</div><div class="line">/**</div><div class="line"> *  POST请求</div><div class="line"> *</div><div class="line"> *  @param urlString  base字符串</div><div class="line"> *  @param parameters 字典参数,字符串+字符串</div><div class="line"> *  @param success    成功后回调</div><div class="line"> *  @param failure    失败后回调</div><div class="line"> */</div><div class="line">+(void)PostWithUrl:(NSString*)urlString parameters:(NSDictionary*)parameters success:(void(^)(id json))success failure:(void(^)(NSError* error))failure;</div><div class="line"></div><div class="line">/**</div><div class="line"> *  表单形式的多图上传</div><div class="line"> *</div><div class="line"> *  @param URL           url地址</div><div class="line"> *  @param parameters    参数</div><div class="line"> *  @param formDataArray 表单数组，数组里面放的时MyFormData模型</div><div class="line"> *  @param success       成功后的json</div><div class="line"> *  @param failure       失败后的error</div><div class="line"> */</div><div class="line">+ (void)PostWithURL:(NSString *)URL parameters:(NSDictionary *)parameters formDataArray:(NSArray *)formDataArray success:(void (^)(id json))success failure:(void (^)(NSError * error))failure;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@interface MyFormData : NSObject</div><div class="line">/**</div><div class="line"> *  图片数据</div><div class="line"> */</div><div class="line">@property (nonatomic, strong) NSData *data;</div><div class="line">/**</div><div class="line"> *  参数名称</div><div class="line"> */</div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line">/**</div><div class="line"> *  文件名称</div><div class="line"> */</div><div class="line">@property (nonatomic, copy) NSString *fileName;</div><div class="line">/**</div><div class="line"> *  文件类型</div><div class="line"> */</div><div class="line">@property (nonatomic, copy) NSString *mimeType;</div></pre></td></tr></table></figure>
+<h5 id="XHNetWorking-m"><a href="#XHNetWorking-m" class="headerlink" title="XHNetWorking.m"></a>XHNetWorking.m</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div></pre></td><td class="code"><pre><div class="line">#import &quot;XHNetWorking.h&quot;</div><div class="line">@interface XHNetWorking()&lt;NSCopying,NSURLSessionDelegate,NSURLSessionTaskDelegate,NSURLSessionDataDelegate&gt;</div><div class="line">@property (nonatomic ,copy )  NSMutableData* dataM;</div><div class="line">@property (nonatomic ,copy ,nullable) NSString* name;</div><div class="line">@end</div><div class="line">@implementation XHNetWorking</div><div class="line"></div><div class="line">static id _instace;</div><div class="line"></div><div class="line"></div><div class="line">+(id)allocWithZone:(struct _NSZone *)zone&#123;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        _instace =  [super allocWithZone:zone];</div><div class="line">    &#125;);</div><div class="line">    return _instace;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">+(instancetype)sharedXHNetWorking&#123;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        _instace = [[self alloc] init];</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    return _instace;</div><div class="line">&#125;</div><div class="line">-(id)copyWithZone:(NSZone *)zone&#123;</div><div class="line">    return _instace;</div><div class="line">    </div><div class="line">&#125;</div><div class="line">+(NSString*)dictChangeString:(NSDictionary*)parma&#123;</div><div class="line">    </div><div class="line">    NSMutableString* parmaUrl = [NSMutableString string];</div><div class="line">    </div><div class="line">    for (NSString* key in parma) &#123;</div><div class="line">        NSString* value =  [parma objectForKey:key];</div><div class="line">        [parmaUrl appendFormat:@&quot;%@=%@&amp;&quot;,key,value];</div><div class="line">    &#125;</div><div class="line">    NSString* str =  [parmaUrl substringToIndex:[parmaUrl length] -1];</div><div class="line">    return str;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+(void)GetWithUrl:(NSString*)urlString parameters:(NSDictionary*)parameters success:(void(^)(id json))success failure:(void(^)(NSError* error))failure&#123;</div><div class="line">    </div><div class="line">    NSString* fitString = [urlString stringByAppendingString:[XHNetWorking dictChangeString:parameters]];</div><div class="line">    </div><div class="line">    NSURL* url =  [NSURL URLWithString:fitString];</div><div class="line">    </div><div class="line">    NSURLSession * session =  [NSURLSession sharedSession];</div><div class="line">    </div><div class="line">    NSURLSessionDataTask* dataTask =  [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</div><div class="line">        //解析服务器返回的数据</div><div class="line">//        NSLog(@&quot;可以回调该数据%@&quot;,[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);</div><div class="line">        if (error == nil) &#123;</div><div class="line">            success([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);</div><div class="line">        &#125;else&#123;</div><div class="line">            failure(error);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        </div><div class="line">        //默认在子线程中解析数据</div><div class="line">//        NSLog(@&quot;执行该代码的时候是在%@线程&quot;, [NSThread currentThread]);</div><div class="line">        </div><div class="line">    &#125;];</div><div class="line"> </div><div class="line">    [dataTask resume];</div><div class="line">&#125;</div><div class="line">+(void)PostWithUrl:(NSString*)urlString parameters:(NSDictionary*)parameters success:(void(^)(id json))success failure:(void(^)(NSError* error))failure&#123;</div><div class="line">    </div><div class="line">    //确定请求路径</div><div class="line">    NSURL* url =  [NSURL URLWithString:urlString];</div><div class="line">    NSMutableURLRequest* requestM =  [NSMutableURLRequest requestWithURL:url];</div><div class="line">    //修改请求方法</div><div class="line">    requestM.HTTPMethod = @&quot;POST&quot;;</div><div class="line">     //设置请求体</div><div class="line">    requestM.HTTPBody = [[XHNetWorking dictChangeString:parameters] dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    //创建会话对象</div><div class="line">    NSURLSession * session =  [NSURLSession sharedSession];</div><div class="line">    </div><div class="line">    NSURLSessionDataTask* dataTaks =  [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</div><div class="line">        //解析返回的数据</div><div class="line">        if (error == nil) &#123;</div><div class="line">            success([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);</div><div class="line">        &#125; else &#123;</div><div class="line">            failure(error);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;];</div><div class="line">    [dataTaks resume];</div><div class="line">    </div><div class="line">&#125;</div><div class="line">+(void)PostSessiondataTakeWithDelegate:(id)delegeta&#123;</div><div class="line">    </div><div class="line">    NSURL*url =  [NSURL URLWithString:@&quot;http://120.25.226.186:32812/login&quot;];</div><div class="line">    NSMutableURLRequest* request =  [NSMutableURLRequest requestWithURL:url];</div><div class="line">    request.HTTPMethod = @&quot;POST&quot;;</div><div class="line">    request.HTTPBody = [@&quot;username=520&amp;pwd=520&amp;type=JSON&quot; dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line"></div><div class="line">    NSURLSession * session =  [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]</div><div class="line">    delegate:delegeta delegateQueue:nil];</div><div class="line">//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];</div><div class="line">    NSURLSessionDataTask * dataTask =  [session dataTaskWithURL:url];</div><div class="line">    [dataTask resume];</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">-(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler&#123;</div><div class="line">    </div><div class="line">    //子线程中执行</div><div class="line">    </div><div class="line">    NSLog(@&quot;接收到服务器响应的时候调用 -- %@&quot;, [NSThread currentThread]);</div><div class="line">    </div><div class="line">    self.dataM = [NSMutableData data];</div><div class="line">    </div><div class="line">    //默认情况下不接收数据</div><div class="line">    </div><div class="line">    //必须告诉系统是否接收服务器返回的数据</div><div class="line">    </div><div class="line">    completionHandler(NSURLSessionResponseAllow);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data &#123;</div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line">    NSLog(@&quot;接受到服务器返回数据的时候调用,可能被调用多次&quot;);</div><div class="line">    </div><div class="line">    //拼接服务器返回的数据</div><div class="line">    </div><div class="line">    [self.dataM appendData:data];</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error &#123;</div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line">    NSLog(@&quot;请求完成或者是失败的时候调用&quot;);</div><div class="line">    </div><div class="line">    //解析服务器返回数据</div><div class="line">    </div><div class="line">    NSLog(@&quot;%@&quot;, [[NSString alloc] initWithData:self.dataM encoding:NSUTF8StringEncoding]);</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (void)PostWithURL:(NSString *)URL parameters:(NSDictionary *)parameters formDataArray:(NSArray *)formDataArray success:(void (^)(id json))success failure:(void (^)(NSError * error))failure&#123;</div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
