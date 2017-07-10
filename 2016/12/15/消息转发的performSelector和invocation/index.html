@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      消息转发的performSelector和invocation | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="消息转发实际上是调用了C底层的函数我们都知道在OC中方法,使用方法叫做发送消息,其实这种说法主要是因为OC在调用方法的时候会将一个方法转化为
+1void objc_msgSend(id self, SEL cmd, ...)
+该第一个参数是对象,第二个参数是方法名字,第三个参数是方法参数.这个时候,如果给对象发送一个当前对象不存在的方法,系统暂时还不会崩溃,它还会调用三个方法给开发者上次机会补救这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消息转发的performSelector和invocation | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/12/15/消息转发的performSelector和invocation/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="消息转发实际上是调用了C底层的函数我们都知道在OC中方法,使用方法叫做发送消息,其实这种说法主要是因为OC在调用方法的时候会将一个方法转化为
+1void objc_msgSend(id self, SEL cmd, ...)
+该第一个参数是对象,第二个参数是方法名字,第三个参数是方法参数.这个时候,如果给对象发送一个当前对象不存在的方法,系统暂时还不会崩溃,它还会调用三个方法给开发者上次机会补救这">
+<meta property="og:updated_time" content="2016-12-15T15:09:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="消息转发的performSelector和invocation | shiron">
+<meta name="twitter:description" content="消息转发实际上是调用了C底层的函数我们都知道在OC中方法,使用方法叫做发送消息,其实这种说法主要是因为OC在调用方法的时候会将一个方法转化为
+1void objc_msgSend(id self, SEL cmd, ...)
+该第一个参数是对象,第二个参数是方法名字,第三个参数是方法参数.这个时候,如果给对象发送一个当前对象不存在的方法,系统暂时还不会崩溃,它还会调用三个方法给开发者上次机会补救这">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">消息转发的performSelector和invocation</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-12-15" class="post-meta__date date">2016-12-15</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h4 id="消息转发实际上是调用了C底层的函数"><a href="#消息转发实际上是调用了C底层的函数" class="headerlink" title="消息转发实际上是调用了C底层的函数"></a>消息转发实际上是调用了C底层的函数</h4><p>我们都知道在OC中方法,使用方法叫做发送消息,其实这种说法主要是因为OC在调用方法的时候会将一个方法转化为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">void objc_msgSend(id self, SEL cmd, ...)</div></pre></td></tr></table></figure>
+<p>该第一个参数是对象,第二个参数是方法名字,第三个参数是方法参数.<br>这个时候,如果给对象发送一个当前对象不存在的方法,系统暂时还不会崩溃,它还会调用三个方法给开发者上次机会补救这个方法的”缺失”(事实上是因此OC才能成为一门真正动态的语言)</p>
+<h4 id="给函数发送失败后会发生什么事情"><a href="#给函数发送失败后会发生什么事情" class="headerlink" title="给函数发送失败后会发生什么事情"></a>给函数发送失败后会发生什么事情</h4><ul>
+<li>1.动态方法解析</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel;//实例方法</div><div class="line">+ (BOOL)resolveClassMethod : (SEL)selector//类方法</div></pre></td></tr></table></figure>
+<p>首先，当接受到未能识别的选择子时，运行时系统会调用该函数用以给对象一次机会来添加相应的方法实现，如果用户在该函数中动态添加了相应方法的实现，则跳转到方法的实现部分，并将该实现存入缓存中，以供下次调用。(52个建议中写道,其实这个缓存机制会缓存在”快速哈希表”中,下次获取的时候就能首先在这个方法列表中寻找高频使用的方法,减少遍历次数)</p>
+<p>首先我们先定义一个Person类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Person.h</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">@interface Person : NSObject</div><div class="line">@property (nonatomic ,copy ) NSString* name;</div><div class="line">@property (nonatomic , assign ) NSUInteger age;</div><div class="line">-(void)run:(NSString*)name withWhere:(NSString*)where;</div><div class="line">-(void)eat;</div><div class="line">-(void)dynamicSelector;</div><div class="line">@end</div><div class="line">----------------------------------------------</div><div class="line">Person.m</div><div class="line">@implementation Person</div><div class="line">-(void)run:(NSString*)name withWhere:(NSString*)where&#123;</div><div class="line">    NSLog(@&quot;%@ is running in %@ &quot;,name,where);</div><div class="line">&#125;</div><div class="line">-(void)eat&#123;</div><div class="line">    NSLog(@&quot;eat&quot;);</div><div class="line">&#125;</div><div class="line">-(void)dynamicSelector&#123;</div><div class="line">    NSLog(@&quot;dynamicSelector&quot;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>好吧,很简单的一个类,主要有一个run/eat/dynamicSelector方法.没有其他好介绍的了,接下来我们在控制器中实例化一个对象,然后调用某个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Person * p = [[Person alloc]init];</div><div class="line">    self.person = p;</div><div class="line"></div><div class="line">#pragma clang diagnostic push//添加该代码可以去除编译器带来的警告,好烦人啊,后面就不再写这句了,默认在找不到方法的地方都应该添加这几行代码</div><div class="line">#pragma clang diagnostic ignored &quot;-Wundeclared-selector&quot;</div><div class="line">    [self performSelector:@selector(dynamicSelector) withObject:nil];</div><div class="line">#pragma clang diagnostic pop</div></pre></td></tr></table></figure>
+<p>因为self里面肯定没有dynamicSelector啊,我们想要在这里调用Person中的dynamicSelector要怎么办呢?<br>这里就可以使用我们动态方法解析机制了,系统在该类中找不到这个方法的时候就会调用下面这个函数,执行里面的方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//定义一个备用的C方法来防止程序崩溃</div><div class="line">void myMehtod(id self,SEL _cmd)&#123;</div><div class="line">    NSLog(@&quot;This is added dynamic&quot;);</div><div class="line">&#125;</div><div class="line">+(BOOL)resolveInstanceMethod:(SEL)sel&#123;</div><div class="line">   </div><div class="line">    if (sel == @selector(dynamicSelector)) &#123;</div><div class="line">        class_addMethod([self class], sel, (IMP)myMehtod, &quot;v@:&quot;);</div><div class="line">        return YES;</div><div class="line">    &#125; else &#123;</div><div class="line">        return [super resolveInstanceMethod:sel];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此处被调用后,控制台打印了”This is added dynamic”</p>
+<ul>
+<li><ol>
+<li>备援接收者</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (id)forwardingTargetForSelector:(SEL)aSelector;</div></pre></td></tr></table></figure>
+<p>如果运行时在消息转发的第一步中未找到所调用方法的实现，那么当前接收者还有第二次机会进行未知选择子的处理。这时运行期系统会调用上述方法，并将未知选择子作为参数传入，该方法可以返回一个能处理该选择子的对象，运行时系统会根据返回的对象进行查找，若找到则跳转到相应方法的实现，则消息转发结束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-(id)forwardingTargetForSelector:(SEL)aSelector&#123;</div><div class="line">    </div><div class="line">    if (aSelector==@selector(dynamicSelector)&amp;&amp;[self.person respondsToSelector:@selector(dynamicSelector)]) &#123;</div><div class="line">        return self.person;</div><div class="line">    &#125; else &#123;</div><div class="line">        return [super forwardingTargetForSelector:aSelector];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的调用频率还是可以很高,因为很多时候此方法的调用还是很廉价的,经过第一步的方法查找如果失败,直接使用这个方法继续查找,这个时候你可以安排这个对象来实现这个方法.如Person中有能够响应dynamicSelector的方法,则返回这个self.Person来执行这个方法,此处打印台中会打印:<strong>dynamicSelector</strong></p>
+<ul>
+<li>3.完整的消息转发</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)forwardInvocation:(NSInvocation *)anInvocation;</div></pre></td></tr></table></figure>
+<p>当运行时系统检测到第二步中用户未返回能处理相应选择子的对象时，那么来到这一步就要启动完整的消息转发机制了。该方法可以改变消息调用目标，运行时系统根据所改变的调用目标，向调用目标方法列表中查询对应方法的实现并实现跳转，这种方式和第二步的操作非常相似。当然你也可以修改方法的选择子，亦或者向所调用方法中追加一个参数等来跳转到相关方法的实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-(void)forwardInvocation:(NSInvocation *)anInvocation&#123;</div><div class="line">    if ([self.person respondsToSelector:[anInvocation selector]]) &#123;</div><div class="line">        [anInvocation invokeWithTarget:self.person];</div><div class="line">    &#125; else &#123;</div><div class="line">        [super forwardInvocation:anInvocation];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此处的代码也会实现Person中的dynamicSelector,这个时候有的同学就懵逼了(反正我是懵逼了),这个NSInvocation到底是什么,怎么这么神奇…</p>
+<h3 id="NSInvocation方法调用解析"><a href="#NSInvocation方法调用解析" class="headerlink" title="NSInvocation方法调用解析"></a>NSInvocation方法调用解析</h3><p>标题中写了performSelector和invocation,实际上的更像说说后者,前者由于所带的参数有局限性,所以没有办法,最多只能whitObject*2 ,参数个数一旦超过两个的时候,我们就得想其他办法来布局了.那么,我们首先考虑到的方案就是NSiNInvocation啦.</p>
+<ul>
+<li>1.要使用该方法,第一步是要进行方法”签名”:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//根据方法来初始化NSMethodSignature</div><div class="line">NSMethodSignature* signature = [Person instanceMethodSignatureForSelector:@selector(run:withWhere:)];</div></pre></td></tr></table></figure>
+<p>方法签名中保存了方法的名称/参数/返回值，协同NSInvocation来进行消息的转发.方法签名一般是用来设置参数和获取返回值的, 和方法的调用没有太大的关系</p>
+<p>但有一点要注意:如果方法不存在的话就会崩溃,所以我们在签名以后还要做一件事情:方法不存在的时候抛出异常提示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (signature == nil) &#123;</div><div class="line">   NSString *info = [NSString stringWithFormat:@&quot;方法找不到&quot;];</div><div class="line">  [NSException raise:@&quot;方法调用出现异常&quot; format:info, nil];</div><div class="line">        //    NSLog(@&quot;%@&quot;,signature);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>2.创建NSInvocation对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">NSInvocation* invocation =  [NSInvocation invocationWithMethodSignature:signature];</div><div class="line">   //设置方法调用者</div><div class="line">   invocation.target = self.person;</div><div class="line">    </div><div class="line">    //注意：这里的方法名一定要与方法签名类中的方法一致</div><div class="line">    invocation.selector = @selector(run:withWhere:);</div><div class="line">    </div><div class="line">    //参数</div><div class="line">    NSString* name = @&quot;小寒&quot;;</div><div class="line">    NSString* where = @&quot;广州&quot;;</div><div class="line">    </div><div class="line">    //参数数组</div><div class="line">    NSMutableArray* objects =  [NSMutableArray array];</div><div class="line">    [objects addObject:name];</div><div class="line">    [objects addObject:where];</div></pre></td></tr></table></figure>
+<p>这里面的objects数组可以装多个参数,到时会按顺序塞进去参数列表中,供方法调用,下面开始使用下面方法设置参数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)setArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div></pre></td></tr></table></figure></p>
+<p>方法中的第二个参数就是用来存放插入的方法参数的,这里按道理来说,我们需要使用遍历objects数组的个数来赋值参数,但是由于外界传进来的参数个数是不可控的,此处不能通过遍历参数数组来设置参数.还记得signature做了方法签名吗?其实最开始的时候有提到过,签名后能获得方法的名称/参数/返回值,其中里面还提供了通过numberOfArguments方法获取的参数个数(但是这个方面里面包含了包含self和_cmd的，所以我们要比较方法需要的参数和外界传进来的参数个数，并且取它们之间的最小值)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">NSUInteger argsCount = signature.numberOfArguments - 2;</div><div class="line">    </div><div class="line">    NSUInteger arrCount = objects.count;</div><div class="line">//获取最小值</div><div class="line">    NSUInteger count = MIN(argsCount, arrCount);</div><div class="line">    </div><div class="line">    NSLog(@&quot;argsCount: %ld,arrCount: %ld,count: %ld&quot;,argsCount,arrCount,count);</div><div class="line"></div><div class="line">    for (int i = 0; i&lt;count; i++) &#123;</div><div class="line">        id arg = objects[i];</div><div class="line">        </div><div class="line">        if ([arg isKindOfClass:[NSNull class]]) arg = nil;</div><div class="line">        //这里的Index要从2开始，以为0跟1已经被占据了，分别是self（target）,selector(_cmd),即使方法的参数为空的时候,此处也应该加2</div><div class="line">        [invocation setArgument:&amp;arg atIndex: i + 2 ];</div><div class="line">        </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>方法的调用和返回值</li>
+</ul>
+<p>需要调用该方法,实际上就是调用invoke方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">   [invocation invoke];</div></pre></td></tr></table></figure>
+<p>执行完这一步以后,就已经可以顺利调用self.person方法中的run:withWhere:方法.</p>
+<p>如果你的代码中需要有返回值的话,可以调用下面这个方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//此处可以获得参数的返回值</div><div class="line">    id res = nil;</div><div class="line">    if (signature.methodReturnLength != 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;res];</div><div class="line">    &#125;</div><div class="line">    NSLog(@&quot;return : %@&quot;,res);</div></pre></td></tr></table></figure>
+<p>现在可以感受到oc中消息调用的魅力了吧,强大之处实在令人佩服,结合runtime来使用的话,就是一种所谓的黑魔法吧.</p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

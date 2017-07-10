@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Button事件的闭包形式 | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="因为业务中经常要用到button的事件点击,但是习惯了BlockKit和RAC的高聚合事件点击写法以后,感觉方法要跳来跳去太麻烦了,特意写一个分类来修改这个弊端,这个分类还包括了一下功能:
+1231. addTarget点击事件2. 按钮倒计时3. 重新排布image和label的位置
+主要代码如下:
+.m
+12345678910111213141516171819#import &amp;lt;UIKi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Button事件的闭包形式 | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/12/04/Button事件的闭包形式/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="因为业务中经常要用到button的事件点击,但是习惯了BlockKit和RAC的高聚合事件点击写法以后,感觉方法要跳来跳去太麻烦了,特意写一个分类来修改这个弊端,这个分类还包括了一下功能:
+1231. addTarget点击事件2. 按钮倒计时3. 重新排布image和label的位置
+主要代码如下:
+.m
+12345678910111213141516171819#import &amp;lt;UIKi">
+<meta property="og:updated_time" content="2016-12-04T01:50:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Button事件的闭包形式 | shiron">
+<meta name="twitter:description" content="因为业务中经常要用到button的事件点击,但是习惯了BlockKit和RAC的高聚合事件点击写法以后,感觉方法要跳来跳去太麻烦了,特意写一个分类来修改这个弊端,这个分类还包括了一下功能:
+1231. addTarget点击事件2. 按钮倒计时3. 重新排布image和label的位置
+主要代码如下:
+.m
+12345678910111213141516171819#import &amp;lt;UIKi">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Button事件的闭包形式</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-12-04" class="post-meta__date date">2016-12-04</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>因为业务中经常要用到button的事件点击,但是习惯了BlockKit和RAC的高聚合事件点击写法以后,感觉方法要跳来跳去太麻烦了,特意写一个分类来修改这个弊端,这个分类还包括了一下功能:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. addTarget点击事件</div><div class="line">2. 按钮倒计时</div><div class="line">3. 重新排布image和label的位置</div></pre></td></tr></table></figure>
+<p>主要代码如下:</p>
+<p>.m</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line">@interface UIButton (XHAdd)</div><div class="line">//button中image和label的相对位置</div><div class="line">typedef enum : NSUInteger&#123;</div><div class="line">    XHButtonImageLocatedLabelTop,</div><div class="line">    XHButtonImageLocatedLabelButtom,</div><div class="line">    XHButtonImageLocatedLabelLeft,</div><div class="line">    XHButtonImageLocatedLabelRight</div><div class="line">&#125;XHButtonImageLocatedLabelEnum;</div><div class="line"></div><div class="line">//设置使得图片和文字的位置改变</div><div class="line">-(void)xh_ButtonImageLocatedLabel:(XHButtonImageLocatedLabelEnum)located whitSpace:(CGFloat)space;</div><div class="line">//设置button在一定时间间隔内不能再次点击</div><div class="line">-(void)xh_buttonBanWithTheCountdown:(int)time;</div><div class="line">//设置某种点击事件后的回调</div><div class="line">-(void)xh_blockWhitControlEvents:(UIControlEvents)ControlEvents block:(void(^)())block;</div><div class="line"></div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>.h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div></pre></td><td class="code"><pre><div class="line">#import &quot;UIButton+XHAdd.h&quot;</div><div class="line">#import &quot;NSTimer+XHAdd.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line">typedef void(^ButtonClikcBlock)();</div><div class="line">@interface UIButton()</div><div class="line">@property (nonatomic ,copy )  ButtonClikcBlock block;</div><div class="line"></div><div class="line"></div><div class="line">@end</div><div class="line">@implementation UIButton (HXAdd)</div><div class="line">-(void)xh_ButtonImageLocatedLabel:(XHButtonImageLocatedLabelEnum)located whitSpace:(CGFloat)space&#123;</div><div class="line">//    NSLog(@&quot;label:%@,imageView:%@&quot;,self.titleLabel,self.imageView);</div><div class="line">    </div><div class="line">    CGFloat imageWidth = self.imageView.frame.size.height;</div><div class="line">    CGFloat imageHeight = self.imageView.frame.size.width;</div><div class="line">    </div><div class="line">    CGFloat labelWidth = 0.0;</div><div class="line">    CGFloat labelHeight = 0.0;</div><div class="line">    </div><div class="line">    if ([UIDevice currentDevice].systemVersion.floatValue &gt;= 8.0) &#123;</div><div class="line">        // 由于iOS8中titleLabel的size为0，用下面的这种设置</div><div class="line">        labelWidth = self.titleLabel.intrinsicContentSize.width;</div><div class="line">        labelHeight = self.titleLabel.intrinsicContentSize.height;</div><div class="line">    &#125;else&#123;</div><div class="line">        labelWidth = self.titleLabel.frame.size.width;</div><div class="line">        labelHeight = self.titleLabel.frame.size.height;</div><div class="line">    &#125;</div><div class="line">    // 2. 声明全局的imageEdgeInsets和labelEdgeInsets</div><div class="line">    UIEdgeInsets imageEdgeInsets = UIEdgeInsetsZero;</div><div class="line">    UIEdgeInsets labelEdgeInsets = UIEdgeInsetsZero;</div><div class="line">    </div><div class="line">    // 3. 根据style和space得到imageEdgeInsets和labelEdgeInsets的值</div><div class="line">    switch (located) &#123;</div><div class="line">        case XHButtonImageLocatedLabelTop:&#123;</div><div class="line">            imageEdgeInsets = UIEdgeInsetsMake(-labelHeight-space/2.0, 0, 0, -labelWidth);</div><div class="line">            labelEdgeInsets = UIEdgeInsetsMake(0, -imageWidth, -imageHeight-space/2.0, 0);</div><div class="line">        &#125;</div><div class="line">            </div><div class="line">            break;</div><div class="line">        case XHButtonImageLocatedLabelButtom:&#123;</div><div class="line">            </div><div class="line">            imageEdgeInsets = UIEdgeInsetsMake(0, 0, -labelHeight-space/2.0, -labelWidth);</div><div class="line">            labelEdgeInsets = UIEdgeInsetsMake(-imageHeight-space/2.0, -imageWidth, 0, 0);</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">            </div><div class="line">            break;</div><div class="line">        case XHButtonImageLocatedLabelLeft:&#123;</div><div class="line">            </div><div class="line">            imageEdgeInsets = UIEdgeInsetsMake(0, -space/2.0, 0, space/2.0);</div><div class="line">            labelEdgeInsets = UIEdgeInsetsMake(0, space/2.0, 0, -space/2.0);</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">            </div><div class="line">            break;</div><div class="line">        case XHButtonImageLocatedLabelRight:&#123;</div><div class="line">            </div><div class="line">            imageEdgeInsets = UIEdgeInsetsMake(0, labelWidth+space/2.0, 0, -labelWidth-space/2.0);</div><div class="line">            labelEdgeInsets = UIEdgeInsetsMake(0, -imageWidth-space/2.0, 0, imageWidth+space/2.0);</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">            </div><div class="line">            break;</div><div class="line">    &#125;</div><div class="line">    // 4. 赋值</div><div class="line">    self.titleEdgeInsets = labelEdgeInsets;</div><div class="line">    self.imageEdgeInsets = imageEdgeInsets;</div><div class="line">    </div><div class="line">    </div><div class="line">&#125;</div><div class="line">-(void)xh_buttonBanWithTheCountdown:(int)time&#123;</div><div class="line"> </div><div class="line">    //1.禁止按钮多次点击</div><div class="line">    self.enabled = NO;</div><div class="line">    __block int count = time;</div><div class="line">    //2. 设置时间</div><div class="line">    [self setTitle:[NSString stringWithFormat:@&quot;%ds&quot;,count] forState:UIControlStateDisabled];</div><div class="line">    </div><div class="line">    //3. 开始倒计时(此处使用了NSTimer的分类来防止忘记取消定时器造成的其他影响)</div><div class="line">    __block NSTimer* timer =  [NSTimer xh_scheduledTimerWithTimeInterval:1 block:^&#123;</div><div class="line">        if (count &lt;= 0) &#123;</div><div class="line">            //5.销毁定时器</div><div class="line">            [timer invalidate];</div><div class="line">            timer = nil;</div><div class="line">            self.enabled = YES;</div><div class="line">        &#125;else&#123;</div><div class="line">            //4. 设置倒计时</div><div class="line">            count--;</div><div class="line">            [self setTitle:[NSString stringWithFormat:@&quot;%ds&quot;,count] forState:UIControlStateDisabled];</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125; repeats:YES];</div><div class="line"></div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">//addTarget事件</div><div class="line">-(void)xh_blockWhitControlEvents:(UIControlEvents)ControlEvents block:(void(^)())block&#123;</div><div class="line">    [self addTarget:self action:@selector(xh_buttonClick:) forControlEvents:ControlEvents];</div><div class="line">    </div><div class="line">    self.block = block;</div><div class="line">&#125;</div><div class="line">-(void)xh_buttonClick:(UIButton*)button&#123;</div><div class="line">    </div><div class="line">    if (self.block) &#123;</div><div class="line">        self.block();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">#pragma set/get</div><div class="line">-(void)setBlock:(ButtonClikcBlock)block&#123;</div><div class="line">    if (block) &#123;</div><div class="line">        objc_setAssociatedObject(self, _cmd, block, OBJC_ASSOCIATION_COPY);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">-(ButtonClikcBlock)block&#123;</div><div class="line">    return objc_getAssociatedObject(self, @selector(setBlock:));</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

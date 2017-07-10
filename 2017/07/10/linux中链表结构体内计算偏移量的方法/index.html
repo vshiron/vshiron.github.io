@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      linux中链表结构体内计算偏移量的方法 | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="1.感悟之前在重新学习C语言的时候,觉得前人设计的链表非常精妙,值得我们学习,一般来说,普通的指针就是有数据域和指针域构成:
+12345678910typedef struct Node&amp;#123;    int data;    struct Node* next;&amp;#125;SLIST;//提供一下方法供访问SLIST	*SList_Creat();int		SList_Print(SLIST">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux中链表结构体内计算偏移量的方法 | shiron">
+<meta property="og:url" content="http://yoursite.com/2017/07/10/linux中链表结构体内计算偏移量的方法/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="1.感悟之前在重新学习C语言的时候,觉得前人设计的链表非常精妙,值得我们学习,一般来说,普通的指针就是有数据域和指针域构成:
+12345678910typedef struct Node&amp;#123;    int data;    struct Node* next;&amp;#125;SLIST;//提供一下方法供访问SLIST	*SList_Creat();int		SList_Print(SLIST">
+<meta property="og:updated_time" content="2017-07-10T09:52:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux中链表结构体内计算偏移量的方法 | shiron">
+<meta name="twitter:description" content="1.感悟之前在重新学习C语言的时候,觉得前人设计的链表非常精妙,值得我们学习,一般来说,普通的指针就是有数据域和指针域构成:
+12345678910typedef struct Node&amp;#123;    int data;    struct Node* next;&amp;#125;SLIST;//提供一下方法供访问SLIST	*SList_Creat();int		SList_Print(SLIST">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">linux中链表结构体内计算偏移量的方法</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-07-10" class="post-meta__date date">2017-07-10</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h4 id="1-感悟"><a href="#1-感悟" class="headerlink" title="1.感悟"></a>1.感悟</h4><p>之前在重新学习C语言的时候,觉得前人设计的链表非常精妙,值得我们学习,一般来说,普通的指针就是有数据域和指针域构成:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">typedef struct Node&#123;</div><div class="line">    int data;</div><div class="line">    struct Node* next;</div><div class="line">&#125;SLIST;</div><div class="line">//提供一下方法供访问</div><div class="line">SLIST	*SList_Creat();</div><div class="line">int		SList_Print(SLIST *pHead);</div><div class="line">int		SList_NodeInsert(SLIST *pHead, int x , int y);</div><div class="line">int		SList_NodeDel(SLIST *pHead, int y);</div><div class="line">int		SList_Destory(SLIST *pHead);</div></pre></td></tr></table></figure>
+<p>普通的单向链表是一种头接尾的形式一直连接下去的,至于链表的好处这里不再附属,想要表达的是在Linux内核中链表的实现,<strong>提供的连接不直接属于结构体,而是一种外部的连接</strong>.怎么理解这句话呢,其实放到面向对象来说,这个链表的设计应该是基于接口而不是基于类的实现去操作的.类可以无穷无尽.但是作为接口只有有一个就可以提供给外界访问.</p>
+<h4 id="2-接口解析"><a href="#2-接口解析" class="headerlink" title="2.接口解析"></a>2.接口解析</h4><p>我们可以来看一下Linux内核为链表提供的一致的访问接口:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Linux内核为链表提供了一致的访问接口</div><div class="line">//初始化</div><div class="line">void INIT_LIST_HEAD(struct list_head *list)；</div><div class="line">//添加到头部</div><div class="line">void list_add(struct list_head *new, struct list_head *head)；</div><div class="line">//添加到尾部</div><div class="line">void list_add_tail(struct list_head *new, struct list_head *head)；</div><div class="line">//删除链表</div><div class="line">void list_del(struct list_head *entry);</div><div class="line">//是否为空</div><div class="line">int list_empty(const struct list_head *head)；</div></pre></td></tr></table></figure>
+<p>下面用一个实例来尝试讲解一下,如何应用到Linux中链表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//定义一个结构体</div><div class="line">struct int_node &#123;</div><div class="line">        int val;</div><div class="line">        struct list_head node;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">        struct list_head head, *plist;</div><div class="line">        struct int_node a, b;</div><div class="line"></div><div class="line">        a.val = 2;</div><div class="line">        b.val = 3;</div><div class="line"></div><div class="line">//生成链表并将内容添加到链表</div><div class="line">        INIT_LIST_HEAD(&amp;head);</div><div class="line">        list_add(&amp;a.list, &amp;head);</div><div class="line">        list_add(&amp;b.list, &amp;head);</div><div class="line"></div><div class="line">//遍历链表</div><div class="line">        list_for_each(plist, &amp;head) &#123;</div><div class="line">                struct int_node *node = list_entry(plist, struct int_node, list);</div><div class="line">                printf(&quot;val = %d\n&quot;, node-&gt;val);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="3-linux内核链表分析"><a href="#3-linux内核链表分析" class="headerlink" title="3.linux内核链表分析"></a>3.linux内核链表分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">typedef struct Node&#123;</div><div class="line">    int data;</div><div class="line">    struct Node* next;</div><div class="line">&#125;SLIST;</div><div class="line"></div><div class="line">typedef struct Person&#123;</div><div class="line">    char[10] name;</div><div class="line">    int age;</div><div class="line">    struct SLIST list</div><div class="line">&#125;SPerson;</div></pre></td></tr></table></figure>
+<p>实际上该链表最强大的地方是做到抽象分离,和外层结构体无关,但又能经过偏移量的计算获得外部结构体的内存地址(因为结构体的偏移量在编写代码的时候就已经固定下来了).</p>
+<p>我们假设链表结构体在自定义struct内存的最底层,偏移量为0,而我们又知道链表的结构,我们可以利用偏移量一个递推一个来获得Person在内存中的地址,而且这个时候我们仅仅是单靠字节数就推算处理整个Person的大小(和指针).刚刚假定linux的偏移位置是0,实际上是可以在其他位置计算出整个Person的大小(和指针).</p>
+<p>需要注意的是,一定要清楚自己定义结构体的层次和结构</p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

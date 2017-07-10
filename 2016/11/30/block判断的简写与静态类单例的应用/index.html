@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      block判断的简写与静态类单例的应用 | shiron 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="shiron">
+    
+    
+
+    <meta name="description" content="今天研究了一些AFN中的一些代码 ,额外发现了一些有趣的东西,记录下来方便以后复习和思考.
+block的简写这个东西简直能和swift的self?.block媲美一样简介,但是我们先看看三目运算符是怎么工作的:
+123int x = 3;int y = (x&amp;gt;0)? : 3;int z = (x&amp;gt;0)? 2:3;
+各位会觉得该代码中y和z中会打印什么值呢?1y=1,z = 2;
+实际上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="block判断的简写与静态类单例的应用 | shiron">
+<meta property="og:url" content="http://yoursite.com/2016/11/30/block判断的简写与静态类单例的应用/index.html">
+<meta property="og:site_name" content="shiron">
+<meta property="og:description" content="今天研究了一些AFN中的一些代码 ,额外发现了一些有趣的东西,记录下来方便以后复习和思考.
+block的简写这个东西简直能和swift的self?.block媲美一样简介,但是我们先看看三目运算符是怎么工作的:
+123int x = 3;int y = (x&amp;gt;0)? : 3;int z = (x&amp;gt;0)? 2:3;
+各位会觉得该代码中y和z中会打印什么值呢?1y=1,z = 2;
+实际上">
+<meta property="og:updated_time" content="2016-11-30T13:02:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="block判断的简写与静态类单例的应用 | shiron">
+<meta name="twitter:description" content="今天研究了一些AFN中的一些代码 ,额外发现了一些有趣的东西,记录下来方便以后复习和思考.
+block的简写这个东西简直能和swift的self?.block媲美一样简介,但是我们先看看三目运算符是怎么工作的:
+123int x = 3;int y = (x&amp;gt;0)? : 3;int z = (x&amp;gt;0)? 2:3;
+各位会觉得该代码中y和z中会打印什么值呢?1y=1,z = 2;
+实际上">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">shiron</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">block判断的简写与静态类单例的应用</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-11-30" class="post-meta__date date">2016-11-30</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>今天研究了一些AFN中的一些代码 ,额外发现了一些有趣的东西,记录下来方便以后复习和思考.</p>
+<h4 id="block的简写"><a href="#block的简写" class="headerlink" title="block的简写"></a>block的简写</h4><p>这个东西简直能和swift的self?.block媲美一样简介,但是我们先看看三目运算符是怎么工作的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int x = 3;</div><div class="line">int y = (x&gt;0)? : 3;</div><div class="line">int z = (x&gt;0)? 2:3;</div></pre></td></tr></table></figure>
+<p>各位会觉得该代码中y和z中会打印什么值呢?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">y=1,z = 2;</div></pre></td></tr></table></figure></p>
+<p>实际上第二条赋值语言只是省略了条件为真的时候的返回参数,这个时候就会返回数值1了,至于为什么是返回1呢?我是这么去查看的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int y = (x&gt;0)? true : false;</div></pre></td></tr></table></figure>
+<p>如果这里面为两个值都为空的时候,就会返回这两个东西,而true在逻辑上是等于1的,false中逻辑是等于0的,所以如果后面的条件不写的话,按道理来说是会返回0的,但是由于语法设置不允许我们这么写,所以如果大家有什么好的方法来测试也可以告诉我,相互学习.</p>
+<p>那么,在这个基础上,我们就可以来判断闭包的操作了,例如常用的点击按钮后,我们要先用if来判断闭包是否存在,不存在的时候就直接跳过,存在的时候就要执行这个闭包:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if(self.block)&#123;</div><div class="line">self.block();</div><div class="line">&#125;//这是闭包没有参数的情况,复杂情况也是一个套路就不写了</div></pre></td></tr></table></figure></p>
+<p>然后如果根据我们的三目运算符的话,我们可以把闭包写成下面这种形式:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">!self.block?:self.block():</div></pre></td></tr></table></figure></p>
+<p>这句语法的意思是如果self.block存在的时候,就执行self.block..<br>在afn中它是这样使用的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">dispatch_group_async(manager.completionGroup ?: url_session_manager_completion_group(), manager.completionQueue ?: dispatch_get_main_queue(), ^&#123;</div><div class="line">           if (self.completionHandler) &#123;</div><div class="line">               self.completionHandler(task.response, responseObject, error);</div><div class="line">           &#125;</div><div class="line"></div><div class="line">           dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">               [[NSNotificationCenter defaultCenter] postNotificationName:AFNetworkingTaskDidCompleteNotification object:task userInfo:userInfo];</div><div class="line">           &#125;);</div><div class="line">       &#125;);</div></pre></td></tr></table></figure></p>
+<p>嗯,是不是觉得还是可以和swift的语法相比较…另外,在这段代码中我还看到了url_session_manager_completion_group(),一开始觉得没有什么,但是后面才发现原来这里是用()来调用的啊,是C的函数吗???<br>然后我里面一戳…</p>
+<h4 id="静态类单例的写法"><a href="#静态类单例的写法" class="headerlink" title="静态类单例的写法"></a>静态类单例的写法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">static dispatch_queue_t url_session_manager_processing_queue() &#123;</div><div class="line">    static dispatch_queue_t af_url_session_manager_processing_queue;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        af_url_session_manager_processing_queue = dispatch_queue_create(&quot;com.alamofire.networking.session.manager.processing&quot;, DISPATCH_QUEUE_CONCURRENT);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    return af_url_session_manager_processing_queue;</div><div class="line">&#125;</div><div class="line"></div><div class="line">static dispatch_group_t url_session_manager_completion_group() &#123;</div><div class="line">    static dispatch_group_t af_url_session_manager_completion_group;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        af_url_session_manager_completion_group = dispatch_group_create();</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    return af_url_session_manager_completion_group;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我米有学过C,但感觉这跟java的语法已经很像了,去查看了一下,原来这样可以形成一种类内部的静态单例,意思就是不会被外部所访问的单例写法,那么我们很自己可以想到如果一个类有有queue和group等东西的时候可以使用该方法来描述,其他对象也可以用该方法来封装静态类单例哦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">static NSArray * arr()&#123;</div><div class="line">    static NSArray* arr = nil;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        arr=@[@&quot;abc&quot;,@&quot;cba&quot;];</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line">NSLog(@&quot;%@&quot;,arr()); </div><div class="line">///abc,cba</div></pre></td></tr></table></figure>
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
